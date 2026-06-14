@@ -47,8 +47,18 @@ jobs:
           python3 scripts/render_live12_daw_mutation_package.py --stable --output /tmp/live12-daw-mutation-package.json
           diff -u automation/generated/live12-daw-mutation-package.json /tmp/live12-daw-mutation-package.json
 
+      - name: Verify generated Max for Live device contracts are in sync
+        run: |
+          rm -rf /tmp/max-for-live-patches
+          python3 scripts/render_max_for_live_device_contracts.py --stable --output /tmp/max-for-live-device-contracts.json --patch-output-dir /tmp/max-for-live-patches
+          diff -u automation/generated/max-for-live-device-contracts.json /tmp/max-for-live-device-contracts.json
+          diff -ru max-for-live/patches /tmp/max-for-live-patches
+
       - name: Validate manifests, provenance policy, and binary hygiene
         run: python3 scripts/validate_repo.py
+
+      - name: Run Max for Live device contract probes
+        run: python3 scripts/test_max_for_live_device_contracts.py
 
       - name: Run Live 12 DAW mutation preflight probes
         run: python3 scripts/test_live12_daw_mutation_preflight.py
@@ -89,8 +99,18 @@ jobs:
           python3 scripts/render_live12_daw_mutation_package.py --stable --output /tmp/live12-daw-mutation-package.json
           diff -u automation/generated/live12-daw-mutation-package.json /tmp/live12-daw-mutation-package.json
 
+      - name: Verify generated Max for Live device contracts are in sync
+        run: |
+          rm -rf /tmp/max-for-live-patches
+          python3 scripts/render_max_for_live_device_contracts.py --stable --output /tmp/max-for-live-device-contracts.json --patch-output-dir /tmp/max-for-live-patches
+          diff -u automation/generated/max-for-live-device-contracts.json /tmp/max-for-live-device-contracts.json
+          diff -ru max-for-live/patches /tmp/max-for-live-patches
+
       - name: Validate repository on macOS
         run: python3 scripts/validate_repo.py
+
+      - name: Run Max for Live device contract probes
+        run: python3 scripts/test_max_for_live_device_contracts.py
 
       - name: Run Live 12 DAW mutation preflight probes
         run: python3 scripts/test_live12_daw_mutation_preflight.py
