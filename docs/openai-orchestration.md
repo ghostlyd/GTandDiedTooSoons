@@ -11,6 +11,27 @@ Official docs consulted:
 - OpenAI SDKs and CLI: https://developers.openai.com/api/docs/libraries
 - Codex MCP workflows: https://developers.openai.com/codex/mcp
 
+## Versioned Contract
+
+The executable orchestration contract lives in `automation/openai-production-orchestration.json`.
+
+It defines:
+
+- official OpenAI API surfaces used by the project
+- data classes and privacy boundaries
+- narrow tool contracts for inventory, rights checks, worker briefs, session proposals, account/vendor automation, DAW automation, and release checklists
+- approval gates for source downloads, private audio upload, vendor account actions, purchases/license changes, Live-set mutation, and export/release
+- Max for Live rollback and artifact boundaries
+
+Generated worker briefs are rendered to `automation/generated/openai-worker-briefs.json`:
+
+```bash
+python3 scripts/render_openai_worker_briefs.py --stable
+python3 scripts/validate_repo.py
+```
+
+CI diffs the generated file against a stable render on both Ubuntu and macOS, so edits to the worker chain, Live template, installation plan, inventory, source catalog, or composition set must be reflected in the generated briefs.
+
 ## API Fit
 
 | Need | OpenAI surface | Guardrail |
@@ -21,6 +42,8 @@ Official docs consulted:
 | Transcribing field notes or rehearsal takes | Audio / transcription APIs | Keep raw audio local unless a reviewed workflow permits upload. |
 | Codex-driven repo automation | Codex CLI / MCP | Run in branch/worktree, require tests, PR review, and no secret exposure. |
 | ChatGPT-facing control surface | Apps SDK / MCP | Expose narrow tools; never expose arbitrary filesystem or DAW control. |
+| Account-authorized library installs | Official vendor UI/app automation | Use authenticated user sessions only; do not capture credentials, bypass terms, or commit installers/assets. |
+| Ableton Live / Max for Live session actions | Reviewed local DAW automation | Require rollback copy, affected-track scope, action receipt, and post-action validation. |
 
 ## Worker Chain
 
@@ -43,6 +66,28 @@ Tools exposed to agents should be narrow and auditable:
 - `propose_session_change`: writes a patch proposal, not a Live set directly.
 - `validate_source_rights`: checks catalog metadata before download.
 - `summarize_take`: processes local transcript text, not raw audio by default.
+- `automate_vendor_install`: uses official Ableton, Arturia, or vendor account surfaces after approval and writes a redacted receipt plus refreshed inventory delta.
+- `automate_daw_session`: applies approved local Ableton/Max for Live actions and writes a local-only receipt.
 - `render_checklist`: emits required human checks before export.
 
-No agent gets unrestricted shell, filesystem, browser, or DAW control in production without a branch, log, and approval boundary.
+No agent gets unrestricted shell, filesystem, browser, account, or DAW control in production without a branch, log, approval boundary, and rollback path.
+
+## Automation Boundary
+
+DAW and account automation are in scope for this project. The secure default is not "no automation"; it is official-surface automation with explicit gates.
+
+Allowed:
+
+- navigate official Ableton, Arturia, or vendor pages/apps in an authenticated user session
+- trigger already-entitled installs through official account, Live Browser, or Arturia Software Center flows
+- refresh local inventory after install
+- apply approved Live/Max for Live changes to a local session after a rollback copy exists
+- record redacted receipts with product/action/result metadata
+
+Blocked:
+
+- capturing passwords, API keys, cookies, serials, license files, or payment data
+- bypassing paywalls, DRM, terms, or entitlement checks
+- purchasing or changing license state without explicit confirmation
+- committing installers, packs, presets, samples, `.als`, `.amxd`, plugin binaries, or raw/private audio
+- streaming private rehearsal audio to OpenAI without session-specific opt-in

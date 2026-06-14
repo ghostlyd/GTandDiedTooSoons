@@ -1,0 +1,982 @@
+{
+  "briefs": [
+    {
+      "allowed_inputs": [
+        "catalogs/public-domain-bluegrass-sources.json"
+      ],
+      "approval_required": [
+        {
+          "id": "source_download",
+          "required_evidence": [
+            "approved_for_download true",
+            "download ledger candidate",
+            "rights evidence",
+            "allowed host and path"
+          ],
+          "trigger": "Download or transform a public-domain source file."
+        }
+      ],
+      "expected_outputs": [
+        "approved source manifest entries",
+        "historical motif notes"
+      ],
+      "handoff_to": "controller_engineer",
+      "live_session_context": [
+        "AeroBand Banjo Lead",
+        "Fiddle / Hybrid Strings",
+        "Mandolin Chop",
+        "Dobro / Metallic Slide",
+        "Upright Bass / Sub",
+        "Punk Kit",
+        "Deep House Machines",
+        "Public Domain Source Deck",
+        "Alien Sky"
+      ],
+      "local_only_inputs": [],
+      "mission": "Own source discovery, rights metadata, historical context, credit lines for GTandDiedTooSoons without crossing data, rights, account, or DAW approval boundaries.",
+      "must_not": [
+        "approve unclear rights",
+        "download copyrighted commercial recordings"
+      ],
+      "owns": [
+        "source discovery",
+        "rights metadata",
+        "historical context",
+        "credit lines"
+      ],
+      "repo_context": [
+        "catalogs/public-domain-bluegrass-sources.json",
+        "sources/public-domain/download-ledger.json",
+        "docs/source-acquisition-policy.md"
+      ],
+      "role_id": "archivist",
+      "role_name": "Music Library Scientist",
+      "suggested_openai_surface": {
+        "id": "responses_api",
+        "name": "Responses API",
+        "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+      },
+      "tool_contracts": [
+        {
+          "approval_required": false,
+          "id": "validate_source_rights",
+          "input_scope": [
+            "catalogs/public-domain-bluegrass-sources.json",
+            "sources/public-domain/download-ledger.json"
+          ],
+          "must_not": [
+            "upgrade unclear rights",
+            "download unapproved copyrighted recordings"
+          ],
+          "output": "Pass/fail rights and provenance decision with unresolved risk notes."
+        },
+        {
+          "approval_required": false,
+          "id": "render_worker_brief",
+          "input_scope": [
+            "automation/worker-chain.json",
+            "automation/live12-session-template.json",
+            "compositions/down-tempo-punk-bluegrass-set.json"
+          ],
+          "must_not": [
+            "include private lyrics",
+            "include raw audio paths",
+            "include credentials"
+          ],
+          "output": "Role-scoped metadata-only worker brief."
+        }
+      ],
+      "track_context": [
+        "Good Vibrations in a Burned Barn",
+        "A.P. Carter in the Warehouse",
+        "No Gods, No Masters, No Quantize",
+        "Possum Kingdom Afterhours",
+        "The Ballad of the Broken Controller"
+      ]
+    },
+    {
+      "allowed_inputs": [
+        "automation/live12-session-template.json"
+      ],
+      "approval_required": [
+        {
+          "id": "live_set_mutation",
+          "required_evidence": [
+            "reviewable proposal",
+            "rollback copy or branch",
+            "scope of tracks/devices affected"
+          ],
+          "trigger": "Apply automation to an Ableton Live set, Max for Live device, controller mapping, or performance template."
+        }
+      ],
+      "expected_outputs": [
+        "Max device contract updates",
+        "controller test notes"
+      ],
+      "handoff_to": "max_device_builder",
+      "live_session_context": [
+        "AeroBand Banjo Lead",
+        "Fiddle / Hybrid Strings",
+        "Mandolin Chop",
+        "Dobro / Metallic Slide",
+        "Upright Bass / Sub",
+        "Punk Kit",
+        "Deep House Machines",
+        "Public Domain Source Deck",
+        "Alien Sky"
+      ],
+      "local_only_inputs": [],
+      "mission": "Own MIDI mapping, velocity curves, roll articulation, performance macros for GTandDiedTooSoons without crossing data, rights, account, or DAW approval boundaries.",
+      "must_not": [
+        "break live playability for theoretical complexity"
+      ],
+      "owns": [
+        "MIDI mapping",
+        "velocity curves",
+        "roll articulation",
+        "performance macros"
+      ],
+      "repo_context": [
+        "automation/live12-session-template.json",
+        "inventory/live12-local-inventory.json",
+        "docs/live12-m4l-ci-cd.md"
+      ],
+      "role_id": "controller_engineer",
+      "role_name": "AeroBand Banjo Controller Engineer",
+      "suggested_openai_surface": {
+        "id": "agents_sdk",
+        "name": "Agents SDK",
+        "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+      },
+      "tool_contracts": [
+        {
+          "approval_required": false,
+          "id": "read_inventory",
+          "input_scope": [
+            "inventory/live12-local-inventory.json"
+          ],
+          "must_not": [
+            "read arbitrary local folders",
+            "copy presets or samples",
+            "emit absolute private paths"
+          ],
+          "output": "Sanitized installed-library and DAW environment summary."
+        },
+        {
+          "approval_required": true,
+          "id": "propose_session_change",
+          "input_scope": [
+            "automation/live12-session-template.json",
+            "compositions/down-tempo-punk-bluegrass-set.json",
+            "inventory/live12-local-inventory.json"
+          ],
+          "must_not": [
+            "mutate a Live set without approval",
+            "commit .als or .amxd binaries",
+            "create unbounded automation loops"
+          ],
+          "output": "Reviewable JSON patch proposal for Live/Max for Live implementation."
+        },
+        {
+          "approval_required": true,
+          "id": "automate_daw_session",
+          "input_scope": [
+            "automation/live12-session-template.json",
+            "automation/generated/openai-worker-briefs.json"
+          ],
+          "must_not": [
+            "export or publish without release QA",
+            "disable provenance checks",
+            "log private performance content by default"
+          ],
+          "output": "Human-reviewable DAW action plan, Max for Live contract update, or local-only session receipt."
+        }
+      ],
+      "track_context": [
+        "Good Vibrations in a Burned Barn",
+        "A.P. Carter in the Warehouse",
+        "No Gods, No Masters, No Quantize",
+        "Possum Kingdom Afterhours",
+        "The Ballad of the Broken Controller"
+      ]
+    },
+    {
+      "allowed_inputs": [
+        "automation/live12-session-template.json"
+      ],
+      "approval_required": [
+        {
+          "id": "live_set_mutation",
+          "required_evidence": [
+            "reviewable proposal",
+            "rollback copy or branch",
+            "scope of tracks/devices affected"
+          ],
+          "trigger": "Apply automation to an Ableton Live set, Max for Live device, controller mapping, or performance template."
+        }
+      ],
+      "expected_outputs": [
+        "reviewable .maxpat source or documented device prototype"
+      ],
+      "handoff_to": "arrangement_producer",
+      "live_session_context": [
+        "AeroBand Banjo Lead",
+        "Fiddle / Hybrid Strings",
+        "Mandolin Chop",
+        "Dobro / Metallic Slide",
+        "Upright Bass / Sub",
+        "Punk Kit",
+        "Deep House Machines",
+        "Public Domain Source Deck",
+        "Alien Sky"
+      ],
+      "local_only_inputs": [],
+      "mission": "Own probability engines, clock guards, provenance sampler, spatial modulation for GTandDiedTooSoons without crossing data, rights, account, or DAW approval boundaries.",
+      "must_not": [
+        "commit binary .amxd without Git LFS and review"
+      ],
+      "owns": [
+        "probability engines",
+        "clock guards",
+        "provenance sampler",
+        "spatial modulation"
+      ],
+      "repo_context": [
+        "automation/live12-session-template.json",
+        "automation/openai-production-orchestration.json",
+        "docs/live12-m4l-ci-cd.md"
+      ],
+      "role_id": "max_device_builder",
+      "role_name": "Max for Live Device Builder",
+      "suggested_openai_surface": {
+        "id": "agents_sdk",
+        "name": "Agents SDK",
+        "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+      },
+      "tool_contracts": [
+        {
+          "approval_required": false,
+          "id": "read_inventory",
+          "input_scope": [
+            "inventory/live12-local-inventory.json"
+          ],
+          "must_not": [
+            "read arbitrary local folders",
+            "copy presets or samples",
+            "emit absolute private paths"
+          ],
+          "output": "Sanitized installed-library and DAW environment summary."
+        },
+        {
+          "approval_required": true,
+          "id": "propose_session_change",
+          "input_scope": [
+            "automation/live12-session-template.json",
+            "compositions/down-tempo-punk-bluegrass-set.json",
+            "inventory/live12-local-inventory.json"
+          ],
+          "must_not": [
+            "mutate a Live set without approval",
+            "commit .als or .amxd binaries",
+            "create unbounded automation loops"
+          ],
+          "output": "Reviewable JSON patch proposal for Live/Max for Live implementation."
+        },
+        {
+          "approval_required": true,
+          "id": "automate_daw_session",
+          "input_scope": [
+            "automation/live12-session-template.json",
+            "automation/generated/openai-worker-briefs.json"
+          ],
+          "must_not": [
+            "export or publish without release QA",
+            "disable provenance checks",
+            "log private performance content by default"
+          ],
+          "output": "Human-reviewable DAW action plan, Max for Live contract update, or local-only session receipt."
+        }
+      ],
+      "track_context": [
+        "Good Vibrations in a Burned Barn",
+        "A.P. Carter in the Warehouse",
+        "No Gods, No Masters, No Quantize",
+        "Possum Kingdom Afterhours",
+        "The Ballad of the Broken Controller"
+      ]
+    },
+    {
+      "allowed_inputs": [
+        "compositions/down-tempo-punk-bluegrass-set.json"
+      ],
+      "approval_required": [
+        {
+          "id": "live_set_mutation",
+          "required_evidence": [
+            "reviewable proposal",
+            "rollback copy or branch",
+            "scope of tracks/devices affected"
+          ],
+          "trigger": "Apply automation to an Ableton Live set, Max for Live device, controller mapping, or performance template."
+        },
+        {
+          "id": "private_audio_upload",
+          "required_evidence": [
+            "session-specific consent",
+            "retention note",
+            "minimum necessary excerpt"
+          ],
+          "trigger": "Send private rehearsal audio, lyrics, or unreleased take content to a cloud API."
+        }
+      ],
+      "expected_outputs": [
+        "updated arrangement maps",
+        "session TODOs"
+      ],
+      "handoff_to": "mix_engineer",
+      "live_session_context": [
+        "AeroBand Banjo Lead",
+        "Fiddle / Hybrid Strings",
+        "Mandolin Chop",
+        "Dobro / Metallic Slide",
+        "Upright Bass / Sub",
+        "Punk Kit",
+        "Deep House Machines",
+        "Public Domain Source Deck",
+        "Alien Sky"
+      ],
+      "local_only_inputs": [],
+      "mission": "Own track form, hook density, contrast, human vs machine tension for GTandDiedTooSoons without crossing data, rights, account, or DAW approval boundaries.",
+      "must_not": [
+        "erase bluegrass instrumentation in favor of generic electronica"
+      ],
+      "owns": [
+        "track form",
+        "hook density",
+        "contrast",
+        "human vs machine tension"
+      ],
+      "repo_context": [
+        "compositions/down-tempo-punk-bluegrass-set.json",
+        "automation/live12-session-template.json",
+        "docs/production-system.md"
+      ],
+      "role_id": "arrangement_producer",
+      "role_name": "Arrangement Producer",
+      "suggested_openai_surface": {
+        "id": "responses_api",
+        "name": "Responses API",
+        "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+      },
+      "tool_contracts": [
+        {
+          "approval_required": false,
+          "id": "render_worker_brief",
+          "input_scope": [
+            "automation/worker-chain.json",
+            "automation/live12-session-template.json",
+            "compositions/down-tempo-punk-bluegrass-set.json"
+          ],
+          "must_not": [
+            "include private lyrics",
+            "include raw audio paths",
+            "include credentials"
+          ],
+          "output": "Role-scoped metadata-only worker brief."
+        },
+        {
+          "approval_required": true,
+          "id": "propose_session_change",
+          "input_scope": [
+            "automation/live12-session-template.json",
+            "compositions/down-tempo-punk-bluegrass-set.json",
+            "inventory/live12-local-inventory.json"
+          ],
+          "must_not": [
+            "mutate a Live set without approval",
+            "commit .als or .amxd binaries",
+            "create unbounded automation loops"
+          ],
+          "output": "Reviewable JSON patch proposal for Live/Max for Live implementation."
+        }
+      ],
+      "track_context": [
+        "Good Vibrations in a Burned Barn",
+        "A.P. Carter in the Warehouse",
+        "No Gods, No Masters, No Quantize",
+        "Possum Kingdom Afterhours",
+        "The Ballad of the Broken Controller"
+      ]
+    },
+    {
+      "allowed_inputs": [],
+      "approval_required": [
+        {
+          "id": "private_audio_upload",
+          "required_evidence": [
+            "session-specific consent",
+            "retention note",
+            "minimum necessary excerpt"
+          ],
+          "trigger": "Send private rehearsal audio, lyrics, or unreleased take content to a cloud API."
+        },
+        {
+          "id": "live_set_mutation",
+          "required_evidence": [
+            "reviewable proposal",
+            "rollback copy or branch",
+            "scope of tracks/devices affected"
+          ],
+          "trigger": "Apply automation to an Ableton Live set, Max for Live device, controller mapping, or performance template."
+        },
+        {
+          "id": "export_or_release",
+          "required_evidence": [
+            "release QA checklist",
+            "sample credits",
+            "source ledger",
+            "CI pass",
+            "mix notes"
+          ],
+          "trigger": "Render, publish, distribute, or hand off production audio."
+        }
+      ],
+      "expected_outputs": [
+        "mix notes",
+        "render checklist",
+        "problem frequencies"
+      ],
+      "handoff_to": "release_qa",
+      "live_session_context": [
+        "AeroBand Banjo Lead",
+        "Fiddle / Hybrid Strings",
+        "Mandolin Chop",
+        "Dobro / Metallic Slide",
+        "Upright Bass / Sub",
+        "Punk Kit",
+        "Deep House Machines",
+        "Public Domain Source Deck",
+        "Alien Sky"
+      ],
+      "local_only_inputs": [
+        "local Live set",
+        "reference notes"
+      ],
+      "mission": "Own gain staging, masking, space, translation, render review for GTandDiedTooSoons without crossing data, rights, account, or DAW approval boundaries.",
+      "must_not": [
+        "log private vocal takes or unreleased lyrics without need"
+      ],
+      "owns": [
+        "gain staging",
+        "masking",
+        "space",
+        "translation",
+        "render review"
+      ],
+      "repo_context": [
+        "automation/live12-session-template.json",
+        "inventory/live12-local-inventory.json",
+        "docs/production-system.md"
+      ],
+      "role_id": "mix_engineer",
+      "role_name": "Masterclass Audio Technician",
+      "suggested_openai_surface": {
+        "id": "agents_sdk",
+        "name": "Agents SDK",
+        "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+      },
+      "tool_contracts": [
+        {
+          "approval_required": false,
+          "id": "read_inventory",
+          "input_scope": [
+            "inventory/live12-local-inventory.json"
+          ],
+          "must_not": [
+            "read arbitrary local folders",
+            "copy presets or samples",
+            "emit absolute private paths"
+          ],
+          "output": "Sanitized installed-library and DAW environment summary."
+        },
+        {
+          "approval_required": true,
+          "id": "automate_daw_session",
+          "input_scope": [
+            "automation/live12-session-template.json",
+            "automation/generated/openai-worker-briefs.json"
+          ],
+          "must_not": [
+            "export or publish without release QA",
+            "disable provenance checks",
+            "log private performance content by default"
+          ],
+          "output": "Human-reviewable DAW action plan, Max for Live contract update, or local-only session receipt."
+        },
+        {
+          "approval_required": false,
+          "id": "render_release_checklist",
+          "input_scope": [
+            "catalogs",
+            "automation",
+            "compositions",
+            "inventory"
+          ],
+          "must_not": [
+            "mark missing sample credits as acceptable",
+            "ignore failed CI"
+          ],
+          "output": "Release readiness checklist covering CI, credits, sources, installs, renders, and residual risks."
+        }
+      ],
+      "track_context": [
+        "Good Vibrations in a Burned Barn",
+        "A.P. Carter in the Warehouse",
+        "No Gods, No Masters, No Quantize",
+        "Possum Kingdom Afterhours",
+        "The Ballad of the Broken Controller"
+      ]
+    },
+    {
+      "allowed_inputs": [],
+      "approval_required": [
+        {
+          "id": "source_download",
+          "required_evidence": [
+            "approved_for_download true",
+            "download ledger candidate",
+            "rights evidence",
+            "allowed host and path"
+          ],
+          "trigger": "Download or transform a public-domain source file."
+        },
+        {
+          "id": "vendor_account_action",
+          "required_evidence": [
+            "official host or app",
+            "redacted log",
+            "requested install or account action",
+            "no credential capture"
+          ],
+          "trigger": "Use an authenticated Ableton, Arturia, or other vendor account session."
+        },
+        {
+          "id": "purchase_or_license_change",
+          "required_evidence": [
+            "official product page",
+            "price or license terms visible to user",
+            "explicit confirmation"
+          ],
+          "trigger": "Buy, license, activate, or materially change entitlement state for a vendor product."
+        },
+        {
+          "id": "export_or_release",
+          "required_evidence": [
+            "release QA checklist",
+            "sample credits",
+            "source ledger",
+            "CI pass",
+            "mix notes"
+          ],
+          "trigger": "Render, publish, distribute, or hand off production audio."
+        }
+      ],
+      "expected_outputs": [
+        "release readiness report"
+      ],
+      "handoff_to": null,
+      "live_session_context": [
+        "AeroBand Banjo Lead",
+        "Fiddle / Hybrid Strings",
+        "Mandolin Chop",
+        "Dobro / Metallic Slide",
+        "Upright Bass / Sub",
+        "Punk Kit",
+        "Deep House Machines",
+        "Public Domain Source Deck",
+        "Alien Sky"
+      ],
+      "local_only_inputs": [
+        "repo status",
+        "source manifests",
+        "render checklist"
+      ],
+      "mission": "Own CI status, credits, source provenance, export manifest for GTandDiedTooSoons without crossing data, rights, account, or DAW approval boundaries.",
+      "must_not": [
+        "ship missing sample credits or failed CI"
+      ],
+      "owns": [
+        "CI status",
+        "credits",
+        "source provenance",
+        "export manifest"
+      ],
+      "repo_context": [
+        ".github/workflows/live12-foundation-ci.yml",
+        "catalogs/library-installation-plan.json",
+        "catalogs/public-domain-bluegrass-sources.json",
+        "sources/public-domain/download-ledger.json"
+      ],
+      "role_id": "release_qa",
+      "role_name": "Release and Provenance QA",
+      "suggested_openai_surface": {
+        "id": "responses_api",
+        "name": "Responses API",
+        "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+      },
+      "tool_contracts": [
+        {
+          "approval_required": false,
+          "id": "validate_source_rights",
+          "input_scope": [
+            "catalogs/public-domain-bluegrass-sources.json",
+            "sources/public-domain/download-ledger.json"
+          ],
+          "must_not": [
+            "upgrade unclear rights",
+            "download unapproved copyrighted recordings"
+          ],
+          "output": "Pass/fail rights and provenance decision with unresolved risk notes."
+        },
+        {
+          "approval_required": false,
+          "id": "read_inventory",
+          "input_scope": [
+            "inventory/live12-local-inventory.json"
+          ],
+          "must_not": [
+            "read arbitrary local folders",
+            "copy presets or samples",
+            "emit absolute private paths"
+          ],
+          "output": "Sanitized installed-library and DAW environment summary."
+        },
+        {
+          "approval_required": false,
+          "id": "render_release_checklist",
+          "input_scope": [
+            "catalogs",
+            "automation",
+            "compositions",
+            "inventory"
+          ],
+          "must_not": [
+            "mark missing sample credits as acceptable",
+            "ignore failed CI"
+          ],
+          "output": "Release readiness checklist covering CI, credits, sources, installs, renders, and residual risks."
+        }
+      ],
+      "track_context": [
+        "Good Vibrations in a Burned Barn",
+        "A.P. Carter in the Warehouse",
+        "No Gods, No Masters, No Quantize",
+        "Possum Kingdom Afterhours",
+        "The Ballad of the Broken Controller"
+      ]
+    }
+  ],
+  "generated_at": "1970-01-01T00:00:00Z",
+  "generator": "scripts/render_openai_worker_briefs.py",
+  "orchestration_contract": {
+    "name": "GTandDiedTooSoons OpenAI Production Orchestration",
+    "official_docs_consulted": [
+      "https://developers.openai.com/api/docs/guides/structured-outputs",
+      "https://developers.openai.com/api/docs/guides/agents",
+      "https://openai.github.io/openai-agents-python/agents/",
+      "https://openai.github.io/openai-agents-python/handoffs/",
+      "https://openai.github.io/openai-agents-python/tracing/",
+      "https://developers.openai.com/api/docs/guides/realtime",
+      "https://developers.openai.com/apps-sdk",
+      "https://developers.openai.com/apps-sdk/build/mcp-server"
+    ],
+    "operating_assumptions": [
+      "AI workers can propose musical, technical, and operational changes, but material changes must be traceable to versioned manifests or human-approved local sessions.",
+      "DAW and account automation is in scope when it uses official user-authenticated surfaces, redacts sensitive data, and honors confirmation gates for purchases, installs, Live-set mutation, export, and release.",
+      "Repository CI must verify orchestration contracts without requiring OpenAI credentials, vendor credentials, Ableton Live, Max for Live, Arturia Software Center, or private audio.",
+      "Generated prompts, briefs, and manifests must avoid raw private audio, unreleased lyrics, credentials, account tokens, installer payloads, and commercial library content."
+    ],
+    "purpose": "A repeatable, auditable orchestration contract for AI-assisted Ableton Live 12 Suite, Max for Live, source-provenance, and account-authorized library operations."
+  },
+  "project_context": {
+    "approved_public_domain_sources": [
+      {
+        "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+        "id": "loc-citizen-dj-devils-dream-reel-123798-001",
+        "name": "Devil's dream reel - excerpt 001",
+        "project_use": "Old-time fiddle reel source for banjo/fiddle chop, granular sampler, and call-and-response arrangement experiments.",
+        "rights_status": "public_domain"
+      }
+    ],
+    "composition_set": "Down-Tempo Punk Bluegrass / Alien House Suite",
+    "inventory_summary": {
+      "ableton_live": {
+        "available_not_installed_count": 34,
+        "exists": true,
+        "factory_pack_count": 9,
+        "indexed_pack_candidate_count": 43,
+        "installed_factory_packs": [
+          "Building Max Devices",
+          "Creative Extensions",
+          "Drone Lab",
+          "Glitch and Wash",
+          "Granulator III",
+          "Inspired by Nature by Dillon Bastan",
+          "Mood Reel",
+          "PitchLoop89",
+          "Voice Box"
+        ],
+        "live_database_read_status": "ok",
+        "name": "Ableton Live 12 Suite.app",
+        "version": "12.4.2 (2026-06-04_a687113d71)"
+      },
+      "arturia": {
+        "application_count": 56,
+        "preset_product_folder_count": 0,
+        "resource_product_count": 0,
+        "sample_product_folder_count": 0
+      }
+    },
+    "library_installation": {
+      "account_or_daw_automation_candidates": [
+        {
+          "id": "ableton-drum-booth",
+          "install_route": "Ableton Live Browser > Packs, or Ableton account if licensed.",
+          "name": "Drum Booth",
+          "status": "live_database_available_not_installed",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "ableton-drum-essentials",
+          "install_route": "Ableton Live Browser > Packs; official page lists Live 12 compatibility.",
+          "name": "Drum Essentials",
+          "status": "live_database_available_not_installed",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "ableton-string-quartet",
+          "install_route": "Ableton Live Browser > Packs, or Ableton account if licensed.",
+          "name": "String Quartet by Spitfire Audio",
+          "status": "live_database_available_not_installed",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "ableton-sequencers",
+          "install_route": "Ableton Live Browser > Packs; requires compatible Max for Live license.",
+          "name": "Sequencers",
+          "status": "live_database_available_not_installed",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "ableton-chop-and-swing",
+          "install_route": "Ableton Live Browser > Packs.",
+          "name": "Chop and Swing",
+          "status": "live_database_available_not_installed",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "ableton-drive-and-glow",
+          "install_route": "Purchase/install through Ableton account or Live Browser if entitled.",
+          "name": "Drive and Glow",
+          "status": "live_database_available_not_installed",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "ableton-electric-keyboards",
+          "install_route": "Ableton Live Browser > Packs.",
+          "name": "Electric Keyboards",
+          "status": "live_database_available_not_installed",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "ableton-generators-by-iftah",
+          "install_route": "Ableton Live Browser > Packs; requires compatible Live/Max for Live license.",
+          "name": "Generators by Iftah",
+          "status": "live_database_available_not_installed",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "ableton-performance-pack-by-iftah",
+          "install_route": "Ableton Live Browser > Packs; requires compatible Live/Max for Live license.",
+          "name": "Performance Pack by Iftah",
+          "status": "live_database_available_not_installed",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "ableton-dm-307a-free-pack",
+          "install_route": "Log in to Ableton, download official .alp if entitled, open with Ableton Live, then delete installer.",
+          "name": "DM-307A Free Pack",
+          "status": "account_login_required",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "ableton-spectral-textures",
+          "install_route": "Log in to Ableton, download/install from the official pack page or account if entitled.",
+          "name": "Spectral Textures",
+          "status": "account_login_required",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "arturia-electronica-selection",
+          "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+          "name": "Electronica Selection",
+          "status": "account_or_purchase_required",
+          "vendor": "Arturia"
+        },
+        {
+          "id": "arturia-dancefloor-selection",
+          "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+          "name": "Dancefloor Selection",
+          "status": "account_or_purchase_required",
+          "vendor": "Arturia"
+        },
+        {
+          "id": "arturia-house-explorations",
+          "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+          "name": "House Explorations",
+          "status": "account_or_purchase_required",
+          "vendor": "Arturia"
+        },
+        {
+          "id": "arturia-guitar-deconstructed",
+          "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+          "name": "Guitar Deconstructed",
+          "status": "account_or_purchase_required",
+          "vendor": "Arturia"
+        },
+        {
+          "id": "arturia-post-rock-guitars",
+          "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+          "name": "Post-Rock Guitars",
+          "status": "account_or_purchase_required",
+          "vendor": "Arturia"
+        },
+        {
+          "id": "arturia-folkloric-strings",
+          "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+          "name": "Folkloric Strings",
+          "status": "account_or_purchase_required",
+          "vendor": "Arturia"
+        },
+        {
+          "id": "arturia-cities-in-dust",
+          "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+          "name": "Cities In Dust",
+          "status": "account_or_purchase_required",
+          "vendor": "Arturia"
+        },
+        {
+          "id": "arturia-industrial-force",
+          "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+          "name": "Industrial Force",
+          "status": "account_or_purchase_required",
+          "vendor": "Arturia"
+        },
+        {
+          "id": "arturia-idm-grooves",
+          "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+          "name": "IDM Grooves",
+          "status": "account_or_purchase_required",
+          "vendor": "Arturia"
+        }
+      ],
+      "high_priority_items": [
+        {
+          "id": "ableton-drum-booth",
+          "name": "Drum Booth",
+          "status": "live_database_available_not_installed",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "ableton-drum-essentials",
+          "name": "Drum Essentials",
+          "status": "live_database_available_not_installed",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "ableton-string-quartet",
+          "name": "String Quartet by Spitfire Audio",
+          "status": "live_database_available_not_installed",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "ableton-sequencers",
+          "name": "Sequencers",
+          "status": "live_database_available_not_installed",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "ableton-chop-and-swing",
+          "name": "Chop and Swing",
+          "status": "live_database_available_not_installed",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "ableton-drive-and-glow",
+          "name": "Drive and Glow",
+          "status": "live_database_available_not_installed",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "ableton-spectral-textures",
+          "name": "Spectral Textures",
+          "status": "account_login_required",
+          "vendor": "Ableton"
+        },
+        {
+          "id": "arturia-electronica-selection",
+          "name": "Electronica Selection",
+          "status": "account_or_purchase_required",
+          "vendor": "Arturia"
+        },
+        {
+          "id": "arturia-dancefloor-selection",
+          "name": "Dancefloor Selection",
+          "status": "account_or_purchase_required",
+          "vendor": "Arturia"
+        },
+        {
+          "id": "arturia-house-explorations",
+          "name": "House Explorations",
+          "status": "account_or_purchase_required",
+          "vendor": "Arturia"
+        },
+        {
+          "id": "arturia-guitar-deconstructed",
+          "name": "Guitar Deconstructed",
+          "status": "account_or_purchase_required",
+          "vendor": "Arturia"
+        }
+      ]
+    },
+    "live_template": "GTandDiedTooSoons Live 12 Foundation Template",
+    "live_tracks": [
+      "AeroBand Banjo Lead",
+      "Fiddle / Hybrid Strings",
+      "Mandolin Chop",
+      "Dobro / Metallic Slide",
+      "Upright Bass / Sub",
+      "Punk Kit",
+      "Deep House Machines",
+      "Public Domain Source Deck",
+      "Alien Sky"
+    ],
+    "track_titles": [
+      "Good Vibrations in a Burned Barn",
+      "A.P. Carter in the Warehouse",
+      "No Gods, No Masters, No Quantize",
+      "Possum Kingdom Afterhours",
+      "The Ballad of the Broken Controller"
+    ]
+  },
+  "schema_version": 1,
+  "source_files": [
+    "automation/openai-production-orchestration.json",
+    "automation/worker-chain.json",
+    "automation/live12-session-template.json",
+    "compositions/down-tempo-punk-bluegrass-set.json",
+    "catalogs/public-domain-bluegrass-sources.json",
+    "catalogs/library-installation-plan.json",
+    "inventory/live12-local-inventory.json"
+  ]
+}
