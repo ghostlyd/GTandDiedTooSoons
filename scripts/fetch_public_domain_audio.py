@@ -8,13 +8,14 @@ import hashlib
 import json
 import posixpath
 import re
+import sys
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 
-DOWNLOADABLE_RIGHTS = {"public_domain", "cc0", "cc_by", "no_known_restrictions"}
+DOWNLOADABLE_RIGHTS = {"public_domain", "cc0", "cc_by"}
 
 
 def require_https_url(value: str, field: str) -> str:
@@ -236,23 +237,33 @@ def main() -> int:
     parser.add_argument("--catalog", default="catalogs/public-domain-bluegrass-sources.json")
     parser.add_argument("--output-dir", default="sources/public-domain/raw")
     parser.add_argument("--ledger", default="sources/public-domain/download-ledger.json")
-    parser.add_argument("--no-ledger", action="store_true", help="Skip updating the tracked download ledger.")
     parser.add_argument("--execute", action="store_true", help="Actually download approved entries. Default is preview only.")
+    parser.add_argument("--source-id", action="append", default=[], help="Fetch only the approved source id. Repeat for multiple ids.")
     parser.add_argument("--max-mb", type=int, default=250)
     args = parser.parse_args()
 
     catalog = load_catalog(Path(args.catalog))
     output_root = Path(args.output_dir)
     downloadable = []
+    approved_ids = set()
+    requested_ids = set(args.source_id)
 
     for entry in catalog.get("sources", []):
         if not entry.get("approved_for_download"):
             continue
+        approved_ids.add(entry.get("id"))
         validate_download_entry(entry)
+        if requested_ids and entry.get("id") not in requested_ids:
+            continue
         downloadable.append(entry)
 
+    missing_ids = sorted(requested_ids - approved_ids)
+    if missing_ids:
+        print(f"Requested source id is not approved or does not exist: {', '.join(missing_ids)}", file=sys.stderr)
+        return 1
+
     if not downloadable:
-        print("No approved downloads found. Review catalog entries and set approved_for_download only after rights checks.")
+        print("No matching approved downloads found. Review catalog entries and set approved_for_download only after rights checks.")
         return 0
 
     for entry in downloadable:
@@ -278,9 +289,8 @@ def main() -> int:
             }
             write_json_atomic(provenance_file, provenance)
             print(f"Wrote {provenance_file}")
-            if not args.no_ledger:
-                upsert_ledger_record(Path(args.ledger), ledger_record)
-                print(f"Updated {args.ledger}")
+            upsert_ledger_record(Path(args.ledger), ledger_record)
+            print(f"Updated {args.ledger}")
 
     return 0
 

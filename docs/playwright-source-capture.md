@@ -6,54 +6,51 @@ Browser automation is used for source metadata review, not for unsafe downloadin
 
 - `npx` is available.
 - The user-scoped `playwright_cli.sh` wrapper currently resolves to a stale `playwright-cli` binary path with the installed `@playwright/mcp` package.
-- The Playwright package CLI is available through `npm exec --package=playwright -- playwright`.
-- Chromium was installed into the local Playwright cache on 2026-06-14.
+- Direct `npx --package playwright` module resolution was unreliable with the local Node/npm runtime on 2026-06-14.
+- A temporary runtime under `/tmp/gt-playwright-runtime` successfully ran Playwright 1.60.0 against the installed Chrome channel without adding Node dependencies to this repository.
 
 ## Verified Commands
 
 ```bash
-npm exec --yes --package=playwright -- playwright --version
-npm exec --yes --package=playwright -- playwright trace --help
-npm exec --yes --package=playwright -- playwright screenshot \
-  --browser chromium \
-  --viewport-size 1280,720 \
-  --wait-for-timeout 1500 \
-  https://www.copyright.gov/music-modernization/pre1972-soundrecordings/ \
-  output/playwright/copyright-pre1972.png
-
-npm exec --yes --package=playwright -- playwright screenshot \
-  --browser chromium \
-  --viewport-size 1280,720 \
-  --wait-for-timeout 1500 \
-  https://cylinders.library.ucsb.edu/hillbilly.php \
-  output/playwright/ucsb-hillbilly.png
-
-npm exec --yes --package=playwright -- playwright screenshot \
-  --browser chromium \
-  --viewport-size 1280,900 \
-  --wait-for-timeout 3000 \
-  https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/ \
-  output/playwright/loc-citizen-dj-folk-20260614.png
+tmpdir=/tmp/gt-playwright-runtime
+rm -rf "$tmpdir"
+mkdir -p "$tmpdir"
+cd "$tmpdir"
+npm init -y
+npm install playwright@1.60.0
+node -e "const { chromium } = require('playwright'); console.log(typeof chromium.launch)"
 ```
 
 The Copyright Office, UCSB, and LOC Citizen DJ screenshots rendered real rights/source pages and are intentionally ignored under `output/playwright/`.
+
+The expanded 2026-06-14 LOC Citizen DJ capture used `/tmp/gt-playwright-runtime/node_modules/playwright` to write:
+
+- `output/playwright/loc-citizen-dj-folk-20260614-expanded.png`
+- `output/playwright/loc-citizen-dj-folk-20260614-trace.zip`
 
 ## Source Notes
 
 The LOC Citizen DJ Folk Music collection page is approved as browser evidence for item-level downloads in `catalogs/public-domain-bluegrass-sources.json`. Because `output/playwright/` is ignored, the catalog also stores concise rights evidence from the page: public-domain status, commercial reuse scope, credit recommendation, and cultural-respect notes. Its WAV/MP3 pack links are still fetched through `scripts/fetch_public_domain_audio.py` so exact host checks, path-prefix allow-lists, size limits, SHA-256 ledger entries, and local provenance sidecars are enforced consistently.
 
+Target a subset of approved entries with repeated `--source-id` flags:
+
+```bash
+python3 scripts/fetch_public_domain_audio.py \
+  --execute \
+  --source-id loc-citizen-dj-turkey-in-the-straw-medley-247928-001 \
+  --source-id loc-citizen-dj-carnival-of-venice-260123-001
+```
+
 The LOC Henry Reed collection page rendered a Cloudflare security-verification interstitial in headless Chromium on 2026-06-14. Do not treat that screenshot as source metadata evidence.
 
 ## Trace Workflow
 
-When future Playwright tests produce `trace.zip`, inspect them with:
+When future Playwright captures produce `trace.zip`, inspect them with the installed Playwright tooling available in that runtime. On 2026-06-14, `show-trace` was available and the newer `playwright trace open` subcommand was not:
 
 ```bash
-npm exec --yes --package=playwright -- playwright trace open path/to/trace.zip
-npm exec --yes --package=playwright -- playwright trace actions
-npm exec --yes --package=playwright -- playwright trace requests --failed
-npm exec --yes --package=playwright -- playwright trace console --errors-only
-npm exec --yes --package=playwright -- playwright trace close
+/tmp/gt-playwright-runtime/node_modules/.bin/playwright show-trace output/playwright/loc-citizen-dj-folk-20260614-trace.zip
 ```
+
+For non-UI inspection, unzip the trace and inspect `trace.trace`, `trace.network`, and resource files. The 2026-06-14 trace contains a `goto` action for `https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/` plus DOM snapshots and screenshots.
 
 Do not commit traces by default; store only concise notes or screenshots needed for review.
