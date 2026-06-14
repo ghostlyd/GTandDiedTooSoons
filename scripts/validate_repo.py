@@ -29,6 +29,7 @@ REQUIRED_FILES = [
     "catalogs/public-domain-bluegrass-sources.json",
     "automation/openai-production-orchestration.json",
     "automation/generated/openai-worker-briefs.json",
+    "automation/generated/live12-daw-action-plan.json",
     "automation/live12-session-template.json",
     "automation/worker-chain.json",
     "compositions/down-tempo-punk-bluegrass-set.json",
@@ -37,6 +38,7 @@ REQUIRED_FILES = [
     "scripts/inventory_live_suite.py",
     "scripts/fetch_public_domain_audio.py",
     "scripts/render_composition_sketches.py",
+    "scripts/render_live12_daw_action_plan.py",
     "scripts/render_openai_worker_briefs.py",
     "sources/public-domain/download-ledger.json",
 ]
@@ -125,6 +127,22 @@ EXPECTED_WORKER_BRIEF_SOURCES = {
 EXPECTED_COMPOSITION_SKETCH_SOURCES = {
     "compositions/down-tempo-punk-bluegrass-set.json",
     "automation/live12-session-template.json",
+}
+EXPECTED_DAW_ACTION_PLAN_SOURCES = {
+    "automation/openai-production-orchestration.json",
+    "automation/live12-session-template.json",
+    "compositions/down-tempo-punk-bluegrass-set.json",
+    "compositions/generated/live12-track-build-plans.json",
+    "catalogs/public-domain-bluegrass-sources.json",
+    "sources/public-domain/download-ledger.json",
+    "inventory/live12-local-inventory.json",
+}
+EXPECTED_DAW_APPROVAL_GATES = {"private_audio_upload", "live_set_mutation", "export_or_release"}
+REQUIRED_DAW_ACTION_GROUP_GATES = {
+    "session_actions": "live_set_mutation",
+    "scene_actions": "live_set_mutation",
+    "layer_actions": "live_set_mutation",
+    "mix_and_release_gates": "export_or_release",
 }
 STABLE_GENERATED_AT = "1970-01-01T00:00:00Z"
 AUDIO_PATH_PATTERN = re.compile(r"(?:^|[/\\\s])[\w .~/-]+\.(?:aif|aiff|flac|m4a|mp3|ogg|wav)\b", re.IGNORECASE)
@@ -500,6 +518,7 @@ def validate_json_contracts(root: Path, errors: list[str]) -> None:
     for rel in [
         "automation/openai-production-orchestration.json",
         "automation/generated/openai-worker-briefs.json",
+        "automation/generated/live12-daw-action-plan.json",
         "automation/live12-session-template.json",
         "automation/worker-chain.json",
         "compositions/down-tempo-punk-bluegrass-set.json",
@@ -653,6 +672,9 @@ def validate_openai_orchestration(root: Path, errors: list[str]) -> None:
         matching = [tool for tool in data.get("tool_contracts", []) if tool.get("id") == required_tool]
         if not matching or matching[0].get("approval_required") is not True:
             fail(errors, f"{required_tool} must require approval")
+    daw_tools = [tool for tool in data.get("tool_contracts", []) if tool.get("id") == "automate_daw_session"]
+    if daw_tools and "automation/generated/live12-daw-action-plan.json" not in daw_tools[0].get("input_scope", []):
+        fail(errors, "automate_daw_session input_scope must include automation/generated/live12-daw-action-plan.json")
 
     gate_ids = set()
     for gate in data.get("approval_gates", []):
@@ -798,6 +820,231 @@ def validate_generated_worker_briefs(root: Path, errors: list[str]) -> None:
             fail(errors, f"Generated OpenAI worker briefs must not contain raw audio paths: {string_value}")
         if SECRET_VALUE_PATTERN.search(string_value):
             fail(errors, "Generated OpenAI worker briefs must not contain API tokens or bearer credentials")
+
+
+def validate_generated_daw_action_plan(root: Path, errors: list[str]) -> None:
+    data = load_json(root / "automation/generated/live12-daw-action-plan.json", errors)
+    orchestration = load_json(root / "automation/openai-production-orchestration.json", errors)
+    session_template = load_json(root / "automation/live12-session-template.json", errors)
+    compositions = load_json(root / "compositions/down-tempo-punk-bluegrass-set.json", errors)
+    composition_plans = load_json(root / "compositions/generated/live12-track-build-plans.json", errors)
+    source_catalog = load_json(root / "catalogs/public-domain-bluegrass-sources.json", errors)
+    source_ledger = load_json(root / "sources/public-domain/download-ledger.json", errors)
+    inventory = as_dict(load_json(root / "inventory/live12-local-inventory.json", errors))
+    if not data or not session_template or not composition_plans:
+        return
+
+    if data.get("schema_version") != 1:
+        fail(errors, "Generated DAW action plan must use schema_version 1")
+    if data.get("generated_at") != STABLE_GENERATED_AT:
+        fail(errors, "Generated DAW action plan must be committed with stable generated_at")
+    if data.get("generator") != "scripts/render_live12_daw_action_plan.py":
+        fail(errors, "Generated DAW action plan must name scripts/render_live12_daw_action_plan.py as generator")
+
+    source_files = set(data.get("source_files", []))
+    if source_files != EXPECTED_DAW_ACTION_PLAN_SOURCES:
+        fail(errors, "Generated DAW action plan source_files must match expected source manifests")
+    source_hashes = data.get("source_file_sha256") or {}
+    for source_file in source_files:
+        if Path(source_file).is_absolute() or ".." in Path(source_file).parts or not (root / source_file).exists():
+            fail(errors, f"Generated DAW action plan source file is invalid: {source_file}")
+            continue
+        expected_hash = source_hashes.get(source_file)
+        if not SHA256_PATTERN.match(str(expected_hash or "")):
+            fail(errors, f"Generated DAW action plan source hash is invalid: {source_file}")
+        elif expected_hash != sha256_file(root / source_file):
+            fail(errors, f"Generated DAW action plan source hash is stale: {source_file}")
+
+    safety = require_dict(data.get("safety"), "Generated DAW action plan safety", errors)
+    if safety.get("proposal_only") is not True:
+        fail(errors, "Generated DAW action plan safety.proposal_only must be true")
+    for field in ["requires_human_approval_before", "must_not"]:
+        validate_string_items(require_list(safety.get(field), f"Generated DAW action plan safety.{field}", errors), f"Generated DAW action plan safety.{field}", errors)
+
+    tool_contract = require_dict(data.get("openai_tool_contract"), "Generated DAW action plan openai_tool_contract", errors)
+    if tool_contract.get("id") != "automate_daw_session" or tool_contract.get("approval_required") is not True:
+        fail(errors, "Generated DAW action plan must bind to the approval-required automate_daw_session tool")
+    orchestration_daw_tools = [tool for tool in orchestration.get("tool_contracts", []) if tool.get("id") == "automate_daw_session"]
+    if not orchestration_daw_tools:
+        fail(errors, "Generated DAW action plan cannot find automate_daw_session in orchestration contract")
+    elif tool_contract.get("source_contract") != orchestration_daw_tools[0]:
+        fail(errors, "Generated DAW action plan source_contract must mirror automate_daw_session")
+
+    live_template = require_dict(data.get("live_template"), "Generated DAW action plan live_template", errors)
+    if live_template.get("name") != session_template.get("name"):
+        fail(errors, "Generated DAW action plan live_template.name must match session template")
+    if live_template.get("target_runtime") != session_template.get("target_runtime"):
+        fail(errors, "Generated DAW action plan live_template.target_runtime must match session template")
+    if live_template.get("tempo_range_bpm") != session_template.get("tempo_range_bpm"):
+        fail(errors, "Generated DAW action plan live_template tempo_range_bpm must match session template")
+    if live_template.get("track_count") != len(session_template.get("tracks", [])):
+        fail(errors, "Generated DAW action plan live_template.track_count is stale")
+    if live_template.get("return_count") != len(session_template.get("returns", [])):
+        fail(errors, "Generated DAW action plan live_template.return_count is stale")
+
+    ableton = as_dict(inventory.get("ableton"))
+    arturia = as_dict(inventory.get("arturia"))
+    expected_inventory_summary = {
+        "ableton_live_version": as_dict(ableton.get("app")).get("version"),
+        "factory_pack_count": len(as_list(ableton.get("factory_packs"))),
+        "arturia_application_count": len(as_list(arturia.get("applications"))),
+    }
+    if data.get("inventory_summary") != expected_inventory_summary:
+        fail(errors, "Generated DAW action plan inventory_summary must match inventory/live12-local-inventory.json")
+
+    approved_sources = {
+        source.get("id"): source
+        for source in source_catalog.get("sources", [])
+        if source.get("id") and source.get("approved_for_download")
+    }
+    ledger_by_source = {
+        record.get("source_id"): record
+        for record in source_ledger.get("downloads", [])
+        if record.get("source_id")
+    }
+    approved_pool = data.get("approved_source_pool", [])
+    pool_ids = {entry.get("source_id") for entry in approved_pool}
+    pool_by_id = {entry.get("source_id"): entry for entry in approved_pool if entry.get("source_id")}
+    if pool_ids != set(approved_sources).intersection(ledger_by_source):
+        fail(errors, "Generated DAW action plan approved_source_pool must match approved source ledger records")
+    for source_entry in approved_pool:
+        source_id = source_entry.get("source_id")
+        record = ledger_by_source.get(source_id, {})
+        source = approved_sources.get(source_id, {})
+        for field in ["name", "rights_status", "credit_line", "sha256", "byte_size"]:
+            if source_entry.get(field) != record.get(field):
+                fail(errors, f"Generated DAW action plan source pool {field} is stale for {source_id}")
+        if source_entry.get("project_use") != source.get("project_use"):
+            fail(errors, f"Generated DAW action plan source pool project_use is stale for {source_id}")
+
+    source_track_titles = [track.get("title") for track in compositions.get("tracks", [])]
+    generated_track_titles = [track.get("title") for track in data.get("tracks", [])]
+    build_plan_track_titles = [track.get("title") for track in composition_plans.get("tracks", [])]
+    if generated_track_titles != source_track_titles or generated_track_titles != build_plan_track_titles:
+        fail(errors, "Generated DAW action plan track order must match composition and generated build plans")
+
+    tempo_range = session_template.get("tempo_range_bpm", [0, 999])
+    session_tracks = {track.get("name"): track for track in session_template.get("tracks", [])}
+    session_returns = session_template.get("returns", [])
+    build_plans_by_slug = {track.get("slug"): track for track in composition_plans.get("tracks", [])}
+    all_action_ids = set()
+
+    for track in data.get("tracks", []):
+        title = track.get("title")
+        slug = track.get("slug")
+        build_plan = build_plans_by_slug.get(slug)
+        if not build_plan:
+            fail(errors, f"Generated DAW action plan track slug is not in build plans: {slug}")
+            continue
+        for field in ["tempo_bpm", "key_center", "duration_target", "midi_file", "midi_sha256", "approximate_bars"]:
+            if track.get(field) != build_plan.get(field):
+                fail(errors, f"Generated DAW action plan track {field} is stale: {title}")
+        if not tempo_range[0] <= track.get("tempo_bpm", 0) <= tempo_range[1]:
+            fail(errors, f"Generated DAW action plan tempo is outside session range: {title}")
+        actual_approval_gates = set()
+
+        for action_group in ["preflight_actions", "session_actions", "scene_actions", "layer_actions", "mix_and_release_gates"]:
+            actions = require_list(track.get(action_group), f"Generated DAW action plan {title}.{action_group}", errors)
+            for action in actions:
+                action_id = action.get("id")
+                if not action_id:
+                    fail(errors, f"Generated DAW action plan action missing id: {title}.{action_group}")
+                elif action_id in all_action_ids:
+                    fail(errors, f"Generated DAW action plan action id is duplicated: {action_id}")
+                all_action_ids.add(action_id)
+                approval_gate = action.get("approval_gate")
+                if approval_gate and approval_gate not in OPENAI_APPROVAL_GATES:
+                    fail(errors, f"Generated DAW action plan action references unknown approval gate: {action_id}: {approval_gate}")
+                if approval_gate:
+                    actual_approval_gates.add(approval_gate)
+                required_gate = REQUIRED_DAW_ACTION_GROUP_GATES.get(action_group)
+                if required_gate and approval_gate != required_gate:
+                    fail(errors, f"Generated DAW action plan {action_group} action must require {required_gate}: {action_id}")
+
+        preflight_actions = track.get("preflight_actions", [])
+        private_upload_checks = [
+            action for action in preflight_actions
+            if action.get("approval_gate") == "private_audio_upload"
+        ]
+        if not private_upload_checks:
+            fail(errors, f"Generated DAW action plan preflight must include private_audio_upload boundary: {title}")
+
+        if len(track.get("scene_actions", [])) != len(build_plan.get("scenes", [])):
+            fail(errors, f"Generated DAW action plan scene count is stale: {title}")
+        for action, scene in zip(track.get("scene_actions", []), build_plan.get("scenes", []), strict=False):
+            for field in ["bar_start", "bar_length", "arrangement_note"]:
+                if action.get(field) != scene.get(field):
+                    fail(errors, f"Generated DAW action plan scene {field} is stale: {title}: {action.get('id')}")
+
+        layers_by_id = {layer.get("id"): layer for layer in build_plan.get("layers", [])}
+        if len(track.get("layer_actions", [])) != len(layers_by_id):
+            fail(errors, f"Generated DAW action plan layer action count is stale: {title}")
+        for action in track.get("layer_actions", []):
+            layer_id = action.get("id", "").split(".layer.", 1)[-1]
+            layer = layers_by_id.get(layer_id)
+            if not layer:
+                fail(errors, f"Generated DAW action plan layer id is not in build plan: {title}: {layer_id}")
+                continue
+            session_track_name = action.get("session_track")
+            session_track = session_tracks.get(session_track_name)
+            if not session_track:
+                fail(errors, f"Generated DAW action plan layer references unknown session track: {title}: {session_track_name}")
+                continue
+            for field in ["midi_track", "midi_channels", "gm_placeholder", "traditional_bluegrass_layer", "alien_electronic_layer", "device_contracts", "automation_targets"]:
+                expected_field = "gm_sound" if field == "gm_placeholder" else field
+                if action.get(field) != layer.get(expected_field):
+                    fail(errors, f"Generated DAW action plan layer {field} is stale: {title}: {layer_id}")
+            if action.get("instrument_strategy") != session_track.get("instrument_strategy"):
+                fail(errors, f"Generated DAW action plan layer instrument_strategy is stale: {title}: {layer_id}")
+            if action.get("device_contracts") != session_track.get("device_contracts", []):
+                fail(errors, f"Generated DAW action plan layer device contracts must mirror session template: {title}: {layer_id}")
+            macro_targets = [macro.get("target") for macro in action.get("macro_initialization", [])]
+            if macro_targets != action.get("automation_targets", []):
+                fail(errors, f"Generated DAW action plan macro initialization must cover automation targets: {title}: {layer_id}")
+
+        configure_returns = [
+            action for action in track.get("session_actions", [])
+            if action.get("type") == "create_or_verify_return_tracks"
+        ]
+        if not configure_returns or configure_returns[0].get("returns") != session_returns:
+            fail(errors, f"Generated DAW action plan return setup is stale: {title}")
+
+        source_deck = require_dict(track.get("source_deck"), f"Generated DAW action plan source_deck for {title}", errors)
+        source_deck_session_track = session_tracks.get(source_deck.get("session_track"))
+        if not source_deck_session_track:
+            fail(errors, f"Generated DAW action plan source_deck references unknown track: {title}")
+        else:
+            for field in ["role", "instrument_strategy", "device_contracts", "automation_targets"]:
+                source_deck_field = "session_role" if field == "role" else field
+                if source_deck.get(source_deck_field) != source_deck_session_track.get(field, [] if field in {"device_contracts", "automation_targets"} else None):
+                    fail(errors, f"Generated DAW action plan source_deck {source_deck_field} is stale: {title}")
+            macro_targets = [macro.get("target") for macro in source_deck.get("macro_initialization", [])]
+            if macro_targets != source_deck.get("automation_targets", []):
+                fail(errors, f"Generated DAW action plan source_deck macro initialization must cover automation targets: {title}")
+        if source_deck.get("default_state") != "muted_until_human_provenance_review":
+            fail(errors, f"Generated DAW action plan source_deck must default muted: {title}")
+        for candidate in source_deck.get("candidate_sources", []):
+            source_id = candidate.get("source_id")
+            if source_id not in pool_ids:
+                fail(errors, f"Generated DAW action plan source candidate is not in approved pool: {title}: {candidate.get('source_id')}")
+            elif candidate != pool_by_id[source_id]:
+                fail(errors, f"Generated DAW action plan source candidate metadata is stale: {title}: {source_id}")
+        if source_deck.get("approval_gate") != "live_set_mutation":
+            fail(errors, f"Generated DAW action plan source_deck must require live_set_mutation: {title}")
+        else:
+            actual_approval_gates.add("live_set_mutation")
+        if set(track.get("approval_gates_required", [])) != actual_approval_gates:
+            fail(errors, f"Generated DAW action plan approval_gates_required must match emitted action gates: {title}")
+        if not EXPECTED_DAW_APPROVAL_GATES.issubset(actual_approval_gates):
+            fail(errors, f"Generated DAW action plan track must require private audio, Live mutation, and export/release gates: {title}")
+
+    for string_value in iter_string_values(data):
+        if "/Users/" in string_value:
+            fail(errors, "Generated DAW action plan must not contain absolute user paths")
+        if "sources/public-domain/raw/" in string_value or AUDIO_PATH_PATTERN.search(string_value):
+            fail(errors, f"Generated DAW action plan must not contain raw audio paths: {string_value}")
+        if SECRET_VALUE_PATTERN.search(string_value):
+            fail(errors, "Generated DAW action plan must not contain API tokens or bearer credentials")
 
 
 def read_varlen(data: bytes, index: int) -> tuple[int, int]:
@@ -1061,6 +1308,7 @@ def main() -> int:
     validate_inventory_snapshot(root, errors)
     validate_openai_orchestration(root, errors)
     validate_generated_worker_briefs(root, errors)
+    validate_generated_daw_action_plan(root, errors)
     validate_generated_composition_sketches(root, errors)
     validate_binary_hygiene(root, errors)
     validate_tracked_raw_source_files(root, errors)

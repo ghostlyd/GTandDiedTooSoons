@@ -152,7 +152,7 @@
     },
     {
       "id": "automate_daw_session",
-      "input_scope": ["automation/live12-session-template.json", "automation/generated/openai-worker-briefs.json", "compositions/generated/live12-track-build-plans.json"],
+      "input_scope": ["automation/live12-session-template.json", "automation/generated/openai-worker-briefs.json", "automation/generated/live12-daw-action-plan.json", "compositions/generated/live12-track-build-plans.json"],
       "output": "Human-reviewable DAW action plan, Max for Live contract update, or local-only session receipt.",
       "approval_required": true,
       "must_not": ["export or publish without release QA", "disable provenance checks", "log private performance content by default"]
