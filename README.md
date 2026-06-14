@@ -16,6 +16,7 @@ The repo intentionally tracks process, manifests, device contracts, session temp
 ```bash
 python3 scripts/render_composition_sketches.py --stable
 python3 scripts/render_openai_worker_briefs.py --stable
+python3 scripts/render_openai_production_swarm_queue.py --stable
 python3 scripts/render_max_for_live_device_contracts.py --stable
 python3 scripts/render_live12_daw_action_plan.py --stable
 python3 scripts/render_public_domain_source_deck.py --stable
@@ -23,6 +24,7 @@ python3 scripts/render_live12_daw_mutation_package.py --stable
 python3 scripts/render_live12_daw_mutation_runbook.py --stable
 python3 scripts/render_live12_daw_mutation_queue_runbook.py --stable
 python3 scripts/validate_repo.py
+python3 scripts/test_openai_production_swarm_queue.py
 python3 scripts/test_max_for_live_device_contracts.py
 python3 scripts/test_live12_daw_mutation_preflight.py
 python3 scripts/test_live12_daw_mutation_runbook.py
@@ -38,6 +40,7 @@ Generated local inventory lands in `inventory/live12-local-inventory.json` and `
 - `docs/production-system.md` - project architecture and operating model.
 - `docs/live12-m4l-ci-cd.md` - CI/CD contract for Ableton Live 12 and Max for Live work.
 - `docs/openai-orchestration.md` - OpenAI-enabled agent and worker-chain design.
+- `docs/openai-production-swarm-queue.md` - generated track-by-track OpenAI worker handoff queue for role-scoped production tasks.
 - `docs/source-acquisition-policy.md` - public-domain source and sampling rules.
 - `docs/public-domain-source-deck.md` - generated metadata-only source deck handoff for Ableton/Max sampling.
 - `docs/playwright-source-capture.md` - browser capture and trace runbook for source research.
@@ -49,6 +52,7 @@ Generated local inventory lands in `inventory/live12-local-inventory.json` and `
 - `automation/worker-chain.json` - division-of-labor chain for production automation.
 - `automation/max-for-live-device-contracts.json` - source definitions for reviewable Max for Live device blueprints.
 - `automation/generated/openai-worker-briefs.json` - generated role briefs for OpenAI-assisted production workers.
+- `automation/generated/openai-production-swarm-queue.json` - generated metadata-only per-track swarm queue linking worker roles to DAW mutation and source-deck handoffs.
 - `automation/generated/max-for-live-device-contracts.json` - generated source-only Max for Live contract bundle with `.maxpat` patch hashes.
 - `automation/generated/live12-daw-action-plan.json` - generated approval-gated Ableton Live 12 / Max for Live action queue for local session building.
 - `automation/generated/public-domain-source-deck.json` - generated source deck manifest with approved source metadata, per-track assignments, and muted-by-default policy.

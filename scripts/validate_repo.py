@@ -21,6 +21,7 @@ REQUIRED_FILES = [
     "docs/production-system.md",
     "docs/live12-m4l-ci-cd.md",
     "docs/openai-orchestration.md",
+    "docs/openai-production-swarm-queue.md",
     "docs/source-acquisition-policy.md",
     "docs/playwright-source-capture.md",
     "docs/recommended-packs.md",
@@ -33,6 +34,7 @@ REQUIRED_FILES = [
     "automation/openai-production-orchestration.json",
     "automation/max-for-live-device-contracts.json",
     "automation/generated/openai-worker-briefs.json",
+    "automation/generated/openai-production-swarm-queue.json",
     "automation/generated/live12-daw-action-plan.json",
     "automation/generated/live12-daw-mutation-package.json",
     "automation/generated/live12-daw-mutation-runbook.json",
@@ -47,6 +49,7 @@ REQUIRED_FILES = [
     "scripts/inventory_live_suite.py",
     "scripts/fetch_public_domain_audio.py",
     "scripts/render_composition_sketches.py",
+    "scripts/render_openai_production_swarm_queue.py",
     "scripts/render_live12_daw_action_plan.py",
     "scripts/render_live12_daw_mutation_package.py",
     "scripts/render_live12_daw_mutation_runbook.py",
@@ -58,6 +61,7 @@ REQUIRED_FILES = [
     "scripts/stage_live12_daw_import_bundle.py",
     "scripts/record_live12_daw_mutation_receipt.py",
     "scripts/render_openai_worker_briefs.py",
+    "scripts/test_openai_production_swarm_queue.py",
     "scripts/test_max_for_live_device_contracts.py",
     "scripts/test_live12_daw_mutation_preflight.py",
     "scripts/test_live12_daw_mutation_runbook.py",
@@ -147,6 +151,15 @@ EXPECTED_WORKER_BRIEF_SOURCES = {
     "catalogs/public-domain-bluegrass-sources.json",
     "catalogs/library-installation-plan.json",
     "inventory/live12-local-inventory.json",
+}
+EXPECTED_OPENAI_SWARM_QUEUE_SOURCES = {
+    "automation/openai-production-orchestration.json",
+    "automation/worker-chain.json",
+    "automation/generated/openai-worker-briefs.json",
+    "automation/generated/live12-daw-mutation-package.json",
+    "automation/generated/live12-daw-mutation-queue-runbook.json",
+    "automation/generated/public-domain-source-deck.json",
+    "compositions/generated/live12-track-build-plans.json",
 }
 EXPECTED_COMPOSITION_SKETCH_SOURCES = {
     "compositions/down-tempo-punk-bluegrass-set.json",
@@ -727,6 +740,7 @@ def validate_json_contracts(root: Path, errors: list[str]) -> None:
         "automation/generated/live12-daw-mutation-package.json",
         "automation/generated/live12-daw-mutation-runbook.json",
         "automation/generated/live12-daw-mutation-queue-runbook.json",
+        "automation/generated/openai-production-swarm-queue.json",
         "automation/generated/public-domain-source-deck.json",
         "automation/live12-session-template.json",
         "automation/worker-chain.json",
@@ -1029,6 +1043,166 @@ def validate_generated_worker_briefs(root: Path, errors: list[str]) -> None:
             fail(errors, f"Generated OpenAI worker briefs must not contain raw audio paths: {string_value}")
         if SECRET_VALUE_PATTERN.search(string_value):
             fail(errors, "Generated OpenAI worker briefs must not contain API tokens or bearer credentials")
+
+
+def validate_openai_production_swarm_queue(root: Path, errors: list[str]) -> None:
+    data = load_json(root / "automation/generated/openai-production-swarm-queue.json", errors)
+    markdown_path = root / "docs/openai-production-swarm-queue.md"
+    orchestration = load_json(root / "automation/openai-production-orchestration.json", errors)
+    worker_briefs = load_json(root / "automation/generated/openai-worker-briefs.json", errors)
+    mutation_package = load_json(root / "automation/generated/live12-daw-mutation-package.json", errors)
+    queue_runbook = load_json(root / "automation/generated/live12-daw-mutation-queue-runbook.json", errors)
+    source_deck = load_json(root / "automation/generated/public-domain-source-deck.json", errors)
+    build_plans = load_json(root / "compositions/generated/live12-track-build-plans.json", errors)
+    if not data or not worker_briefs or not mutation_package or not queue_runbook or not build_plans:
+        return
+
+    if data.get("schema_version") != 1:
+        fail(errors, "Generated OpenAI production swarm queue must use schema_version 1")
+    if data.get("generated_at") != STABLE_GENERATED_AT:
+        fail(errors, "Generated OpenAI production swarm queue must be committed with stable generated_at")
+    if data.get("generator") != "scripts/render_openai_production_swarm_queue.py":
+        fail(errors, "Generated OpenAI production swarm queue must name scripts/render_openai_production_swarm_queue.py as generator")
+
+    source_files = set(data.get("source_files", []))
+    if source_files != EXPECTED_OPENAI_SWARM_QUEUE_SOURCES:
+        fail(errors, "Generated OpenAI production swarm queue source_files must match expected source manifests")
+    source_hashes = data.get("source_file_sha256") or {}
+    if set(source_hashes) != EXPECTED_OPENAI_SWARM_QUEUE_SOURCES:
+        fail(errors, "Generated OpenAI production swarm queue source_file_sha256 keys must match expected source manifests")
+    for source_file in source_files:
+        if Path(source_file).is_absolute() or ".." in Path(source_file).parts or not (root / source_file).exists():
+            fail(errors, f"Generated OpenAI production swarm queue source file is invalid: {source_file}")
+            continue
+        expected_hash = source_hashes.get(source_file)
+        if not SHA256_PATTERN.match(str(expected_hash or "")):
+            fail(errors, f"Generated OpenAI production swarm queue source hash is invalid: {source_file}")
+        elif expected_hash != sha256_file(root / source_file):
+            fail(errors, f"Generated OpenAI production swarm queue source hash is stale: {source_file}")
+
+    queue_policy = require_dict(data.get("queue_policy"), "Generated OpenAI production swarm queue queue_policy", errors)
+    if queue_policy.get("execution_status") != "planned_not_executed":
+        fail(errors, "Generated OpenAI production swarm queue must stay planned_not_executed")
+    if queue_policy.get("api_execution_status") != "not_called_ci_safe":
+        fail(errors, "Generated OpenAI production swarm queue must not require OpenAI API calls in CI")
+    if queue_policy.get("git_policy") != "metadata_only_no_private_audio":
+        fail(errors, "Generated OpenAI production swarm queue must use metadata_only_no_private_audio git policy")
+    if queue_policy.get("credentials_required_for_generation") is not False:
+        fail(errors, "Generated OpenAI production swarm queue generation must not require credentials")
+    if queue_policy.get("local_output_root") != "output/openai-swarm":
+        fail(errors, "Generated OpenAI production swarm queue local_output_root is stale")
+    if not OPENAI_APPROVAL_GATES.issubset(set(queue_policy.get("blocked_without_approval", []))):
+        fail(errors, "Generated OpenAI production swarm queue must block all OpenAI approval gates before execution")
+    if "OpenAI API keys" not in queue_policy.get("must_not_commit", []):
+        fail(errors, "Generated OpenAI production swarm queue must block API key commits")
+
+    role_ids = [brief.get("role_id") for brief in worker_briefs.get("briefs", [])]
+    if data.get("role_order") != role_ids:
+        fail(errors, "Generated OpenAI production swarm queue role_order must mirror worker briefs")
+    jobs = mutation_package.get("jobs", [])
+    build_tracks = build_plans.get("tracks", [])
+    if [track.get("slug") for track in build_tracks] != [job.get("track_slug") for job in jobs]:
+        fail(errors, "Generated OpenAI production swarm queue source track order inputs disagree")
+    if data.get("track_count") != len(jobs):
+        fail(errors, "Generated OpenAI production swarm queue track_count must mirror mutation package")
+    if data.get("role_count") != len(role_ids):
+        fail(errors, "Generated OpenAI production swarm queue role_count must mirror worker briefs")
+    if data.get("task_count") != len(jobs) * len(role_ids):
+        fail(errors, "Generated OpenAI production swarm queue task_count must equal tracks times roles")
+
+    surface_ids = {surface.get("id") for surface in orchestration.get("api_surfaces", [])}
+    tool_ids = {tool.get("id") for tool in orchestration.get("tool_contracts", [])}
+    gate_ids = {gate.get("id") for gate in orchestration.get("approval_gates", [])}
+    queue_tracks_by_slug = {track.get("track_slug"): track for track in queue_runbook.get("tracks", [])}
+    source_assignments_by_slug = {assignment.get("track_slug"): assignment for assignment in source_deck.get("track_assignments", [])}
+    worker_briefs_by_role = {brief.get("role_id"): brief for brief in worker_briefs.get("briefs", [])}
+
+    tracks = data.get("tracks", [])
+    if [track.get("track_slug") for track in tracks] != [job.get("track_slug") for job in jobs]:
+        fail(errors, "Generated OpenAI production swarm queue track order must mirror mutation package")
+    for track, job, build_track in zip(tracks, jobs, build_tracks, strict=False):
+        slug = job.get("track_slug")
+        if track.get("track_slug") != build_track.get("slug") or track.get("track_title") != build_track.get("title"):
+            fail(errors, f"Generated OpenAI production swarm queue track identity is stale: {slug}")
+        if track.get("mutation_job_id") != job.get("id"):
+            fail(errors, f"Generated OpenAI production swarm queue mutation job id is stale: {slug}")
+        if track.get("planned_daw_action_count") != job.get("mutation_action_count"):
+            fail(errors, f"Generated OpenAI production swarm queue planned DAW action count is stale: {slug}")
+        source_assignment = source_assignments_by_slug.get(slug, {})
+        if track.get("source_deck_state") != source_assignment.get("deck_state"):
+            fail(errors, f"Generated OpenAI production swarm queue source deck state is stale: {slug}")
+        if track.get("source_candidate_ids") != source_assignment.get("candidate_source_ids", []):
+            fail(errors, f"Generated OpenAI production swarm queue source candidate ids are stale: {slug}")
+        queue_track = queue_tracks_by_slug.get(slug, {})
+        expected_daw_queue = {
+            "request_path": queue_track.get("request_path"),
+            "bundle_manifest_path": queue_track.get("bundle_manifest_path"),
+            "launch_plan_path": queue_track.get("launch_plan_path"),
+            "launch_status": queue_runbook.get("queue_policy", {}).get("launch_status"),
+        }
+        if track.get("daw_queue") != expected_daw_queue:
+            fail(errors, f"Generated OpenAI production swarm queue DAW queue refs are stale: {slug}")
+
+        tasks = track.get("tasks", [])
+        if [task.get("role_id") for task in tasks] != role_ids:
+            fail(errors, f"Generated OpenAI production swarm queue task order must mirror role order: {slug}")
+        for index, task in enumerate(tasks, start=1):
+            role_id = task.get("role_id")
+            brief = worker_briefs_by_role.get(role_id, {})
+            expected_task_id = f"{slug}.{role_id}.{index:02d}"
+            if task.get("task_id") != expected_task_id:
+                fail(errors, f"Generated OpenAI production swarm queue task id is stale: {expected_task_id}")
+            if task.get("sequence") != index or task.get("execution_status") != "not_started":
+                fail(errors, f"Generated OpenAI production swarm queue task execution state is stale: {expected_task_id}")
+            surface_id = (task.get("suggested_openai_surface") or {}).get("id")
+            if surface_id not in surface_ids:
+                fail(errors, f"Generated OpenAI production swarm queue task references unknown OpenAI surface: {expected_task_id}")
+            if set(task.get("tool_contract_ids", [])) - tool_ids:
+                fail(errors, f"Generated OpenAI production swarm queue task references unknown tool contract: {expected_task_id}")
+            if set(task.get("approval_gate_ids", [])) - gate_ids:
+                fail(errors, f"Generated OpenAI production swarm queue task references unknown approval gate: {expected_task_id}")
+            expected_depends = [] if index == 1 else [tasks[index - 2].get("task_id")]
+            if task.get("depends_on") != expected_depends:
+                fail(errors, f"Generated OpenAI production swarm queue task dependency is stale: {expected_task_id}")
+            expected_handoff = None if index == len(tasks) else tasks[index].get("task_id")
+            if task.get("handoff_to_task_id") != expected_handoff:
+                fail(errors, f"Generated OpenAI production swarm queue task handoff is stale: {expected_task_id}")
+            for rel in task.get("allowed_repo_inputs", []):
+                path = Path(str(rel))
+                if path.is_absolute() or ".." in path.parts or not (root / path).exists():
+                    fail(errors, f"Generated OpenAI production swarm queue allowed input is invalid: {expected_task_id}: {rel}")
+            output_policy = task.get("local_output_policy", {})
+            output_path = Path(str(output_policy.get("path", "")))
+            if output_path.parts[:2] != ("output", "openai-swarm") or output_policy.get("git_policy") != "ignored_local_only":
+                fail(errors, f"Generated OpenAI production swarm queue output policy must stay ignored local-only: {expected_task_id}")
+            prompt_packet = task.get("prompt_packet", {})
+            if prompt_packet.get("brief_ref") != f"automation/generated/openai-worker-briefs.json#role_id={role_id}":
+                fail(errors, f"Generated OpenAI production swarm queue prompt brief ref is stale: {expected_task_id}")
+            if "call OpenAI APIs from CI" not in prompt_packet.get("must_not", []):
+                fail(errors, f"Generated OpenAI production swarm queue prompt guardrails must block CI API calls: {expected_task_id}")
+            if task.get("expected_outputs") != brief.get("expected_outputs", []):
+                fail(errors, f"Generated OpenAI production swarm queue expected outputs are stale: {expected_task_id}")
+
+    markdown = markdown_path.read_text(encoding="utf-8") if markdown_path.exists() else ""
+    for expected_text in [
+        "# OpenAI Production Swarm Queue",
+        "planned_not_executed",
+        "No OpenAI API call is made by this renderer or CI check.",
+        "Agents SDK handoffs",
+        "Responses API structured outputs",
+    ]:
+        if expected_text not in markdown:
+            fail(errors, f"Generated OpenAI production swarm queue markdown is missing required text: {expected_text}")
+
+    for string_value in iter_string_values(data):
+        if "/Users/" in string_value:
+            fail(errors, "Generated OpenAI production swarm queue must not contain absolute user paths")
+        if "sources/public-domain/raw/" in string_value or AUDIO_PATH_PATTERN.search(string_value):
+            fail(errors, f"Generated OpenAI production swarm queue must not contain raw audio paths: {string_value}")
+        if SECRET_VALUE_PATTERN.search(string_value):
+            fail(errors, "Generated OpenAI production swarm queue must not contain API tokens or bearer credentials")
+    if "/Users/" in markdown or "sources/public-domain/raw/" in markdown or SECRET_VALUE_PATTERN.search(markdown):
+        fail(errors, "Generated OpenAI production swarm queue markdown contains sensitive local data")
 
 
 def validate_generated_daw_action_plan(root: Path, errors: list[str]) -> None:
@@ -2191,6 +2365,7 @@ def main() -> int:
     validate_inventory_snapshot(root, errors)
     validate_openai_orchestration(root, errors)
     validate_generated_worker_briefs(root, errors)
+    validate_openai_production_swarm_queue(root, errors)
     validate_generated_daw_action_plan(root, errors)
     validate_public_domain_source_deck(root, errors)
     validate_generated_daw_mutation_package(root, errors)

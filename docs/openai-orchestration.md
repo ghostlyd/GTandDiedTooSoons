@@ -27,10 +27,13 @@ Generated worker briefs are rendered to `automation/generated/openai-worker-brie
 
 ```bash
 python3 scripts/render_openai_worker_briefs.py --stable
+python3 scripts/render_openai_production_swarm_queue.py --stable
 python3 scripts/validate_repo.py
 ```
 
 CI diffs the generated file against a stable render on both Ubuntu and macOS, so edits to the worker chain, Live template, DAW mutation package, installation plan, inventory, source catalog, or composition set must be reflected in the generated briefs.
+
+The generated production swarm queue lives in `automation/generated/openai-production-swarm-queue.json` and `docs/openai-production-swarm-queue.md`. It expands the role briefs into one ordered task chain per track, links each task to the relevant DAW mutation request, source deck state, and Max for Live context, and keeps every task in `planned_not_executed` state. It is designed for future Agents SDK handoffs and Responses API structured outputs, but the renderer and CI do not call OpenAI APIs or require credentials.
 
 Generated DAW mutation packages are rendered to `automation/generated/live12-daw-mutation-package.json`:
 

@@ -18,7 +18,7 @@ GTandDiedTooSoons is a repeatable production framework for composing spatially a
    Installation readiness and account-gated pack backlog live in `catalogs/library-installation-plan.json`.
 3. **Session layer**: track/routing/device contracts in `automation/live12-session-template.json`.
 4. **Max for Live source layer**: device definitions in `automation/max-for-live-device-contracts.json`, generated source bundle in `automation/generated/max-for-live-device-contracts.json`, and reviewable `.maxpat` blueprints in `max-for-live/patches/`.
-5. **Agent layer**: production worker roles in `automation/worker-chain.json`.
+5. **Agent layer**: production worker roles in `automation/worker-chain.json`, role briefs in `automation/generated/openai-worker-briefs.json`, and per-track swarm queue handoffs in `automation/generated/openai-production-swarm-queue.json` plus `docs/openai-production-swarm-queue.md`.
 6. **Composition layer**: standalone track briefs in `compositions/down-tempo-punk-bluegrass-set.json`.
 7. **Generated sketch layer**: deterministic Live-import build plans and MIDI sketches in `compositions/generated/`, rendered by `scripts/render_composition_sketches.py`.
 8. **DAW action layer**: approval-gated local Ableton/Max for Live action queues in `automation/generated/live12-daw-action-plan.json`, rendered by `scripts/render_live12_daw_action_plan.py`.
