@@ -24,6 +24,7 @@ REQUIRED_FILES = [
     "docs/source-acquisition-policy.md",
     "docs/playwright-source-capture.md",
     "docs/recommended-packs.md",
+    "docs/live12-daw-mutation-runbook.md",
     "catalogs/recommended-packs.json",
     "catalogs/library-installation-plan.json",
     "catalogs/public-domain-bluegrass-sources.json",
@@ -32,6 +33,7 @@ REQUIRED_FILES = [
     "automation/generated/openai-worker-briefs.json",
     "automation/generated/live12-daw-action-plan.json",
     "automation/generated/live12-daw-mutation-package.json",
+    "automation/generated/live12-daw-mutation-runbook.json",
     "automation/generated/max-for-live-device-contracts.json",
     "automation/live12-session-template.json",
     "automation/worker-chain.json",
@@ -43,6 +45,7 @@ REQUIRED_FILES = [
     "scripts/render_composition_sketches.py",
     "scripts/render_live12_daw_action_plan.py",
     "scripts/render_live12_daw_mutation_package.py",
+    "scripts/render_live12_daw_mutation_runbook.py",
     "scripts/render_max_for_live_device_contracts.py",
     "scripts/prepare_live12_daw_mutation.py",
     "scripts/prepare_live12_daw_mutation_queue.py",
@@ -51,6 +54,7 @@ REQUIRED_FILES = [
     "scripts/render_openai_worker_briefs.py",
     "scripts/test_max_for_live_device_contracts.py",
     "scripts/test_live12_daw_mutation_preflight.py",
+    "scripts/test_live12_daw_mutation_runbook.py",
     "sources/public-domain/download-ledger.json",
 ]
 
@@ -153,6 +157,11 @@ EXPECTED_DAW_MUTATION_PACKAGE_SOURCES = {
     "automation/generated/live12-daw-action-plan.json",
     "automation/live12-session-template.json",
     "compositions/generated/live12-track-build-plans.json",
+}
+EXPECTED_DAW_MUTATION_RUNBOOK_SOURCES = {
+    "automation/generated/live12-daw-mutation-package.json",
+    "automation/generated/live12-daw-action-plan.json",
+    "automation/generated/max-for-live-device-contracts.json",
 }
 EXPECTED_DAW_APPROVAL_GATES = {"private_audio_upload", "live_set_mutation", "export_or_release"}
 REQUIRED_DAW_ACTION_GROUP_GATES = {
@@ -265,6 +274,56 @@ EXPECTED_DAW_MUTATION_LOCAL_OUTPUT_POLICY = {
 EXPECTED_DAW_MUTATION_EXECUTION_MODE = "local_preflight_then_human_approved_daw_mutation"
 EXPECTED_DAW_MUTATION_EXECUTABLE_GROUPS = ["session_actions", "scene_actions", "layer_actions", "source_deck"]
 EXPECTED_DAW_MUTATION_BLOCKED_GROUPS = ["mix_and_release_gates"]
+EXPECTED_DAW_MUTATION_RUNBOOK_TOP_LEVEL_KEYS = {
+    "approval_policy",
+    "artifact_policy",
+    "composition_set",
+    "execution_status",
+    "generated_at",
+    "generator",
+    "live_template",
+    "phase_contract",
+    "purpose",
+    "queue_command",
+    "schema_version",
+    "source_file_sha256",
+    "source_files",
+    "total_planned_action_count",
+    "track_count",
+    "tracks",
+}
+EXPECTED_DAW_MUTATION_RUNBOOK_PHASE_ORDER = [
+    "preflight",
+    "stage_import_bundle",
+    "apply_live_mutation",
+    "record_receipt",
+    "postflight",
+]
+EXPECTED_DAW_MUTATION_RUNBOOK_REQUIRED_FLAGS = [
+    "--launch-ableton",
+    "--confirm-live-mutation",
+    "--operator-approval-reference",
+    "--rollback-copy-reference",
+]
+EXPECTED_DAW_MUTATION_RUNBOOK_TRACK_KEYS = {
+    "affected_returns",
+    "affected_tracks",
+    "approval_required_before_execution",
+    "blocked_action_groups",
+    "commands",
+    "execution_status",
+    "max_for_live_device_ids",
+    "max_for_live_devices",
+    "midi_artifact",
+    "operator_evidence",
+    "operator_phase_order",
+    "planned_action_count",
+    "postflight_checks",
+    "queue_order",
+    "source_deck_policy",
+    "track_slug",
+    "track_title",
+}
 STABLE_GENERATED_AT = "1970-01-01T00:00:00Z"
 AUDIO_PATH_PATTERN = re.compile(r"(?:^|[/\\\s])[\w .~/-]+\.(?:aif|aiff|flac|m4a|mp3|ogg|wav)\b", re.IGNORECASE)
 SECRET_VALUE_PATTERN = re.compile(r"(?:sk-[A-Za-z0-9_-]{20,}|Bearer\s+[A-Za-z0-9._-]{20,})")
@@ -646,6 +705,7 @@ def validate_json_contracts(root: Path, errors: list[str]) -> None:
         "automation/generated/openai-worker-briefs.json",
         "automation/generated/live12-daw-action-plan.json",
         "automation/generated/live12-daw-mutation-package.json",
+        "automation/generated/live12-daw-mutation-runbook.json",
         "automation/live12-session-template.json",
         "automation/worker-chain.json",
         "compositions/down-tempo-punk-bluegrass-set.json",
@@ -1355,6 +1415,211 @@ def validate_generated_daw_mutation_package(root: Path, errors: list[str]) -> No
             fail(errors, "Generated DAW mutation package must not contain API tokens or bearer credentials")
 
 
+def expected_daw_runbook_commands(slug: str) -> dict[str, list[str]]:
+    request_path = f"output/daw-mutations/{slug}/mutation-request.json"
+    evidence_path = f"output/daw-mutations/{slug}/operator-evidence.json"
+    return {
+        "preflight": [
+            "python3",
+            "scripts/prepare_live12_daw_mutation.py",
+            "--track",
+            slug,
+        ],
+        "stage_import_bundle": [
+            "python3",
+            "scripts/stage_live12_daw_import_bundle.py",
+            "--request",
+            request_path,
+        ],
+        "apply_live_mutation": [
+            "python3",
+            "scripts/stage_live12_daw_import_bundle.py",
+            "--request",
+            request_path,
+            "--launch-ableton",
+            "--confirm-live-mutation",
+            "--operator-approval-reference",
+            "<approval-id>",
+            "--rollback-copy-reference",
+            "<rollback-note>",
+        ],
+        "record_receipt": [
+            "python3",
+            "scripts/record_live12_daw_mutation_receipt.py",
+            "--request",
+            request_path,
+            "--evidence",
+            evidence_path,
+        ],
+    }
+
+
+def expected_runbook_max_devices(job: dict, max_contracts: dict) -> list[dict]:
+    affected_tracks = set(job.get("affected_tracks", []))
+    track_slug = job.get("track_slug")
+    devices = []
+    for device in max_contracts.get("devices", []):
+        target_tracks = device.get("target_tracks", [])
+        track_slugs = device.get("track_slugs", [])
+        if track_slug not in track_slugs and not affected_tracks.intersection(target_tracks):
+            continue
+        devices.append(
+            {
+                "id": device.get("id"),
+                "display_name": device.get("display_name"),
+                "device_class": device.get("device_class"),
+                "approval_gate": device.get("approval_gate"),
+                "target_tracks": target_tracks,
+                "macro_controls": device.get("macro_controls"),
+                "source_patch": device.get("source_patch"),
+                "source_patch_sha256": device.get("source_patch_sha256"),
+            }
+        )
+    return devices
+
+
+def validate_generated_daw_mutation_runbook(root: Path, errors: list[str]) -> None:
+    data = load_json(root / "automation/generated/live12-daw-mutation-runbook.json", errors)
+    markdown_path = root / "docs/live12-daw-mutation-runbook.md"
+    package = load_json(root / "automation/generated/live12-daw-mutation-package.json", errors)
+    daw_plan = load_json(root / "automation/generated/live12-daw-action-plan.json", errors)
+    max_contracts = load_json(root / "automation/generated/max-for-live-device-contracts.json", errors)
+    if not data or not package or not max_contracts:
+        return
+
+    if data.get("schema_version") != 1:
+        fail(errors, "Generated DAW mutation runbook must use schema_version 1")
+    if data.get("generated_at") != STABLE_GENERATED_AT:
+        fail(errors, "Generated DAW mutation runbook must be committed with stable generated_at")
+    if data.get("generator") != "scripts/render_live12_daw_mutation_runbook.py":
+        fail(errors, "Generated DAW mutation runbook must name scripts/render_live12_daw_mutation_runbook.py as generator")
+    if set(data) != EXPECTED_DAW_MUTATION_RUNBOOK_TOP_LEVEL_KEYS:
+        fail(errors, "Generated DAW mutation runbook top-level keys must exactly match contract")
+    if data.get("execution_status") != "operator_runbook_not_applied":
+        fail(errors, "Generated DAW mutation runbook must not claim a Live mutation was applied")
+
+    source_files = set(data.get("source_files", []))
+    if source_files != EXPECTED_DAW_MUTATION_RUNBOOK_SOURCES:
+        fail(errors, "Generated DAW mutation runbook source_files must match expected source manifests")
+    source_hashes = data.get("source_file_sha256") or {}
+    if set(source_hashes) != EXPECTED_DAW_MUTATION_RUNBOOK_SOURCES:
+        fail(errors, "Generated DAW mutation runbook source_file_sha256 keys must match expected source manifests")
+    for source_file in source_files:
+        if Path(source_file).is_absolute() or ".." in Path(source_file).parts or not (root / source_file).exists():
+            fail(errors, f"Generated DAW mutation runbook source file is invalid: {source_file}")
+            continue
+        expected_hash = source_hashes.get(source_file)
+        if not SHA256_PATTERN.match(str(expected_hash or "")):
+            fail(errors, f"Generated DAW mutation runbook source hash is invalid: {source_file}")
+        elif expected_hash != sha256_file(root / source_file):
+            fail(errors, f"Generated DAW mutation runbook source hash is stale: {source_file}")
+
+    if data.get("composition_set") != package.get("composition_set"):
+        fail(errors, "Generated DAW mutation runbook composition_set must mirror the mutation package")
+    if data.get("live_template") != daw_plan.get("live_template"):
+        fail(errors, "Generated DAW mutation runbook live_template must mirror the DAW action plan")
+    if data.get("queue_command") != ["python3", "scripts/prepare_live12_daw_mutation_queue.py"]:
+        fail(errors, "Generated DAW mutation runbook queue command is stale")
+    approval_policy = require_dict(data.get("approval_policy"), "Generated DAW mutation runbook approval_policy", errors)
+    if approval_policy.get("status") != "blocked_until_operator_approval_and_rollback_reference":
+        fail(errors, "Generated DAW mutation runbook approval policy must stay blocked")
+    if approval_policy.get("required_cli_flags") != EXPECTED_DAW_MUTATION_RUNBOOK_REQUIRED_FLAGS:
+        fail(errors, "Generated DAW mutation runbook approval flags are stale")
+    if approval_policy.get("approval_gates") != package.get("safety", {}).get("requires_operator_approval_before_execution"):
+        fail(errors, "Generated DAW mutation runbook approval gates must mirror the mutation package")
+    if approval_policy.get("must_not") != package.get("safety", {}).get("must_not"):
+        fail(errors, "Generated DAW mutation runbook safety boundary must mirror the mutation package")
+
+    artifact_policy = require_dict(data.get("artifact_policy"), "Generated DAW mutation runbook artifact_policy", errors)
+    if artifact_policy.get("git_policy") != "text_contracts_only":
+        fail(errors, "Generated DAW mutation runbook artifact policy must remain text_contracts_only")
+    for required_root in ["output/daw-mutations", "output/daw-import-bundles", "output/daw-mutation-queue"]:
+        if required_root not in artifact_policy.get("local_output_roots", []):
+            fail(errors, f"Generated DAW mutation runbook artifact policy missing local output root: {required_root}")
+    if "source audio" not in artifact_policy.get("must_not_commit", []):
+        fail(errors, "Generated DAW mutation runbook artifact policy must block source audio commits")
+
+    phase_contract = require_list(data.get("phase_contract"), "Generated DAW mutation runbook phase_contract", errors)
+    if [phase.get("id") for phase in phase_contract if isinstance(phase, dict)] != EXPECTED_DAW_MUTATION_RUNBOOK_PHASE_ORDER:
+        fail(errors, "Generated DAW mutation runbook phase order is stale")
+
+    tracks = data.get("tracks", [])
+    jobs = package.get("jobs", [])
+    if data.get("track_count") != len(jobs) or len(tracks) != len(jobs):
+        fail(errors, "Generated DAW mutation runbook track count must mirror the mutation package")
+    if data.get("total_planned_action_count") != sum(job.get("mutation_action_count", 0) for job in jobs):
+        fail(errors, "Generated DAW mutation runbook total action count must mirror the mutation package")
+    if [track.get("track_slug") for track in tracks] != [job.get("track_slug") for job in jobs]:
+        fail(errors, "Generated DAW mutation runbook track order must mirror the mutation package")
+
+    postflight_checks = package.get("receipt_contract", {}).get("required_postflight_checks", [])
+    for index, (track, job) in enumerate(zip(tracks, jobs, strict=False), start=1):
+        slug = job.get("track_slug")
+        if set(track) != EXPECTED_DAW_MUTATION_RUNBOOK_TRACK_KEYS:
+            fail(errors, f"Generated DAW mutation runbook track keys must exactly match contract: {slug}")
+        if track.get("queue_order") != index:
+            fail(errors, f"Generated DAW mutation runbook queue order is stale: {slug}")
+        if track.get("track_slug") != slug or track.get("track_title") != job.get("track_title"):
+            fail(errors, f"Generated DAW mutation runbook track identity is stale: {slug}")
+        if track.get("execution_status") != "not_applied":
+            fail(errors, f"Generated DAW mutation runbook track must not claim mutation applied: {slug}")
+        if track.get("operator_phase_order") != EXPECTED_DAW_MUTATION_RUNBOOK_PHASE_ORDER:
+            fail(errors, f"Generated DAW mutation runbook track phase order is stale: {slug}")
+        for field in [
+            "approval_required_before_execution",
+            "blocked_action_groups",
+            "affected_tracks",
+            "affected_returns",
+            "midi_artifact",
+            "source_deck_policy",
+        ]:
+            if track.get(field) != job.get(field):
+                fail(errors, f"Generated DAW mutation runbook track {field} must mirror mutation package: {slug}")
+        if track.get("planned_action_count") != job.get("mutation_action_count"):
+            fail(errors, f"Generated DAW mutation runbook planned action count is stale: {slug}")
+        expected_devices = expected_runbook_max_devices(job, max_contracts)
+        if track.get("max_for_live_devices") != expected_devices:
+            fail(errors, f"Generated DAW mutation runbook Max for Live devices are stale: {slug}")
+        if track.get("max_for_live_device_ids") != [device.get("id") for device in expected_devices]:
+            fail(errors, f"Generated DAW mutation runbook Max for Live device ids are stale: {slug}")
+        if track.get("commands") != expected_daw_runbook_commands(str(slug)):
+            fail(errors, f"Generated DAW mutation runbook commands are stale: {slug}")
+        expected_evidence = {
+            "template_path": f"output/daw-import-bundles/{slug}/operator-evidence-template.json",
+            "local_evidence_path": f"output/daw-mutations/{slug}/operator-evidence.json",
+            "receipt_output_path": f"output/daw-mutations/{slug}/applied-receipt.json",
+            "required_reference_fields": [
+                "operator_approval_reference",
+                "rollback_copy_reference",
+            ],
+        }
+        if track.get("operator_evidence") != expected_evidence:
+            fail(errors, f"Generated DAW mutation runbook operator evidence contract is stale: {slug}")
+        if track.get("postflight_checks") != postflight_checks:
+            fail(errors, f"Generated DAW mutation runbook postflight checks must mirror mutation package: {slug}")
+
+    markdown = markdown_path.read_text(encoding="utf-8") if markdown_path.exists() else ""
+    for expected_text in [
+        "# Live 12 DAW Mutation Runbook",
+        "Do not commit Ableton sets, Max devices, source audio, renders, credentials, cookies, or license files.",
+        "python3 scripts/prepare_live12_daw_mutation_queue.py",
+        "--confirm-live-mutation",
+        "Public Domain Source Deck remains muted",
+    ]:
+        if expected_text not in markdown:
+            fail(errors, f"Generated DAW mutation runbook markdown is missing required text: {expected_text}")
+
+    for string_value in iter_string_values(data):
+        if "/Users/" in string_value:
+            fail(errors, "Generated DAW mutation runbook must not contain absolute user paths")
+        if "sources/public-domain/raw/" in string_value or AUDIO_PATH_PATTERN.search(string_value):
+            fail(errors, f"Generated DAW mutation runbook must not contain raw audio paths: {string_value}")
+        if SECRET_VALUE_PATTERN.search(string_value):
+            fail(errors, "Generated DAW mutation runbook must not contain API tokens or bearer credentials")
+    if "/Users/" in markdown or "sources/public-domain/raw/" in markdown or SECRET_VALUE_PATTERN.search(markdown):
+        fail(errors, "Generated DAW mutation runbook markdown contains sensitive local data")
+
+
 def read_varlen(data: bytes, index: int) -> tuple[int, int]:
     value = 0
     for _ in range(4):
@@ -1618,6 +1883,7 @@ def main() -> int:
     validate_generated_worker_briefs(root, errors)
     validate_generated_daw_action_plan(root, errors)
     validate_generated_daw_mutation_package(root, errors)
+    validate_generated_daw_mutation_runbook(root, errors)
     validate_generated_composition_sketches(root, errors)
     validate_binary_hygiene(root, errors)
     validate_tracked_raw_source_files(root, errors)
