@@ -42,8 +42,16 @@ jobs:
           python3 scripts/render_live12_daw_action_plan.py --stable --output /tmp/live12-daw-action-plan.json
           diff -u automation/generated/live12-daw-action-plan.json /tmp/live12-daw-action-plan.json
 
+      - name: Verify generated Live 12 DAW mutation package is in sync
+        run: |
+          python3 scripts/render_live12_daw_mutation_package.py --stable --output /tmp/live12-daw-mutation-package.json
+          diff -u automation/generated/live12-daw-mutation-package.json /tmp/live12-daw-mutation-package.json
+
       - name: Validate manifests, provenance policy, and binary hygiene
         run: python3 scripts/validate_repo.py
+
+      - name: Run Live 12 DAW mutation preflight probes
+        run: python3 scripts/test_live12_daw_mutation_preflight.py
 
       - name: Exercise inventory script in dry-run mode
         run: python3 scripts/inventory_live_suite.py --dry-run --output inventory/live12-local-inventory.json
@@ -76,8 +84,16 @@ jobs:
           python3 scripts/render_live12_daw_action_plan.py --stable --output /tmp/live12-daw-action-plan.json
           diff -u automation/generated/live12-daw-action-plan.json /tmp/live12-daw-action-plan.json
 
+      - name: Verify generated Live 12 DAW mutation package is in sync
+        run: |
+          python3 scripts/render_live12_daw_mutation_package.py --stable --output /tmp/live12-daw-mutation-package.json
+          diff -u automation/generated/live12-daw-mutation-package.json /tmp/live12-daw-mutation-package.json
+
       - name: Validate repository on macOS
         run: python3 scripts/validate_repo.py
+
+      - name: Run Live 12 DAW mutation preflight probes
+        run: python3 scripts/test_live12_daw_mutation_preflight.py
 
       - name: Generate non-sensitive host inventory snapshot
         run: python3 scripts/inventory_live_suite.py --dry-run

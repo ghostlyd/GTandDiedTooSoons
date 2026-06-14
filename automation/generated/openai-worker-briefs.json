@@ -141,6 +141,7 @@
       "repo_context": [
         "automation/live12-session-template.json",
         "automation/generated/live12-daw-action-plan.json",
+        "automation/generated/live12-daw-mutation-package.json",
         "inventory/live12-local-inventory.json",
         "docs/live12-m4l-ci-cd.md"
       ],
@@ -251,6 +252,7 @@
       "repo_context": [
         "automation/live12-session-template.json",
         "automation/generated/live12-daw-action-plan.json",
+        "automation/generated/live12-daw-mutation-package.json",
         "automation/openai-production-orchestration.json",
         "docs/live12-m4l-ci-cd.md"
       ],
@@ -371,6 +373,7 @@
       "repo_context": [
         "compositions/down-tempo-punk-bluegrass-set.json",
         "automation/generated/live12-daw-action-plan.json",
+        "automation/generated/live12-daw-mutation-package.json",
         "automation/live12-session-template.json",
         "docs/production-system.md"
       ],
@@ -491,6 +494,7 @@
       "repo_context": [
         "automation/live12-session-template.json",
         "automation/generated/live12-daw-action-plan.json",
+        "automation/generated/live12-daw-mutation-package.json",
         "inventory/live12-local-inventory.json",
         "docs/production-system.md"
       ],
@@ -633,6 +637,7 @@
       "repo_context": [
         ".github/workflows/live12-foundation-ci.yml",
         "automation/generated/live12-daw-action-plan.json",
+        "automation/generated/live12-daw-mutation-package.json",
         "catalogs/library-installation-plan.json",
         "catalogs/public-domain-bluegrass-sources.json",
         "sources/public-domain/download-ledger.json"
@@ -1016,6 +1021,7 @@
     "automation/openai-production-orchestration.json",
     "automation/worker-chain.json",
     "automation/live12-session-template.json",
+    "automation/generated/live12-daw-mutation-package.json",
     "compositions/down-tempo-punk-bluegrass-set.json",
     "catalogs/public-domain-bluegrass-sources.json",
     "catalogs/library-installation-plan.json",

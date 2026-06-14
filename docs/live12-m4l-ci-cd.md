@@ -11,6 +11,8 @@ GitHub-hosted runners do not include Ableton Live, Max for Live, Arturia Softwar
 - Ensure public-domain source entries include rights metadata.
 - Regenerate OpenAI worker briefs and composition MIDI sketches in stable mode, then diff them against committed generated artifacts.
 - Regenerate the Live 12 / Max for Live DAW action plan in stable mode, then diff it against the committed generated artifact.
+- Regenerate the Live 12 / Max for Live DAW mutation package in stable mode, then diff it against the committed generated artifact.
+- Run local DAW mutation preflight probes without opening Ableton or writing `.als`/`.amxd` files.
 
 ## Local Gates
 
@@ -19,6 +21,8 @@ Run before committing production changes:
 ```bash
 python3 scripts/validate_repo.py
 python3 scripts/render_live12_daw_action_plan.py --stable
+python3 scripts/render_live12_daw_mutation_package.py --stable
+python3 scripts/test_live12_daw_mutation_preflight.py
 python3 scripts/inventory_live_suite.py
 ```
 
@@ -36,6 +40,7 @@ For future Max device work:
 | `automation/live12-session-template.json` | Canonical track layout, routing, devices, sends, and performance controls. |
 | `automation/worker-chain.json` | Agent/worker responsibilities for arrangement, sound design, source research, mix review, and release QA. |
 | `automation/generated/live12-daw-action-plan.json` | Approval-gated action queue for building generated tracks locally in Live 12 without committing `.als`, `.amxd`, samples, renders, credentials, or account artifacts. |
+| `automation/generated/live12-daw-mutation-package.json` | Local-only preflight jobs, affected-track scope, blocked export/release groups, and receipt contract for approved Live 12 / Max for Live mutations. |
 | `compositions/generated/live12-track-build-plans.json` | Human-readable import map, device targets, MIDI hashes, and safety constraints for each standalone track. |
 | `compositions/generated/midi/*.mid` | Deterministic placeholder MIDI sketches for Live import and replacement with verified Ableton/Arturia instruments. |
 | `inventory/live12-local-inventory.*` | Non-sensitive local host state for pack and plugin availability. |
@@ -48,4 +53,10 @@ For future Max device work:
 2. Install packs locally through official vendor account flows.
 3. Refresh inventory.
 4. Build or update Live set locally.
-5. Export stems/renders to an artifact store or release process with provenance, not directly into the source repo.
+5. Write local mutation requests and receipt templates under `output/daw-mutations/`:
+
+```bash
+python3 scripts/prepare_live12_daw_mutation.py --track good-vibrations-in-a-burned-barn
+```
+
+6. Export stems/renders to an artifact store or release process with provenance, not directly into the source repo.

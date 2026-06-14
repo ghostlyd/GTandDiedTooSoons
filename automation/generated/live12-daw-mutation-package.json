@@ -1,0 +1,545 @@
+{
+  "composition_set": "Down-Tempo Punk Bluegrass / Alien House Suite",
+  "generated_at": "1970-01-01T00:00:00Z",
+  "generator": "scripts/render_live12_daw_mutation_package.py",
+  "jobs": [
+    {
+      "affected_returns": [
+        "A Short Spring",
+        "B Deep Dub",
+        "C Alien Bloom",
+        "D Punk Crush"
+      ],
+      "affected_tracks": [
+        "AeroBand Banjo Lead",
+        "Fiddle / Hybrid Strings",
+        "Mandolin Chop",
+        "Dobro / Metallic Slide",
+        "Upright Bass / Sub",
+        "Acoustic Guitar Boom-Chuck",
+        "Punk Kit",
+        "Deep House Machines",
+        "Alien Sky",
+        "Public Domain Source Deck"
+      ],
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "approval_required_before_execution": [
+        "live_set_mutation",
+        "private_audio_upload"
+      ],
+      "blocked_action_groups": [
+        "mix_and_release_gates"
+      ],
+      "executable_action_groups": [
+        "session_actions",
+        "scene_actions",
+        "layer_actions",
+        "source_deck"
+      ],
+      "executable_action_ids": [
+        "good-vibrations-in-a-burned-barn.session.set-tempo-and-swing",
+        "good-vibrations-in-a-burned-barn.session.import-midi",
+        "good-vibrations-in-a-burned-barn.session.configure-returns",
+        "good-vibrations-in-a-burned-barn.scene.01",
+        "good-vibrations-in-a-burned-barn.scene.02",
+        "good-vibrations-in-a-burned-barn.scene.03",
+        "good-vibrations-in-a-burned-barn.scene.04",
+        "good-vibrations-in-a-burned-barn.scene.05",
+        "good-vibrations-in-a-burned-barn.scene.06",
+        "good-vibrations-in-a-burned-barn.layer.aeroband_banjo_lead",
+        "good-vibrations-in-a-burned-barn.layer.fiddle_hybrid_strings",
+        "good-vibrations-in-a-burned-barn.layer.mandolin_chop",
+        "good-vibrations-in-a-burned-barn.layer.dobro_metallic_slide",
+        "good-vibrations-in-a-burned-barn.layer.upright_bass_sub",
+        "good-vibrations-in-a-burned-barn.layer.acoustic_guitar_boom_chuck",
+        "good-vibrations-in-a-burned-barn.layer.punk_kit",
+        "good-vibrations-in-a-burned-barn.layer.deep_house_machines",
+        "good-vibrations-in-a-burned-barn.layer.alien_sky",
+        "good-vibrations-in-a-burned-barn.source-deck.keep-muted-for-provenance-review"
+      ],
+      "execution_mode": "local_preflight_then_human_approved_daw_mutation",
+      "id": "daw-mutation.good-vibrations-in-a-burned-barn",
+      "local_output_policy": {
+        "git_policy": "ignored_local_only",
+        "receipt_root": "output/daw-mutations"
+      },
+      "midi_artifact": {
+        "path": "compositions/generated/midi/good-vibrations-in-a-burned-barn.mid",
+        "sha256": "9dd16949691ef1477ffab2b66fb86ad01efb8384f69ca8a16d3d07550ee78cf0",
+        "verification_action_id": "good-vibrations-in-a-burned-barn.preflight.verify-midi-hash"
+      },
+      "mutation_action_count": 19,
+      "plan_track_sha256": "65d1b12598acb4772d939ece31779885d5514f09a2e7d6d8013f450c7dd8518e",
+      "preflight_action_ids": [
+        "good-vibrations-in-a-burned-barn.preflight.verify-midi-hash",
+        "good-vibrations-in-a-burned-barn.preflight.create-local-rollback-copy",
+        "good-vibrations-in-a-burned-barn.preflight.confirm-no-private-audio-upload"
+      ],
+      "rollback": {
+        "instruction": "Save a timestamped local rollback copy outside Git before applying any Ableton Live or Max for Live mutation.",
+        "required": true
+      },
+      "source_deck_policy": {
+        "action_id": "good-vibrations-in-a-burned-barn.source-deck.keep-muted-for-provenance-review",
+        "candidate_source_count": 3,
+        "default_state": "muted_until_human_provenance_review",
+        "requires_provenance_review": true,
+        "session_track": "Public Domain Source Deck"
+      },
+      "track_slug": "good-vibrations-in-a-burned-barn",
+      "track_title": "Good Vibrations in a Burned Barn"
+    },
+    {
+      "affected_returns": [
+        "A Short Spring",
+        "B Deep Dub",
+        "C Alien Bloom",
+        "D Punk Crush"
+      ],
+      "affected_tracks": [
+        "AeroBand Banjo Lead",
+        "Fiddle / Hybrid Strings",
+        "Mandolin Chop",
+        "Dobro / Metallic Slide",
+        "Upright Bass / Sub",
+        "Acoustic Guitar Boom-Chuck",
+        "Punk Kit",
+        "Deep House Machines",
+        "Alien Sky",
+        "Public Domain Source Deck"
+      ],
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "approval_required_before_execution": [
+        "live_set_mutation",
+        "private_audio_upload"
+      ],
+      "blocked_action_groups": [
+        "mix_and_release_gates"
+      ],
+      "executable_action_groups": [
+        "session_actions",
+        "scene_actions",
+        "layer_actions",
+        "source_deck"
+      ],
+      "executable_action_ids": [
+        "a-p-carter-in-the-warehouse.session.set-tempo-and-swing",
+        "a-p-carter-in-the-warehouse.session.import-midi",
+        "a-p-carter-in-the-warehouse.session.configure-returns",
+        "a-p-carter-in-the-warehouse.scene.01",
+        "a-p-carter-in-the-warehouse.scene.02",
+        "a-p-carter-in-the-warehouse.scene.03",
+        "a-p-carter-in-the-warehouse.scene.04",
+        "a-p-carter-in-the-warehouse.scene.05",
+        "a-p-carter-in-the-warehouse.layer.aeroband_banjo_lead",
+        "a-p-carter-in-the-warehouse.layer.fiddle_hybrid_strings",
+        "a-p-carter-in-the-warehouse.layer.mandolin_chop",
+        "a-p-carter-in-the-warehouse.layer.dobro_metallic_slide",
+        "a-p-carter-in-the-warehouse.layer.upright_bass_sub",
+        "a-p-carter-in-the-warehouse.layer.acoustic_guitar_boom_chuck",
+        "a-p-carter-in-the-warehouse.layer.punk_kit",
+        "a-p-carter-in-the-warehouse.layer.deep_house_machines",
+        "a-p-carter-in-the-warehouse.layer.alien_sky",
+        "a-p-carter-in-the-warehouse.source-deck.keep-muted-for-provenance-review"
+      ],
+      "execution_mode": "local_preflight_then_human_approved_daw_mutation",
+      "id": "daw-mutation.a-p-carter-in-the-warehouse",
+      "local_output_policy": {
+        "git_policy": "ignored_local_only",
+        "receipt_root": "output/daw-mutations"
+      },
+      "midi_artifact": {
+        "path": "compositions/generated/midi/a-p-carter-in-the-warehouse.mid",
+        "sha256": "eb5dffb6e310e7794b3a72ff8fd02799720029d9456e4091e63e3a42249e6920",
+        "verification_action_id": "a-p-carter-in-the-warehouse.preflight.verify-midi-hash"
+      },
+      "mutation_action_count": 18,
+      "plan_track_sha256": "7873b6961d1ad83f9a96808012102d878f00c48477739acf7bd4a699258d14c3",
+      "preflight_action_ids": [
+        "a-p-carter-in-the-warehouse.preflight.verify-midi-hash",
+        "a-p-carter-in-the-warehouse.preflight.create-local-rollback-copy",
+        "a-p-carter-in-the-warehouse.preflight.confirm-no-private-audio-upload"
+      ],
+      "rollback": {
+        "instruction": "Save a timestamped local rollback copy outside Git before applying any Ableton Live or Max for Live mutation.",
+        "required": true
+      },
+      "source_deck_policy": {
+        "action_id": "a-p-carter-in-the-warehouse.source-deck.keep-muted-for-provenance-review",
+        "candidate_source_count": 3,
+        "default_state": "muted_until_human_provenance_review",
+        "requires_provenance_review": true,
+        "session_track": "Public Domain Source Deck"
+      },
+      "track_slug": "a-p-carter-in-the-warehouse",
+      "track_title": "A.P. Carter in the Warehouse"
+    },
+    {
+      "affected_returns": [
+        "A Short Spring",
+        "B Deep Dub",
+        "C Alien Bloom",
+        "D Punk Crush"
+      ],
+      "affected_tracks": [
+        "AeroBand Banjo Lead",
+        "Fiddle / Hybrid Strings",
+        "Mandolin Chop",
+        "Dobro / Metallic Slide",
+        "Upright Bass / Sub",
+        "Acoustic Guitar Boom-Chuck",
+        "Punk Kit",
+        "Deep House Machines",
+        "Alien Sky",
+        "Public Domain Source Deck"
+      ],
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "approval_required_before_execution": [
+        "live_set_mutation",
+        "private_audio_upload"
+      ],
+      "blocked_action_groups": [
+        "mix_and_release_gates"
+      ],
+      "executable_action_groups": [
+        "session_actions",
+        "scene_actions",
+        "layer_actions",
+        "source_deck"
+      ],
+      "executable_action_ids": [
+        "no-gods-no-masters-no-quantize.session.set-tempo-and-swing",
+        "no-gods-no-masters-no-quantize.session.import-midi",
+        "no-gods-no-masters-no-quantize.session.configure-returns",
+        "no-gods-no-masters-no-quantize.scene.01",
+        "no-gods-no-masters-no-quantize.scene.02",
+        "no-gods-no-masters-no-quantize.scene.03",
+        "no-gods-no-masters-no-quantize.scene.04",
+        "no-gods-no-masters-no-quantize.scene.05",
+        "no-gods-no-masters-no-quantize.layer.aeroband_banjo_lead",
+        "no-gods-no-masters-no-quantize.layer.fiddle_hybrid_strings",
+        "no-gods-no-masters-no-quantize.layer.mandolin_chop",
+        "no-gods-no-masters-no-quantize.layer.dobro_metallic_slide",
+        "no-gods-no-masters-no-quantize.layer.upright_bass_sub",
+        "no-gods-no-masters-no-quantize.layer.acoustic_guitar_boom_chuck",
+        "no-gods-no-masters-no-quantize.layer.punk_kit",
+        "no-gods-no-masters-no-quantize.layer.deep_house_machines",
+        "no-gods-no-masters-no-quantize.layer.alien_sky",
+        "no-gods-no-masters-no-quantize.source-deck.keep-muted-for-provenance-review"
+      ],
+      "execution_mode": "local_preflight_then_human_approved_daw_mutation",
+      "id": "daw-mutation.no-gods-no-masters-no-quantize",
+      "local_output_policy": {
+        "git_policy": "ignored_local_only",
+        "receipt_root": "output/daw-mutations"
+      },
+      "midi_artifact": {
+        "path": "compositions/generated/midi/no-gods-no-masters-no-quantize.mid",
+        "sha256": "cea40e19e0a6be6e47a97eacf4fcbef65a901694aad7d77d746e5f24de79d59b",
+        "verification_action_id": "no-gods-no-masters-no-quantize.preflight.verify-midi-hash"
+      },
+      "mutation_action_count": 18,
+      "plan_track_sha256": "a813234bfffd78d31b9da3f5b419d43d4160b8ce13eece29603ca72d6bd19c47",
+      "preflight_action_ids": [
+        "no-gods-no-masters-no-quantize.preflight.verify-midi-hash",
+        "no-gods-no-masters-no-quantize.preflight.create-local-rollback-copy",
+        "no-gods-no-masters-no-quantize.preflight.confirm-no-private-audio-upload"
+      ],
+      "rollback": {
+        "instruction": "Save a timestamped local rollback copy outside Git before applying any Ableton Live or Max for Live mutation.",
+        "required": true
+      },
+      "source_deck_policy": {
+        "action_id": "no-gods-no-masters-no-quantize.source-deck.keep-muted-for-provenance-review",
+        "candidate_source_count": 3,
+        "default_state": "muted_until_human_provenance_review",
+        "requires_provenance_review": true,
+        "session_track": "Public Domain Source Deck"
+      },
+      "track_slug": "no-gods-no-masters-no-quantize",
+      "track_title": "No Gods, No Masters, No Quantize"
+    },
+    {
+      "affected_returns": [
+        "A Short Spring",
+        "B Deep Dub",
+        "C Alien Bloom",
+        "D Punk Crush"
+      ],
+      "affected_tracks": [
+        "AeroBand Banjo Lead",
+        "Fiddle / Hybrid Strings",
+        "Mandolin Chop",
+        "Dobro / Metallic Slide",
+        "Upright Bass / Sub",
+        "Acoustic Guitar Boom-Chuck",
+        "Punk Kit",
+        "Deep House Machines",
+        "Alien Sky",
+        "Public Domain Source Deck"
+      ],
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "approval_required_before_execution": [
+        "live_set_mutation",
+        "private_audio_upload"
+      ],
+      "blocked_action_groups": [
+        "mix_and_release_gates"
+      ],
+      "executable_action_groups": [
+        "session_actions",
+        "scene_actions",
+        "layer_actions",
+        "source_deck"
+      ],
+      "executable_action_ids": [
+        "possum-kingdom-afterhours.session.set-tempo-and-swing",
+        "possum-kingdom-afterhours.session.import-midi",
+        "possum-kingdom-afterhours.session.configure-returns",
+        "possum-kingdom-afterhours.scene.01",
+        "possum-kingdom-afterhours.scene.02",
+        "possum-kingdom-afterhours.scene.03",
+        "possum-kingdom-afterhours.scene.04",
+        "possum-kingdom-afterhours.scene.05",
+        "possum-kingdom-afterhours.layer.aeroband_banjo_lead",
+        "possum-kingdom-afterhours.layer.fiddle_hybrid_strings",
+        "possum-kingdom-afterhours.layer.mandolin_chop",
+        "possum-kingdom-afterhours.layer.dobro_metallic_slide",
+        "possum-kingdom-afterhours.layer.upright_bass_sub",
+        "possum-kingdom-afterhours.layer.acoustic_guitar_boom_chuck",
+        "possum-kingdom-afterhours.layer.punk_kit",
+        "possum-kingdom-afterhours.layer.deep_house_machines",
+        "possum-kingdom-afterhours.layer.alien_sky",
+        "possum-kingdom-afterhours.source-deck.keep-muted-for-provenance-review"
+      ],
+      "execution_mode": "local_preflight_then_human_approved_daw_mutation",
+      "id": "daw-mutation.possum-kingdom-afterhours",
+      "local_output_policy": {
+        "git_policy": "ignored_local_only",
+        "receipt_root": "output/daw-mutations"
+      },
+      "midi_artifact": {
+        "path": "compositions/generated/midi/possum-kingdom-afterhours.mid",
+        "sha256": "070a6a4f7432eb8ea68aac2d1f62c763ed0c6b059540c390894b3b9dff47aa95",
+        "verification_action_id": "possum-kingdom-afterhours.preflight.verify-midi-hash"
+      },
+      "mutation_action_count": 18,
+      "plan_track_sha256": "4e23877413461055815f51937d19cc7cce6175113eeac3e3b7c9a2acfc27fc81",
+      "preflight_action_ids": [
+        "possum-kingdom-afterhours.preflight.verify-midi-hash",
+        "possum-kingdom-afterhours.preflight.create-local-rollback-copy",
+        "possum-kingdom-afterhours.preflight.confirm-no-private-audio-upload"
+      ],
+      "rollback": {
+        "instruction": "Save a timestamped local rollback copy outside Git before applying any Ableton Live or Max for Live mutation.",
+        "required": true
+      },
+      "source_deck_policy": {
+        "action_id": "possum-kingdom-afterhours.source-deck.keep-muted-for-provenance-review",
+        "candidate_source_count": 3,
+        "default_state": "muted_until_human_provenance_review",
+        "requires_provenance_review": true,
+        "session_track": "Public Domain Source Deck"
+      },
+      "track_slug": "possum-kingdom-afterhours",
+      "track_title": "Possum Kingdom Afterhours"
+    },
+    {
+      "affected_returns": [
+        "A Short Spring",
+        "B Deep Dub",
+        "C Alien Bloom",
+        "D Punk Crush"
+      ],
+      "affected_tracks": [
+        "AeroBand Banjo Lead",
+        "Fiddle / Hybrid Strings",
+        "Mandolin Chop",
+        "Dobro / Metallic Slide",
+        "Upright Bass / Sub",
+        "Acoustic Guitar Boom-Chuck",
+        "Punk Kit",
+        "Deep House Machines",
+        "Alien Sky",
+        "Public Domain Source Deck"
+      ],
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "approval_required_before_execution": [
+        "live_set_mutation",
+        "private_audio_upload"
+      ],
+      "blocked_action_groups": [
+        "mix_and_release_gates"
+      ],
+      "executable_action_groups": [
+        "session_actions",
+        "scene_actions",
+        "layer_actions",
+        "source_deck"
+      ],
+      "executable_action_ids": [
+        "the-ballad-of-the-broken-controller.session.set-tempo-and-swing",
+        "the-ballad-of-the-broken-controller.session.import-midi",
+        "the-ballad-of-the-broken-controller.session.configure-returns",
+        "the-ballad-of-the-broken-controller.scene.01",
+        "the-ballad-of-the-broken-controller.scene.02",
+        "the-ballad-of-the-broken-controller.scene.03",
+        "the-ballad-of-the-broken-controller.scene.04",
+        "the-ballad-of-the-broken-controller.scene.05",
+        "the-ballad-of-the-broken-controller.layer.aeroband_banjo_lead",
+        "the-ballad-of-the-broken-controller.layer.fiddle_hybrid_strings",
+        "the-ballad-of-the-broken-controller.layer.mandolin_chop",
+        "the-ballad-of-the-broken-controller.layer.dobro_metallic_slide",
+        "the-ballad-of-the-broken-controller.layer.upright_bass_sub",
+        "the-ballad-of-the-broken-controller.layer.acoustic_guitar_boom_chuck",
+        "the-ballad-of-the-broken-controller.layer.punk_kit",
+        "the-ballad-of-the-broken-controller.layer.deep_house_machines",
+        "the-ballad-of-the-broken-controller.layer.alien_sky",
+        "the-ballad-of-the-broken-controller.source-deck.keep-muted-for-provenance-review"
+      ],
+      "execution_mode": "local_preflight_then_human_approved_daw_mutation",
+      "id": "daw-mutation.the-ballad-of-the-broken-controller",
+      "local_output_policy": {
+        "git_policy": "ignored_local_only",
+        "receipt_root": "output/daw-mutations"
+      },
+      "midi_artifact": {
+        "path": "compositions/generated/midi/the-ballad-of-the-broken-controller.mid",
+        "sha256": "0806d648fef1d4388b926ded3f4958573b1fbd61c5c2a016c69e3bf991d299fd",
+        "verification_action_id": "the-ballad-of-the-broken-controller.preflight.verify-midi-hash"
+      },
+      "mutation_action_count": 18,
+      "plan_track_sha256": "3f012cc5d1babfd8193bed8b45ba2c23421e22468586d2109b358f2cd6241f62",
+      "preflight_action_ids": [
+        "the-ballad-of-the-broken-controller.preflight.verify-midi-hash",
+        "the-ballad-of-the-broken-controller.preflight.create-local-rollback-copy",
+        "the-ballad-of-the-broken-controller.preflight.confirm-no-private-audio-upload"
+      ],
+      "rollback": {
+        "instruction": "Save a timestamped local rollback copy outside Git before applying any Ableton Live or Max for Live mutation.",
+        "required": true
+      },
+      "source_deck_policy": {
+        "action_id": "the-ballad-of-the-broken-controller.source-deck.keep-muted-for-provenance-review",
+        "candidate_source_count": 3,
+        "default_state": "muted_until_human_provenance_review",
+        "requires_provenance_review": true,
+        "session_track": "Public Domain Source Deck"
+      },
+      "track_slug": "the-ballad-of-the-broken-controller",
+      "track_title": "The Ballad of the Broken Controller"
+    }
+  ],
+  "live_template": {
+    "master_bus_targets": [
+      "headroom >= -6 dBFS pre-master",
+      "mono-compatible low end",
+      "documented reference mix notes"
+    ],
+    "name": "GTandDiedTooSoons Live 12 Foundation Template",
+    "return_count": 4,
+    "target_runtime": "Ableton Live 12 Suite with Max for Live",
+    "tempo_range_bpm": [
+      82,
+      106
+    ],
+    "track_count": 10
+  },
+  "purpose": "Local-only preflight package for applying reviewed Ableton Live 12 / Max for Live mutation jobs without committing DAW binaries or audio artifacts.",
+  "receipt_contract": {
+    "git_policy": "ignored_local_only",
+    "output_root": "output/daw-mutations",
+    "prohibited_artifacts": [
+      ".als",
+      ".amxd",
+      ".alp",
+      "plugins",
+      "presets",
+      "samples",
+      "renders",
+      "credentials",
+      "cookies",
+      "license files",
+      "private audio"
+    ],
+    "required_fields": [
+      "run_id",
+      "track_slug",
+      "track_title",
+      "execution_status",
+      "operator_approval_reference",
+      "rollback_copy_reference",
+      "mutation_package_sha256",
+      "plan_track_sha256",
+      "midi_verification",
+      "affected_tracks",
+      "affected_returns",
+      "applied_action_ids",
+      "skipped_action_ids",
+      "required_postflight_checks",
+      "created_artifacts",
+      "redactions"
+    ],
+    "required_postflight_checks": [
+      "rollback copy exists outside Git before mutation",
+      "generated MIDI hash matched before import",
+      "affected tracks match mutation package scope",
+      "Public Domain Source Deck remains muted until provenance review",
+      "no export, render, .als, .amxd, sample, preset, credential, cookie, or license artifact is committed",
+      "python3 scripts/validate_repo.py passes after metadata updates"
+    ]
+  },
+  "safety": {
+    "local_only": true,
+    "must_not": [
+      "commit .als, .amxd, .alp, plugins, presets, samples, renders, credentials, cookies, or license files",
+      "mark a mutation applied before Ableton Live or Max for Live confirms the change",
+      "load unapproved source audio into the Public Domain Source Deck",
+      "export or publish from a mutation preflight run"
+    ],
+    "requires_operator_approval_before_execution": [
+      "Live-set mutation",
+      "Max for Live device mutation",
+      "private audio upload",
+      "export or release"
+    ]
+  },
+  "schema_version": 1,
+  "source_file_sha256": {
+    "automation/generated/live12-daw-action-plan.json": "9a246f1cad8e578a9d4b3d206d564a98c7a8a60a643afa9dc1ab93e7fef80bc1",
+    "automation/live12-session-template.json": "f17640bd3d24a4f6953836393c3286a45c7ba9c9064399590611dac566c76c51",
+    "compositions/generated/live12-track-build-plans.json": "4f08ba22b55b0c61a9fd688e353a97ca4caa6de74f52e6d89d339ae2b9ac2498"
+  },
+  "source_files": [
+    "automation/generated/live12-daw-action-plan.json",
+    "automation/live12-session-template.json",
+    "compositions/generated/live12-track-build-plans.json"
+  ],
+  "source_plan": {
+    "build_plan_track_count": 5,
+    "path": "automation/generated/live12-daw-action-plan.json",
+    "session_track_count": 10,
+    "sha256": "9a246f1cad8e578a9d4b3d206d564a98c7a8a60a643afa9dc1ab93e7fef80bc1",
+    "track_count": 5
+  }
+}

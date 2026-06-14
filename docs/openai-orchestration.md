@@ -30,7 +30,17 @@ python3 scripts/render_openai_worker_briefs.py --stable
 python3 scripts/validate_repo.py
 ```
 
-CI diffs the generated file against a stable render on both Ubuntu and macOS, so edits to the worker chain, Live template, installation plan, inventory, source catalog, or composition set must be reflected in the generated briefs.
+CI diffs the generated file against a stable render on both Ubuntu and macOS, so edits to the worker chain, Live template, DAW mutation package, installation plan, inventory, source catalog, or composition set must be reflected in the generated briefs.
+
+Generated DAW mutation packages are rendered to `automation/generated/live12-daw-mutation-package.json`:
+
+```bash
+python3 scripts/render_live12_daw_mutation_package.py --stable
+python3 scripts/prepare_live12_daw_mutation.py --track good-vibrations-in-a-burned-barn
+python3 scripts/test_live12_daw_mutation_preflight.py
+```
+
+They translate the approval-gated DAW action plan into local-only preflight jobs and ignored receipt templates under `output/daw-mutations/`. This is the bridge for Ableton/Max work: prepare, approve, mutate locally, then fill the receipt without committing DAW binaries or audio artifacts.
 
 ## API Fit
 
@@ -67,7 +77,7 @@ Tools exposed to agents should be narrow and auditable:
 - `validate_source_rights`: checks catalog metadata before download.
 - `summarize_take`: processes local transcript text, not raw audio by default.
 - `automate_vendor_install`: uses official Ableton, Arturia, or vendor account surfaces after approval and writes a redacted receipt plus refreshed inventory delta.
-- `automate_daw_session`: applies approved local Ableton/Max for Live actions and writes a local-only receipt.
+- `automate_daw_session`: applies approved local Ableton/Max for Live actions from the DAW mutation package and writes a local-only receipt.
 - `render_checklist`: emits required human checks before export.
 
 No agent gets unrestricted shell, filesystem, browser, account, or DAW control in production without a branch, log, approval boundary, and rollback path.
