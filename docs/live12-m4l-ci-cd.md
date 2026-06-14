@@ -12,11 +12,12 @@ GitHub-hosted runners do not include Ableton Live, Max for Live, Arturia Softwar
 - Regenerate OpenAI worker briefs and composition MIDI sketches in stable mode, then diff them against committed generated artifacts.
 - Regenerate Max for Live device contracts and `.maxpat` source blueprints in stable mode, then diff them against committed generated artifacts.
 - Regenerate the Live 12 / Max for Live DAW action plan in stable mode, then diff it against the committed generated artifact.
+- Regenerate the public-domain source deck in stable mode, then diff JSON and Markdown outputs against committed artifacts.
 - Regenerate the Live 12 / Max for Live DAW mutation package in stable mode, then diff it against the committed generated artifact.
-- Regenerate the Live 12 / Max for Live DAW mutation operator runbook in stable mode, then diff JSON and Markdown outputs against committed artifacts.
+- Regenerate the Live 12 / Max for Live DAW mutation operator runbook and queue runbook in stable mode, then diff JSON and Markdown outputs against committed artifacts.
 - Run Max for Live source contract probes without compiling `.amxd` devices.
 - Run local DAW mutation preflight probes without opening Ableton or writing `.als`/`.amxd` files.
-- Run DAW mutation runbook probes to verify command contracts, approval gates, Max for Live assignments, and sensitive-path hygiene.
+- Run DAW mutation runbook and queue runbook probes to verify command contracts, approval gates, Max for Live assignments, and sensitive-path hygiene.
 
 ## Local Gates
 
@@ -26,11 +27,15 @@ Run before committing production changes:
 python3 scripts/validate_repo.py
 python3 scripts/render_max_for_live_device_contracts.py --stable
 python3 scripts/render_live12_daw_action_plan.py --stable
+python3 scripts/render_public_domain_source_deck.py --stable
 python3 scripts/render_live12_daw_mutation_package.py --stable
 python3 scripts/render_live12_daw_mutation_runbook.py --stable
+python3 scripts/render_live12_daw_mutation_queue_runbook.py --stable
 python3 scripts/test_max_for_live_device_contracts.py
 python3 scripts/test_live12_daw_mutation_preflight.py
 python3 scripts/test_live12_daw_mutation_runbook.py
+python3 scripts/test_live12_daw_mutation_queue_runbook.py
+python3 scripts/test_public_domain_source_deck.py
 python3 scripts/inventory_live_suite.py
 ```
 
@@ -50,9 +55,13 @@ For future Max device work:
 | `automation/generated/max-for-live-device-contracts.json` | Source-only Max for Live contract bundle and `.maxpat` patch hashes for every session device contract. |
 | `max-for-live/patches/*.maxpat` | Reviewable Max patch source blueprints; compile locally only after approval and rollback evidence. |
 | `automation/generated/live12-daw-action-plan.json` | Approval-gated action queue for building generated tracks locally in Live 12 without committing `.als`, `.amxd`, samples, renders, credentials, or account artifacts. |
+| `automation/generated/public-domain-source-deck.json` | Metadata-only approved source-deck handoff with rights evidence and muted-by-default per-track source assignments. |
+| `docs/public-domain-source-deck.md` | Generated operator-facing source-deck summary that omits raw local paths and direct download URLs. |
 | `automation/generated/live12-daw-mutation-package.json` | Local-only preflight jobs, affected-track scope, blocked export/release groups, and receipt contract for approved Live 12 / Max for Live mutations. |
 | `automation/generated/live12-daw-mutation-runbook.json` | Generated operator contract for queue order, per-track commands, approval gates, Max for Live device assignments, and postflight checks. |
 | `docs/live12-daw-mutation-runbook.md` | Generated human-readable checklist for applying local Ableton/Max mutations with rollback and receipt evidence. |
+| `automation/generated/live12-daw-mutation-queue-runbook.json` | Generated full-set queue command manifest for staging ignored local DAW mutation artifacts without launching Ableton automatically. |
+| `docs/live12-daw-mutation-queue-runbook.md` | Generated full-set queue handoff for queue preparation, gated per-track launch commands, and receipt capture. |
 | `compositions/generated/live12-track-build-plans.json` | Human-readable import map, device targets, MIDI hashes, and safety constraints for each standalone track. |
 | `compositions/generated/midi/*.mid` | Deterministic placeholder MIDI sketches for Live import and replacement with verified Ableton/Arturia instruments. |
 | `inventory/live12-local-inventory.*` | Non-sensitive local host state for pack and plugin availability. |
@@ -65,7 +74,7 @@ For future Max device work:
 2. Install packs locally through official vendor account flows.
 3. Refresh inventory.
 4. Build or update Live set locally.
-5. Prepare and stage the full five-track DAW mutation queue under ignored `output/` folders:
+5. Prepare and stage the full six-track DAW mutation queue under ignored `output/` folders:
 
 ```bash
 python3 scripts/prepare_live12_daw_mutation_queue.py
@@ -81,6 +90,14 @@ python3 scripts/render_live12_daw_mutation_runbook.py --stable
 ```
 
 Use `docs/live12-daw-mutation-runbook.md` as the local DAW mutation checklist. It is generated from committed contracts and remains non-authoritative if edited by hand; regenerate it instead.
+
+The generated queue runbook provides the full-set queue handoff with gated launch and receipt commands for every track:
+
+```bash
+python3 scripts/render_live12_daw_mutation_queue_runbook.py --stable
+```
+
+Use `docs/live12-daw-mutation-queue-runbook.md` when preparing the whole set. It is generated from committed contracts and remains non-authoritative if edited by hand; regenerate it instead.
 
 6. For targeted single-track work, write local mutation requests, receipt templates, and editable operator evidence drafts under `output/daw-mutations/`:
 

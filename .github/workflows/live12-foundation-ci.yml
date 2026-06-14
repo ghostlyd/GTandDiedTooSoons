@@ -66,6 +66,12 @@ jobs:
           diff -u automation/generated/live12-daw-mutation-runbook.json /tmp/live12-daw-mutation-runbook.json
           diff -u docs/live12-daw-mutation-runbook.md /tmp/live12-daw-mutation-runbook.md
 
+      - name: Verify generated Live 12 DAW mutation queue runbook is in sync
+        run: |
+          python3 scripts/render_live12_daw_mutation_queue_runbook.py --stable --output /tmp/live12-daw-mutation-queue-runbook.json --markdown-output /tmp/live12-daw-mutation-queue-runbook.md
+          diff -u automation/generated/live12-daw-mutation-queue-runbook.json /tmp/live12-daw-mutation-queue-runbook.json
+          diff -u docs/live12-daw-mutation-queue-runbook.md /tmp/live12-daw-mutation-queue-runbook.md
+
       - name: Validate manifests, provenance policy, and binary hygiene
         run: python3 scripts/validate_repo.py
 
@@ -77,6 +83,9 @@ jobs:
 
       - name: Run Live 12 DAW mutation runbook probes
         run: python3 scripts/test_live12_daw_mutation_runbook.py
+
+      - name: Run Live 12 DAW mutation queue runbook probes
+        run: python3 scripts/test_live12_daw_mutation_queue_runbook.py
 
       - name: Run public-domain source deck probes
         run: python3 scripts/test_public_domain_source_deck.py
@@ -136,6 +145,12 @@ jobs:
           diff -u automation/generated/live12-daw-mutation-runbook.json /tmp/live12-daw-mutation-runbook.json
           diff -u docs/live12-daw-mutation-runbook.md /tmp/live12-daw-mutation-runbook.md
 
+      - name: Verify generated Live 12 DAW mutation queue runbook is in sync
+        run: |
+          python3 scripts/render_live12_daw_mutation_queue_runbook.py --stable --output /tmp/live12-daw-mutation-queue-runbook.json --markdown-output /tmp/live12-daw-mutation-queue-runbook.md
+          diff -u automation/generated/live12-daw-mutation-queue-runbook.json /tmp/live12-daw-mutation-queue-runbook.json
+          diff -u docs/live12-daw-mutation-queue-runbook.md /tmp/live12-daw-mutation-queue-runbook.md
+
       - name: Validate repository on macOS
         run: python3 scripts/validate_repo.py
 
@@ -147,6 +162,9 @@ jobs:
 
       - name: Run Live 12 DAW mutation runbook probes
         run: python3 scripts/test_live12_daw_mutation_runbook.py
+
+      - name: Run Live 12 DAW mutation queue runbook probes
+        run: python3 scripts/test_live12_daw_mutation_queue_runbook.py
 
       - name: Run public-domain source deck probes
         run: python3 scripts/test_public_domain_source_deck.py

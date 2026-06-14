@@ -21,10 +21,12 @@ python3 scripts/render_live12_daw_action_plan.py --stable
 python3 scripts/render_public_domain_source_deck.py --stable
 python3 scripts/render_live12_daw_mutation_package.py --stable
 python3 scripts/render_live12_daw_mutation_runbook.py --stable
+python3 scripts/render_live12_daw_mutation_queue_runbook.py --stable
 python3 scripts/validate_repo.py
 python3 scripts/test_max_for_live_device_contracts.py
 python3 scripts/test_live12_daw_mutation_preflight.py
 python3 scripts/test_live12_daw_mutation_runbook.py
+python3 scripts/test_live12_daw_mutation_queue_runbook.py
 python3 scripts/test_public_domain_source_deck.py
 python3 scripts/inventory_live_suite.py
 ```
@@ -41,6 +43,7 @@ Generated local inventory lands in `inventory/live12-local-inventory.json` and `
 - `docs/playwright-source-capture.md` - browser capture and trace runbook for source research.
 - `docs/recommended-packs.md` - Ableton and Arturia recommendations.
 - `docs/live12-daw-mutation-runbook.md` - generated operator checklist for approval-gated local DAW mutations.
+- `docs/live12-daw-mutation-queue-runbook.md` - generated full-set queue handoff for local-only DAW mutation staging, gated launch, and receipts.
 - `automation/openai-production-orchestration.json` - OpenAI, account automation, DAW automation, and approval-gate contract.
 - `automation/live12-session-template.json` - repeatable Live set structure.
 - `automation/worker-chain.json` - division-of-labor chain for production automation.
@@ -51,6 +54,7 @@ Generated local inventory lands in `inventory/live12-local-inventory.json` and `
 - `automation/generated/public-domain-source-deck.json` - generated source deck manifest with approved source metadata, per-track assignments, and muted-by-default policy.
 - `automation/generated/live12-daw-mutation-package.json` - generated local-only preflight package for approved Live 12 / Max for Live session mutations and receipts.
 - `automation/generated/live12-daw-mutation-runbook.json` - generated DAW mutation operator contract with commands, approval gates, Max for Live device assignments, and postflight checks.
+- `automation/generated/live12-daw-mutation-queue-runbook.json` - generated full-set queue command manifest for staging ignored local DAW mutation artifacts without launching Ableton automatically.
 - `max-for-live/patches/*.maxpat` - reviewable Max patch source blueprints, not compiled `.amxd` devices.
 - `compositions/down-tempo-punk-bluegrass-set.json` - initial standalone track briefs.
 - `compositions/generated/live12-track-build-plans.json` - generated Live-import plan with MIDI hashes and device targets.
