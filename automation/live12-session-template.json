@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "name": "GTandDiedTooSoons Live 12 Foundation Template",
+  "target_runtime": "Ableton Live 12 Suite with Max for Live",
+  "tempo_range_bpm": [82, 106],
+  "global_swing": "54-61%",
+  "tuning": "12-TET with optional bluegrass fiddle/banjo pitch inflection automation",
+  "tracks": [
+    {
+      "name": "AeroBand Banjo Lead",
+      "role": "Lead performer controller track",
+      "input": "AeroBand MIDI guitar/controller",
+      "instrument_strategy": "Banjo-imitation rack using pluck envelope, resonator EQ, velocity layers, and MPE/pitch-bend articulation where available.",
+      "device_contracts": ["m4l.aeroband_banjo_mapper", "m4l.roll_probability_engine"],
+      "automation_targets": ["velocity_curve", "roll_density", "pluck_decay", "humanize_ms"]
+    },
+    {
+      "name": "Fiddle / Hybrid Strings",
+      "role": "Melodic answer, drones, and tension",
+      "input": "MIDI clips or performed parts",
+      "instrument_strategy": "Ableton String Quartet or Arturia Augmented STRINGS, layered with subtle pitch drift.",
+      "device_contracts": ["m4l.call_response_router"],
+      "automation_targets": ["bow_noise", "vibrato_depth", "send_spatial"]
+    },
+    {
+      "name": "Mandolin Chop",
+      "role": "Offbeat bluegrass pulse",
+      "input": "MIDI clips",
+      "instrument_strategy": "Short plucked sampler/rack layer, high-mid transient emphasis, gated room.",
+      "device_contracts": ["m4l.chop_clock_guard"],
+      "automation_targets": ["chop_gate", "ghost_note_probability"]
+    },
+    {
+      "name": "Dobro / Metallic Slide",
+      "role": "Haunting hooks and punk-bluegrass bends",
+      "input": "MIDI or audio",
+      "instrument_strategy": "Resonator-like slide layer or guitar-source Arturia bank routed through granular delay.",
+      "device_contracts": ["m4l.slide_phrase_sampler"],
+      "automation_targets": ["glide_time", "feedback", "spectral_tilt"]
+    },
+    {
+      "name": "Upright Bass / Sub",
+      "role": "Bluegrass root movement fused with deep-house low end",
+      "input": "MIDI",
+      "instrument_strategy": "Layer upright-like transient with sine/triangle sub; sidechain from kick.",
+      "device_contracts": ["m4l.root_motion_limiter"],
+      "automation_targets": ["sub_blend", "sidechain_depth", "note_length"]
+    },
+    {
+      "name": "Punk Kit",
+      "role": "Human drum aggression",
+      "input": "MIDI clips or pads",
+      "instrument_strategy": "Dry acoustic kit, parallel saturation, short room.",
+      "device_contracts": ["m4l.fill_trigger"],
+      "automation_targets": ["parallel_drive", "room_send", "fill_probability"]
+    },
+    {
+      "name": "Deep House Machines",
+      "role": "Kick, hats, stabs, and dance-floor continuity",
+      "input": "MIDI clips and sequencers",
+      "instrument_strategy": "Classic drum-machine racks, 303/101-style bass or stabs, restrained sidechain.",
+      "device_contracts": ["m4l.house_grid_conductor"],
+      "automation_targets": ["filter_cutoff", "accent", "swing_amount"]
+    },
+    {
+      "name": "Public Domain Source Deck",
+      "role": "Auditable historical fragments",
+      "input": "Rights-cleared samples only",
+      "instrument_strategy": "Sampler or Simpler loaded from provenance-checked local source folder.",
+      "device_contracts": ["m4l.provenance_sampler"],
+      "automation_targets": ["slice_index", "grain_size", "reverse_probability"]
+    },
+    {
+      "name": "Alien Sky",
+      "role": "Granular, spectral, and spatial atmosphere",
+      "input": "Resampled project audio",
+      "instrument_strategy": "Granulator III, Inspired by Nature, PitchLoop89, spectral/freeform processing.",
+      "device_contracts": ["m4l.spatial_harmonic_field"],
+      "automation_targets": ["azimuth", "width", "grain_density", "freeze"]
+    }
+  ],
+  "returns": [
+    {"name": "A Short Spring", "role": "bluegrass room and slap"},
+    {"name": "B Deep Dub", "role": "house delay and modulation"},
+    {"name": "C Alien Bloom", "role": "granular/spectral send"},
+    {"name": "D Punk Crush", "role": "parallel saturation"}
+  ],
+  "master_bus": {
+    "targets": ["headroom >= -6 dBFS pre-master", "mono-compatible low end", "documented reference mix notes"],
+    "avoid": ["unlogged limiters", "untraceable AI-generated audio", "uncredited samples"]
+  }
+}

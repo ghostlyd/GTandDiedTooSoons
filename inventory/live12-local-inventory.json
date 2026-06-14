@@ -1,0 +1,336 @@
+{
+  "ableton": {
+    "app": {
+      "exists": true,
+      "name": "Ableton Live 12 Suite.app",
+      "path": "/Applications/Ableton Live 12 Suite.app",
+      "version": "12.4.2 (2026-06-04_a687113d71)"
+    },
+    "factory_packs": [
+      {
+        "name": "Building Max Devices",
+        "path": "~/Music/Ableton/Factory Packs/Building Max Devices"
+      },
+      {
+        "name": "Creative Extensions",
+        "path": "~/Music/Ableton/Factory Packs/Creative Extensions"
+      },
+      {
+        "name": "Drone Lab",
+        "path": "~/Music/Ableton/Factory Packs/Drone Lab"
+      },
+      {
+        "name": "Glitch and Wash",
+        "path": "~/Music/Ableton/Factory Packs/Glitch and Wash"
+      },
+      {
+        "name": "Granulator III",
+        "path": "~/Music/Ableton/Factory Packs/Granulator III"
+      },
+      {
+        "name": "Inspired by Nature by Dillon Bastan",
+        "path": "~/Music/Ableton/Factory Packs/Inspired by Nature by Dillon Bastan"
+      },
+      {
+        "name": "Mood Reel",
+        "path": "~/Music/Ableton/Factory Packs/Mood Reel"
+      },
+      {
+        "name": "PitchLoop89",
+        "path": "~/Music/Ableton/Factory Packs/PitchLoop89"
+      },
+      {
+        "name": "Voice Box",
+        "path": "~/Music/Ableton/Factory Packs/Voice Box"
+      }
+    ],
+    "factory_packs_root": "~/Music/Ableton/Factory Packs",
+    "support_dir": {
+      "children": [
+        "Cloud Manager",
+        "Live 12.4.2",
+        "Live Database",
+        "Live Reports",
+        "Splice"
+      ],
+      "exists": true,
+      "path": "~/Library/Application Support/Ableton"
+    },
+    "user_library": {
+      "counts": {
+        ".adg": 0,
+        ".adv": 0,
+        ".aif": 0,
+        ".aiff": 0,
+        ".alc": 0,
+        ".als": 0,
+        ".amxd": 0,
+        ".wav": 0
+      },
+      "exists": true,
+      "path": "~/Music/Ableton/User Library"
+    }
+  },
+  "arturia": {
+    "app_root": "/Applications/Arturia",
+    "applications": [
+      {
+        "name": "Acid V.app",
+        "path": "/Applications/Arturia/Acid V.app"
+      },
+      {
+        "name": "Analog Lab 4.app",
+        "path": "/Applications/Arturia/Analog Lab 4.app"
+      },
+      {
+        "name": "Analog Lab V.app",
+        "path": "/Applications/Arturia/Analog Lab V.app"
+      },
+      {
+        "name": "ARP 2600 V3.app",
+        "path": "/Applications/Arturia/ARP 2600 V3.app"
+      },
+      {
+        "name": "Arturia Software Center.app",
+        "path": "/Applications/Arturia/Arturia Software Center.app"
+      },
+      {
+        "name": "AudioFuse Control Center.app",
+        "path": "/Applications/Arturia/AudioFuse Control Center.app"
+      },
+      {
+        "name": "Augmented BRASS.app",
+        "path": "/Applications/Arturia/Augmented BRASS.app"
+      },
+      {
+        "name": "Augmented GRAND PIANO.app",
+        "path": "/Applications/Arturia/Augmented GRAND PIANO.app"
+      },
+      {
+        "name": "Augmented MALLETS.app",
+        "path": "/Applications/Arturia/Augmented MALLETS.app"
+      },
+      {
+        "name": "Augmented PERSIA.app",
+        "path": "/Applications/Arturia/Augmented PERSIA.app"
+      },
+      {
+        "name": "Augmented STRINGS.app",
+        "path": "/Applications/Arturia/Augmented STRINGS.app"
+      },
+      {
+        "name": "Augmented VOICES.app",
+        "path": "/Applications/Arturia/Augmented VOICES.app"
+      },
+      {
+        "name": "Augmented WOODWINDS.app",
+        "path": "/Applications/Arturia/Augmented WOODWINDS.app"
+      },
+      {
+        "name": "Augmented YANGTZE.app",
+        "path": "/Applications/Arturia/Augmented YANGTZE.app"
+      },
+      {
+        "name": "B-3 V2.app",
+        "path": "/Applications/Arturia/B-3 V2.app"
+      },
+      {
+        "name": "Buchla Easel V.app",
+        "path": "/Applications/Arturia/Buchla Easel V.app"
+      },
+      {
+        "name": "Clavinet V.app",
+        "path": "/Applications/Arturia/Clavinet V.app"
+      },
+      {
+        "name": "CMI V.app",
+        "path": "/Applications/Arturia/CMI V.app"
+      },
+      {
+        "name": "CP-70 V.app",
+        "path": "/Applications/Arturia/CP-70 V.app"
+      },
+      {
+        "name": "CS-80 V4.app",
+        "path": "/Applications/Arturia/CS-80 V4.app"
+      },
+      {
+        "name": "CZ V.app",
+        "path": "/Applications/Arturia/CZ V.app"
+      },
+      {
+        "name": "DX7 V.app",
+        "path": "/Applications/Arturia/DX7 V.app"
+      },
+      {
+        "name": "Emulator II V.app",
+        "path": "/Applications/Arturia/Emulator II V.app"
+      },
+      {
+        "name": "Farfisa V.app",
+        "path": "/Applications/Arturia/Farfisa V.app"
+      },
+      {
+        "name": "Jun-6 V.app",
+        "path": "/Applications/Arturia/Jun-6 V.app"
+      },
+      {
+        "name": "Jup-8 V4.app",
+        "path": "/Applications/Arturia/Jup-8 V4.app"
+      },
+      {
+        "name": "Jup-8000 V.app",
+        "path": "/Applications/Arturia/Jup-8000 V.app"
+      },
+      {
+        "name": "KORG MS-20 V.app",
+        "path": "/Applications/Arturia/KORG MS-20 V.app"
+      },
+      {
+        "name": "Matrix-12 V2.app",
+        "path": "/Applications/Arturia/Matrix-12 V2.app"
+      },
+      {
+        "name": "Mellotron V.app",
+        "path": "/Applications/Arturia/Mellotron V.app"
+      },
+      {
+        "name": "Memory V.app",
+        "path": "/Applications/Arturia/Memory V.app"
+      },
+      {
+        "name": "MIDI Control Center.app",
+        "path": "/Applications/Arturia/MIDI Control Center.app"
+      },
+      {
+        "name": "Mini V4.app",
+        "path": "/Applications/Arturia/Mini V4.app"
+      },
+      {
+        "name": "MiniBrute V.app",
+        "path": "/Applications/Arturia/MiniBrute V.app"
+      },
+      {
+        "name": "MiniFreak V.app",
+        "path": "/Applications/Arturia/MiniFreak V.app"
+      },
+      {
+        "name": "MiniFuse Control Center.app",
+        "path": "/Applications/Arturia/MiniFuse Control Center.app"
+      },
+      {
+        "name": "Modular V3.app",
+        "path": "/Applications/Arturia/Modular V3.app"
+      },
+      {
+        "name": "OP-Xa V.app",
+        "path": "/Applications/Arturia/OP-Xa V.app"
+      },
+      {
+        "name": "Piano V3.app",
+        "path": "/Applications/Arturia/Piano V3.app"
+      },
+      {
+        "name": "Pigments.app",
+        "path": "/Applications/Arturia/Pigments.app"
+      },
+      {
+        "name": "PolyBrute Connect.app",
+        "path": "/Applications/Arturia/PolyBrute Connect.app"
+      },
+      {
+        "name": "Prophet V3.app",
+        "path": "/Applications/Arturia/Prophet V3.app"
+      },
+      {
+        "name": "Prophet-5 V.app",
+        "path": "/Applications/Arturia/Prophet-5 V.app"
+      },
+      {
+        "name": "Prophet-VS V.app",
+        "path": "/Applications/Arturia/Prophet-VS V.app"
+      },
+      {
+        "name": "Pure LoFi.app",
+        "path": "/Applications/Arturia/Pure LoFi.app"
+      },
+      {
+        "name": "SEM V3.app",
+        "path": "/Applications/Arturia/SEM V3.app"
+      },
+      {
+        "name": "Solina V2.app",
+        "path": "/Applications/Arturia/Solina V2.app"
+      },
+      {
+        "name": "Spark.app",
+        "path": "/Applications/Arturia/Spark.app"
+      },
+      {
+        "name": "SQ80 V.app",
+        "path": "/Applications/Arturia/SQ80 V.app"
+      },
+      {
+        "name": "Stage-73 V2.app",
+        "path": "/Applications/Arturia/Stage-73 V2.app"
+      },
+      {
+        "name": "Synclavier V.app",
+        "path": "/Applications/Arturia/Synclavier V.app"
+      },
+      {
+        "name": "Synthi V.app",
+        "path": "/Applications/Arturia/Synthi V.app"
+      },
+      {
+        "name": "Synthx V.app",
+        "path": "/Applications/Arturia/Synthx V.app"
+      },
+      {
+        "name": "Vocoder V.app",
+        "path": "/Applications/Arturia/Vocoder V.app"
+      },
+      {
+        "name": "VOX Continental V2.app",
+        "path": "/Applications/Arturia/VOX Continental V2.app"
+      },
+      {
+        "name": "Wurli V3.app",
+        "path": "/Applications/Arturia/Wurli V3.app"
+      }
+    ]
+  },
+  "generated_at": "2026-06-14T12:36:04.671226+00:00",
+  "host": {
+    "machine": "arm64",
+    "python": "3.14.2",
+    "system": "Darwin"
+  },
+  "plugins": {
+    "audio_unit_roots": [
+      {
+        "arturia_plugins": [],
+        "exists": true,
+        "path": "~/Library/Audio/Plug-Ins/Components"
+      },
+      {
+        "arturia_plugins": [],
+        "exists": true,
+        "path": "/Library/Audio/Plug-Ins/Components"
+      }
+    ],
+    "vst3_roots": [
+      {
+        "arturia_plugins": [],
+        "exists": false,
+        "path": "~/Library/Audio/Plug-Ins/VST3"
+      },
+      {
+        "arturia_plugins": [],
+        "exists": true,
+        "path": "/Library/Audio/Plug-Ins/VST3"
+      }
+    ]
+  },
+  "schema_version": 1
+}

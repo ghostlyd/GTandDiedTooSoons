@@ -1,0 +1,32 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+node_modules/
+output/
+
+# Do not commit commercial, account-bound, or bulky Ableton/Arturia assets.
+*.alp
+*.als
+*.alc
+*.adg
+*.adv
+*.amxd
+*.wav
+*.aif
+*.aiff
+*.flac
+*.mp3
+*.m4a
+*.ogg
+*.vst3
+*.component
+*.app
+
+# Public-domain source audio is fetched locally with provenance, not vendored.
+sources/public-domain/raw/**
+!sources/public-domain/raw/.gitkeep

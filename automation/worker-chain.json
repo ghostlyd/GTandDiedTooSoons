@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "name": "GTandDiedTooSoons Production Worker Chain",
+  "roles": [
+    {
+      "id": "archivist",
+      "name": "Music Library Scientist",
+      "owns": ["source discovery", "rights metadata", "historical context", "credit lines"],
+      "inputs": ["catalogs/public-domain-bluegrass-sources.json"],
+      "outputs": ["approved source manifest entries", "historical motif notes"],
+      "must_not": ["approve unclear rights", "download copyrighted commercial recordings"]
+    },
+    {
+      "id": "controller_engineer",
+      "name": "AeroBand Banjo Controller Engineer",
+      "owns": ["MIDI mapping", "velocity curves", "roll articulation", "performance macros"],
+      "inputs": ["automation/live12-session-template.json"],
+      "outputs": ["Max device contract updates", "controller test notes"],
+      "must_not": ["break live playability for theoretical complexity"]
+    },
+    {
+      "id": "max_device_builder",
+      "name": "Max for Live Device Builder",
+      "owns": ["probability engines", "clock guards", "provenance sampler", "spatial modulation"],
+      "inputs": ["automation/live12-session-template.json"],
+      "outputs": ["reviewable .maxpat source or documented device prototype"],
+      "must_not": ["commit binary .amxd without Git LFS and review"]
+    },
+    {
+      "id": "arrangement_producer",
+      "name": "Arrangement Producer",
+      "owns": ["track form", "hook density", "contrast", "human vs machine tension"],
+      "inputs": ["compositions/down-tempo-punk-bluegrass-set.json"],
+      "outputs": ["updated arrangement maps", "session TODOs"],
+      "must_not": ["erase bluegrass instrumentation in favor of generic electronica"]
+    },
+    {
+      "id": "mix_engineer",
+      "name": "Masterclass Audio Technician",
+      "owns": ["gain staging", "masking", "space", "translation", "render review"],
+      "inputs": ["local Live set", "reference notes"],
+      "outputs": ["mix notes", "render checklist", "problem frequencies"],
+      "must_not": ["log private vocal takes or unreleased lyrics without need"]
+    },
+    {
+      "id": "release_qa",
+      "name": "Release and Provenance QA",
+      "owns": ["CI status", "credits", "source provenance", "export manifest"],
+      "inputs": ["repo status", "source manifests", "render checklist"],
+      "outputs": ["release readiness report"],
+      "must_not": ["ship missing sample credits or failed CI"]
+    }
+  ],
+  "handoff_order": [
+    "archivist",
+    "controller_engineer",
+    "max_device_builder",
+    "arrangement_producer",
+    "mix_engineer",
+    "release_qa"
+  ]
+}
