@@ -59,4 +59,12 @@ For future Max device work:
 python3 scripts/prepare_live12_daw_mutation.py --track good-vibrations-in-a-burned-barn
 ```
 
-6. Export stems/renders to an artifact store or release process with provenance, not directly into the source repo.
+6. After an approved local Ableton/Max mutation attempt, record operator evidence against the prepared request:
+
+```bash
+python3 scripts/record_live12_daw_mutation_receipt.py \
+  --request output/daw-mutations/good-vibrations-in-a-burned-barn/mutation-request.json \
+  --evidence output/daw-mutations/good-vibrations-in-a-burned-barn/operator-evidence.json
+```
+
+7. Export stems/renders to an artifact store or release process with provenance, not directly into the source repo.

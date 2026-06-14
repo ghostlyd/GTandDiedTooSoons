@@ -42,6 +42,7 @@ REQUIRED_FILES = [
     "scripts/render_live12_daw_action_plan.py",
     "scripts/render_live12_daw_mutation_package.py",
     "scripts/prepare_live12_daw_mutation.py",
+    "scripts/record_live12_daw_mutation_receipt.py",
     "scripts/render_openai_worker_briefs.py",
     "scripts/test_live12_daw_mutation_preflight.py",
     "sources/public-domain/download-ledger.json",
