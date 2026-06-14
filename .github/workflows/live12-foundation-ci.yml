@@ -29,6 +29,11 @@ jobs:
       - name: Validate manifests, provenance policy, and binary hygiene
         run: python3 scripts/validate_repo.py
 
+      - name: Verify generated OpenAI worker briefs are in sync
+        run: |
+          python3 scripts/render_openai_worker_briefs.py --stable --output /tmp/openai-worker-briefs.json
+          diff -u automation/generated/openai-worker-briefs.json /tmp/openai-worker-briefs.json
+
       - name: Exercise inventory script in dry-run mode
         run: python3 scripts/inventory_live_suite.py --dry-run --output inventory/live12-local-inventory.json
 
@@ -46,6 +51,11 @@ jobs:
 
       - name: Validate repository on macOS
         run: python3 scripts/validate_repo.py
+
+      - name: Verify generated OpenAI worker briefs are in sync
+        run: |
+          python3 scripts/render_openai_worker_briefs.py --stable --output /tmp/openai-worker-briefs.json
+          diff -u automation/generated/openai-worker-briefs.json /tmp/openai-worker-briefs.json
 
       - name: Generate non-sensitive host inventory snapshot
         run: python3 scripts/inventory_live_suite.py --dry-run

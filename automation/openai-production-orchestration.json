@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "name": "GTandDiedTooSoons OpenAI Production Orchestration",
+  "purpose": "A repeatable, auditable orchestration contract for AI-assisted Ableton Live 12 Suite, Max for Live, source-provenance, and account-authorized library operations.",
+  "official_docs_consulted": [
+    "https://developers.openai.com/api/docs/guides/structured-outputs",
+    "https://developers.openai.com/api/docs/guides/agents",
+    "https://openai.github.io/openai-agents-python/agents/",
+    "https://openai.github.io/openai-agents-python/handoffs/",
+    "https://openai.github.io/openai-agents-python/tracing/",
+    "https://developers.openai.com/api/docs/guides/realtime",
+    "https://developers.openai.com/apps-sdk",
+    "https://developers.openai.com/apps-sdk/build/mcp-server"
+  ],
+  "operating_assumptions": [
+    "AI workers can propose musical, technical, and operational changes, but material changes must be traceable to versioned manifests or human-approved local sessions.",
+    "DAW and account automation is in scope when it uses official user-authenticated surfaces, redacts sensitive data, and honors confirmation gates for purchases, installs, Live-set mutation, export, and release.",
+    "Repository CI must verify orchestration contracts without requiring OpenAI credentials, vendor credentials, Ableton Live, Max for Live, Arturia Software Center, or private audio.",
+    "Generated prompts, briefs, and manifests must avoid raw private audio, unreleased lyrics, credentials, account tokens, installer payloads, and commercial library content."
+  ],
+  "api_surfaces": [
+    {
+      "id": "responses_api",
+      "name": "Responses API",
+      "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests.",
+      "guardrails": [
+        "Use structured outputs for machine-consumable plans.",
+        "Keep prompts metadata-focused unless a human explicitly approves private creative content.",
+        "Store only durable outputs that are useful for review, repeatability, or release audit."
+      ]
+    },
+    {
+      "id": "agents_sdk",
+      "name": "Agents SDK",
+      "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries.",
+      "guardrails": [
+        "Agents must receive role-scoped instructions and narrow tools.",
+        "Handoffs must preserve provenance and unresolved risk notes.",
+        "Trace logs must redact secrets, credentials, account pages, and private audio content."
+      ]
+    },
+    {
+      "id": "realtime_api",
+      "name": "Realtime API",
+      "use": "Optional low-latency rehearsal talkback, live critique, controller coaching, and spoken checklist interaction.",
+      "guardrails": [
+        "Private rehearsal audio streaming is opt-in per session.",
+        "Do not persist raw audio by default.",
+        "Use push-to-talk or session-level consent for live rooms."
+      ]
+    },
+    {
+      "id": "audio_transcription",
+      "name": "Audio and transcription APIs",
+      "use": "Transcribe field notes, rehearsal talkback, or exported review bounces when the material is approved for upload.",
+      "guardrails": [
+        "Prefer transcript files or short review excerpts over raw private audio.",
+        "Tag transcripts with source, consent, and retention notes.",
+        "Do not upload third-party copyrighted material unless rights permit that processing."
+      ]
+    },
+    {
+      "id": "apps_sdk_mcp",
+      "name": "Apps SDK and MCP",
+      "use": "Expose a future ChatGPT-facing project control surface for inventory lookup, worker brief rendering, rights checks, and DAW/account automation requests.",
+      "guardrails": [
+        "Expose narrow tools rather than arbitrary shell, filesystem, browser, or DAW control.",
+        "Require explicit confirmation before account-gated downloads, installs, purchases, Live-set mutation, exports, or publishing.",
+        "Record only high-level action receipts and redacted evidence."
+      ]
+    }
+  ],
+  "data_classes": [
+    {
+      "id": "public_repo_metadata",
+      "examples": ["catalogs", "docs", "automation contracts", "composition briefs"],
+      "allowed_in_repo": true,
+      "allowed_for_openai": true,
+      "notes": "Default input for structured worker planning."
+    },
+    {
+      "id": "local_inventory",
+      "examples": ["installed pack names", "home-relative paths", "version strings"],
+      "allowed_in_repo": true,
+      "allowed_for_openai": true,
+      "notes": "Inventory scripts must avoid copying licensed content or absolute home paths."
+    },
+    {
+      "id": "public_domain_metadata",
+      "examples": ["rights status", "credit line", "source URL", "download ledger hashes"],
+      "allowed_in_repo": true,
+      "allowed_for_openai": true,
+      "notes": "Approved audio binaries remain local or external; Git tracks provenance only."
+    },
+    {
+      "id": "private_rehearsal_audio",
+      "examples": ["raw takes", "talkback", "unreleased vocal ideas", "private lyrics"],
+      "allowed_in_repo": false,
+      "allowed_for_openai": "explicit_opt_in_only",
+      "notes": "Use local processing or transcript summaries unless a session-specific upload is approved."
+    },
+    {
+      "id": "account_credentials",
+      "examples": ["OpenAI API keys", "Ableton login", "Arturia login", "session cookies", "license files"],
+      "allowed_in_repo": false,
+      "allowed_for_openai": false,
+      "notes": "Automation may use an already-authenticated browser/app session, but must not capture or persist secrets."
+    },
+    {
+      "id": "licensed_assets",
+      "examples": ["Ableton packs", "Arturia presets", "sample libraries", "plugin binaries", "Live sets"],
+      "allowed_in_repo": false,
+      "allowed_for_openai": false,
+      "notes": "Install through official account flows and verify by inventory metadata only."
+    }
+  ],
+  "tool_contracts": [
+    {
+      "id": "read_inventory",
+      "input_scope": ["inventory/live12-local-inventory.json"],
+      "output": "Sanitized installed-library and DAW environment summary.",
+      "approval_required": false,
+      "must_not": ["read arbitrary local folders", "copy presets or samples", "emit absolute private paths"]
+    },
+    {
+      "id": "validate_source_rights",
+      "input_scope": ["catalogs/public-domain-bluegrass-sources.json", "sources/public-domain/download-ledger.json"],
+      "output": "Pass/fail rights and provenance decision with unresolved risk notes.",
+      "approval_required": false,
+      "must_not": ["upgrade unclear rights", "download unapproved copyrighted recordings"]
+    },
+    {
+      "id": "render_worker_brief",
+      "input_scope": ["automation/worker-chain.json", "automation/live12-session-template.json", "compositions/down-tempo-punk-bluegrass-set.json"],
+      "output": "Role-scoped metadata-only worker brief.",
+      "approval_required": false,
+      "must_not": ["include private lyrics", "include raw audio paths", "include credentials"]
+    },
+    {
+      "id": "propose_session_change",
+      "input_scope": ["automation/live12-session-template.json", "compositions/down-tempo-punk-bluegrass-set.json", "inventory/live12-local-inventory.json"],
+      "output": "Reviewable JSON patch proposal for Live/Max for Live implementation.",
+      "approval_required": true,
+      "must_not": ["mutate a Live set without approval", "commit .als or .amxd binaries", "create unbounded automation loops"]
+    },
+    {
+      "id": "automate_vendor_install",
+      "input_scope": ["catalogs/library-installation-plan.json", "inventory/live12-local-inventory.json"],
+      "output": "Redacted account-flow action receipt plus refreshed inventory delta.",
+      "approval_required": true,
+      "must_not": ["collect credentials", "bypass paywalls or terms", "purchase without explicit human confirmation", "commit installers or licensed assets"]
+    },
+    {
+      "id": "automate_daw_session",
+      "input_scope": ["automation/live12-session-template.json", "automation/generated/openai-worker-briefs.json"],
+      "output": "Human-reviewable DAW action plan, Max for Live contract update, or local-only session receipt.",
+      "approval_required": true,
+      "must_not": ["export or publish without release QA", "disable provenance checks", "log private performance content by default"]
+    },
+    {
+      "id": "render_release_checklist",
+      "input_scope": ["catalogs", "automation", "compositions", "inventory"],
+      "output": "Release readiness checklist covering CI, credits, sources, installs, renders, and residual risks.",
+      "approval_required": false,
+      "must_not": ["mark missing sample credits as acceptable", "ignore failed CI"]
+    }
+  ],
+  "approval_gates": [
+    {
+      "id": "source_download",
+      "trigger": "Download or transform a public-domain source file.",
+      "required_evidence": ["approved_for_download true", "download ledger candidate", "rights evidence", "allowed host and path"],
+      "approver": "human or CI policy"
+    },
+    {
+      "id": "private_audio_upload",
+      "trigger": "Send private rehearsal audio, lyrics, or unreleased take content to a cloud API.",
+      "required_evidence": ["session-specific consent", "retention note", "minimum necessary excerpt"],
+      "approver": "human"
+    },
+    {
+      "id": "vendor_account_action",
+      "trigger": "Use an authenticated Ableton, Arturia, or other vendor account session.",
+      "required_evidence": ["official host or app", "redacted log", "requested install or account action", "no credential capture"],
+      "approver": "human"
+    },
+    {
+      "id": "purchase_or_license_change",
+      "trigger": "Buy, license, activate, or materially change entitlement state for a vendor product.",
+      "required_evidence": ["official product page", "price or license terms visible to user", "explicit confirmation"],
+      "approver": "human"
+    },
+    {
+      "id": "live_set_mutation",
+      "trigger": "Apply automation to an Ableton Live set, Max for Live device, controller mapping, or performance template.",
+      "required_evidence": ["reviewable proposal", "rollback copy or branch", "scope of tracks/devices affected"],
+      "approver": "human"
+    },
+    {
+      "id": "export_or_release",
+      "trigger": "Render, publish, distribute, or hand off production audio.",
+      "required_evidence": ["release QA checklist", "sample credits", "source ledger", "CI pass", "mix notes"],
+      "approver": "human"
+    }
+  ],
+  "max_for_live_bridge": {
+    "strategy": "Use Max for Live and Live-session automation as local execution targets for reviewed proposals and receipts.",
+    "allowed_outputs": [
+      "device contract JSON",
+      "reviewable .maxpat source when authored",
+      "local-only session mutation receipt",
+      "controller mapping notes",
+      "automation parameter plans"
+    ],
+    "blocked_outputs": [
+      "unreviewed .amxd binaries",
+      "unversioned .als files",
+      "raw private takes",
+      "licensed samples or presets",
+      "secrets or account artifacts"
+    ],
+    "rollback_path": [
+      "Keep all orchestration changes in Git branches.",
+      "Before mutating local DAW sessions, save a timestamped local copy outside Git.",
+      "Record the applied proposal id and affected tracks/devices.",
+      "Re-run inventory and repository validation after automation."
+    ]
+  }
+}

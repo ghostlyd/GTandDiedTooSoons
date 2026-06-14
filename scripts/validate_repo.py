@@ -26,11 +26,14 @@ REQUIRED_FILES = [
     "catalogs/recommended-packs.json",
     "catalogs/library-installation-plan.json",
     "catalogs/public-domain-bluegrass-sources.json",
+    "automation/openai-production-orchestration.json",
+    "automation/generated/openai-worker-briefs.json",
     "automation/live12-session-template.json",
     "automation/worker-chain.json",
     "compositions/down-tempo-punk-bluegrass-set.json",
     "scripts/inventory_live_suite.py",
     "scripts/fetch_public_domain_audio.py",
+    "scripts/render_openai_worker_briefs.py",
     "sources/public-domain/download-ledger.json",
 ]
 
@@ -77,6 +80,44 @@ OFFICIAL_PACK_HOSTS = {
     "Ableton": {"www.ableton.com"},
     "Arturia": {"www.arturia.com"},
 }
+OFFICIAL_OPENAI_DOC_HOSTS = {"developers.openai.com", "openai.github.io"}
+OPENAI_API_SURFACES = {"responses_api", "agents_sdk", "realtime_api", "audio_transcription", "apps_sdk_mcp"}
+OPENAI_DATA_CLASSES = {
+    "public_repo_metadata",
+    "local_inventory",
+    "public_domain_metadata",
+    "private_rehearsal_audio",
+    "account_credentials",
+    "licensed_assets",
+}
+OPENAI_TOOL_CONTRACTS = {
+    "read_inventory",
+    "validate_source_rights",
+    "render_worker_brief",
+    "propose_session_change",
+    "automate_vendor_install",
+    "automate_daw_session",
+    "render_release_checklist",
+}
+OPENAI_APPROVAL_GATES = {
+    "source_download",
+    "private_audio_upload",
+    "vendor_account_action",
+    "purchase_or_license_change",
+    "live_set_mutation",
+    "export_or_release",
+}
+EXPECTED_WORKER_BRIEF_SOURCES = {
+    "automation/openai-production-orchestration.json",
+    "automation/worker-chain.json",
+    "automation/live12-session-template.json",
+    "compositions/down-tempo-punk-bluegrass-set.json",
+    "catalogs/public-domain-bluegrass-sources.json",
+    "catalogs/library-installation-plan.json",
+    "inventory/live12-local-inventory.json",
+}
+AUDIO_PATH_PATTERN = re.compile(r"(?:^|[/\\\s])[\w .~/-]+\.(?:aif|aiff|flac|m4a|mp3|ogg|wav)\b", re.IGNORECASE)
+SECRET_VALUE_PATTERN = re.compile(r"(?:sk-[A-Za-z0-9_-]{20,}|Bearer\s+[A-Za-z0-9._-]{20,})")
 
 
 def https_host(value: str) -> str | None:
@@ -375,6 +416,8 @@ def validate_tracked_raw_source_files(root: Path, errors: list[str]) -> None:
 
 def validate_json_contracts(root: Path, errors: list[str]) -> None:
     for rel in [
+        "automation/openai-production-orchestration.json",
+        "automation/generated/openai-worker-briefs.json",
         "automation/live12-session-template.json",
         "automation/worker-chain.json",
         "compositions/down-tempo-punk-bluegrass-set.json",
@@ -382,6 +425,185 @@ def validate_json_contracts(root: Path, errors: list[str]) -> None:
         data = load_json(root / rel, errors)
         if data and data.get("schema_version") != 1:
             fail(errors, f"{rel}: expected schema_version 1")
+
+
+def validate_openai_orchestration(root: Path, errors: list[str]) -> None:
+    data = load_json(root / "automation/openai-production-orchestration.json", errors)
+    if not data:
+        return
+
+    docs = data.get("official_docs_consulted", [])
+    if not docs:
+        fail(errors, "OpenAI orchestration contract must list official docs consulted")
+    for doc_url in docs:
+        host = https_host(doc_url)
+        if host not in OFFICIAL_OPENAI_DOC_HOSTS:
+            fail(errors, f"OpenAI docs URL must use an official OpenAI docs host: {doc_url}")
+
+    api_surface_ids = set()
+    for surface in data.get("api_surfaces", []):
+        for field in ["id", "name", "use", "guardrails"]:
+            if not surface.get(field):
+                fail(errors, f"OpenAI api surface missing {field}: {surface}")
+        surface_id = surface.get("id")
+        if surface_id in api_surface_ids:
+            fail(errors, f"Duplicate OpenAI api surface id: {surface_id}")
+        api_surface_ids.add(surface_id)
+        if surface_id not in OPENAI_API_SURFACES:
+            fail(errors, f"Unknown OpenAI api surface id: {surface_id}")
+        if not isinstance(surface.get("guardrails"), list):
+            fail(errors, f"OpenAI api surface guardrails must be a list: {surface_id}")
+
+    data_class_ids = set()
+    for data_class in data.get("data_classes", []):
+        for field in ["id", "examples", "allowed_in_repo", "allowed_for_openai", "notes"]:
+            if field not in data_class or data_class[field] in ("", None):
+                fail(errors, f"OpenAI data class missing {field}: {data_class}")
+        data_class_id = data_class.get("id")
+        if data_class_id in data_class_ids:
+            fail(errors, f"Duplicate OpenAI data class id: {data_class_id}")
+        data_class_ids.add(data_class_id)
+        if data_class_id not in OPENAI_DATA_CLASSES:
+            fail(errors, f"Unknown OpenAI data class id: {data_class_id}")
+        if data_class_id in {"account_credentials", "licensed_assets"}:
+            if data_class.get("allowed_in_repo") is not False or data_class.get("allowed_for_openai") is not False:
+                fail(errors, f"{data_class_id} must be blocked from repo and OpenAI use")
+        if data_class_id == "private_rehearsal_audio" and data_class.get("allowed_in_repo") is not False:
+            fail(errors, "private_rehearsal_audio must be blocked from repo storage")
+
+    tool_ids = set()
+    for tool in data.get("tool_contracts", []):
+        for field in ["id", "input_scope", "output", "approval_required", "must_not"]:
+            if field not in tool or tool[field] in ("", None):
+                fail(errors, f"OpenAI tool contract missing {field}: {tool}")
+        tool_id = tool.get("id")
+        if tool_id in tool_ids:
+            fail(errors, f"Duplicate OpenAI tool contract id: {tool_id}")
+        tool_ids.add(tool_id)
+        if tool_id not in OPENAI_TOOL_CONTRACTS:
+            fail(errors, f"Unknown OpenAI tool contract id: {tool_id}")
+        if not isinstance(tool.get("approval_required"), bool):
+            fail(errors, f"OpenAI tool contract approval_required must be boolean: {tool_id}")
+        if not isinstance(tool.get("input_scope"), list) or not isinstance(tool.get("must_not"), list):
+            fail(errors, f"OpenAI tool contract input_scope and must_not must be lists: {tool_id}")
+        for scope in tool.get("input_scope", []):
+            if Path(scope).is_absolute() or ".." in Path(scope).parts:
+                fail(errors, f"OpenAI tool contract input_scope must be repo-relative: {tool_id}: {scope}")
+            elif not (root / scope).exists():
+                fail(errors, f"OpenAI tool contract input_scope does not exist: {tool_id}: {scope}")
+    for required_tool in ["automate_vendor_install", "automate_daw_session", "propose_session_change"]:
+        matching = [tool for tool in data.get("tool_contracts", []) if tool.get("id") == required_tool]
+        if not matching or matching[0].get("approval_required") is not True:
+            fail(errors, f"{required_tool} must require approval")
+
+    gate_ids = set()
+    for gate in data.get("approval_gates", []):
+        for field in ["id", "trigger", "required_evidence", "approver"]:
+            if not gate.get(field):
+                fail(errors, f"OpenAI approval gate missing {field}: {gate}")
+        gate_id = gate.get("id")
+        if gate_id in gate_ids:
+            fail(errors, f"Duplicate OpenAI approval gate id: {gate_id}")
+        gate_ids.add(gate_id)
+        if gate_id not in OPENAI_APPROVAL_GATES:
+            fail(errors, f"Unknown OpenAI approval gate id: {gate_id}")
+        if not isinstance(gate.get("required_evidence"), list):
+            fail(errors, f"OpenAI approval gate required_evidence must be a list: {gate_id}")
+
+    bridge = data.get("max_for_live_bridge") or {}
+    for field in ["strategy", "allowed_outputs", "blocked_outputs", "rollback_path"]:
+        if not bridge.get(field):
+            fail(errors, f"max_for_live_bridge missing {field}")
+
+
+def iter_string_values(value: object) -> list[str]:
+    if isinstance(value, str):
+        return [value]
+    if isinstance(value, list):
+        values: list[str] = []
+        for item in value:
+            values.extend(iter_string_values(item))
+        return values
+    if isinstance(value, dict):
+        values = []
+        for item in value.values():
+            values.extend(iter_string_values(item))
+        return values
+    return []
+
+
+def validate_generated_worker_briefs(root: Path, errors: list[str]) -> None:
+    data = load_json(root / "automation/generated/openai-worker-briefs.json", errors)
+    orchestration = load_json(root / "automation/openai-production-orchestration.json", errors)
+    worker_chain = load_json(root / "automation/worker-chain.json", errors)
+    if not data or not worker_chain:
+        return
+
+    source_files = set(data.get("source_files", []))
+    if source_files != EXPECTED_WORKER_BRIEF_SOURCES:
+        fail(errors, "Generated OpenAI worker briefs source_files must match expected source manifests")
+    for source_file in source_files:
+        if Path(source_file).is_absolute() or ".." in Path(source_file).parts or not (root / source_file).exists():
+            fail(errors, f"Generated OpenAI worker brief source file is invalid: {source_file}")
+    if data.get("generator") != "scripts/render_openai_worker_briefs.py":
+        fail(errors, "Generated OpenAI worker briefs must name scripts/render_openai_worker_briefs.py as generator")
+
+    role_ids = [role.get("id") for role in worker_chain.get("roles", [])]
+    brief_ids = [brief.get("role_id") for brief in data.get("briefs", [])]
+    if brief_ids != role_ids:
+        fail(errors, "Generated OpenAI worker brief role order must match automation/worker-chain.json")
+
+    handoff_order = worker_chain.get("handoff_order", [])
+    tool_ids = {tool.get("id") for tool in orchestration.get("tool_contracts", [])}
+    gate_ids = {gate.get("id") for gate in orchestration.get("approval_gates", [])}
+    surface_ids = {surface.get("id") for surface in orchestration.get("api_surfaces", [])}
+
+    for index, brief in enumerate(data.get("briefs", [])):
+        role_id = brief.get("role_id")
+        for field in [
+            "role_id",
+            "role_name",
+            "mission",
+            "owns",
+            "allowed_inputs",
+            "local_only_inputs",
+            "expected_outputs",
+            "must_not",
+            "suggested_openai_surface",
+            "tool_contracts",
+            "repo_context",
+            "approval_required",
+            "track_context",
+            "live_session_context",
+        ]:
+            if field not in brief or brief[field] in ("", None):
+                fail(errors, f"Generated OpenAI worker brief missing {field}: {role_id}")
+        expected_handoff = handoff_order[index + 1] if index + 1 < len(handoff_order) else None
+        if brief.get("handoff_to") != expected_handoff:
+            fail(errors, f"Generated OpenAI worker brief has wrong handoff: {role_id}")
+        for rel in brief.get("allowed_inputs", []):
+            if Path(rel).is_absolute() or ".." in Path(rel).parts or not (root / rel).exists():
+                fail(errors, f"Generated OpenAI worker brief allowed_input must be repo-relative metadata: {role_id}: {rel}")
+        surface_id = (brief.get("suggested_openai_surface") or {}).get("id")
+        if surface_id not in surface_ids:
+            fail(errors, f"Generated OpenAI worker brief references unknown surface: {role_id}: {surface_id}")
+        for tool in brief.get("tool_contracts", []):
+            if tool.get("id") not in tool_ids:
+                fail(errors, f"Generated OpenAI worker brief references unknown tool: {role_id}: {tool.get('id')}")
+        for gate in brief.get("approval_required", []):
+            if gate.get("id") not in gate_ids:
+                fail(errors, f"Generated OpenAI worker brief references unknown approval gate: {role_id}: {gate.get('id')}")
+        for rel in brief.get("repo_context", []):
+            if Path(rel).is_absolute() or ".." in Path(rel).parts or not (root / rel).exists():
+                fail(errors, f"Generated OpenAI worker brief repo_context is invalid: {role_id}: {rel}")
+
+    for string_value in iter_string_values(data):
+        if "/Users/" in string_value:
+            fail(errors, "Generated OpenAI worker briefs must not contain absolute user paths")
+        if "sources/public-domain/raw/" in string_value or AUDIO_PATH_PATTERN.search(string_value):
+            fail(errors, f"Generated OpenAI worker briefs must not contain raw audio paths: {string_value}")
+        if SECRET_VALUE_PATTERN.search(string_value):
+            fail(errors, "Generated OpenAI worker briefs must not contain API tokens or bearer credentials")
 
 
 def main() -> int:
@@ -394,6 +616,8 @@ def main() -> int:
     validate_sources(root, errors)
     validate_download_ledger(root, errors)
     validate_json_contracts(root, errors)
+    validate_openai_orchestration(root, errors)
+    validate_generated_worker_briefs(root, errors)
     validate_binary_hygiene(root, errors)
     validate_tracked_raw_source_files(root, errors)
 
