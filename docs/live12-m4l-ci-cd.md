@@ -66,6 +66,7 @@ python3 scripts/prepare_live12_daw_mutation_queue.py
 ```
 
 This writes `output/daw-mutation-queue/queue-manifest.json` plus per-track mutation requests, receipt templates, Ableton import bundles, launch plans, and operator evidence templates. The queue manifest paths are relative to its `artifact_base`, normally `output/`.
+The queue also references `automation/generated/max-for-live-device-contracts.json` and lists the committed `.maxpat` source patches required for each queued track.
 
 6. For targeted single-track work, write local mutation requests and receipt templates under `output/daw-mutations/`:
 

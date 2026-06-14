@@ -16,6 +16,7 @@ import stage_live12_daw_import_bundle as bundle_stage
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PACKAGE = ROOT / "automation" / "generated" / "live12-daw-mutation-package.json"
+DEFAULT_MAX_CONTRACTS = ROOT / "automation" / "generated" / "max-for-live-device-contracts.json"
 DEFAULT_MUTATION_OUTPUT_DIR = ROOT / "output" / "daw-mutations"
 DEFAULT_BUNDLE_OUTPUT_DIR = ROOT / "output" / "daw-import-bundles"
 DEFAULT_QUEUE_OUTPUT_DIR = ROOT / "output" / "daw-mutation-queue"
@@ -43,6 +44,52 @@ def artifact_ref(path: Path, artifact_base: Path) -> str:
     return str(path.resolve().relative_to(artifact_base))
 
 
+def validate_max_contracts(max_contracts: dict[str, Any], max_contracts_path: Path) -> list[str]:
+    errors = []
+    if max_contracts.get("artifact_policy", {}).get("git_policy") != "source_only_no_amxd":
+        errors.append("Max for Live contracts must use source_only_no_amxd git policy")
+    if not max_contracts.get("devices"):
+        errors.append("Max for Live contracts must include at least one device")
+    for device in max_contracts.get("devices", []):
+        source_patch = device.get("source_patch")
+        if not isinstance(source_patch, str) or not source_patch.endswith(".maxpat"):
+            errors.append(f"Max for Live device missing .maxpat source patch: {device.get('id')}")
+            continue
+        source_patch_path = Path(source_patch)
+        if source_patch_path.is_absolute() or ".." in source_patch_path.parts:
+            errors.append(f"Invalid Max for Live source patch path: {source_patch}")
+            continue
+        if not (ROOT / source_patch_path).exists():
+            errors.append(f"Missing Max for Live source patch: {source_patch}")
+    if not max_contracts_path.exists():
+        errors.append(f"Missing Max for Live contract bundle: {max_contracts_path}")
+    return errors
+
+
+def max_devices_for_job(job: dict[str, Any], max_contracts: dict[str, Any]) -> list[dict[str, Any]]:
+    affected_tracks = set(job.get("affected_tracks", []))
+    track_slug = job["track_slug"]
+    devices = []
+    for device in max_contracts.get("devices", []):
+        target_tracks = device.get("target_tracks", [])
+        track_slugs = device.get("track_slugs", [])
+        if track_slug not in track_slugs and not affected_tracks.intersection(target_tracks):
+            continue
+        devices.append(
+            {
+                "id": device["id"],
+                "display_name": device["display_name"],
+                "device_class": device["device_class"],
+                "approval_gate": device["approval_gate"],
+                "target_tracks": target_tracks,
+                "macro_controls": device["macro_controls"],
+                "source_patch": device["source_patch"],
+                "source_patch_sha256": device["source_patch_sha256"],
+            }
+        )
+    return devices
+
+
 def build_track_queue_entry(
     request: dict[str, Any],
     request_path: Path,
@@ -51,6 +98,7 @@ def build_track_queue_entry(
     staged_midi: Path,
     bundle_manifest: dict[str, Any],
     launch_plan: dict[str, Any],
+    max_devices: list[dict[str, Any]],
     artifact_base: Path,
 ) -> dict[str, Any]:
     bundle_manifest_path = bundle_root / "bundle-manifest.json"
@@ -89,12 +137,15 @@ def build_track_queue_entry(
             "path": artifact_ref(staged_midi, artifact_base),
             "sha256": bundle_manifest["midi_staging"]["sha256"],
         },
+        "max_for_live_devices": max_devices,
     }
 
 
 def build_queue_manifest(
     package: dict[str, Any],
     package_path: Path,
+    max_contracts: dict[str, Any],
+    max_contracts_path: Path,
     queue_output_dir: Path,
     artifact_base: Path,
     generated_at: str,
@@ -110,6 +161,12 @@ def build_queue_manifest(
         "mutation_package": {
             "path": preflight.package_reference(package_path),
             "sha256": preflight.sha256_file(package_path),
+        },
+        "max_for_live_contracts": {
+            "path": bundle_stage.repo_relative(max_contracts_path),
+            "sha256": preflight.sha256_file(max_contracts_path),
+            "device_count": max_contracts["device_count"],
+            "git_policy": max_contracts["artifact_policy"]["git_policy"],
         },
         "track_count": len(track_entries),
         "total_planned_action_count": sum(track["planned_action_count"] for track in track_entries),
@@ -133,6 +190,7 @@ def build_queue_manifest(
 def prepare_track(
     package: dict[str, Any],
     package_path: Path,
+    max_contracts: dict[str, Any],
     job: dict[str, Any],
     mutation_output_dir: Path,
     bundle_output_dir: Path,
@@ -173,6 +231,7 @@ def prepare_track(
         staged_midi,
         bundle_manifest,
         launch_plan,
+        max_devices_for_job(job, max_contracts),
         artifact_base,
     )
 
@@ -180,6 +239,7 @@ def prepare_track(
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--package", type=Path, default=DEFAULT_PACKAGE, help="Generated DAW mutation package JSON.")
+    parser.add_argument("--max-contracts", type=Path, default=DEFAULT_MAX_CONTRACTS, help="Generated source-only Max for Live device contracts JSON.")
     parser.add_argument("--mutation-output-dir", type=Path, default=DEFAULT_MUTATION_OUTPUT_DIR, help="Local-only mutation request output directory.")
     parser.add_argument("--bundle-output-dir", type=Path, default=DEFAULT_BUNDLE_OUTPUT_DIR, help="Local-only import bundle output directory.")
     parser.add_argument("--queue-output-dir", type=Path, default=DEFAULT_QUEUE_OUTPUT_DIR, help="Local-only queue manifest output directory.")
@@ -191,12 +251,18 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     package_path = output_path(args.package)
+    max_contracts_path = output_path(args.max_contracts)
     if not package_path.exists():
         print(f"Missing DAW mutation package: {args.package}", file=sys.stderr)
         return 1
+    if not max_contracts_path.exists():
+        print(f"Missing Max for Live contract bundle: {args.max_contracts}", file=sys.stderr)
+        return 1
 
     package = preflight.read_json(package_path)
+    max_contracts = preflight.read_json(max_contracts_path)
     source_errors = preflight.validate_package_sources(package)
+    source_errors.extend(validate_max_contracts(max_contracts, max_contracts_path))
     if source_errors:
         for error in source_errors:
             print(error, file=sys.stderr)
@@ -217,6 +283,7 @@ def main() -> int:
             prepare_track(
                 package,
                 package_path,
+                max_contracts,
                 job,
                 mutation_output_dir,
                 bundle_output_dir,
@@ -233,6 +300,8 @@ def main() -> int:
     queue_manifest = build_queue_manifest(
         package,
         package_path,
+        max_contracts,
+        max_contracts_path,
         queue_output_dir,
         artifact_base,
         generated_at,

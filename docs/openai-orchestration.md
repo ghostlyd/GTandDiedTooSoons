@@ -44,7 +44,7 @@ python3 scripts/record_live12_daw_mutation_receipt.py --request output/daw-mutat
 python3 scripts/test_live12_daw_mutation_preflight.py
 ```
 
-They translate the source-only Max for Live device contracts and approval-gated DAW action plan into a full-set local queue, per-track preflight jobs, ignored Ableton import bundles, and receipt templates under `output/`. This is the bridge for Ableton/Max work: render `.maxpat` source blueprints, prepare the queue, stage import bundles, approve each Live mutation, launch Live locally, then record operator evidence without committing DAW binaries or audio artifacts.
+They translate the source-only Max for Live device contracts and approval-gated DAW action plan into a full-set local queue, per-track Max patch references, per-track preflight jobs, ignored Ableton import bundles, and receipt templates under `output/`. This is the bridge for Ableton/Max work: render `.maxpat` source blueprints, prepare the queue, stage import bundles, approve each Live mutation, launch Live locally, then record operator evidence without committing DAW binaries or audio artifacts.
 
 ## API Fit
 
