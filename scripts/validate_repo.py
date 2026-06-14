@@ -4,9 +4,12 @@
 from __future__ import annotations
 
 import json
+import posixpath
+import re
+import subprocess
 import sys
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 
 
 REQUIRED_FILES = [
@@ -27,6 +30,7 @@ REQUIRED_FILES = [
     "compositions/down-tempo-punk-bluegrass-set.json",
     "scripts/inventory_live_suite.py",
     "scripts/fetch_public_domain_audio.py",
+    "sources/public-domain/download-ledger.json",
 ]
 
 SECRET_NAMES = {".env", "id_rsa", "id_ed25519", "license.key"}
@@ -48,6 +52,8 @@ BLOCKED_EXTENSIONS = {
 RIGHTS_STATUSES = {"public_domain", "cc0", "cc_by", "no_known_restrictions", "rights_assessment_required", "research_only"}
 DOWNLOADABLE_RIGHTS = {"public_domain", "cc0", "cc_by", "no_known_restrictions"}
 SKIP_BINARY_SCAN_PARTS = {".git", "output", "__pycache__"}
+SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
+LEDGER_CATALOG_MIRRORED_FIELDS = ["name", "source_url", "rights_status", "credit_line", "browser_evidence", "rights_evidence"]
 
 
 def https_host(value: str) -> str | None:
@@ -60,9 +66,43 @@ def https_host(value: str) -> str | None:
 def host_matches(host: str, allowed_hosts: list[str]) -> bool:
     for allowed in allowed_hosts:
         allowed_lower = allowed.lower()
-        if host == allowed_lower or host.endswith("." + allowed_lower):
+        if host == allowed_lower:
             return True
     return False
+
+
+def allowed_path(path: str, prefixes: list[str]) -> bool:
+    canonical_path = canonical_url_path(path)
+    for prefix in prefixes:
+        canonical_prefix = canonical_url_path(prefix)
+        if canonical_path == canonical_prefix:
+            return True
+        prefix_with_boundary = canonical_prefix if canonical_prefix.endswith("/") else canonical_prefix + "/"
+        if canonical_path.startswith(prefix_with_boundary):
+            return True
+    return False
+
+
+def canonical_url_path(path: str) -> str:
+    decoded = unquote(path)
+    if any(segment in (".", "..") for segment in decoded.split("/")):
+        raise ValueError(f"URL path contains dot segments: {path}")
+
+    normalized = posixpath.normpath(decoded)
+    if not normalized.startswith("/"):
+        normalized = "/" + normalized
+    if decoded.endswith("/") and not normalized.endswith("/"):
+        normalized += "/"
+    if normalized != decoded:
+        raise ValueError(f"URL path is not canonical: {path}")
+    return normalized
+
+
+def is_allowed_path(path: str, prefixes: list[str]) -> bool:
+    try:
+        return allowed_path(path, prefixes)
+    except ValueError:
+        return False
 
 
 def fail(errors: list[str], message: str) -> None:
@@ -125,12 +165,117 @@ def validate_sources(root: Path, errors: list[str]) -> None:
             allowed_hosts = entry.get("allowed_download_hosts") or ([source_host] if source_host else [])
             if not host_matches(download_host, allowed_hosts):
                 fail(errors, f"Approved source download host is not allowed for {entry.get('id')}: {download_host}")
+            allowed_prefixes = entry.get("allowed_download_path_prefixes") or []
+            if not allowed_prefixes:
+                fail(errors, f"Approved source missing allowed_download_path_prefixes: {entry.get('id')}")
+            elif not is_allowed_path(urlparse(entry["download_url"]).path, allowed_prefixes):
+                fail(errors, f"Approved source download path is not allowed for {entry.get('id')}")
             evidence = entry.get("browser_evidence") or {}
             for evidence_field in ["captured_url", "artifact_path", "captured_at"]:
                 if not evidence.get(evidence_field):
                     fail(errors, f"Approved source missing browser_evidence.{evidence_field}: {entry.get('id')}")
             if evidence.get("captured_url") and not https_host(evidence["captured_url"]):
                 fail(errors, f"browser_evidence.captured_url must be https for {entry.get('id')}")
+            rights_evidence = entry.get("rights_evidence") or {}
+            for evidence_field in ["evidence_url", "captured_at", "rights_summary", "reuse_scope", "credit_recommendation"]:
+                if not rights_evidence.get(evidence_field):
+                    fail(errors, f"Approved source missing rights_evidence.{evidence_field}: {entry.get('id')}")
+            if rights_evidence.get("evidence_url") and not https_host(rights_evidence["evidence_url"]):
+                fail(errors, f"rights_evidence.evidence_url must be https for {entry.get('id')}")
+
+
+def validate_download_ledger(root: Path, errors: list[str]) -> None:
+    ledger = load_json(root / "sources/public-domain/download-ledger.json", errors)
+    catalog = load_json(root / "catalogs/public-domain-bluegrass-sources.json", errors)
+    sources_by_id = {entry.get("id"): entry for entry in catalog.get("sources", []) if entry.get("id")}
+    approved_sources = {
+        entry.get("id"): entry
+        for entry in catalog.get("sources", [])
+        if entry.get("id") and entry.get("approved_for_download")
+    }
+    ledger_keys = {(record.get("source_id"), record.get("download_url")) for record in ledger.get("downloads", [])}
+
+    for source_id, source in approved_sources.items():
+        if (source_id, source.get("download_url")) not in ledger_keys:
+            fail(errors, f"Approved source missing download ledger record: {source_id}")
+
+    if ledger and ledger.get("schema_version") != 1:
+        fail(errors, "sources/public-domain/download-ledger.json: expected schema_version 1")
+
+    for record in ledger.get("downloads", []):
+        for field in [
+            "source_id",
+            "name",
+            "fetched_at",
+            "local_file",
+            "sha256",
+            "byte_size",
+            "source_url",
+            "download_url",
+            "rights_status",
+            "credit_line",
+            "browser_evidence",
+            "rights_evidence",
+            "transformation",
+        ]:
+            if field not in record or record[field] in ("", None):
+                fail(errors, f"download ledger record missing {field}: {record}")
+
+        source = sources_by_id.get(record.get("source_id"))
+        if not source:
+            fail(errors, f"download ledger source_id is not in catalog: {record.get('source_id')}")
+            continue
+        if not source.get("approved_for_download"):
+            fail(errors, f"download ledger source is not approved in catalog: {record.get('source_id')}")
+        if record.get("download_url") != source.get("download_url"):
+            fail(errors, f"download ledger URL does not match catalog for {record.get('source_id')}")
+        for field in LEDGER_CATALOG_MIRRORED_FIELDS:
+            if record.get(field) != source.get(field):
+                fail(errors, f"download ledger {field} does not match catalog for {record.get('source_id')}")
+        if record.get("rights_status") not in DOWNLOADABLE_RIGHTS:
+            fail(errors, f"download ledger has non-downloadable rights status: {record.get('source_id')}")
+        if not https_host(record.get("source_url", "")):
+            fail(errors, f"download ledger source_url must be https: {record.get('source_id')}")
+        if not https_host(record.get("download_url", "")):
+            fail(errors, f"download ledger download_url must be https: {record.get('source_id')}")
+        final_url = record.get("final_url")
+        if final_url and not https_host(final_url):
+            fail(errors, f"download ledger final_url must be https when present: {record.get('source_id')}")
+        if not isinstance(record.get("byte_size"), int) or record.get("byte_size", 0) <= 0:
+            fail(errors, f"download ledger byte_size must be positive integer: {record.get('source_id')}")
+        if not SHA256_PATTERN.match(str(record.get("sha256", ""))):
+            fail(errors, f"download ledger sha256 must be lowercase hex SHA-256: {record.get('source_id')}")
+        allowed_hosts = source.get("allowed_download_hosts") or []
+        download_host = https_host(record.get("download_url", ""))
+        if download_host and not host_matches(download_host, allowed_hosts):
+            fail(errors, f"download ledger download host is not allowed: {record.get('source_id')}")
+        final_host = https_host(record.get("final_url", "")) if record.get("final_url") else None
+        if final_host and not host_matches(final_host, allowed_hosts):
+            fail(errors, f"download ledger final host is not allowed: {record.get('source_id')}")
+        allowed_prefixes = source.get("allowed_download_path_prefixes") or []
+        download_path = urlparse(record.get("download_url", "")).path
+        if not allowed_prefixes or not is_allowed_path(download_path, allowed_prefixes):
+            fail(errors, f"download ledger download path is not allowed: {record.get('source_id')}")
+        final_path = urlparse(record.get("final_url", "")).path if record.get("final_url") else None
+        if final_path and not is_allowed_path(final_path, allowed_prefixes):
+            fail(errors, f"download ledger final path is not allowed: {record.get('source_id')}")
+
+        local_file = Path(str(record.get("local_file", "")))
+        if local_file.is_absolute() or local_file.parts[:3] != ("sources", "public-domain", "raw"):
+            fail(errors, f"download ledger local_file must be under sources/public-domain/raw/: {record.get('source_id')}")
+
+        evidence = record.get("browser_evidence") or {}
+        for evidence_field in ["captured_url", "artifact_path", "captured_at"]:
+            if not evidence.get(evidence_field):
+                fail(errors, f"download ledger missing browser_evidence.{evidence_field}: {record.get('source_id')}")
+        if evidence.get("captured_url") and not https_host(evidence["captured_url"]):
+            fail(errors, f"download ledger browser_evidence.captured_url must be https: {record.get('source_id')}")
+        rights_evidence = record.get("rights_evidence") or {}
+        for evidence_field in ["evidence_url", "captured_at", "rights_summary", "reuse_scope", "credit_recommendation"]:
+            if not rights_evidence.get(evidence_field):
+                fail(errors, f"download ledger missing rights_evidence.{evidence_field}: {record.get('source_id')}")
+        if rights_evidence.get("evidence_url") and not https_host(rights_evidence["evidence_url"]):
+            fail(errors, f"download ledger rights_evidence.evidence_url must be https: {record.get('source_id')}")
 
 
 def validate_binary_hygiene(root: Path, errors: list[str]) -> None:
@@ -146,6 +291,24 @@ def validate_binary_hygiene(root: Path, errors: list[str]) -> None:
             fail(errors, f"Potential secret committed: {rel}")
         if path.suffix.lower() in BLOCKED_EXTENSIONS:
             fail(errors, f"Blocked binary/commercial asset committed: {rel}")
+
+
+def validate_tracked_raw_source_files(root: Path, errors: list[str]) -> None:
+    result = subprocess.run(
+        ["git", "ls-files", "sources/public-domain/raw"],
+        cwd=root,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(errors, f"Unable to inspect tracked raw source files: {result.stderr.strip()}")
+        return
+
+    allowed = {"sources/public-domain/raw/.gitkeep"}
+    for rel in result.stdout.splitlines():
+        if rel not in allowed:
+            fail(errors, f"Raw source file must not be tracked: {rel}")
 
 
 def validate_json_contracts(root: Path, errors: list[str]) -> None:
@@ -166,8 +329,10 @@ def main() -> int:
     validate_required_files(root, errors)
     validate_recommended_packs(root, errors)
     validate_sources(root, errors)
+    validate_download_ledger(root, errors)
     validate_json_contracts(root, errors)
     validate_binary_hygiene(root, errors)
+    validate_tracked_raw_source_files(root, errors)
 
     if errors:
         print("Repository validation failed:", file=sys.stderr)

@@ -33,6 +33,39 @@
       "notes": "Use item-level metadata before enabling downloads."
     },
     {
+      "id": "loc-citizen-dj-devils-dream-reel-123798-001",
+      "name": "Devil's dream reel - excerpt 001",
+      "type": "sample",
+      "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+      "item_url": "https://www.loc.gov/item/jukebox-123798/",
+      "rights_status": "public_domain",
+      "approved_for_download": true,
+      "download_url": "https://s3.amazonaws.com/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/Devils-dream-reel_jukebox-123798_001_00-00-00.wav",
+      "allowed_download_hosts": [
+        "s3.amazonaws.com"
+      ],
+      "allowed_download_path_prefixes": [
+        "/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/"
+      ],
+      "browser_evidence": {
+        "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "artifact_path": "output/playwright/loc-citizen-dj-folk-20260614.png",
+        "captured_at": "2026-06-14T12:42:00Z"
+      },
+      "rights_evidence": {
+        "evidence_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "captured_at": "2026-06-14T12:42:00Z",
+        "collection": "The National Jukebox: Folk Music",
+        "rights_summary": "Citizen DJ states the collection works have been identified as public domain and are free to use and reuse without restriction.",
+        "reuse_scope": "Copy, modify, distribute, and perform, including commercial use, without asking permission.",
+        "credit_recommendation": "Attribution is recommended but not required; use the Citizen DJ / Library of Congress / National Jukebox credit line.",
+        "cultural_respect_note": "LOC asks artists to approach historical recordings with respect and notes privacy or publicity rights may still affect some uses."
+      },
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "project_use": "Old-time fiddle reel source for banjo/fiddle chop, granular sampler, and call-and-response arrangement experiments.",
+      "notes": "Citizen DJ collection page states these works are public domain and may be reused commercially; credit is recommended even when not required."
+    },
+    {
       "id": "loc-citizen-dj-public-domain-2022",
       "name": "Library of Congress Citizen DJ Public Domain Audio Release 2022",
       "type": "collection_note",
@@ -131,7 +164,7 @@
       },
       "credit_line": "UCSB Library Cylinder Audio Archive",
       "project_use": "Early cylinder recordings, banjo/fiddle roots, and old-time repertoire.",
-      "notes": "Prefer pre-1926 items and record item-level rights/publication metadata before enabling downloads."
+      "notes": "Prefer pre-1926 items and record item-level rights/publication metadata before enabling downloads. Site-level MP3 metadata includes Creative Commons BY-NC language, so do not approve for distributable production assets without compatible item-level terms."
     },
     {
       "id": "ucsb-dahr",

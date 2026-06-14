@@ -27,21 +27,20 @@ npm exec --yes --package=playwright -- playwright screenshot \
   --wait-for-timeout 1500 \
   https://cylinders.library.ucsb.edu/hillbilly.php \
   output/playwright/ucsb-hillbilly.png
-```
 
-The Copyright Office and UCSB screenshots rendered real rights/source pages and are intentionally ignored under `output/playwright/`.
-
-## Known Failure
-
-This command failed from Chromium with `net::ERR_NAME_NOT_RESOLVED`:
-
-```bash
 npm exec --yes --package=playwright -- playwright screenshot \
+  --browser chromium \
+  --viewport-size 1280,900 \
+  --wait-for-timeout 3000 \
   https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/ \
-  output/playwright/loc-citizen-dj-folk.png
+  output/playwright/loc-citizen-dj-folk-20260614.png
 ```
 
-The source remains in the catalog because it was reachable through web search metadata and should be manually checked in a normal browser/network path before any download entry is approved.
+The Copyright Office, UCSB, and LOC Citizen DJ screenshots rendered real rights/source pages and are intentionally ignored under `output/playwright/`.
+
+## Source Notes
+
+The LOC Citizen DJ Folk Music collection page is approved as browser evidence for item-level downloads in `catalogs/public-domain-bluegrass-sources.json`. Because `output/playwright/` is ignored, the catalog also stores concise rights evidence from the page: public-domain status, commercial reuse scope, credit recommendation, and cultural-respect notes. Its WAV/MP3 pack links are still fetched through `scripts/fetch_public_domain_audio.py` so exact host checks, path-prefix allow-lists, size limits, SHA-256 ledger entries, and local provenance sidecars are enforced consistently.
 
 The LOC Henry Reed collection page rendered a Cloudflare security-verification interstitial in headless Chromium on 2026-06-14. Do not treat that screenshot as source metadata evidence.
 

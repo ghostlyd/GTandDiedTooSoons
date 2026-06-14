@@ -1,0 +1,35 @@
+{
+  "downloads": [
+    {
+      "browser_evidence": {
+        "artifact_path": "output/playwright/loc-citizen-dj-folk-20260614.png",
+        "captured_at": "2026-06-14T12:42:00Z",
+        "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/"
+      },
+      "byte_size": 5778092,
+      "content_type": "audio/x-wav",
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "download_url": "https://s3.amazonaws.com/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/Devils-dream-reel_jukebox-123798_001_00-00-00.wav",
+      "fetched_at": "2026-06-14T12:57:49.598266Z",
+      "final_url": "https://s3.amazonaws.com/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/Devils-dream-reel_jukebox-123798_001_00-00-00.wav",
+      "local_file": "sources/public-domain/raw/loc-citizen-dj-devils-dream-reel-123798-001/Devils-dream-reel_jukebox-123798_001_00-00-00.wav",
+      "name": "Devil's dream reel - excerpt 001",
+      "rights_evidence": {
+        "captured_at": "2026-06-14T12:42:00Z",
+        "collection": "The National Jukebox: Folk Music",
+        "credit_recommendation": "Attribution is recommended but not required; use the Citizen DJ / Library of Congress / National Jukebox credit line.",
+        "cultural_respect_note": "LOC asks artists to approach historical recordings with respect and notes privacy or publicity rights may still affect some uses.",
+        "evidence_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "reuse_scope": "Copy, modify, distribute, and perform, including commercial use, without asking permission.",
+        "rights_summary": "Citizen DJ states the collection works have been identified as public domain and are free to use and reuse without restriction."
+      },
+      "rights_status": "public_domain",
+      "sha256": "f0b80ccd67d28210b62e9b4bcae1fb6b7066855da34c3c1b1a80d7a47f1f7a14",
+      "source_id": "loc-citizen-dj-devils-dream-reel-123798-001",
+      "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+      "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+    }
+  ],
+  "generated_at": "2026-06-14T12:57:49.598266Z",
+  "schema_version": 1
+}
