@@ -2,6 +2,36 @@
   "downloads": [
     {
       "browser_evidence": {
+        "artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-expanded.png",
+        "captured_at": "2026-06-14T13:51:24Z",
+        "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "trace_artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-trace.zip"
+      },
+      "byte_size": 1208108,
+      "content_type": "audio/x-wav",
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "download_url": "https://s3.amazonaws.com/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/Carnival-of-Venice_jukebox-260123_001_00-00-03.wav",
+      "fetched_at": "2026-06-14T13:52:07.931318Z",
+      "final_url": "https://s3.amazonaws.com/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/Carnival-of-Venice_jukebox-260123_001_00-00-03.wav",
+      "local_file": "sources/public-domain/raw/loc-citizen-dj-carnival-of-venice-260123-001/Carnival-of-Venice_jukebox-260123_001_00-00-03.wav",
+      "name": "Carnival of Venice - excerpt 001",
+      "rights_evidence": {
+        "captured_at": "2026-06-14T13:51:24Z",
+        "collection": "The National Jukebox: Folk Music",
+        "credit_recommendation": "Attribution is recommended but not required; use the Citizen DJ / Library of Congress / National Jukebox credit line.",
+        "cultural_respect_note": "Treat as a historical instrumental source and preserve the collection credit when transformed.",
+        "evidence_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "reuse_scope": "Copy, modify, distribute, and perform, including commercial use, without asking permission.",
+        "rights_summary": "Citizen DJ states the collection works have been identified as public domain and are free to use and reuse without restriction."
+      },
+      "rights_status": "public_domain",
+      "sha256": "a62d633eb195f0ecacceedc1831f05fc87db9da07eec114e9d6af667b93b4adb",
+      "source_id": "loc-citizen-dj-carnival-of-venice-260123-001",
+      "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+      "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+    },
+    {
+      "browser_evidence": {
         "artifact_path": "output/playwright/loc-citizen-dj-folk-20260614.png",
         "captured_at": "2026-06-14T12:42:00Z",
         "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/"
@@ -28,8 +58,68 @@
       "source_id": "loc-citizen-dj-devils-dream-reel-123798-001",
       "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
       "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+    },
+    {
+      "browser_evidence": {
+        "artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-expanded.png",
+        "captured_at": "2026-06-14T13:51:24Z",
+        "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "trace_artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-trace.zip"
+      },
+      "byte_size": 1887980,
+      "content_type": "audio/x-wav",
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "download_url": "https://s3.amazonaws.com/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/Duke-of-Marlborough_jukebox-12147_001_00-00-00.wav",
+      "fetched_at": "2026-06-14T13:52:10.003815Z",
+      "final_url": "https://s3.amazonaws.com/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/Duke-of-Marlborough_jukebox-12147_001_00-00-00.wav",
+      "local_file": "sources/public-domain/raw/loc-citizen-dj-duke-of-marlborough-12147-001/Duke-of-Marlborough_jukebox-12147_001_00-00-00.wav",
+      "name": "Duke of Marlborough - excerpt 001",
+      "rights_evidence": {
+        "captured_at": "2026-06-14T13:51:24Z",
+        "collection": "The National Jukebox: Folk Music",
+        "credit_recommendation": "Attribution is recommended but not required; use the Citizen DJ / Library of Congress / National Jukebox credit line.",
+        "cultural_respect_note": "Treat as historical ballad source material; avoid implying contemporary endorsement by performers or communities.",
+        "evidence_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "reuse_scope": "Copy, modify, distribute, and perform, including commercial use, without asking permission.",
+        "rights_summary": "Citizen DJ states the collection works have been identified as public domain and are free to use and reuse without restriction."
+      },
+      "rights_status": "public_domain",
+      "sha256": "a896860d2f155d2f93203b15534ad833c1fd1c174d5192a045cc022687e5243f",
+      "source_id": "loc-citizen-dj-duke-of-marlborough-12147-001",
+      "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+      "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+    },
+    {
+      "browser_evidence": {
+        "artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-expanded.png",
+        "captured_at": "2026-06-14T13:51:24Z",
+        "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "trace_artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-trace.zip"
+      },
+      "byte_size": 5809196,
+      "content_type": "audio/x-wav",
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "download_url": "https://s3.amazonaws.com/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/Turkey-in-de-straw-medley_jukebox-247928_001_00-00-01.wav",
+      "fetched_at": "2026-06-14T13:52:07.030392Z",
+      "final_url": "https://s3.amazonaws.com/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/Turkey-in-de-straw-medley_jukebox-247928_001_00-00-01.wav",
+      "local_file": "sources/public-domain/raw/loc-citizen-dj-turkey-in-the-straw-medley-247928-001/Turkey-in-de-straw-medley_jukebox-247928_001_00-00-01.wav",
+      "name": "Turkey in the straw medley - excerpt 001",
+      "rights_evidence": {
+        "captured_at": "2026-06-14T13:51:24Z",
+        "collection": "The National Jukebox: Folk Music",
+        "credit_recommendation": "Attribution is recommended but not required; use the Citizen DJ / Library of Congress / National Jukebox credit line.",
+        "cultural_respect_note": "LOC warns that historical recordings may reflect language, attitudes, and perspectives of their time; review context before foregrounding this tune.",
+        "evidence_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "reuse_scope": "Copy, modify, distribute, and perform, including commercial use, without asking permission.",
+        "rights_summary": "Citizen DJ states the collection works have been identified as public domain and are free to use and reuse without restriction."
+      },
+      "rights_status": "public_domain",
+      "sha256": "3f5ed365b48faa2a21fb9d9ab7dbe467af01cdb8d709413ab324008472113baa",
+      "source_id": "loc-citizen-dj-turkey-in-the-straw-medley-247928-001",
+      "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+      "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
     }
   ],
-  "generated_at": "2026-06-14T12:57:49.598266Z",
+  "generated_at": "2026-06-14T13:52:10.003815Z",
   "schema_version": 1
 }

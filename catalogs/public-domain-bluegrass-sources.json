@@ -66,6 +66,108 @@
       "notes": "Citizen DJ collection page states these works are public domain and may be reused commercially; credit is recommended even when not required."
     },
     {
+      "id": "loc-citizen-dj-turkey-in-the-straw-medley-247928-001",
+      "name": "Turkey in the straw medley - excerpt 001",
+      "type": "sample",
+      "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+      "item_url": "https://www.loc.gov/item/jukebox-247928/",
+      "rights_status": "public_domain",
+      "approved_for_download": true,
+      "download_url": "https://s3.amazonaws.com/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/Turkey-in-de-straw-medley_jukebox-247928_001_00-00-01.wav",
+      "allowed_download_hosts": [
+        "s3.amazonaws.com"
+      ],
+      "allowed_download_path_prefixes": [
+        "/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/"
+      ],
+      "browser_evidence": {
+        "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-expanded.png",
+        "trace_artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-trace.zip",
+        "captured_at": "2026-06-14T13:51:24Z"
+      },
+      "rights_evidence": {
+        "evidence_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "captured_at": "2026-06-14T13:51:24Z",
+        "collection": "The National Jukebox: Folk Music",
+        "rights_summary": "Citizen DJ states the collection works have been identified as public domain and are free to use and reuse without restriction.",
+        "reuse_scope": "Copy, modify, distribute, and perform, including commercial use, without asking permission.",
+        "credit_recommendation": "Attribution is recommended but not required; use the Citizen DJ / Library of Congress / National Jukebox credit line.",
+        "cultural_respect_note": "LOC warns that historical recordings may reflect language, attitudes, and perspectives of their time; review context before foregrounding this tune."
+      },
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "project_use": "Early banjo/traditional-country rhythmic DNA for AeroBand banjo mapping, boom-chuck counter-rhythm, and chopped call-and-response studies.",
+      "notes": "LOC item metadata describes the 1905 source as a banjo solo with orchestra; use respectfully because some repertoire and title variants have minstrel-era associations."
+    },
+    {
+      "id": "loc-citizen-dj-carnival-of-venice-260123-001",
+      "name": "Carnival of Venice - excerpt 001",
+      "type": "sample",
+      "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+      "item_url": "https://www.loc.gov/item/jukebox-260123/",
+      "rights_status": "public_domain",
+      "approved_for_download": true,
+      "download_url": "https://s3.amazonaws.com/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/Carnival-of-Venice_jukebox-260123_001_00-00-03.wav",
+      "allowed_download_hosts": [
+        "s3.amazonaws.com"
+      ],
+      "allowed_download_path_prefixes": [
+        "/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/"
+      ],
+      "browser_evidence": {
+        "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-expanded.png",
+        "trace_artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-trace.zip",
+        "captured_at": "2026-06-14T13:51:24Z"
+      },
+      "rights_evidence": {
+        "evidence_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "captured_at": "2026-06-14T13:51:24Z",
+        "collection": "The National Jukebox: Folk Music",
+        "rights_summary": "Citizen DJ states the collection works have been identified as public domain and are free to use and reuse without restriction.",
+        "reuse_scope": "Copy, modify, distribute, and perform, including commercial use, without asking permission.",
+        "credit_recommendation": "Attribution is recommended but not required; use the Citizen DJ / Library of Congress / National Jukebox credit line.",
+        "cultural_respect_note": "Treat as a historical instrumental source and preserve the collection credit when transformed."
+      },
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "project_use": "Virtuosic melodic ornament source for banjo-roll variation, alien granular flourishes, and lead-controller pitch-bend studies.",
+      "notes": "Selected as old-time/folk-adjacent instrumental technique material from the Citizen DJ public-domain folk sample page."
+    },
+    {
+      "id": "loc-citizen-dj-duke-of-marlborough-12147-001",
+      "name": "Duke of Marlborough - excerpt 001",
+      "type": "sample",
+      "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+      "item_url": "https://www.loc.gov/item/jukebox-12147/",
+      "rights_status": "public_domain",
+      "approved_for_download": true,
+      "download_url": "https://s3.amazonaws.com/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/Duke-of-Marlborough_jukebox-12147_001_00-00-00.wav",
+      "allowed_download_hosts": [
+        "s3.amazonaws.com"
+      ],
+      "allowed_download_path_prefixes": [
+        "/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/"
+      ],
+      "browser_evidence": {
+        "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-expanded.png",
+        "trace_artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-trace.zip",
+        "captured_at": "2026-06-14T13:51:24Z"
+      },
+      "rights_evidence": {
+        "evidence_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "captured_at": "2026-06-14T13:51:24Z",
+        "collection": "The National Jukebox: Folk Music",
+        "rights_summary": "Citizen DJ states the collection works have been identified as public domain and are free to use and reuse without restriction.",
+        "reuse_scope": "Copy, modify, distribute, and perform, including commercial use, without asking permission.",
+        "credit_recommendation": "Attribution is recommended but not required; use the Citizen DJ / Library of Congress / National Jukebox credit line.",
+        "cultural_respect_note": "Treat as historical ballad source material; avoid implying contemporary endorsement by performers or communities."
+      },
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "project_use": "Ballad-contour and modal phrase source for A.P. Carter-style narrative hooks, fiddle drone reharmonization, and slow-house vocal-chop beds.",
+      "notes": "Selected as a public-domain folk sample with useful melodic contour for downtempo arrangement studies."
+    },
+    {
       "id": "loc-citizen-dj-public-domain-2022",
       "name": "Library of Congress Citizen DJ Public Domain Audio Release 2022",
       "type": "collection_note",

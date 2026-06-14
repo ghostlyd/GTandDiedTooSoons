@@ -31,6 +31,6 @@ Bluegrass as a named commercial genre mostly emerges after the earliest public-d
 
 Key starting points are versioned in `catalogs/public-domain-bluegrass-sources.json`, including Library of Congress Citizen DJ Folk Music, UCSB Cylinder Audio Archive, Internet Archive Great 78, the Henry Reed Collection, and Library of Congress bluegrass/folklife guides.
 
-The first approved source download is an excerpt from Library of Congress Citizen DJ's National Jukebox Folk Music collection. The catalog records concise rights evidence from the Citizen DJ collection page so review does not depend on ignored screenshots. UCSB Cylinder Archive material remains research-only for this project until item-level terms are compatible with production reuse, because the site-level MP3 metadata includes non-commercial Creative Commons language.
+The approved source downloads are excerpts from Library of Congress Citizen DJ's National Jukebox Folk Music collection. The catalog records concise rights evidence from the Citizen DJ collection page so review does not depend on ignored screenshots, and the download ledger records local SHA-256 and byte-size evidence for each fetched WAV. UCSB Cylinder Archive material remains research-only for this project until item-level terms are compatible with production reuse, because the site-level MP3 metadata includes non-commercial Creative Commons language.
 
 Reference for U.S. pre-1972 sound recording terms: https://www.copyright.gov/music-modernization/pre1972-soundrecordings/

@@ -58,7 +58,7 @@ BLOCKED_EXTENSIONS = {
     ".wav",
 }
 RIGHTS_STATUSES = {"public_domain", "cc0", "cc_by", "no_known_restrictions", "rights_assessment_required", "research_only"}
-DOWNLOADABLE_RIGHTS = {"public_domain", "cc0", "cc_by", "no_known_restrictions"}
+DOWNLOADABLE_RIGHTS = {"public_domain", "cc0", "cc_by"}
 SKIP_BINARY_SCAN_PARTS = {".git", "output", "__pycache__"}
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 LEDGER_CATALOG_MIRRORED_FIELDS = ["name", "source_url", "rights_status", "credit_line", "browser_evidence", "rights_evidence"]
