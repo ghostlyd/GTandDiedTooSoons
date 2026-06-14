@@ -26,6 +26,7 @@
         "Fiddle / Hybrid Strings",
         "Mandolin Chop",
         "Dobro / Metallic Slide",
+        "Acoustic Guitar Boom-Chuck",
         "Upright Bass / Sub",
         "Punk Kit",
         "Deep House Machines",
@@ -119,6 +120,7 @@
         "Fiddle / Hybrid Strings",
         "Mandolin Chop",
         "Dobro / Metallic Slide",
+        "Acoustic Guitar Boom-Chuck",
         "Upright Bass / Sub",
         "Punk Kit",
         "Deep House Machines",
@@ -168,6 +170,7 @@
           "input_scope": [
             "automation/live12-session-template.json",
             "compositions/down-tempo-punk-bluegrass-set.json",
+            "compositions/generated/live12-track-build-plans.json",
             "inventory/live12-local-inventory.json"
           ],
           "must_not": [
@@ -182,7 +185,8 @@
           "id": "automate_daw_session",
           "input_scope": [
             "automation/live12-session-template.json",
-            "automation/generated/openai-worker-briefs.json"
+            "automation/generated/openai-worker-briefs.json",
+            "compositions/generated/live12-track-build-plans.json"
           ],
           "must_not": [
             "export or publish without release QA",
@@ -224,6 +228,7 @@
         "Fiddle / Hybrid Strings",
         "Mandolin Chop",
         "Dobro / Metallic Slide",
+        "Acoustic Guitar Boom-Chuck",
         "Upright Bass / Sub",
         "Punk Kit",
         "Deep House Machines",
@@ -273,6 +278,7 @@
           "input_scope": [
             "automation/live12-session-template.json",
             "compositions/down-tempo-punk-bluegrass-set.json",
+            "compositions/generated/live12-track-build-plans.json",
             "inventory/live12-local-inventory.json"
           ],
           "must_not": [
@@ -287,7 +293,8 @@
           "id": "automate_daw_session",
           "input_scope": [
             "automation/live12-session-template.json",
-            "automation/generated/openai-worker-briefs.json"
+            "automation/generated/openai-worker-briefs.json",
+            "compositions/generated/live12-track-build-plans.json"
           ],
           "must_not": [
             "export or publish without release QA",
@@ -339,6 +346,7 @@
         "Fiddle / Hybrid Strings",
         "Mandolin Chop",
         "Dobro / Metallic Slide",
+        "Acoustic Guitar Boom-Chuck",
         "Upright Bass / Sub",
         "Punk Kit",
         "Deep House Machines",
@@ -390,6 +398,7 @@
           "input_scope": [
             "automation/live12-session-template.json",
             "compositions/down-tempo-punk-bluegrass-set.json",
+            "compositions/generated/live12-track-build-plans.json",
             "inventory/live12-local-inventory.json"
           ],
           "must_not": [
@@ -452,6 +461,7 @@
         "Fiddle / Hybrid Strings",
         "Mandolin Chop",
         "Dobro / Metallic Slide",
+        "Acoustic Guitar Boom-Chuck",
         "Upright Bass / Sub",
         "Punk Kit",
         "Deep House Machines",
@@ -504,7 +514,8 @@
           "id": "automate_daw_session",
           "input_scope": [
             "automation/live12-session-template.json",
-            "automation/generated/openai-worker-briefs.json"
+            "automation/generated/openai-worker-briefs.json",
+            "compositions/generated/live12-track-build-plans.json"
           ],
           "must_not": [
             "export or publish without release QA",
@@ -590,6 +601,7 @@
         "Fiddle / Hybrid Strings",
         "Mandolin Chop",
         "Dobro / Metallic Slide",
+        "Acoustic Guitar Boom-Chuck",
         "Upright Bass / Sub",
         "Punk Kit",
         "Deep House Machines",
@@ -955,6 +967,7 @@
       "Fiddle / Hybrid Strings",
       "Mandolin Chop",
       "Dobro / Metallic Slide",
+      "Acoustic Guitar Boom-Chuck",
       "Upright Bass / Sub",
       "Punk Kit",
       "Deep House Machines",

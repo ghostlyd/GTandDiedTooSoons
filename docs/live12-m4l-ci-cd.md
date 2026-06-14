@@ -9,6 +9,7 @@ GitHub-hosted runners do not include Ableton Live, Max for Live, Arturia Softwar
 - Block secrets and unreviewed commercial/binary assets.
 - Exercise local inventory code in dry-run mode.
 - Ensure public-domain source entries include rights metadata.
+- Regenerate OpenAI worker briefs and composition MIDI sketches in stable mode, then diff them against committed generated artifacts.
 
 ## Local Gates
 
@@ -23,6 +24,7 @@ For future Max device work:
 
 - Store source patches as reviewable `.maxpat` JSON where possible.
 - Treat `.amxd`, `.als`, `.alp`, and rendered audio as release artifacts, not ordinary source.
+- Treat generated `.mid` files as importable note/control sketches only; the reviewable source of truth is `compositions/generated/live12-track-build-plans.json`.
 - If binary artifacts must be versioned, add a pull request that documents Git LFS policy, provenance, and rollback.
 
 ## Ableton Workflow Mapping
@@ -31,6 +33,8 @@ For future Max device work:
 | --- | --- |
 | `automation/live12-session-template.json` | Canonical track layout, routing, devices, sends, and performance controls. |
 | `automation/worker-chain.json` | Agent/worker responsibilities for arrangement, sound design, source research, mix review, and release QA. |
+| `compositions/generated/live12-track-build-plans.json` | Human-readable import map, device targets, MIDI hashes, and safety constraints for each standalone track. |
+| `compositions/generated/midi/*.mid` | Deterministic placeholder MIDI sketches for Live import and replacement with verified Ableton/Arturia instruments. |
 | `inventory/live12-local-inventory.*` | Non-sensitive local host state for pack and plugin availability. |
 | `catalogs/recommended-packs.json` | License-aware install planning for Ableton and Arturia content. |
 | `catalogs/public-domain-bluegrass-sources.json` | Rights-aware source pool for sampling and reference study. |

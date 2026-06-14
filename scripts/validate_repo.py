@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import posixpath
 import re
@@ -31,8 +32,11 @@ REQUIRED_FILES = [
     "automation/live12-session-template.json",
     "automation/worker-chain.json",
     "compositions/down-tempo-punk-bluegrass-set.json",
+    "compositions/generated/README.md",
+    "compositions/generated/live12-track-build-plans.json",
     "scripts/inventory_live_suite.py",
     "scripts/fetch_public_domain_audio.py",
+    "scripts/render_composition_sketches.py",
     "scripts/render_openai_worker_briefs.py",
     "sources/public-domain/download-ledger.json",
 ]
@@ -116,6 +120,11 @@ EXPECTED_WORKER_BRIEF_SOURCES = {
     "catalogs/library-installation-plan.json",
     "inventory/live12-local-inventory.json",
 }
+EXPECTED_COMPOSITION_SKETCH_SOURCES = {
+    "compositions/down-tempo-punk-bluegrass-set.json",
+    "automation/live12-session-template.json",
+}
+STABLE_GENERATED_AT = "1970-01-01T00:00:00Z"
 AUDIO_PATH_PATTERN = re.compile(r"(?:^|[/\\\s])[\w .~/-]+\.(?:aif|aiff|flac|m4a|mp3|ogg|wav)\b", re.IGNORECASE)
 SECRET_VALUE_PATTERN = re.compile(r"(?:sk-[A-Za-z0-9_-]{20,}|Bearer\s+[A-Za-z0-9._-]{20,})")
 
@@ -179,6 +188,14 @@ def load_json(path: Path, errors: list[str]) -> dict:
     except Exception as exc:  # noqa: BLE001 - validator should report any parse/read problem.
         fail(errors, f"{path}: {exc}")
         return {}
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def validate_required_files(root: Path, errors: list[str]) -> None:
@@ -606,6 +623,254 @@ def validate_generated_worker_briefs(root: Path, errors: list[str]) -> None:
             fail(errors, "Generated OpenAI worker briefs must not contain API tokens or bearer credentials")
 
 
+def read_varlen(data: bytes, index: int) -> tuple[int, int]:
+    value = 0
+    for _ in range(4):
+        if index >= len(data):
+            raise ValueError("truncated variable-length value")
+        byte = data[index]
+        index += 1
+        value = (value << 7) | (byte & 0x7F)
+        if not byte & 0x80:
+            return value, index
+    raise ValueError("variable-length value exceeds four bytes")
+
+
+def validate_midi_file(path: Path, errors: list[str], expected_track_names: list[str]) -> None:
+    try:
+        data = path.read_bytes()
+    except OSError as exc:
+        fail(errors, f"Unable to read MIDI file {path}: {exc}")
+        return
+
+    rel = path.name
+    if len(data) > 500_000:
+        fail(errors, f"MIDI file is unexpectedly large: {rel}")
+    if not data.startswith(b"MThd") or len(data) < 14:
+        fail(errors, f"MIDI file missing SMF header: {rel}")
+        return
+
+    header_length = int.from_bytes(data[4:8], "big")
+    if header_length != 6 or len(data) < 8 + header_length:
+        fail(errors, f"MIDI file has invalid SMF header length: {rel}")
+        return
+    midi_format = int.from_bytes(data[8:10], "big")
+    track_count = int.from_bytes(data[10:12], "big")
+    division = int.from_bytes(data[12:14], "big")
+    if midi_format != 1:
+        fail(errors, f"MIDI file must be format 1: {rel}")
+    if track_count < 2 or track_count > 32:
+        fail(errors, f"MIDI file has unexpected track count: {rel}: {track_count}")
+    if division <= 0 or division > 960:
+        fail(errors, f"MIDI file has unexpected ticks-per-quarter: {rel}: {division}")
+
+    index = 8 + header_length
+    parsed_tracks = 0
+    track_names = []
+    while index < len(data):
+        if data[index:index + 4] != b"MTrk":
+            fail(errors, f"MIDI file has invalid track chunk: {rel}")
+            return
+        track_length = int.from_bytes(data[index + 4:index + 8], "big")
+        track = data[index + 8:index + 8 + track_length]
+        if len(track) != track_length:
+            fail(errors, f"MIDI file has truncated track chunk: {rel}")
+            return
+        parsed_tracks += 1
+        cursor = 0
+        running_status = None
+        track_has_end = False
+        while cursor < len(track):
+            try:
+                _, cursor = read_varlen(track, cursor)
+            except ValueError as exc:
+                fail(errors, f"MIDI file has invalid delta time in {rel}: {exc}")
+                return
+            if cursor >= len(track):
+                fail(errors, f"MIDI file has truncated event in {rel}")
+                return
+            status = track[cursor]
+            if status < 0x80:
+                if running_status is None:
+                    fail(errors, f"MIDI file uses running status without previous status: {rel}")
+                    return
+                status = running_status
+            else:
+                cursor += 1
+                if status < 0xF0:
+                    running_status = status
+
+            if status == 0xFF:
+                if cursor >= len(track):
+                    fail(errors, f"MIDI file has truncated meta event in {rel}")
+                    return
+                meta_type = track[cursor]
+                cursor += 1
+                try:
+                    length, cursor = read_varlen(track, cursor)
+                except ValueError as exc:
+                    fail(errors, f"MIDI file has invalid meta event length in {rel}: {exc}")
+                    return
+                payload = track[cursor:cursor + length]
+                if len(payload) != length:
+                    fail(errors, f"MIDI file has truncated meta payload in {rel}")
+                    return
+                if meta_type == 0x2F:
+                    track_has_end = True
+                    if length != 0:
+                        fail(errors, f"MIDI file End-of-Track event must be zero-length: {rel}")
+                if meta_type == 0x03:
+                    track_names.append(payload.decode("utf-8", errors="ignore"))
+                text = payload.decode("utf-8", errors="ignore")
+                if "/Users/" in text or "sources/public-domain/raw/" in text or AUDIO_PATH_PATTERN.search(text):
+                    fail(errors, f"MIDI file contains local/raw audio path text: {rel}")
+                if SECRET_VALUE_PATTERN.search(text):
+                    fail(errors, f"MIDI file contains secret-like text: {rel}")
+                cursor += length
+                continue
+
+            if status in {0xF0, 0xF7}:
+                fail(errors, f"MIDI file must not contain SysEx events: {rel}")
+                return
+            if status >= 0xF0:
+                fail(errors, f"MIDI file contains unsupported system event: {rel}: 0x{status:02x}")
+                return
+
+            event_type = status & 0xF0
+            data_length = 1 if event_type in {0xC0, 0xD0} else 2
+            payload = track[cursor:cursor + data_length]
+            if len(payload) != data_length:
+                fail(errors, f"MIDI file has truncated channel event: {rel}")
+                return
+            if any(byte > 127 for byte in payload):
+                fail(errors, f"MIDI file has invalid channel data byte: {rel}")
+                return
+            cursor += data_length
+
+        if not track_has_end:
+            fail(errors, f"MIDI track is missing End-of-Track meta event: {rel}")
+        index += 8 + track_length
+
+    if parsed_tracks != track_count:
+        fail(errors, f"MIDI file track count does not match header: {rel}")
+    if track_count != len(expected_track_names):
+        fail(errors, f"MIDI file track count does not match expected generated layers: {rel}")
+    if track_names != expected_track_names:
+        fail(errors, f"MIDI file track names do not match manifest layers: {rel}")
+
+
+def validate_generated_composition_sketches(root: Path, errors: list[str]) -> None:
+    data = load_json(root / "compositions/generated/live12-track-build-plans.json", errors)
+    compositions = load_json(root / "compositions/down-tempo-punk-bluegrass-set.json", errors)
+    session_template = load_json(root / "automation/live12-session-template.json", errors)
+    if not data or not compositions or not session_template:
+        return
+
+    if data.get("schema_version") != 1:
+        fail(errors, "Generated composition sketch plan must use schema_version 1")
+    if data.get("generated_at") != STABLE_GENERATED_AT:
+        fail(errors, "Generated composition sketch plan must be committed with stable generated_at")
+    if data.get("generator") != "scripts/render_composition_sketches.py":
+        fail(errors, "Generated composition sketch plan must name scripts/render_composition_sketches.py as generator")
+
+    source_files = set(data.get("source_files", []))
+    if source_files != EXPECTED_COMPOSITION_SKETCH_SOURCES:
+        fail(errors, "Generated composition sketch source_files must match expected source manifests")
+    source_hashes = data.get("source_file_sha256") or {}
+    for source_file in source_files:
+        if Path(source_file).is_absolute() or ".." in Path(source_file).parts or not (root / source_file).exists():
+            fail(errors, f"Generated composition sketch source file is invalid: {source_file}")
+            continue
+        expected_hash = source_hashes.get(source_file)
+        if not SHA256_PATTERN.match(str(expected_hash or "")):
+            fail(errors, f"Generated composition sketch source hash is invalid: {source_file}")
+        elif expected_hash != sha256_file(root / source_file):
+            fail(errors, f"Generated composition sketch source hash is stale: {source_file}")
+
+    source_track_titles = [track.get("title") for track in compositions.get("tracks", [])]
+    generated_track_titles = [track.get("title") for track in data.get("tracks", [])]
+    if generated_track_titles != source_track_titles:
+        fail(errors, "Generated composition sketch track order must match compositions/down-tempo-punk-bluegrass-set.json")
+
+    tempo_range = session_template.get("tempo_range_bpm", [0, 999])
+    session_tracks = {track.get("name") for track in session_template.get("tracks", [])}
+    device_contracts = {
+        contract.removeprefix("m4l.")
+        for track in session_template.get("tracks", [])
+        for contract in track.get("device_contracts", [])
+    }
+    declared_midi_files = set()
+
+    for track in data.get("tracks", []):
+        title = track.get("title")
+        if not isinstance(track.get("approximate_bars"), int) or not 4 <= track.get("approximate_bars", 0) <= 256:
+            fail(errors, f"Generated composition sketch has invalid bar count: {title}")
+        if not tempo_range[0] <= track.get("tempo_bpm", 0) <= tempo_range[1]:
+            fail(errors, f"Generated composition sketch tempo is outside session range: {title}")
+        for focus in track.get("max_for_live_focus", []):
+            if focus not in device_contracts:
+                fail(errors, f"Generated composition sketch references unknown Max for Live focus: {title}: {focus}")
+        for layer in track.get("layers", []):
+            session_track = layer.get("session_track")
+            if session_track not in session_tracks:
+                fail(errors, f"Generated composition sketch layer references unknown session track: {title}: {session_track}")
+            channels = layer.get("midi_channels", [])
+            if not isinstance(channels, list) or not channels or any(not isinstance(channel, int) or channel < 1 or channel > 16 for channel in channels):
+                fail(errors, f"Generated composition sketch layer has invalid MIDI channels: {title}: {session_track}")
+        midi_file = track.get("midi_file", "")
+        midi_path = Path(midi_file)
+        if midi_path.is_absolute() or ".." in midi_path.parts or midi_path.parts[:3] != ("compositions", "generated", "midi"):
+            fail(errors, f"Generated composition sketch MIDI path must be under compositions/generated/midi: {title}")
+            continue
+        full_midi_path = root / midi_path
+        declared_midi_files.add(str(midi_path))
+        if not full_midi_path.exists():
+            fail(errors, f"Generated composition sketch MIDI file is missing: {title}: {midi_file}")
+            continue
+        if track.get("midi_byte_size") != full_midi_path.stat().st_size:
+            fail(errors, f"Generated composition sketch MIDI byte size is stale: {title}")
+        if not SHA256_PATTERN.match(str(track.get("midi_sha256", ""))):
+            fail(errors, f"Generated composition sketch MIDI hash is invalid: {title}")
+        elif track.get("midi_sha256") != sha256_file(full_midi_path):
+            fail(errors, f"Generated composition sketch MIDI hash is stale: {title}")
+        expected_track_names = ["Conductor"] + [layer.get("midi_track", "") for layer in track.get("layers", [])]
+        validate_midi_file(full_midi_path, errors, expected_track_names)
+
+    actual_midi_files = {
+        str(path.relative_to(root))
+        for path in (root / "compositions/generated/midi").glob("*.mid")
+    }
+    if actual_midi_files != declared_midi_files:
+        fail(errors, "Generated composition sketch MIDI files must exactly match manifest")
+
+    expected_generated_files = {
+        "compositions/generated/README.md",
+        "compositions/generated/live12-track-build-plans.json",
+        *declared_midi_files,
+    }
+    actual_generated_files = {
+        str(path.relative_to(root))
+        for path in (root / "compositions/generated").rglob("*")
+        if path.is_file()
+    }
+    if actual_generated_files != expected_generated_files:
+        fail(errors, "Generated composition sketch directory must contain only declared artifacts")
+
+    for path in root.rglob("*.mid"):
+        if any(part in SKIP_BINARY_SCAN_PARTS for part in path.relative_to(root).parts):
+            continue
+        if str(path.relative_to(root)) not in declared_midi_files:
+            fail(errors, f"Unexpected MIDI file outside generated composition manifest: {path.relative_to(root)}")
+
+    for string_value in iter_string_values(data):
+        if "/Users/" in string_value:
+            fail(errors, "Generated composition sketches must not contain absolute user paths")
+        if "sources/public-domain/raw/" in string_value or AUDIO_PATH_PATTERN.search(string_value):
+            fail(errors, f"Generated composition sketches must not contain raw audio paths: {string_value}")
+        if SECRET_VALUE_PATTERN.search(string_value):
+            fail(errors, "Generated composition sketches must not contain API tokens or bearer credentials")
+
+
 def main() -> int:
     root = Path(__file__).resolve().parents[1]
     errors: list[str] = []
@@ -618,6 +883,7 @@ def main() -> int:
     validate_json_contracts(root, errors)
     validate_openai_orchestration(root, errors)
     validate_generated_worker_briefs(root, errors)
+    validate_generated_composition_sketches(root, errors)
     validate_binary_hygiene(root, errors)
     validate_tracked_raw_source_files(root, errors)
 

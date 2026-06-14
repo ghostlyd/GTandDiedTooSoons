@@ -19,12 +19,14 @@ GTandDiedTooSoons is a repeatable production framework for composing spatially a
 3. **Session layer**: track/routing/device contracts in `automation/live12-session-template.json`.
 4. **Agent layer**: production worker roles in `automation/worker-chain.json`.
 5. **Composition layer**: standalone track briefs in `compositions/down-tempo-punk-bluegrass-set.json`.
-6. **CI layer**: repository checks in `.github/workflows/live12-foundation-ci.yml`.
+6. **Generated sketch layer**: deterministic Live-import build plans and MIDI sketches in `compositions/generated/`, rendered by `scripts/render_composition_sketches.py`.
+7. **CI layer**: repository checks in `.github/workflows/live12-foundation-ci.yml`.
 
 ## Security and Operational Controls
 
 - Secrets live in `.env` only and are ignored by Git.
 - CI blocks common audio, installer, plugin, and Ableton binary artifacts unless a future reviewed Git LFS policy explicitly allows them.
+- Generated `.mid` sketches are permitted only under `compositions/generated/midi/`; they contain note/control data and are validated against the JSON build plan.
 - Inventory scripts record names, versions, and home-relative paths only.
 - Audio acquisition requires explicit rights metadata and `approved_for_download: true`.
 - Logs should not contain vocals, private lyrics, account IDs, license keys, or raw prompt data that is not needed for review.

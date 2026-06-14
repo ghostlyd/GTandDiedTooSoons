@@ -14,9 +14,10 @@ The repo intentionally tracks process, manifests, device contracts, session temp
 ## Quick Start
 
 ```bash
+python3 scripts/render_composition_sketches.py --stable
+python3 scripts/render_openai_worker_briefs.py --stable
 python3 scripts/validate_repo.py
 python3 scripts/inventory_live_suite.py
-python3 scripts/render_openai_worker_briefs.py --stable
 ```
 
 Generated local inventory lands in `inventory/live12-local-inventory.json` and `inventory/live12-local-inventory.md`. Paths are home-relative and do not copy licensed content into Git.
@@ -34,6 +35,8 @@ Generated local inventory lands in `inventory/live12-local-inventory.json` and `
 - `automation/worker-chain.json` - division-of-labor chain for production automation.
 - `automation/generated/openai-worker-briefs.json` - generated role briefs for OpenAI-assisted production workers.
 - `compositions/down-tempo-punk-bluegrass-set.json` - initial standalone track briefs.
+- `compositions/generated/live12-track-build-plans.json` - generated Live-import plan with MIDI hashes and device targets.
+- `compositions/generated/midi/*.mid` - deterministic MIDI sketches for importing each standalone track into Live.
 - `catalogs/public-domain-bluegrass-sources.json` - rights-aware source catalog.
 - `catalogs/recommended-packs.json` - license-aware library and pack catalog.
 
