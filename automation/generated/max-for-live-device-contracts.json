@@ -64,6 +64,7 @@
         "good-vibrations-in-a-burned-barn",
         "no-gods-no-masters-no-quantize",
         "possum-kingdom-afterhours",
+        "rail-yard-ghost-in-the-control-room",
         "the-ballad-of-the-broken-controller"
       ],
       "traditional_bluegrass_layer": true
@@ -108,6 +109,7 @@
         "good-vibrations-in-a-burned-barn",
         "no-gods-no-masters-no-quantize",
         "possum-kingdom-afterhours",
+        "rail-yard-ghost-in-the-control-room",
         "the-ballad-of-the-broken-controller"
       ],
       "traditional_bluegrass_layer": true
@@ -161,6 +163,7 @@
         "good-vibrations-in-a-burned-barn",
         "no-gods-no-masters-no-quantize",
         "possum-kingdom-afterhours",
+        "rail-yard-ghost-in-the-control-room",
         "the-ballad-of-the-broken-controller"
       ],
       "traditional_bluegrass_layer": true
@@ -212,6 +215,7 @@
         "good-vibrations-in-a-burned-barn",
         "no-gods-no-masters-no-quantize",
         "possum-kingdom-afterhours",
+        "rail-yard-ghost-in-the-control-room",
         "the-ballad-of-the-broken-controller"
       ],
       "traditional_bluegrass_layer": true
@@ -254,6 +258,7 @@
         "good-vibrations-in-a-burned-barn",
         "no-gods-no-masters-no-quantize",
         "possum-kingdom-afterhours",
+        "rail-yard-ghost-in-the-control-room",
         "the-ballad-of-the-broken-controller"
       ],
       "traditional_bluegrass_layer": true
@@ -296,6 +301,7 @@
         "good-vibrations-in-a-burned-barn",
         "no-gods-no-masters-no-quantize",
         "possum-kingdom-afterhours",
+        "rail-yard-ghost-in-the-control-room",
         "the-ballad-of-the-broken-controller"
       ],
       "traditional_bluegrass_layer": true
@@ -338,6 +344,7 @@
         "good-vibrations-in-a-burned-barn",
         "no-gods-no-masters-no-quantize",
         "possum-kingdom-afterhours",
+        "rail-yard-ghost-in-the-control-room",
         "the-ballad-of-the-broken-controller"
       ],
       "traditional_bluegrass_layer": false
@@ -380,6 +387,7 @@
         "good-vibrations-in-a-burned-barn",
         "no-gods-no-masters-no-quantize",
         "possum-kingdom-afterhours",
+        "rail-yard-ghost-in-the-control-room",
         "the-ballad-of-the-broken-controller"
       ],
       "traditional_bluegrass_layer": false
@@ -454,6 +462,7 @@
         "good-vibrations-in-a-burned-barn",
         "no-gods-no-masters-no-quantize",
         "possum-kingdom-afterhours",
+        "rail-yard-ghost-in-the-control-room",
         "the-ballad-of-the-broken-controller"
       ],
       "traditional_bluegrass_layer": false
@@ -466,7 +475,7 @@
   "source_file_sha256": {
     "automation/live12-session-template.json": "f17640bd3d24a4f6953836393c3286a45c7ba9c9064399590611dac566c76c51",
     "automation/max-for-live-device-contracts.json": "e057cd7e9931b678b0785ab1857aeeff2e2e100d38bc0aa4657c3042c5d467c3",
-    "compositions/generated/live12-track-build-plans.json": "4f08ba22b55b0c61a9fd688e353a97ca4caa6de74f52e6d89d339ae2b9ac2498"
+    "compositions/generated/live12-track-build-plans.json": "0893e3a502e4b451f5d2b5b4da5848e732fd1c14bdd4f39512c745e5f7921bce"
   },
   "source_files": [
     "automation/max-for-live-device-contracts.json",

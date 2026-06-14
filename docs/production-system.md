@@ -13,7 +13,7 @@ GTandDiedTooSoons is a repeatable production framework for composing spatially a
 
 ## Architecture
 
-1. **Source layer**: public-domain or rights-cleared audio references documented in `catalogs/public-domain-bluegrass-sources.json`.
+1. **Source layer**: public-domain or rights-cleared audio references documented in `catalogs/public-domain-bluegrass-sources.json`, download evidence in `sources/public-domain/download-ledger.json`, and generated source-deck handoff artifacts in `automation/generated/public-domain-source-deck.json` plus `docs/public-domain-source-deck.md`.
 2. **Library layer**: Ableton/Arturia packs and instruments documented in `catalogs/recommended-packs.json` and local inventory snapshots.
    Installation readiness and account-gated pack backlog live in `catalogs/library-installation-plan.json`.
 3. **Session layer**: track/routing/device contracts in `automation/live12-session-template.json`.
@@ -36,6 +36,7 @@ GTandDiedTooSoons is a repeatable production framework for composing spatially a
 - Generated DAW mutation runbooks are operator checklists. They may include local command paths under ignored `output/` roots, but they must keep Ableton launches approval-gated and must not contain absolute user paths, raw source audio paths, secrets, or committed DAW binary references.
 - Inventory scripts record names, versions, and home-relative paths only.
 - Audio acquisition requires explicit rights metadata and `approved_for_download: true`.
+- Generated public-domain source decks are metadata-only handoffs. They may include source IDs, rights evidence, credit summaries, SHA-256 values, and per-track source candidates, but they must not expose raw local audio paths or download URLs in tracked generated artifacts.
 - Logs should not contain vocals, private lyrics, account IDs, license keys, or raw prompt data that is not needed for review.
 
 ## Scientific Claims Boundary

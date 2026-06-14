@@ -42,6 +42,12 @@ jobs:
           python3 scripts/render_live12_daw_action_plan.py --stable --output /tmp/live12-daw-action-plan.json
           diff -u automation/generated/live12-daw-action-plan.json /tmp/live12-daw-action-plan.json
 
+      - name: Verify generated public-domain source deck is in sync
+        run: |
+          python3 scripts/render_public_domain_source_deck.py --stable --output /tmp/public-domain-source-deck.json --markdown-output /tmp/public-domain-source-deck.md
+          diff -u automation/generated/public-domain-source-deck.json /tmp/public-domain-source-deck.json
+          diff -u docs/public-domain-source-deck.md /tmp/public-domain-source-deck.md
+
       - name: Verify generated Live 12 DAW mutation package is in sync
         run: |
           python3 scripts/render_live12_daw_mutation_package.py --stable --output /tmp/live12-daw-mutation-package.json
@@ -71,6 +77,9 @@ jobs:
 
       - name: Run Live 12 DAW mutation runbook probes
         run: python3 scripts/test_live12_daw_mutation_runbook.py
+
+      - name: Run public-domain source deck probes
+        run: python3 scripts/test_public_domain_source_deck.py
 
       - name: Exercise inventory script in dry-run mode
         run: python3 scripts/inventory_live_suite.py --dry-run --output inventory/live12-local-inventory.json
@@ -103,6 +112,12 @@ jobs:
           python3 scripts/render_live12_daw_action_plan.py --stable --output /tmp/live12-daw-action-plan.json
           diff -u automation/generated/live12-daw-action-plan.json /tmp/live12-daw-action-plan.json
 
+      - name: Verify generated public-domain source deck is in sync
+        run: |
+          python3 scripts/render_public_domain_source_deck.py --stable --output /tmp/public-domain-source-deck.json --markdown-output /tmp/public-domain-source-deck.md
+          diff -u automation/generated/public-domain-source-deck.json /tmp/public-domain-source-deck.json
+          diff -u docs/public-domain-source-deck.md /tmp/public-domain-source-deck.md
+
       - name: Verify generated Live 12 DAW mutation package is in sync
         run: |
           python3 scripts/render_live12_daw_mutation_package.py --stable --output /tmp/live12-daw-mutation-package.json
@@ -132,6 +147,9 @@ jobs:
 
       - name: Run Live 12 DAW mutation runbook probes
         run: python3 scripts/test_live12_daw_mutation_runbook.py
+
+      - name: Run public-domain source deck probes
+        run: python3 scripts/test_public_domain_source_deck.py
 
       - name: Generate non-sensitive host inventory snapshot
         run: python3 scripts/inventory_live_suite.py --dry-run

@@ -14,6 +14,7 @@ The project needs deep old-time, bluegrass-adjacent source literacy without crea
 8. Do not bypass paywalls, account gates, robots policies, DRM, or terms of service.
 9. Keep `sources/public-domain/download-ledger.json` updated for every approved local fetch, including SHA-256, byte size, source URL, download URL, rights status, and browser evidence.
 10. For object-storage URLs, require exact host matching and an approved path prefix so a trusted bucket path cannot turn into a generic storage allow-list.
+11. Regenerate `automation/generated/public-domain-source-deck.json` and `docs/public-domain-source-deck.md` after approved catalog or ledger changes so Ableton/Max operators use the current metadata-only source deck.
 
 ## Playwright Use
 
@@ -32,5 +33,7 @@ Bluegrass as a named commercial genre mostly emerges after the earliest public-d
 Key starting points are versioned in `catalogs/public-domain-bluegrass-sources.json`, including Library of Congress Citizen DJ Folk Music, UCSB Cylinder Audio Archive, Internet Archive Great 78, the Henry Reed Collection, and Library of Congress bluegrass/folklife guides.
 
 The approved source downloads are excerpts from Library of Congress Citizen DJ's National Jukebox Folk Music collection. The catalog records concise rights evidence from the Citizen DJ collection page so review does not depend on ignored screenshots, and the download ledger records local SHA-256 and byte-size evidence for each fetched WAV. UCSB Cylinder Archive material remains research-only for this project until item-level terms are compatible with production reuse, because the site-level MP3 metadata includes non-commercial Creative Commons language.
+
+The generated public-domain source deck is the operator-facing bridge into Ableton Live. It mirrors approved ledger entries and per-track source candidates without exposing raw local audio paths or direct download URLs. Keep the Live `Public Domain Source Deck` muted until the generated unmute checks are satisfied and a Live-set mutation approval exists.
 
 Reference for U.S. pre-1972 sound recording terms: https://www.copyright.gov/music-modernization/pre1972-soundrecordings/

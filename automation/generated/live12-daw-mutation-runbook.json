@@ -85,17 +85,17 @@
   ],
   "schema_version": 1,
   "source_file_sha256": {
-    "automation/generated/live12-daw-action-plan.json": "9a246f1cad8e578a9d4b3d206d564a98c7a8a60a643afa9dc1ab93e7fef80bc1",
-    "automation/generated/live12-daw-mutation-package.json": "0a9f5da3404007f48dedb348d7e2b9532a7916b320b0efa759625f524e0a3290",
-    "automation/generated/max-for-live-device-contracts.json": "ccdbc4eecb581d02da70a448bbcb29baeffc898f06f2879e6bc5e395d6e24b2d"
+    "automation/generated/live12-daw-action-plan.json": "dbe1b210945519be06e0fed556563be219b213f5f0017df043bd67c47fa0b4fc",
+    "automation/generated/live12-daw-mutation-package.json": "1a2e88db2cb7868a60bca8fbe0ca62c130c741a99b6e7f9bd71827834c14266a",
+    "automation/generated/max-for-live-device-contracts.json": "25613153f7ed60871411911a4572f10448a6f0298a62ba63bc2aa285e10b51d0"
   },
   "source_files": [
     "automation/generated/live12-daw-mutation-package.json",
     "automation/generated/live12-daw-action-plan.json",
     "automation/generated/max-for-live-device-contracts.json"
   ],
-  "total_planned_action_count": 91,
-  "track_count": 5,
+  "total_planned_action_count": 112,
+  "track_count": 6,
   "tracks": [
     {
       "affected_returns": [
@@ -1536,6 +1536,294 @@
       },
       "track_slug": "the-ballad-of-the-broken-controller",
       "track_title": "The Ballad of the Broken Controller"
+    },
+    {
+      "affected_returns": [
+        "A Short Spring",
+        "B Deep Dub",
+        "C Alien Bloom",
+        "D Punk Crush"
+      ],
+      "affected_tracks": [
+        "AeroBand Banjo Lead",
+        "Fiddle / Hybrid Strings",
+        "Mandolin Chop",
+        "Dobro / Metallic Slide",
+        "Upright Bass / Sub",
+        "Acoustic Guitar Boom-Chuck",
+        "Punk Kit",
+        "Deep House Machines",
+        "Alien Sky",
+        "Public Domain Source Deck"
+      ],
+      "approval_required_before_execution": [
+        "live_set_mutation",
+        "private_audio_upload"
+      ],
+      "blocked_action_groups": [
+        "mix_and_release_gates"
+      ],
+      "commands": {
+        "apply_live_mutation": [
+          "python3",
+          "scripts/stage_live12_daw_import_bundle.py",
+          "--request",
+          "output/daw-mutations/rail-yard-ghost-in-the-control-room/mutation-request.json",
+          "--launch-ableton",
+          "--confirm-live-mutation",
+          "--operator-approval-reference",
+          "<approval-id>",
+          "--rollback-copy-reference",
+          "<rollback-note>"
+        ],
+        "preflight": [
+          "python3",
+          "scripts/prepare_live12_daw_mutation.py",
+          "--track",
+          "rail-yard-ghost-in-the-control-room"
+        ],
+        "record_receipt": [
+          "python3",
+          "scripts/record_live12_daw_mutation_receipt.py",
+          "--request",
+          "output/daw-mutations/rail-yard-ghost-in-the-control-room/mutation-request.json",
+          "--evidence",
+          "output/daw-mutations/rail-yard-ghost-in-the-control-room/operator-evidence.json"
+        ],
+        "stage_import_bundle": [
+          "python3",
+          "scripts/stage_live12_daw_import_bundle.py",
+          "--request",
+          "output/daw-mutations/rail-yard-ghost-in-the-control-room/mutation-request.json"
+        ]
+      },
+      "execution_status": "not_applied",
+      "max_for_live_device_ids": [
+        "m4l.aeroband_banjo_mapper",
+        "m4l.roll_probability_engine",
+        "m4l.call_response_router",
+        "m4l.chop_clock_guard",
+        "m4l.slide_phrase_sampler",
+        "m4l.root_motion_limiter",
+        "m4l.fill_trigger",
+        "m4l.house_grid_conductor",
+        "m4l.provenance_sampler",
+        "m4l.spatial_harmonic_field"
+      ],
+      "max_for_live_devices": [
+        {
+          "approval_gate": "live_set_mutation",
+          "device_class": "midi_effect",
+          "display_name": "AeroBand Banjo Mapper",
+          "id": "m4l.aeroband_banjo_mapper",
+          "macro_controls": [
+            "velocity_curve",
+            "roll_density",
+            "pluck_decay",
+            "humanize_ms"
+          ],
+          "source_patch": "max-for-live/patches/m4l_aeroband_banjo_mapper.maxpat",
+          "source_patch_sha256": "abda9d08a3ff66426a3191bf83bfcd0487fffaf49f95c910050b208e0db1d815",
+          "target_tracks": [
+            "AeroBand Banjo Lead"
+          ]
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "device_class": "midi_effect",
+          "display_name": "Roll Probability Engine",
+          "id": "m4l.roll_probability_engine",
+          "macro_controls": [
+            "roll_density",
+            "humanize_ms",
+            "velocity_curve",
+            "pluck_decay"
+          ],
+          "source_patch": "max-for-live/patches/m4l_roll_probability_engine.maxpat",
+          "source_patch_sha256": "a242603c309ca24f3537353eb1c1d1f194536feb92f9ca1b8d1fd878b69a8cf7",
+          "target_tracks": [
+            "AeroBand Banjo Lead"
+          ]
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "device_class": "midi_effect",
+          "display_name": "Call Response Router",
+          "id": "m4l.call_response_router",
+          "macro_controls": [
+            "bow_noise",
+            "vibrato_depth",
+            "send_spatial",
+            "boom_chuck_balance",
+            "downstroke_bias",
+            "room_send",
+            "strum_velocity"
+          ],
+          "source_patch": "max-for-live/patches/m4l_call_response_router.maxpat",
+          "source_patch_sha256": "86c0f819c2e6b9eddb76376734c44a223f10e42626d9a47a501d0f254dc599c6",
+          "target_tracks": [
+            "Acoustic Guitar Boom-Chuck",
+            "Fiddle / Hybrid Strings"
+          ]
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "device_class": "midi_effect",
+          "display_name": "Chop Clock Guard",
+          "id": "m4l.chop_clock_guard",
+          "macro_controls": [
+            "chop_gate",
+            "ghost_note_probability",
+            "boom_chuck_balance",
+            "downstroke_bias",
+            "room_send",
+            "strum_velocity"
+          ],
+          "source_patch": "max-for-live/patches/m4l_chop_clock_guard.maxpat",
+          "source_patch_sha256": "5d0d495556538c993db5c4670e02a1c6019dda8e07639c0efd2e80cbff1b976f",
+          "target_tracks": [
+            "Acoustic Guitar Boom-Chuck",
+            "Mandolin Chop"
+          ]
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "device_class": "audio_effect",
+          "display_name": "Slide Phrase Sampler",
+          "id": "m4l.slide_phrase_sampler",
+          "macro_controls": [
+            "glide_time",
+            "feedback",
+            "spectral_tilt"
+          ],
+          "source_patch": "max-for-live/patches/m4l_slide_phrase_sampler.maxpat",
+          "source_patch_sha256": "3d520438056405dd047c88a0348f9e1f003a9b4e1513e087739580b020746cf8",
+          "target_tracks": [
+            "Dobro / Metallic Slide"
+          ]
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "device_class": "midi_effect",
+          "display_name": "Root Motion Limiter",
+          "id": "m4l.root_motion_limiter",
+          "macro_controls": [
+            "sub_blend",
+            "sidechain_depth",
+            "note_length"
+          ],
+          "source_patch": "max-for-live/patches/m4l_root_motion_limiter.maxpat",
+          "source_patch_sha256": "ccb7853700e0b607a184f346ece4a9f7b769c6d3d3a7a7c167e6d820fd20fbdb",
+          "target_tracks": [
+            "Upright Bass / Sub"
+          ]
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "device_class": "midi_effect",
+          "display_name": "Fill Trigger",
+          "id": "m4l.fill_trigger",
+          "macro_controls": [
+            "fill_probability",
+            "parallel_drive",
+            "room_send"
+          ],
+          "source_patch": "max-for-live/patches/m4l_fill_trigger.maxpat",
+          "source_patch_sha256": "5616ddf6ef86d056a28a3cf680cd6182507836464b1398d2ac7a583abdd67b15",
+          "target_tracks": [
+            "Punk Kit"
+          ]
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "device_class": "midi_effect",
+          "display_name": "House Grid Conductor",
+          "id": "m4l.house_grid_conductor",
+          "macro_controls": [
+            "swing_amount",
+            "filter_cutoff",
+            "accent"
+          ],
+          "source_patch": "max-for-live/patches/m4l_house_grid_conductor.maxpat",
+          "source_patch_sha256": "d31e9f188fd7d020400387aeb4a449bc2f142c1ae140c467fbada364f8100b28",
+          "target_tracks": [
+            "Deep House Machines"
+          ]
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "device_class": "audio_effect",
+          "display_name": "Provenance Sampler",
+          "id": "m4l.provenance_sampler",
+          "macro_controls": [
+            "source_gate",
+            "slice_density",
+            "provenance_hold"
+          ],
+          "source_patch": "max-for-live/patches/m4l_provenance_sampler.maxpat",
+          "source_patch_sha256": "621c4225e704c710e86c0c66f729928cd3cfd4eda1f578a554de5906f8fdfb11",
+          "target_tracks": [
+            "Public Domain Source Deck"
+          ]
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "device_class": "audio_effect",
+          "display_name": "Spatial Harmonic Field",
+          "id": "m4l.spatial_harmonic_field",
+          "macro_controls": [
+            "grain_density",
+            "freeze",
+            "width",
+            "azimuth"
+          ],
+          "source_patch": "max-for-live/patches/m4l_spatial_harmonic_field.maxpat",
+          "source_patch_sha256": "5c9524ebced6b61c5d95a8963999aef9b4d6b8520525765c30bced3310ad90f1",
+          "target_tracks": [
+            "Alien Sky"
+          ]
+        }
+      ],
+      "midi_artifact": {
+        "path": "compositions/generated/midi/rail-yard-ghost-in-the-control-room.mid",
+        "sha256": "6591072ba470b3775da4cfdbadb15d1042d469c7e466a17527051592be30293f",
+        "verification_action_id": "rail-yard-ghost-in-the-control-room.preflight.verify-midi-hash"
+      },
+      "operator_evidence": {
+        "local_evidence_path": "output/daw-mutations/rail-yard-ghost-in-the-control-room/operator-evidence.json",
+        "receipt_output_path": "output/daw-mutations/rail-yard-ghost-in-the-control-room/applied-receipt.json",
+        "required_reference_fields": [
+          "operator_approval_reference",
+          "rollback_copy_reference"
+        ],
+        "template_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/operator-evidence-template.json"
+      },
+      "operator_phase_order": [
+        "preflight",
+        "stage_import_bundle",
+        "apply_live_mutation",
+        "record_receipt",
+        "postflight"
+      ],
+      "planned_action_count": 21,
+      "postflight_checks": [
+        "rollback copy exists outside Git before mutation",
+        "generated MIDI hash matched before import",
+        "affected tracks match mutation package scope",
+        "Public Domain Source Deck remains muted until provenance review",
+        "no export, render, .als, .amxd, sample, preset, credential, cookie, or license artifact is committed",
+        "python3 scripts/validate_repo.py passes after metadata updates"
+      ],
+      "queue_order": 6,
+      "source_deck_policy": {
+        "action_id": "rail-yard-ghost-in-the-control-room.source-deck.keep-muted-for-provenance-review",
+        "candidate_source_count": 3,
+        "default_state": "muted_until_human_provenance_review",
+        "requires_provenance_review": true,
+        "session_track": "Public Domain Source Deck"
+      },
+      "track_slug": "rail-yard-ghost-in-the-control-room",
+      "track_title": "Rail Yard Ghost in the Control Room"
     }
   ]
 }

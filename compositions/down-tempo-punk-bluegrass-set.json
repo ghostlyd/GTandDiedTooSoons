@@ -87,6 +87,37 @@
         "final refrain stacks all traditional instruments over alien choir"
       ],
       "max_for_live_focus": ["aeroband_banjo_mapper", "fill_trigger"]
+    },
+    {
+      "title": "Rail Yard Ghost in the Control Room",
+      "tempo_bpm": 94,
+      "key_center": "C dorian",
+      "duration_target": "4:48",
+      "bluegrass_core": ["AeroBand banjo lead", "fiddle answer", "mandolin chop", "dobro swells", "upright bass"],
+      "electronic_dna": ["four-on-floor house grid", "sidechained sub", "glitch source-deck stutters", "spatial freeze bloom"],
+      "punk_spirit": ["one-take controller risk", "short loud refrain", "bounded drum fills", "no glossy outro"],
+      "arrangement": [
+        "operator preflight drone with source deck muted",
+        "AeroBand banjo calibration becomes forward-roll hook",
+        "house grid conductor locks kick, hats, and mandolin chop",
+        "call-response fiddle, guitar, and dobro orbit the hook",
+        "root motion limiter drops bass and sub under punk kit pushes",
+        "provenance sampler gate opens only on approved source stutters",
+        "alien sky freeze and spatial harmonic field bloom",
+        "one-take punk outro with bounded fills and rollback-safe stop"
+      ],
+      "max_for_live_focus": [
+        "aeroband_banjo_mapper",
+        "roll_probability_engine",
+        "call_response_router",
+        "chop_clock_guard",
+        "slide_phrase_sampler",
+        "root_motion_limiter",
+        "fill_trigger",
+        "house_grid_conductor",
+        "provenance_sampler",
+        "spatial_harmonic_field"
+      ]
     }
   ]
 }

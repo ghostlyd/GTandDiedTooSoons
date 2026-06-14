@@ -309,3 +309,58 @@ Postflight checks:
 - Public Domain Source Deck remains muted until provenance review
 - no export, render, .als, .amxd, sample, preset, credential, cookie, or license artifact is committed
 - python3 scripts/validate_repo.py passes after metadata updates
+
+### 6. Rail Yard Ghost in the Control Room
+
+- Track slug: `rail-yard-ghost-in-the-control-room`
+- Planned actions: `21`
+- Affected tracks: `10`
+- Max for Live source devices: `10`
+- Source deck state: `muted_until_human_provenance_review`
+- Operator evidence draft: `output/daw-mutations/rail-yard-ghost-in-the-control-room/operator-evidence.json`
+
+Preflight:
+
+```bash
+python3 scripts/prepare_live12_daw_mutation.py --track rail-yard-ghost-in-the-control-room
+```
+
+Stage import bundle:
+
+```bash
+python3 scripts/stage_live12_daw_import_bundle.py --request output/daw-mutations/rail-yard-ghost-in-the-control-room/mutation-request.json
+```
+
+Apply Live mutation after approval and rollback evidence:
+
+```bash
+python3 scripts/stage_live12_daw_import_bundle.py --request output/daw-mutations/rail-yard-ghost-in-the-control-room/mutation-request.json --launch-ableton --confirm-live-mutation --operator-approval-reference '<approval-id>' --rollback-copy-reference '<rollback-note>'
+```
+
+Record receipt:
+
+```bash
+python3 scripts/record_live12_daw_mutation_receipt.py --request output/daw-mutations/rail-yard-ghost-in-the-control-room/mutation-request.json --evidence output/daw-mutations/rail-yard-ghost-in-the-control-room/operator-evidence.json
+```
+
+Max for Live source devices:
+
+- `m4l.aeroband_banjo_mapper` on AeroBand Banjo Lead
+- `m4l.roll_probability_engine` on AeroBand Banjo Lead
+- `m4l.call_response_router` on Acoustic Guitar Boom-Chuck, Fiddle / Hybrid Strings
+- `m4l.chop_clock_guard` on Acoustic Guitar Boom-Chuck, Mandolin Chop
+- `m4l.slide_phrase_sampler` on Dobro / Metallic Slide
+- `m4l.root_motion_limiter` on Upright Bass / Sub
+- `m4l.fill_trigger` on Punk Kit
+- `m4l.house_grid_conductor` on Deep House Machines
+- `m4l.provenance_sampler` on Public Domain Source Deck
+- `m4l.spatial_harmonic_field` on Alien Sky
+
+Postflight checks:
+
+- rollback copy exists outside Git before mutation
+- generated MIDI hash matched before import
+- affected tracks match mutation package scope
+- Public Domain Source Deck remains muted until provenance review
+- no export, render, .als, .amxd, sample, preset, credential, cookie, or license artifact is committed
+- python3 scripts/validate_repo.py passes after metadata updates
