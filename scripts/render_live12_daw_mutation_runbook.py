@@ -277,6 +277,7 @@ def render_markdown(runbook: dict[str, Any]) -> str:
                 f"- Affected tracks: `{len(track['affected_tracks'])}`",
                 f"- Max for Live source devices: `{len(track['max_for_live_device_ids'])}`",
                 f"- Source deck state: `{track['source_deck_policy']['default_state']}`",
+                f"- Operator evidence draft: `{track['operator_evidence']['local_evidence_path']}`",
                 "",
                 "Preflight:",
                 "",

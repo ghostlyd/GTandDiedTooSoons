@@ -71,7 +71,7 @@ For future Max device work:
 python3 scripts/prepare_live12_daw_mutation_queue.py
 ```
 
-This writes `output/daw-mutation-queue/queue-manifest.json` plus per-track mutation requests, receipt templates, Ableton import bundles, launch plans, and operator evidence templates. The queue manifest paths are relative to its `artifact_base`, normally `output/`.
+This writes `output/daw-mutation-queue/queue-manifest.json` plus per-track mutation requests, receipt templates, editable `operator-evidence.json` drafts, Ableton import bundles, launch plans, and bundle evidence templates. The queue manifest paths are relative to its `artifact_base`, normally `output/`.
 The queue also references `automation/generated/max-for-live-device-contracts.json` and lists the committed `.maxpat` source patches required for each queued track.
 
 The generated runbook provides the same queue as an operator checklist:
@@ -82,7 +82,7 @@ python3 scripts/render_live12_daw_mutation_runbook.py --stable
 
 Use `docs/live12-daw-mutation-runbook.md` as the local DAW mutation checklist. It is generated from committed contracts and remains non-authoritative if edited by hand; regenerate it instead.
 
-6. For targeted single-track work, write local mutation requests and receipt templates under `output/daw-mutations/`:
+6. For targeted single-track work, write local mutation requests, receipt templates, and editable operator evidence drafts under `output/daw-mutations/`:
 
 ```bash
 python3 scripts/prepare_live12_daw_mutation.py --track good-vibrations-in-a-burned-barn
@@ -106,7 +106,7 @@ python3 scripts/stage_live12_daw_import_bundle.py \
   --rollback-copy-reference <rollback-note>
 ```
 
-8. After an approved local Ableton/Max mutation attempt, record operator evidence against the prepared request:
+8. After an approved local Ableton/Max mutation attempt, fill the generated `operator-evidence.json` draft with approval and rollback references, then record evidence against the prepared request:
 
 ```bash
 python3 scripts/record_live12_daw_mutation_receipt.py \

@@ -105,6 +105,7 @@ def stage_bundle(
     midi_source = ROOT / request["midi_verification"]["path"]
     staged_midi = bundle_root / "midi" / midi_source.name
     staged_request = bundle_root / "mutation-request.json"
+    evidence_draft_path = request_path.parent / "operator-evidence.json"
     staged_midi.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(midi_source, staged_midi)
     shutil.copy2(request_path, staged_request)
@@ -167,7 +168,7 @@ def stage_bundle(
             "--request",
             repo_relative(staged_request),
             "--evidence",
-            repo_relative(bundle_root / "operator-evidence-template.json"),
+            repo_relative(evidence_draft_path) if evidence_draft_path.is_relative_to(ROOT) else str(evidence_draft_path),
         ],
         "git_policy": "ignored_local_only",
     }

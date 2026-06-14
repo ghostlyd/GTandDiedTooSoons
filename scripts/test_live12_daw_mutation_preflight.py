@@ -152,11 +152,23 @@ def main() -> int:
             return 1
         expected_device_ids = [device["id"] for device in max_contracts["devices"]]
         for track in queue_tracks:
-            for key in ["request", "receipt_template", "bundle_manifest", "launch_plan", "operator_evidence_template", "staged_midi"]:
+            for key in ["request", "receipt_template", "operator_evidence_draft", "bundle_manifest", "launch_plan", "operator_evidence_template", "staged_midi"]:
                 track_path = temp_root / track[key]["path"]
                 if not track_path.exists():
                     print(f"DAW mutation queue missing staged artifact: {track_path}", file=sys.stderr)
                     return 1
+            evidence_draft = load_json(temp_root / track["operator_evidence_draft"]["path"])
+            if evidence_draft.get("operator_approval_reference") != "" or evidence_draft.get("rollback_copy_reference") != "":
+                print("DAW mutation queue operator evidence draft must not prefill approval or rollback references.", file=sys.stderr)
+                return 1
+            request = load_json(temp_root / track["request"]["path"])
+            if evidence_draft.get("skipped_action_ids") != request["planned_action_ids"]:
+                print("DAW mutation queue operator evidence draft must account for planned actions as skipped by default.", file=sys.stderr)
+                return 1
+            if evidence_draft.get("postflight_checks") != request["required_postflight_checks"]:
+                print("DAW mutation queue operator evidence draft must mirror request postflight checks.", file=sys.stderr)
+                return 1
+            assert_no_sensitive_paths(evidence_draft, "queue operator evidence draft")
             launch_plan = load_json(temp_root / track["launch_plan"]["path"])
             if launch_plan.get("launch_status") != "blocked_until_confirm_live_mutation":
                 print("DAW mutation queue must keep each Ableton launch blocked.", file=sys.stderr)
@@ -196,11 +208,13 @@ def main() -> int:
 
         request_path = output_dir / TRACK_SLUG / "mutation-request.json"
         receipt_path = output_dir / TRACK_SLUG / "receipt-template.json"
-        if not request_path.exists() or not receipt_path.exists():
-            print("DAW mutation preflight must write request and receipt-template JSON files.", file=sys.stderr)
+        evidence_draft_path = output_dir / TRACK_SLUG / "operator-evidence.json"
+        if not request_path.exists() or not receipt_path.exists() or not evidence_draft_path.exists():
+            print("DAW mutation preflight must write request, receipt-template, and operator-evidence draft JSON files.", file=sys.stderr)
             return 1
         request = load_json(request_path)
         receipt = load_json(receipt_path)
+        evidence_draft = load_json(evidence_draft_path)
         if request.get("execution_status") != "prepared_not_applied":
             print("DAW mutation request must not claim an applied Live mutation.", file=sys.stderr)
             return 1
@@ -214,8 +228,18 @@ def main() -> int:
         if receipt.get("required_postflight_checks") != package["receipt_contract"]["required_postflight_checks"]:
             print("Receipt template must mirror the package postflight contract.", file=sys.stderr)
             return 1
+        if evidence_draft.get("operator_approval_reference") != "" or evidence_draft.get("rollback_copy_reference") != "":
+            print("Operator evidence draft must require the operator to fill approval and rollback references.", file=sys.stderr)
+            return 1
+        if evidence_draft.get("skipped_action_ids") != request["planned_action_ids"]:
+            print("Operator evidence draft must account for planned actions as skipped by default.", file=sys.stderr)
+            return 1
+        if evidence_draft.get("postflight_checks") != request["required_postflight_checks"]:
+            print("Operator evidence draft must mirror request postflight checks.", file=sys.stderr)
+            return 1
         assert_no_sensitive_paths(request, "mutation request")
         assert_no_sensitive_paths(receipt, "receipt template")
+        assert_no_sensitive_paths(evidence_draft, "operator evidence draft")
 
         bundle_dir = temp_root / "bundle"
         bundle_result = run_command(
@@ -254,6 +278,9 @@ def main() -> int:
         if bundle_manifest.get("midi_staging", {}).get("sha256") != request["midi_verification"]["expected_sha256"]:
             print("Import bundle must preserve the MIDI hash.", file=sys.stderr)
             return 1
+        if str(evidence_draft_path) not in bundle_manifest.get("receipt_command", []):
+            print("Import bundle receipt command must point at the editable operator-evidence draft.", file=sys.stderr)
+            return 1
         if evidence_template.get("skipped_action_ids") != request["planned_action_ids"]:
             print("Evidence template must account for planned action ids as skipped by default.", file=sys.stderr)
             return 1
@@ -276,6 +303,24 @@ def main() -> int:
             print("Import bundle launcher must reject Ableton launch without explicit confirmation.", file=sys.stderr)
             print(blocked_launch_result.stdout, file=sys.stderr)
             print(blocked_launch_result.stderr, file=sys.stderr)
+            return 1
+
+        draft_receipt_result = run_command(
+            [
+                PYTHON,
+                "scripts/record_live12_daw_mutation_receipt.py",
+                "--request",
+                str(request_path),
+                "--evidence",
+                str(evidence_draft_path),
+                "--output",
+                str(temp_root / "draft-receipt.json"),
+            ]
+        )
+        if draft_receipt_result.returncode == 0 or "operator_approval_reference is required" not in draft_receipt_result.stderr:
+            print("Receipt recorder must reject unapproved operator evidence drafts.", file=sys.stderr)
+            print(draft_receipt_result.stdout, file=sys.stderr)
+            print(draft_receipt_result.stderr, file=sys.stderr)
             return 1
 
         evidence_path = temp_root / "mutation-evidence.json"

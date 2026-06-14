@@ -134,6 +134,23 @@ def build_receipt_template(package: dict[str, Any], request: dict[str, Any]) -> 
     }
 
 
+def build_operator_evidence_draft(request: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "operator_approval_reference": "",
+        "rollback_copy_reference": "",
+        "applied_action_ids": [],
+        "skipped_action_ids": request["planned_action_ids"],
+        "created_artifacts": [
+            {
+                "type": "local_ableton_session",
+                "reference": "Fill after Ableton Live confirms the local set mutation.",
+                "git_policy": "not_committed",
+            }
+        ],
+        "postflight_checks": request["required_postflight_checks"],
+    }
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--track", required=True, help="Track slug from the generated DAW mutation package.")
@@ -174,11 +191,13 @@ def main() -> int:
         print(f"MIDI hash mismatch for track {args.track}", file=sys.stderr)
         return 1
     receipt = build_receipt_template(package, request)
+    evidence_draft = build_operator_evidence_draft(request)
 
     output_root = args.output_dir if args.output_dir.is_absolute() else ROOT / args.output_dir
     track_output = output_root / args.track
     write_json(track_output / "mutation-request.json", request)
     write_json(track_output / "receipt-template.json", receipt)
+    write_json(track_output / "operator-evidence.json", evidence_draft)
     print(
         json.dumps(
             {
