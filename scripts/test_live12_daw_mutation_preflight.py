@@ -138,6 +138,67 @@ def main() -> int:
         assert_no_sensitive_paths(request, "mutation request")
         assert_no_sensitive_paths(receipt, "receipt template")
 
+        bundle_dir = temp_root / "bundle"
+        bundle_result = run_command(
+            [
+                PYTHON,
+                "scripts/stage_live12_daw_import_bundle.py",
+                "--request",
+                str(request_path),
+                "--output-dir",
+                str(bundle_dir),
+                "--stable",
+            ]
+        )
+        if bundle_result.returncode != 0:
+            print(bundle_result.stdout, file=sys.stderr)
+            print(bundle_result.stderr, file=sys.stderr)
+            return bundle_result.returncode
+        bundle_root = bundle_dir / TRACK_SLUG
+        bundle_manifest_path = bundle_root / "bundle-manifest.json"
+        launch_plan_path = bundle_root / "launch-plan.json"
+        evidence_template_path = bundle_root / "operator-evidence-template.json"
+        staged_midi_path = bundle_root / "midi" / "good-vibrations-in-a-burned-barn.mid"
+        for required_path in [bundle_manifest_path, launch_plan_path, evidence_template_path, staged_midi_path]:
+            if not required_path.exists():
+                print(f"Import bundle missing expected file: {required_path}", file=sys.stderr)
+                return 1
+        bundle_manifest = load_json(bundle_manifest_path)
+        launch_plan = load_json(launch_plan_path)
+        evidence_template = load_json(evidence_template_path)
+        if bundle_manifest.get("execution_status") != "staged_not_launched":
+            print("Import bundle must not claim Ableton was launched.", file=sys.stderr)
+            return 1
+        if launch_plan.get("launch_status") != "blocked_until_confirm_live_mutation":
+            print("Launch plan must require explicit Live mutation confirmation.", file=sys.stderr)
+            return 1
+        if bundle_manifest.get("midi_staging", {}).get("sha256") != request["midi_verification"]["expected_sha256"]:
+            print("Import bundle must preserve the MIDI hash.", file=sys.stderr)
+            return 1
+        if evidence_template.get("skipped_action_ids") != request["planned_action_ids"]:
+            print("Evidence template must account for planned action ids as skipped by default.", file=sys.stderr)
+            return 1
+        assert_no_sensitive_paths(bundle_manifest, "bundle manifest")
+        assert_no_sensitive_paths(launch_plan, "launch plan")
+        assert_no_sensitive_paths(evidence_template, "evidence template")
+
+        blocked_launch_result = run_command(
+            [
+                PYTHON,
+                "scripts/stage_live12_daw_import_bundle.py",
+                "--request",
+                str(request_path),
+                "--output-dir",
+                str(temp_root / "blocked-launch"),
+                "--launch-ableton",
+            ]
+        )
+        if blocked_launch_result.returncode == 0 or "--confirm-live-mutation is required" not in blocked_launch_result.stderr:
+            print("Import bundle launcher must reject Ableton launch without explicit confirmation.", file=sys.stderr)
+            print(blocked_launch_result.stdout, file=sys.stderr)
+            print(blocked_launch_result.stderr, file=sys.stderr)
+            return 1
+
         evidence_path = temp_root / "mutation-evidence.json"
         evidence = {
             "operator_approval_reference": APPROVAL_REFERENCE,

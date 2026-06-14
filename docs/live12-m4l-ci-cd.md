@@ -59,7 +59,25 @@ For future Max device work:
 python3 scripts/prepare_live12_daw_mutation.py --track good-vibrations-in-a-burned-barn
 ```
 
-6. After an approved local Ableton/Max mutation attempt, record operator evidence against the prepared request:
+6. Stage a local Ableton import bundle with the generated MIDI and launch plan:
+
+```bash
+python3 scripts/stage_live12_daw_import_bundle.py \
+  --request output/daw-mutations/good-vibrations-in-a-burned-barn/mutation-request.json
+```
+
+To send the staged MIDI to Ableton Live, the launcher requires explicit mutation approval and rollback evidence:
+
+```bash
+python3 scripts/stage_live12_daw_import_bundle.py \
+  --request output/daw-mutations/good-vibrations-in-a-burned-barn/mutation-request.json \
+  --launch-ableton \
+  --confirm-live-mutation \
+  --operator-approval-reference <approval-id> \
+  --rollback-copy-reference <rollback-note>
+```
+
+7. After an approved local Ableton/Max mutation attempt, record operator evidence against the prepared request:
 
 ```bash
 python3 scripts/record_live12_daw_mutation_receipt.py \
@@ -67,4 +85,4 @@ python3 scripts/record_live12_daw_mutation_receipt.py \
   --evidence output/daw-mutations/good-vibrations-in-a-burned-barn/operator-evidence.json
 ```
 
-7. Export stems/renders to an artifact store or release process with provenance, not directly into the source repo.
+8. Export stems/renders to an artifact store or release process with provenance, not directly into the source repo.
