@@ -35,6 +35,16 @@ def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def expected_track_slugs(package_jobs: list[dict[str, Any]]) -> list[str]:
+    source_order = [*EXPECTED_TRACK_SLUGS]
+    source_order.extend(
+        job["track_slug"]
+        for job in package_jobs
+        if job.get("track_slug") and job["track_slug"] not in source_order
+    )
+    return source_order
+
+
 def iter_string_values(value: object) -> list[str]:
     if isinstance(value, str):
         return [value]
@@ -86,7 +96,8 @@ def main() -> int:
 
         package = load_json(package_path)
         jobs = package.get("jobs", [])
-        if package.get("schema_version") != 1 or len(jobs) != 5:
+        expected_slugs = expected_track_slugs(jobs)
+        if package.get("schema_version") != 1 or len(jobs) != len(expected_slugs):
             print("Mutation package must contain schema_version 1 and one job per generated track.", file=sys.stderr)
             return 1
         first_job = jobs[0]
@@ -132,7 +143,7 @@ def main() -> int:
             print("DAW mutation queue must not claim Ableton was launched.", file=sys.stderr)
             return 1
         queue_tracks = queue_manifest.get("tracks", [])
-        if [track.get("track_slug") for track in queue_tracks] != EXPECTED_TRACK_SLUGS:
+        if [track.get("track_slug") for track in queue_tracks] != expected_slugs:
             print("DAW mutation queue must preserve package track order.", file=sys.stderr)
             return 1
         expected_action_count = sum(job["mutation_action_count"] for job in jobs)

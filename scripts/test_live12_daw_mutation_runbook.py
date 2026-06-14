@@ -46,6 +46,16 @@ def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def expected_track_slugs(package_jobs: list[dict[str, Any]]) -> list[str]:
+    source_order = [*EXPECTED_TRACK_SLUGS]
+    source_order.extend(
+        job["track_slug"]
+        for job in package_jobs
+        if job.get("track_slug") and job["track_slug"] not in source_order
+    )
+    return source_order
+
+
 def diff_text(expected_path: Path, actual_path: Path) -> str:
     expected = expected_path.read_text(encoding="utf-8").splitlines(keepends=True)
     actual = actual_path.read_text(encoding="utf-8").splitlines(keepends=True)
@@ -122,6 +132,7 @@ def main() -> int:
         max_contracts = load_json(ROOT / "automation" / "generated" / "max-for-live-device-contracts.json")
         expected_device_ids = [device["id"] for device in max_contracts["devices"]]
         package_jobs_by_slug = {job["track_slug"]: job for job in package["jobs"]}
+        expected_slugs = expected_track_slugs(package["jobs"])
 
         if generated_json.read_text(encoding="utf-8") != COMMITTED_JSON.read_text(encoding="utf-8"):
             print(diff_text(COMMITTED_JSON, generated_json), file=sys.stderr)
@@ -153,10 +164,10 @@ def main() -> int:
             return 1
 
         tracks = runbook.get("tracks", [])
-        if [track.get("track_slug") for track in tracks] != EXPECTED_TRACK_SLUGS:
+        if [track.get("track_slug") for track in tracks] != expected_slugs:
             print("DAW mutation runbook must preserve mutation package track order.", file=sys.stderr)
             return 1
-        if runbook.get("track_count") != len(EXPECTED_TRACK_SLUGS):
+        if runbook.get("track_count") != len(expected_slugs):
             print("DAW mutation runbook must summarize the generated track count.", file=sys.stderr)
             return 1
 

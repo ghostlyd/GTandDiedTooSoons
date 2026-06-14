@@ -1,0 +1,271 @@
+{
+  "approved_source_count": 4,
+  "approved_sources": [
+    {
+      "browser_evidence": {
+        "artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-expanded.png",
+        "captured_at": "2026-06-14T13:51:24Z",
+        "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "trace_artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-trace.zip"
+      },
+      "byte_size": 1208108,
+      "content_type": "audio/x-wav",
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "item_url": "https://www.loc.gov/item/jukebox-260123/",
+      "local_file_policy": "raw_audio_ignored_metadata_only",
+      "name": "Carnival of Venice - excerpt 001",
+      "project_use": "Virtuosic melodic ornament source for banjo-roll variation, alien granular flourishes, and lead-controller pitch-bend studies.",
+      "rights_evidence": {
+        "captured_at": "2026-06-14T13:51:24Z",
+        "collection": "The National Jukebox: Folk Music",
+        "credit_recommendation": "Attribution is recommended but not required; use the Citizen DJ / Library of Congress / National Jukebox credit line.",
+        "cultural_respect_note": "Treat as a historical instrumental source and preserve the collection credit when transformed.",
+        "evidence_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "reuse_scope": "Copy, modify, distribute, and perform, including commercial use, without asking permission.",
+        "rights_summary": "Citizen DJ states the collection works have been identified as public domain and are free to use and reuse without restriction."
+      },
+      "rights_status": "public_domain",
+      "sha256": "a62d633eb195f0ecacceedc1831f05fc87db9da07eec114e9d6af667b93b4adb",
+      "source_id": "loc-citizen-dj-carnival-of-venice-260123-001",
+      "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+      "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+    },
+    {
+      "browser_evidence": {
+        "artifact_path": "output/playwright/loc-citizen-dj-folk-20260614.png",
+        "captured_at": "2026-06-14T12:42:00Z",
+        "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/"
+      },
+      "byte_size": 5778092,
+      "content_type": "audio/x-wav",
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "item_url": "https://www.loc.gov/item/jukebox-123798/",
+      "local_file_policy": "raw_audio_ignored_metadata_only",
+      "name": "Devil's dream reel - excerpt 001",
+      "project_use": "Old-time fiddle reel source for banjo/fiddle chop, granular sampler, and call-and-response arrangement experiments.",
+      "rights_evidence": {
+        "captured_at": "2026-06-14T12:42:00Z",
+        "collection": "The National Jukebox: Folk Music",
+        "credit_recommendation": "Attribution is recommended but not required; use the Citizen DJ / Library of Congress / National Jukebox credit line.",
+        "cultural_respect_note": "LOC asks artists to approach historical recordings with respect and notes privacy or publicity rights may still affect some uses.",
+        "evidence_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "reuse_scope": "Copy, modify, distribute, and perform, including commercial use, without asking permission.",
+        "rights_summary": "Citizen DJ states the collection works have been identified as public domain and are free to use and reuse without restriction."
+      },
+      "rights_status": "public_domain",
+      "sha256": "f0b80ccd67d28210b62e9b4bcae1fb6b7066855da34c3c1b1a80d7a47f1f7a14",
+      "source_id": "loc-citizen-dj-devils-dream-reel-123798-001",
+      "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+      "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+    },
+    {
+      "browser_evidence": {
+        "artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-expanded.png",
+        "captured_at": "2026-06-14T13:51:24Z",
+        "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "trace_artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-trace.zip"
+      },
+      "byte_size": 1887980,
+      "content_type": "audio/x-wav",
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "item_url": "https://www.loc.gov/item/jukebox-12147/",
+      "local_file_policy": "raw_audio_ignored_metadata_only",
+      "name": "Duke of Marlborough - excerpt 001",
+      "project_use": "Ballad-contour and modal phrase source for A.P. Carter-style narrative hooks, fiddle drone reharmonization, and slow-house vocal-chop beds.",
+      "rights_evidence": {
+        "captured_at": "2026-06-14T13:51:24Z",
+        "collection": "The National Jukebox: Folk Music",
+        "credit_recommendation": "Attribution is recommended but not required; use the Citizen DJ / Library of Congress / National Jukebox credit line.",
+        "cultural_respect_note": "Treat as historical ballad source material; avoid implying contemporary endorsement by performers or communities.",
+        "evidence_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "reuse_scope": "Copy, modify, distribute, and perform, including commercial use, without asking permission.",
+        "rights_summary": "Citizen DJ states the collection works have been identified as public domain and are free to use and reuse without restriction."
+      },
+      "rights_status": "public_domain",
+      "sha256": "a896860d2f155d2f93203b15534ad833c1fd1c174d5192a045cc022687e5243f",
+      "source_id": "loc-citizen-dj-duke-of-marlborough-12147-001",
+      "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+      "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+    },
+    {
+      "browser_evidence": {
+        "artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-expanded.png",
+        "captured_at": "2026-06-14T13:51:24Z",
+        "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "trace_artifact_path": "output/playwright/loc-citizen-dj-folk-20260614-trace.zip"
+      },
+      "byte_size": 5809196,
+      "content_type": "audio/x-wav",
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "item_url": "https://www.loc.gov/item/jukebox-247928/",
+      "local_file_policy": "raw_audio_ignored_metadata_only",
+      "name": "Turkey in the straw medley - excerpt 001",
+      "project_use": "Early banjo/traditional-country rhythmic DNA for AeroBand banjo mapping, boom-chuck counter-rhythm, and chopped call-and-response studies.",
+      "rights_evidence": {
+        "captured_at": "2026-06-14T13:51:24Z",
+        "collection": "The National Jukebox: Folk Music",
+        "credit_recommendation": "Attribution is recommended but not required; use the Citizen DJ / Library of Congress / National Jukebox credit line.",
+        "cultural_respect_note": "LOC warns that historical recordings may reflect language, attitudes, and perspectives of their time; review context before foregrounding this tune.",
+        "evidence_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "reuse_scope": "Copy, modify, distribute, and perform, including commercial use, without asking permission.",
+        "rights_summary": "Citizen DJ states the collection works have been identified as public domain and are free to use and reuse without restriction."
+      },
+      "rights_status": "public_domain",
+      "sha256": "3f5ed365b48faa2a21fb9d9ab7dbe467af01cdb8d709413ab324008472113baa",
+      "source_id": "loc-citizen-dj-turkey-in-the-straw-medley-247928-001",
+      "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+      "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+    }
+  ],
+  "artifact_policy": {
+    "git_policy": "metadata_only_no_raw_audio",
+    "must_not_commit": [
+      "raw source audio",
+      "downloaded samples",
+      "rendered audio",
+      "Ableton sets",
+      "compiled Max for Live devices",
+      "credentials",
+      "cookies",
+      "license files"
+    ],
+    "raw_audio_root": "sources/public-domain/raw"
+  },
+  "deck_policy": {
+    "approval_gate": "live_set_mutation",
+    "default_state": "muted_until_human_provenance_review",
+    "session_track": "Public Domain Source Deck",
+    "unmute_policy": "Only unmute after rights/provenance review, source credit review, and operator approval."
+  },
+  "generated_at": "1970-01-01T00:00:00Z",
+  "generator": "scripts/render_public_domain_source_deck.py",
+  "purpose": "Metadata-only public-domain source deck handoff for Ableton Live 12 / Max for Live sampling and reference work.",
+  "schema_version": 1,
+  "source_file_sha256": {
+    "automation/generated/live12-daw-action-plan.json": "dbe1b210945519be06e0fed556563be219b213f5f0017df043bd67c47fa0b4fc",
+    "catalogs/public-domain-bluegrass-sources.json": "ffd31092e6c9914fc8e91f14e298ebfb093beb3348134ebd23a289abea192bd9",
+    "sources/public-domain/download-ledger.json": "0e85c95b9beaf356a4fd1a4e2c7c5db1add06d89a09f86aa3d830844a87e0ebf"
+  },
+  "source_files": [
+    "catalogs/public-domain-bluegrass-sources.json",
+    "sources/public-domain/download-ledger.json",
+    "automation/generated/live12-daw-action-plan.json"
+  ],
+  "track_assignment_count": 6,
+  "track_assignments": [
+    {
+      "approval_gate": "live_set_mutation",
+      "candidate_source_count": 3,
+      "candidate_source_ids": [
+        "loc-citizen-dj-devils-dream-reel-123798-001",
+        "loc-citizen-dj-carnival-of-venice-260123-001",
+        "loc-citizen-dj-duke-of-marlborough-12147-001"
+      ],
+      "deck_state": "muted_until_human_provenance_review",
+      "required_before_unmute": [
+        "source_id appears in sources/public-domain/download-ledger.json",
+        "rights_status is public_domain, cc0, or cc_by",
+        "credit line is carried into release notes",
+        "no raw sample path is written into tracked repo artifacts"
+      ],
+      "session_track": "Public Domain Source Deck",
+      "track_slug": "good-vibrations-in-a-burned-barn",
+      "track_title": "Good Vibrations in a Burned Barn"
+    },
+    {
+      "approval_gate": "live_set_mutation",
+      "candidate_source_count": 3,
+      "candidate_source_ids": [
+        "loc-citizen-dj-duke-of-marlborough-12147-001",
+        "loc-citizen-dj-devils-dream-reel-123798-001",
+        "loc-citizen-dj-turkey-in-the-straw-medley-247928-001"
+      ],
+      "deck_state": "muted_until_human_provenance_review",
+      "required_before_unmute": [
+        "source_id appears in sources/public-domain/download-ledger.json",
+        "rights_status is public_domain, cc0, or cc_by",
+        "credit line is carried into release notes",
+        "no raw sample path is written into tracked repo artifacts"
+      ],
+      "session_track": "Public Domain Source Deck",
+      "track_slug": "a-p-carter-in-the-warehouse",
+      "track_title": "A.P. Carter in the Warehouse"
+    },
+    {
+      "approval_gate": "live_set_mutation",
+      "candidate_source_count": 3,
+      "candidate_source_ids": [
+        "loc-citizen-dj-devils-dream-reel-123798-001",
+        "loc-citizen-dj-duke-of-marlborough-12147-001",
+        "loc-citizen-dj-carnival-of-venice-260123-001"
+      ],
+      "deck_state": "muted_until_human_provenance_review",
+      "required_before_unmute": [
+        "source_id appears in sources/public-domain/download-ledger.json",
+        "rights_status is public_domain, cc0, or cc_by",
+        "credit line is carried into release notes",
+        "no raw sample path is written into tracked repo artifacts"
+      ],
+      "session_track": "Public Domain Source Deck",
+      "track_slug": "no-gods-no-masters-no-quantize",
+      "track_title": "No Gods, No Masters, No Quantize"
+    },
+    {
+      "approval_gate": "live_set_mutation",
+      "candidate_source_count": 3,
+      "candidate_source_ids": [
+        "loc-citizen-dj-devils-dream-reel-123798-001",
+        "loc-citizen-dj-duke-of-marlborough-12147-001",
+        "loc-citizen-dj-carnival-of-venice-260123-001"
+      ],
+      "deck_state": "muted_until_human_provenance_review",
+      "required_before_unmute": [
+        "source_id appears in sources/public-domain/download-ledger.json",
+        "rights_status is public_domain, cc0, or cc_by",
+        "credit line is carried into release notes",
+        "no raw sample path is written into tracked repo artifacts"
+      ],
+      "session_track": "Public Domain Source Deck",
+      "track_slug": "possum-kingdom-afterhours",
+      "track_title": "Possum Kingdom Afterhours"
+    },
+    {
+      "approval_gate": "live_set_mutation",
+      "candidate_source_count": 3,
+      "candidate_source_ids": [
+        "loc-citizen-dj-carnival-of-venice-260123-001",
+        "loc-citizen-dj-duke-of-marlborough-12147-001",
+        "loc-citizen-dj-turkey-in-the-straw-medley-247928-001"
+      ],
+      "deck_state": "muted_until_human_provenance_review",
+      "required_before_unmute": [
+        "source_id appears in sources/public-domain/download-ledger.json",
+        "rights_status is public_domain, cc0, or cc_by",
+        "credit line is carried into release notes",
+        "no raw sample path is written into tracked repo artifacts"
+      ],
+      "session_track": "Public Domain Source Deck",
+      "track_slug": "the-ballad-of-the-broken-controller",
+      "track_title": "The Ballad of the Broken Controller"
+    },
+    {
+      "approval_gate": "live_set_mutation",
+      "candidate_source_count": 3,
+      "candidate_source_ids": [
+        "loc-citizen-dj-devils-dream-reel-123798-001",
+        "loc-citizen-dj-duke-of-marlborough-12147-001",
+        "loc-citizen-dj-turkey-in-the-straw-medley-247928-001"
+      ],
+      "deck_state": "muted_until_human_provenance_review",
+      "required_before_unmute": [
+        "source_id appears in sources/public-domain/download-ledger.json",
+        "rights_status is public_domain, cc0, or cc_by",
+        "credit line is carried into release notes",
+        "no raw sample path is written into tracked repo artifacts"
+      ],
+      "session_track": "Public Domain Source Deck",
+      "track_slug": "rail-yard-ghost-in-the-control-room",
+      "track_title": "Rail Yard Ghost in the Control Room"
+    }
+  ]
+}

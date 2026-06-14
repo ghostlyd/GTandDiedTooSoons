@@ -25,6 +25,7 @@ REQUIRED_FILES = [
     "docs/playwright-source-capture.md",
     "docs/recommended-packs.md",
     "docs/live12-daw-mutation-runbook.md",
+    "docs/public-domain-source-deck.md",
     "catalogs/recommended-packs.json",
     "catalogs/library-installation-plan.json",
     "catalogs/public-domain-bluegrass-sources.json",
@@ -34,6 +35,7 @@ REQUIRED_FILES = [
     "automation/generated/live12-daw-action-plan.json",
     "automation/generated/live12-daw-mutation-package.json",
     "automation/generated/live12-daw-mutation-runbook.json",
+    "automation/generated/public-domain-source-deck.json",
     "automation/generated/max-for-live-device-contracts.json",
     "automation/live12-session-template.json",
     "automation/worker-chain.json",
@@ -46,6 +48,7 @@ REQUIRED_FILES = [
     "scripts/render_live12_daw_action_plan.py",
     "scripts/render_live12_daw_mutation_package.py",
     "scripts/render_live12_daw_mutation_runbook.py",
+    "scripts/render_public_domain_source_deck.py",
     "scripts/render_max_for_live_device_contracts.py",
     "scripts/prepare_live12_daw_mutation.py",
     "scripts/prepare_live12_daw_mutation_queue.py",
@@ -55,6 +58,7 @@ REQUIRED_FILES = [
     "scripts/test_max_for_live_device_contracts.py",
     "scripts/test_live12_daw_mutation_preflight.py",
     "scripts/test_live12_daw_mutation_runbook.py",
+    "scripts/test_public_domain_source_deck.py",
     "sources/public-domain/download-ledger.json",
 ]
 
@@ -152,6 +156,11 @@ EXPECTED_DAW_ACTION_PLAN_SOURCES = {
     "catalogs/public-domain-bluegrass-sources.json",
     "sources/public-domain/download-ledger.json",
     "inventory/live12-local-inventory.json",
+}
+EXPECTED_PUBLIC_DOMAIN_SOURCE_DECK_SOURCES = {
+    "catalogs/public-domain-bluegrass-sources.json",
+    "sources/public-domain/download-ledger.json",
+    "automation/generated/live12-daw-action-plan.json",
 }
 EXPECTED_DAW_MUTATION_PACKAGE_SOURCES = {
     "automation/generated/live12-daw-action-plan.json",
@@ -706,6 +715,7 @@ def validate_json_contracts(root: Path, errors: list[str]) -> None:
         "automation/generated/live12-daw-action-plan.json",
         "automation/generated/live12-daw-mutation-package.json",
         "automation/generated/live12-daw-mutation-runbook.json",
+        "automation/generated/public-domain-source-deck.json",
         "automation/live12-session-template.json",
         "automation/worker-chain.json",
         "compositions/down-tempo-punk-bluegrass-set.json",
@@ -1232,6 +1242,129 @@ def validate_generated_daw_action_plan(root: Path, errors: list[str]) -> None:
             fail(errors, f"Generated DAW action plan must not contain raw audio paths: {string_value}")
         if SECRET_VALUE_PATTERN.search(string_value):
             fail(errors, "Generated DAW action plan must not contain API tokens or bearer credentials")
+
+
+def validate_public_domain_source_deck(root: Path, errors: list[str]) -> None:
+    data = load_json(root / "automation/generated/public-domain-source-deck.json", errors)
+    markdown_path = root / "docs/public-domain-source-deck.md"
+    catalog = load_json(root / "catalogs/public-domain-bluegrass-sources.json", errors)
+    ledger = load_json(root / "sources/public-domain/download-ledger.json", errors)
+    daw_plan = load_json(root / "automation/generated/live12-daw-action-plan.json", errors)
+    if not data or not ledger or not daw_plan:
+        return
+
+    if data.get("schema_version") != 1:
+        fail(errors, "Generated public-domain source deck must use schema_version 1")
+    if data.get("generated_at") != STABLE_GENERATED_AT:
+        fail(errors, "Generated public-domain source deck must be committed with stable generated_at")
+    if data.get("generator") != "scripts/render_public_domain_source_deck.py":
+        fail(errors, "Generated public-domain source deck must name scripts/render_public_domain_source_deck.py as generator")
+
+    source_files = set(data.get("source_files", []))
+    if source_files != EXPECTED_PUBLIC_DOMAIN_SOURCE_DECK_SOURCES:
+        fail(errors, "Generated public-domain source deck source_files must match expected source manifests")
+    source_hashes = data.get("source_file_sha256") or {}
+    if set(source_hashes) != EXPECTED_PUBLIC_DOMAIN_SOURCE_DECK_SOURCES:
+        fail(errors, "Generated public-domain source deck source_file_sha256 keys must match expected source manifests")
+    for source_file in source_files:
+        if Path(source_file).is_absolute() or ".." in Path(source_file).parts or not (root / source_file).exists():
+            fail(errors, f"Generated public-domain source deck source file is invalid: {source_file}")
+            continue
+        expected_hash = source_hashes.get(source_file)
+        if not SHA256_PATTERN.match(str(expected_hash or "")):
+            fail(errors, f"Generated public-domain source deck source hash is invalid: {source_file}")
+        elif expected_hash != sha256_file(root / source_file):
+            fail(errors, f"Generated public-domain source deck source hash is stale: {source_file}")
+
+    deck_policy = require_dict(data.get("deck_policy"), "Generated public-domain source deck deck_policy", errors)
+    if deck_policy.get("session_track") != "Public Domain Source Deck":
+        fail(errors, "Generated public-domain source deck must target the Public Domain Source Deck track")
+    if deck_policy.get("default_state") != "muted_until_human_provenance_review":
+        fail(errors, "Generated public-domain source deck must remain muted by default")
+    if deck_policy.get("approval_gate") != "live_set_mutation":
+        fail(errors, "Generated public-domain source deck must require live_set_mutation approval")
+
+    artifact_policy = require_dict(data.get("artifact_policy"), "Generated public-domain source deck artifact_policy", errors)
+    if artifact_policy.get("git_policy") != "metadata_only_no_raw_audio":
+        fail(errors, "Generated public-domain source deck git_policy must be metadata_only_no_raw_audio")
+    if "raw source audio" not in artifact_policy.get("must_not_commit", []):
+        fail(errors, "Generated public-domain source deck must block raw source audio commits")
+
+    catalog_by_id = {
+        source.get("id"): source
+        for source in catalog.get("sources", [])
+        if source.get("id")
+    }
+    approved_sources = data.get("approved_sources", [])
+    ledger_downloads = ledger.get("downloads", [])
+    if data.get("approved_source_count") != len(ledger_downloads):
+        fail(errors, "Generated public-domain source deck approved_source_count must mirror the download ledger")
+    if [source.get("source_id") for source in approved_sources] != [record.get("source_id") for record in ledger_downloads]:
+        fail(errors, "Generated public-domain source deck approved source order must mirror the download ledger")
+    for source, record in zip(approved_sources, ledger_downloads, strict=False):
+        source_id = record.get("source_id")
+        catalog_source = catalog_by_id.get(source_id, {})
+        for blocked_field in ["download_url", "final_url", "local_file"]:
+            if blocked_field in source:
+                fail(errors, f"Generated public-domain source deck must not expose {blocked_field}: {source_id}")
+        for field in ["source_id", "name", "rights_status", "sha256", "byte_size", "content_type", "credit_line", "source_url", "transformation", "browser_evidence", "rights_evidence"]:
+            if source.get(field) != record.get(field):
+                fail(errors, f"Generated public-domain source deck source {field} is stale: {source_id}")
+        if source.get("project_use") != catalog_source.get("project_use"):
+            fail(errors, f"Generated public-domain source deck source project_use is stale: {source_id}")
+        if source.get("item_url") != catalog_source.get("item_url"):
+            fail(errors, f"Generated public-domain source deck source item_url is stale: {source_id}")
+        if source.get("rights_status") != "public_domain":
+            fail(errors, f"Generated public-domain source deck source must be public_domain: {source_id}")
+        if source.get("local_file_policy") != "raw_audio_ignored_metadata_only":
+            fail(errors, f"Generated public-domain source deck source local_file_policy is stale: {source_id}")
+
+    assignments = data.get("track_assignments", [])
+    daw_tracks = daw_plan.get("tracks", [])
+    if data.get("track_assignment_count") != len(daw_tracks) or len(assignments) != len(daw_tracks):
+        fail(errors, "Generated public-domain source deck track assignments must mirror DAW action plan track count")
+    if [assignment.get("track_slug") for assignment in assignments] != [track.get("slug") for track in daw_tracks]:
+        fail(errors, "Generated public-domain source deck track assignment order must mirror the DAW action plan")
+    for assignment, track in zip(assignments, daw_tracks, strict=False):
+        source_deck = track.get("source_deck", {})
+        expected_candidate_ids = [
+            candidate.get("source_id")
+            for candidate in source_deck.get("candidate_sources", [])
+        ]
+        if assignment.get("track_title") != track.get("title"):
+            fail(errors, f"Generated public-domain source deck track title is stale: {track.get('slug')}")
+        if assignment.get("deck_state") != source_deck.get("default_state"):
+            fail(errors, f"Generated public-domain source deck track state is stale: {track.get('slug')}")
+        if assignment.get("approval_gate") != source_deck.get("approval_gate"):
+            fail(errors, f"Generated public-domain source deck track approval gate is stale: {track.get('slug')}")
+        if assignment.get("session_track") != source_deck.get("session_track"):
+            fail(errors, f"Generated public-domain source deck track session_track is stale: {track.get('slug')}")
+        if assignment.get("candidate_source_ids") != expected_candidate_ids:
+            fail(errors, f"Generated public-domain source deck track candidates are stale: {track.get('slug')}")
+        if assignment.get("candidate_source_count") != len(expected_candidate_ids):
+            fail(errors, f"Generated public-domain source deck track candidate count is stale: {track.get('slug')}")
+        if assignment.get("required_before_unmute") != source_deck.get("required_checks", []):
+            fail(errors, f"Generated public-domain source deck track unmute checks are stale: {track.get('slug')}")
+
+    markdown = markdown_path.read_text(encoding="utf-8") if markdown_path.exists() else ""
+    for expected_text in [
+        "# Public-Domain Source Deck",
+        "metadata only",
+        "muted_until_human_provenance_review",
+        "raw source audio must remain outside Git",
+    ]:
+        if expected_text not in markdown:
+            fail(errors, f"Generated public-domain source deck markdown is missing required text: {expected_text}")
+
+    for string_value in iter_string_values(data):
+        if "/Users/" in string_value:
+            fail(errors, "Generated public-domain source deck must not contain absolute user paths")
+        if "sources/public-domain/raw/" in string_value or AUDIO_PATH_PATTERN.search(string_value):
+            fail(errors, f"Generated public-domain source deck must not contain raw audio paths: {string_value}")
+        if SECRET_VALUE_PATTERN.search(string_value):
+            fail(errors, "Generated public-domain source deck must not contain API tokens or bearer credentials")
+    if "/Users/" in markdown or "sources/public-domain/raw/" in markdown or SECRET_VALUE_PATTERN.search(markdown):
+        fail(errors, "Generated public-domain source deck markdown contains sensitive local data")
 
 
 def action_ids(track: dict, groups: list[str]) -> list[str]:
@@ -1882,6 +2015,7 @@ def main() -> int:
     validate_openai_orchestration(root, errors)
     validate_generated_worker_briefs(root, errors)
     validate_generated_daw_action_plan(root, errors)
+    validate_public_domain_source_deck(root, errors)
     validate_generated_daw_mutation_package(root, errors)
     validate_generated_daw_mutation_runbook(root, errors)
     validate_generated_composition_sketches(root, errors)

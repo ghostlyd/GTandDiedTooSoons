@@ -448,6 +448,98 @@
       },
       "track_slug": "the-ballad-of-the-broken-controller",
       "track_title": "The Ballad of the Broken Controller"
+    },
+    {
+      "affected_returns": [
+        "A Short Spring",
+        "B Deep Dub",
+        "C Alien Bloom",
+        "D Punk Crush"
+      ],
+      "affected_tracks": [
+        "AeroBand Banjo Lead",
+        "Fiddle / Hybrid Strings",
+        "Mandolin Chop",
+        "Dobro / Metallic Slide",
+        "Upright Bass / Sub",
+        "Acoustic Guitar Boom-Chuck",
+        "Punk Kit",
+        "Deep House Machines",
+        "Alien Sky",
+        "Public Domain Source Deck"
+      ],
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "approval_required_before_execution": [
+        "live_set_mutation",
+        "private_audio_upload"
+      ],
+      "blocked_action_groups": [
+        "mix_and_release_gates"
+      ],
+      "executable_action_groups": [
+        "session_actions",
+        "scene_actions",
+        "layer_actions",
+        "source_deck"
+      ],
+      "executable_action_ids": [
+        "rail-yard-ghost-in-the-control-room.session.set-tempo-and-swing",
+        "rail-yard-ghost-in-the-control-room.session.import-midi",
+        "rail-yard-ghost-in-the-control-room.session.configure-returns",
+        "rail-yard-ghost-in-the-control-room.scene.01",
+        "rail-yard-ghost-in-the-control-room.scene.02",
+        "rail-yard-ghost-in-the-control-room.scene.03",
+        "rail-yard-ghost-in-the-control-room.scene.04",
+        "rail-yard-ghost-in-the-control-room.scene.05",
+        "rail-yard-ghost-in-the-control-room.scene.06",
+        "rail-yard-ghost-in-the-control-room.scene.07",
+        "rail-yard-ghost-in-the-control-room.scene.08",
+        "rail-yard-ghost-in-the-control-room.layer.aeroband_banjo_lead",
+        "rail-yard-ghost-in-the-control-room.layer.fiddle_hybrid_strings",
+        "rail-yard-ghost-in-the-control-room.layer.mandolin_chop",
+        "rail-yard-ghost-in-the-control-room.layer.dobro_metallic_slide",
+        "rail-yard-ghost-in-the-control-room.layer.upright_bass_sub",
+        "rail-yard-ghost-in-the-control-room.layer.acoustic_guitar_boom_chuck",
+        "rail-yard-ghost-in-the-control-room.layer.punk_kit",
+        "rail-yard-ghost-in-the-control-room.layer.deep_house_machines",
+        "rail-yard-ghost-in-the-control-room.layer.alien_sky",
+        "rail-yard-ghost-in-the-control-room.source-deck.keep-muted-for-provenance-review"
+      ],
+      "execution_mode": "local_preflight_then_human_approved_daw_mutation",
+      "id": "daw-mutation.rail-yard-ghost-in-the-control-room",
+      "local_output_policy": {
+        "git_policy": "ignored_local_only",
+        "receipt_root": "output/daw-mutations"
+      },
+      "midi_artifact": {
+        "path": "compositions/generated/midi/rail-yard-ghost-in-the-control-room.mid",
+        "sha256": "6591072ba470b3775da4cfdbadb15d1042d469c7e466a17527051592be30293f",
+        "verification_action_id": "rail-yard-ghost-in-the-control-room.preflight.verify-midi-hash"
+      },
+      "mutation_action_count": 21,
+      "plan_track_sha256": "9609d1ebca38eee6a08c9d29c7e7e1b0cac8f1dd8b69594205364a0bbb64904a",
+      "preflight_action_ids": [
+        "rail-yard-ghost-in-the-control-room.preflight.verify-midi-hash",
+        "rail-yard-ghost-in-the-control-room.preflight.create-local-rollback-copy",
+        "rail-yard-ghost-in-the-control-room.preflight.confirm-no-private-audio-upload"
+      ],
+      "rollback": {
+        "instruction": "Save a timestamped local rollback copy outside Git before applying any Ableton Live or Max for Live mutation.",
+        "required": true
+      },
+      "source_deck_policy": {
+        "action_id": "rail-yard-ghost-in-the-control-room.source-deck.keep-muted-for-provenance-review",
+        "candidate_source_count": 3,
+        "default_state": "muted_until_human_provenance_review",
+        "requires_provenance_review": true,
+        "session_track": "Public Domain Source Deck"
+      },
+      "track_slug": "rail-yard-ghost-in-the-control-room",
+      "track_title": "Rail Yard Ghost in the Control Room"
     }
   ],
   "live_template": {
@@ -526,9 +618,9 @@
   },
   "schema_version": 1,
   "source_file_sha256": {
-    "automation/generated/live12-daw-action-plan.json": "9a246f1cad8e578a9d4b3d206d564a98c7a8a60a643afa9dc1ab93e7fef80bc1",
+    "automation/generated/live12-daw-action-plan.json": "dbe1b210945519be06e0fed556563be219b213f5f0017df043bd67c47fa0b4fc",
     "automation/live12-session-template.json": "f17640bd3d24a4f6953836393c3286a45c7ba9c9064399590611dac566c76c51",
-    "compositions/generated/live12-track-build-plans.json": "4f08ba22b55b0c61a9fd688e353a97ca4caa6de74f52e6d89d339ae2b9ac2498"
+    "compositions/generated/live12-track-build-plans.json": "0893e3a502e4b451f5d2b5b4da5848e732fd1c14bdd4f39512c745e5f7921bce"
   },
   "source_files": [
     "automation/generated/live12-daw-action-plan.json",
@@ -536,10 +628,10 @@
     "compositions/generated/live12-track-build-plans.json"
   ],
   "source_plan": {
-    "build_plan_track_count": 5,
+    "build_plan_track_count": 6,
     "path": "automation/generated/live12-daw-action-plan.json",
     "session_track_count": 10,
-    "sha256": "9a246f1cad8e578a9d4b3d206d564a98c7a8a60a643afa9dc1ab93e7fef80bc1",
-    "track_count": 5
+    "sha256": "dbe1b210945519be06e0fed556563be219b213f5f0017df043bd67c47fa0b4fc",
+    "track_count": 6
   }
 }
