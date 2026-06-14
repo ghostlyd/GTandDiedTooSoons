@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "set_name": "Down-Tempo Punk Bluegrass / Alien House Suite",
+  "tracks": [
+    {
+      "title": "Good Vibrations in a Burned Barn",
+      "tempo_bpm": 96,
+      "key_center": "D mixolydian",
+      "duration_target": "4:20",
+      "bluegrass_core": ["AeroBand banjo lead", "fiddle drone", "mandolin chop", "upright bass"],
+      "electronic_dna": ["sidechained sub", "granular vocal-like pads", "909 hat pulse"],
+      "punk_spirit": ["two-chord chorus", "dry kit hits", "shouted gang-response placeholders"],
+      "arrangement": [
+        "field-texture intro with public-domain source deck muted until cleared",
+        "banjo roll establishes hook over kick-free pulse",
+        "deep-house kick enters under mandolin chop",
+        "fiddle answer bends into granular sky",
+        "half-time punk break",
+        "final chorus with source deck slices if provenance approved"
+      ],
+      "max_for_live_focus": ["roll_probability_engine", "spatial_harmonic_field"]
+    },
+    {
+      "title": "A.P. Carter in the Warehouse",
+      "tempo_bpm": 88,
+      "key_center": "A minor / dorian interchange",
+      "duration_target": "3:45",
+      "bluegrass_core": ["banjo imitation", "dobro slide", "acoustic guitar boom-chuck", "fiddle tremolo"],
+      "electronic_dna": ["lowpassed deep-house chord stab", "dub send", "granular reverse tails"],
+      "punk_spirit": ["plainspoken topline", "minimal bridge", "distorted room crush"],
+      "arrangement": [
+        "dobro hook alone",
+        "warehouse kick and sub enter",
+        "call-and-response between banjo and stab",
+        "bridge strips to voice, stomp, and bowed harmonic",
+        "return with doubled banjo/dobro riff"
+      ],
+      "max_for_live_focus": ["call_response_router", "house_grid_conductor"]
+    },
+    {
+      "title": "No Gods, No Masters, No Quantize",
+      "tempo_bpm": 104,
+      "key_center": "G major with flat-7 pressure",
+      "duration_target": "3:10",
+      "bluegrass_core": ["fast banjo roll", "mandolin offbeats", "upright bass walk", "fiddle double-stop"],
+      "electronic_dna": ["acid bass shadow", "bitcrushed percussion", "spectral freeze fills"],
+      "punk_spirit": ["raw kit", "abrupt stops", "anti-polish vocal cadence"],
+      "arrangement": [
+        "count-off into unquantized banjo",
+        "kick locks after four bars",
+        "acid line mirrors bass roots",
+        "stop-time chorus",
+        "fiddle and spectral freeze outro"
+      ],
+      "max_for_live_focus": ["chop_clock_guard", "root_motion_limiter"]
+    },
+    {
+      "title": "Possum Kingdom Afterhours",
+      "tempo_bpm": 82,
+      "key_center": "E minor pentatonic",
+      "duration_target": "5:30",
+      "bluegrass_core": ["modal fiddle", "banjo harmonics", "dobro swells", "brush kit"],
+      "electronic_dna": ["slow dub-techno chords", "sub drone", "Inspired by Nature modulation"],
+      "punk_spirit": ["one-take lead rule", "feedback edges", "no glossy breakdown"],
+      "arrangement": [
+        "drone and fiddle establish place",
+        "brush kit and dub chords pulse",
+        "banjo harmonics become granular particles",
+        "dobro swell chorus",
+        "long spatial fade with low-end discipline"
+      ],
+      "max_for_live_focus": ["spatial_harmonic_field", "provenance_sampler"]
+    },
+    {
+      "title": "The Ballad of the Broken Controller",
+      "tempo_bpm": 100,
+      "key_center": "B flat major with punk chromatic passing tones",
+      "duration_target": "4:00",
+      "bluegrass_core": ["AeroBand banjo lead", "mandolin tremolo", "upright slap", "fiddle saw"],
+      "electronic_dna": ["glitch percussion", "resampled controller errors", "wide synthetic choir"],
+      "punk_spirit": ["failure-as-hook", "short loud refrain", "live controller risk retained"],
+      "arrangement": [
+        "controller calibration noises become rhythm",
+        "banjo riff locks to glitch percussion",
+        "mandolin tremolo lifts refrain",
+        "breakdown exposes failed notes",
+        "final refrain stacks all traditional instruments over alien choir"
+      ],
+      "max_for_live_focus": ["aeroband_banjo_mapper", "fill_trigger"]
+    }
+  ]
+}

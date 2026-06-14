@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "generated_for": "GTandDiedTooSoons",
+  "reviewed_on": "2026-06-14",
+  "items": [
+    {
+      "id": "ableton-drum-booth",
+      "vendor": "Ableton",
+      "name": "Drum Booth",
+      "priority": "high",
+      "status": "recommended",
+      "source_url": "https://www.ableton.com/en/packs/drum-booth/",
+      "license_action": "Install only through Ableton account or Live Browser Packs.",
+      "project_use": "Dry acoustic drums for punk kit energy and human reinforcement under electronic drums."
+    },
+    {
+      "id": "ableton-string-quartet",
+      "vendor": "Ableton",
+      "name": "String Quartet",
+      "priority": "high",
+      "status": "recommended",
+      "source_url": "https://www.ableton.com/en/packs/string-quartet/",
+      "license_action": "Paid pack; verify account entitlement before installation.",
+      "project_use": "Fiddle-like bowed lines, pizzicato pulses, tremolo tension, and chamber counterpoint."
+    },
+    {
+      "id": "ableton-sequencers",
+      "vendor": "Ableton",
+      "name": "Sequencers",
+      "priority": "high",
+      "status": "recommended",
+      "source_url": "https://www.ableton.com/en/packs/sequencers/",
+      "license_action": "Install through official Ableton pack flow; requires compatible Live/Max for Live license.",
+      "project_use": "Generative and probability sequencing for banjo rolls, house stabs, and modular arrangement sketches."
+    },
+    {
+      "id": "ableton-spectral-textures",
+      "vendor": "Ableton",
+      "name": "Spectral Textures",
+      "priority": "high",
+      "status": "recommended",
+      "source_url": "https://www.ableton.com/en/packs/spectral-textures/",
+      "license_action": "Free official Ableton pack; install through official download flow.",
+      "project_use": "Field-recording and additive-synthesis atmospheres for alien transitions."
+    },
+    {
+      "id": "ableton-inspired-by-nature",
+      "vendor": "Ableton",
+      "name": "Inspired by Nature",
+      "priority": "high",
+      "status": "observed_local",
+      "source_url": "https://www.ableton.com/en/packs/inspired-nature/",
+      "license_action": "Included with Live 12 Suite on this host; do not commit pack files.",
+      "project_use": "Generative soundscapes, evolving modulation, and natural-force Max for Live control."
+    },
+    {
+      "id": "ableton-granulator-iii",
+      "vendor": "Ableton",
+      "name": "Granulator III",
+      "priority": "high",
+      "status": "observed_local",
+      "source_url": "https://www.ableton.com/en/packs/granulator-iii/",
+      "license_action": "Observed locally; do not commit pack files.",
+      "project_use": "Granular transformation of banjo, fiddle, voice, and public-domain source fragments."
+    },
+    {
+      "id": "arturia-house-explorations",
+      "vendor": "Arturia",
+      "name": "House Explorations",
+      "priority": "high",
+      "status": "recommended",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/house_explorations",
+      "license_action": "Purchase/install through Arturia account, in-app store, or official sound bank store.",
+      "project_use": "Deep-house sub bass, chord stabs, EP keys, pads, and leads."
+    },
+    {
+      "id": "arturia-guitar-deconstructed",
+      "vendor": "Arturia",
+      "name": "Guitar Deconstructed",
+      "priority": "high",
+      "status": "recommended",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/rock-music/guitar_deconstructed",
+      "license_action": "Purchase/install through Arturia account, in-app store, or official sound bank store.",
+      "project_use": "Granular guitar-source presets that bridge punk strum energy and abstract ambience."
+    },
+    {
+      "id": "arturia-augmented-strings",
+      "vendor": "Arturia",
+      "name": "Augmented STRINGS",
+      "priority": "high",
+      "status": "observed_local",
+      "source_url": "https://www.arturia.com/products/software-instruments/augmented/strings",
+      "license_action": "Observed locally; use installed plugin, do not commit Arturia content.",
+      "project_use": "Hybrid acoustic/synthetic string layers for fiddle-family gestures and cinematic swells."
+    },
+    {
+      "id": "arturia-augmented-woodwinds",
+      "vendor": "Arturia",
+      "name": "Augmented WOODWINDS",
+      "priority": "medium",
+      "status": "observed_local",
+      "source_url": "https://www.arturia.com/products/software-instruments/augmented/woodwinds",
+      "license_action": "Observed locally; use installed plugin, do not commit Arturia content.",
+      "project_use": "Breath-like hybrid motion, ghost harmonies, and eerie counterlines."
+    },
+    {
+      "id": "arturia-folkloric-strings",
+      "vendor": "Arturia",
+      "name": "Folkloric Strings",
+      "priority": "medium",
+      "status": "recommended",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/cinematic-fx/folkloric_strings",
+      "license_action": "Purchase/install through Arturia account, in-app store, or official sound bank store.",
+      "project_use": "Old-world drones, bowed color, and roots-adjacent string atmosphere."
+    },
+    {
+      "id": "arturia-cities-in-dust",
+      "vendor": "Arturia",
+      "name": "Cities In Dust",
+      "priority": "medium",
+      "status": "recommended",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/cities_in_dust",
+      "license_action": "Purchase/install through Arturia account, in-app store, or official sound bank store.",
+      "project_use": "Ambient, IDM, crystalline, and granular alien-electronica palette."
+    }
+  ]
+}

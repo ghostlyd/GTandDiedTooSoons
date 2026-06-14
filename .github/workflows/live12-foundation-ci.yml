@@ -1,0 +1,48 @@
+name: Live 12 Foundation CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - "codex/**"
+
+permissions:
+  contents: read
+
+jobs:
+  repository-contract:
+    name: Repository contract
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate manifests, provenance policy, and binary hygiene
+        run: python3 scripts/validate_repo.py
+
+      - name: Exercise inventory script in dry-run mode
+        run: python3 scripts/inventory_live_suite.py --dry-run --output inventory/live12-local-inventory.json
+
+  macos-ableton-contract:
+    name: macOS Ableton path contract
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate repository on macOS
+        run: python3 scripts/validate_repo.py
+
+      - name: Generate non-sensitive host inventory snapshot
+        run: python3 scripts/inventory_live_suite.py --dry-run
