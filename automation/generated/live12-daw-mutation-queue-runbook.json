@@ -1,0 +1,501 @@
+{
+  "generated_at": "1970-01-01T00:00:00Z",
+  "generator": "scripts/render_live12_daw_mutation_queue_runbook.py",
+  "max_for_live_device_count": 10,
+  "prepare_queue_command": [
+    "python3",
+    "scripts/prepare_live12_daw_mutation_queue.py",
+    "--stable"
+  ],
+  "purpose": "Operator runbook for preparing local-only Ableton Live 12 / Max for Live mutation queues without automatic DAW launch.",
+  "queue_manifest_path": "output/daw-mutation-queue/queue-manifest.json",
+  "queue_policy": {
+    "artifact_roots": [
+      "output/daw-mutations",
+      "output/daw-import-bundles",
+      "output/daw-mutation-queue"
+    ],
+    "execution_status": "queued_not_launched",
+    "git_policy": "ignored_local_only",
+    "launch_status": "blocked_until_per_track_confirm_live_mutation",
+    "must_not_commit": [
+      "Ableton sets",
+      "compiled Max for Live devices",
+      "rendered audio",
+      "raw source audio",
+      "credentials",
+      "cookies",
+      "license files"
+    ]
+  },
+  "receipt_contract": {
+    "git_policy": "ignored_local_only",
+    "output_root": "output/daw-mutations",
+    "prohibited_artifacts": [
+      ".als",
+      ".amxd",
+      ".alp",
+      "plugins",
+      "presets",
+      "samples",
+      "renders",
+      "credentials",
+      "cookies",
+      "license files",
+      "private audio"
+    ],
+    "required_fields": [
+      "run_id",
+      "track_slug",
+      "track_title",
+      "execution_status",
+      "operator_approval_reference",
+      "rollback_copy_reference",
+      "mutation_package_sha256",
+      "plan_track_sha256",
+      "midi_verification",
+      "affected_tracks",
+      "affected_returns",
+      "applied_action_ids",
+      "skipped_action_ids",
+      "required_postflight_checks",
+      "created_artifacts",
+      "redactions"
+    ],
+    "required_postflight_checks": [
+      "rollback copy exists outside Git before mutation",
+      "generated MIDI hash matched before import",
+      "affected tracks match mutation package scope",
+      "Public Domain Source Deck remains muted until provenance review",
+      "no export, render, .als, .amxd, sample, preset, credential, cookie, or license artifact is committed",
+      "python3 scripts/validate_repo.py passes after metadata updates"
+    ]
+  },
+  "schema_version": 1,
+  "source_file_sha256": {
+    "automation/generated/live12-daw-mutation-package.json": "1a2e88db2cb7868a60bca8fbe0ca62c130c741a99b6e7f9bd71827834c14266a",
+    "automation/generated/max-for-live-device-contracts.json": "25613153f7ed60871411911a4572f10448a6f0298a62ba63bc2aa285e10b51d0",
+    "scripts/prepare_live12_daw_mutation_queue.py": "9afdf8bdee1d476d1fd5ffc4c019245e64aae5477e5b80d032ea874753786b3a",
+    "scripts/record_live12_daw_mutation_receipt.py": "e056ae3bbf38d128c0054b1c4bab4b7af9ce28db0b11ac017819ffef351e3ed9",
+    "scripts/stage_live12_daw_import_bundle.py": "5d776200f8836f9a6724da40d11b11b8bc2eb331857e3a08a3be6f48c15a6fc2"
+  },
+  "source_files": [
+    "automation/generated/live12-daw-mutation-package.json",
+    "automation/generated/max-for-live-device-contracts.json",
+    "scripts/prepare_live12_daw_mutation_queue.py",
+    "scripts/stage_live12_daw_import_bundle.py",
+    "scripts/record_live12_daw_mutation_receipt.py"
+  ],
+  "total_planned_action_count": 112,
+  "track_count": 6,
+  "tracks": [
+    {
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "blocked_action_groups": [
+        "mix_and_release_gates"
+      ],
+      "bundle_manifest_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/bundle-manifest.json",
+      "execution_mode": "local_preflight_then_human_approved_daw_mutation",
+      "gated_launch_command": [
+        "python3",
+        "scripts/stage_live12_daw_import_bundle.py",
+        "--request",
+        "output/daw-mutations/good-vibrations-in-a-burned-barn/mutation-request.json",
+        "--launch-ableton",
+        "--confirm-live-mutation",
+        "--operator-approval-reference",
+        "<approval-ref>",
+        "--rollback-copy-reference",
+        "<rollback-copy-ref>"
+      ],
+      "launch_plan_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/launch-plan.json",
+      "max_for_live_device_ids": [
+        "m4l.aeroband_banjo_mapper",
+        "m4l.roll_probability_engine",
+        "m4l.call_response_router",
+        "m4l.chop_clock_guard",
+        "m4l.slide_phrase_sampler",
+        "m4l.root_motion_limiter",
+        "m4l.fill_trigger",
+        "m4l.house_grid_conductor",
+        "m4l.provenance_sampler",
+        "m4l.spatial_harmonic_field"
+      ],
+      "operator_evidence_path": "output/daw-mutations/good-vibrations-in-a-burned-barn/operator-evidence.json",
+      "planned_action_count": 19,
+      "prepare_track_command": [
+        "python3",
+        "scripts/prepare_live12_daw_mutation.py",
+        "--track",
+        "good-vibrations-in-a-burned-barn",
+        "--stable"
+      ],
+      "receipt_command": [
+        "python3",
+        "scripts/record_live12_daw_mutation_receipt.py",
+        "--request",
+        "output/daw-import-bundles/good-vibrations-in-a-burned-barn/mutation-request.json",
+        "--evidence",
+        "output/daw-mutations/good-vibrations-in-a-burned-barn/operator-evidence.json",
+        "--output",
+        "output/daw-import-bundles/good-vibrations-in-a-burned-barn/applied-receipt.json"
+      ],
+      "receipt_template_path": "output/daw-mutations/good-vibrations-in-a-burned-barn/receipt-template.json",
+      "request_path": "output/daw-mutations/good-vibrations-in-a-burned-barn/mutation-request.json",
+      "stage_bundle_command": [
+        "python3",
+        "scripts/stage_live12_daw_import_bundle.py",
+        "--request",
+        "output/daw-mutations/good-vibrations-in-a-burned-barn/mutation-request.json",
+        "--stable"
+      ],
+      "staged_midi_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/midi/good-vibrations-in-a-burned-barn.mid",
+      "track_slug": "good-vibrations-in-a-burned-barn",
+      "track_title": "Good Vibrations in a Burned Barn"
+    },
+    {
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "blocked_action_groups": [
+        "mix_and_release_gates"
+      ],
+      "bundle_manifest_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/bundle-manifest.json",
+      "execution_mode": "local_preflight_then_human_approved_daw_mutation",
+      "gated_launch_command": [
+        "python3",
+        "scripts/stage_live12_daw_import_bundle.py",
+        "--request",
+        "output/daw-mutations/a-p-carter-in-the-warehouse/mutation-request.json",
+        "--launch-ableton",
+        "--confirm-live-mutation",
+        "--operator-approval-reference",
+        "<approval-ref>",
+        "--rollback-copy-reference",
+        "<rollback-copy-ref>"
+      ],
+      "launch_plan_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/launch-plan.json",
+      "max_for_live_device_ids": [
+        "m4l.aeroband_banjo_mapper",
+        "m4l.roll_probability_engine",
+        "m4l.call_response_router",
+        "m4l.chop_clock_guard",
+        "m4l.slide_phrase_sampler",
+        "m4l.root_motion_limiter",
+        "m4l.fill_trigger",
+        "m4l.house_grid_conductor",
+        "m4l.provenance_sampler",
+        "m4l.spatial_harmonic_field"
+      ],
+      "operator_evidence_path": "output/daw-mutations/a-p-carter-in-the-warehouse/operator-evidence.json",
+      "planned_action_count": 18,
+      "prepare_track_command": [
+        "python3",
+        "scripts/prepare_live12_daw_mutation.py",
+        "--track",
+        "a-p-carter-in-the-warehouse",
+        "--stable"
+      ],
+      "receipt_command": [
+        "python3",
+        "scripts/record_live12_daw_mutation_receipt.py",
+        "--request",
+        "output/daw-import-bundles/a-p-carter-in-the-warehouse/mutation-request.json",
+        "--evidence",
+        "output/daw-mutations/a-p-carter-in-the-warehouse/operator-evidence.json",
+        "--output",
+        "output/daw-import-bundles/a-p-carter-in-the-warehouse/applied-receipt.json"
+      ],
+      "receipt_template_path": "output/daw-mutations/a-p-carter-in-the-warehouse/receipt-template.json",
+      "request_path": "output/daw-mutations/a-p-carter-in-the-warehouse/mutation-request.json",
+      "stage_bundle_command": [
+        "python3",
+        "scripts/stage_live12_daw_import_bundle.py",
+        "--request",
+        "output/daw-mutations/a-p-carter-in-the-warehouse/mutation-request.json",
+        "--stable"
+      ],
+      "staged_midi_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/midi/a-p-carter-in-the-warehouse.mid",
+      "track_slug": "a-p-carter-in-the-warehouse",
+      "track_title": "A.P. Carter in the Warehouse"
+    },
+    {
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "blocked_action_groups": [
+        "mix_and_release_gates"
+      ],
+      "bundle_manifest_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/bundle-manifest.json",
+      "execution_mode": "local_preflight_then_human_approved_daw_mutation",
+      "gated_launch_command": [
+        "python3",
+        "scripts/stage_live12_daw_import_bundle.py",
+        "--request",
+        "output/daw-mutations/no-gods-no-masters-no-quantize/mutation-request.json",
+        "--launch-ableton",
+        "--confirm-live-mutation",
+        "--operator-approval-reference",
+        "<approval-ref>",
+        "--rollback-copy-reference",
+        "<rollback-copy-ref>"
+      ],
+      "launch_plan_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/launch-plan.json",
+      "max_for_live_device_ids": [
+        "m4l.aeroband_banjo_mapper",
+        "m4l.roll_probability_engine",
+        "m4l.call_response_router",
+        "m4l.chop_clock_guard",
+        "m4l.slide_phrase_sampler",
+        "m4l.root_motion_limiter",
+        "m4l.fill_trigger",
+        "m4l.house_grid_conductor",
+        "m4l.provenance_sampler",
+        "m4l.spatial_harmonic_field"
+      ],
+      "operator_evidence_path": "output/daw-mutations/no-gods-no-masters-no-quantize/operator-evidence.json",
+      "planned_action_count": 18,
+      "prepare_track_command": [
+        "python3",
+        "scripts/prepare_live12_daw_mutation.py",
+        "--track",
+        "no-gods-no-masters-no-quantize",
+        "--stable"
+      ],
+      "receipt_command": [
+        "python3",
+        "scripts/record_live12_daw_mutation_receipt.py",
+        "--request",
+        "output/daw-import-bundles/no-gods-no-masters-no-quantize/mutation-request.json",
+        "--evidence",
+        "output/daw-mutations/no-gods-no-masters-no-quantize/operator-evidence.json",
+        "--output",
+        "output/daw-import-bundles/no-gods-no-masters-no-quantize/applied-receipt.json"
+      ],
+      "receipt_template_path": "output/daw-mutations/no-gods-no-masters-no-quantize/receipt-template.json",
+      "request_path": "output/daw-mutations/no-gods-no-masters-no-quantize/mutation-request.json",
+      "stage_bundle_command": [
+        "python3",
+        "scripts/stage_live12_daw_import_bundle.py",
+        "--request",
+        "output/daw-mutations/no-gods-no-masters-no-quantize/mutation-request.json",
+        "--stable"
+      ],
+      "staged_midi_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/midi/no-gods-no-masters-no-quantize.mid",
+      "track_slug": "no-gods-no-masters-no-quantize",
+      "track_title": "No Gods, No Masters, No Quantize"
+    },
+    {
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "blocked_action_groups": [
+        "mix_and_release_gates"
+      ],
+      "bundle_manifest_path": "output/daw-import-bundles/possum-kingdom-afterhours/bundle-manifest.json",
+      "execution_mode": "local_preflight_then_human_approved_daw_mutation",
+      "gated_launch_command": [
+        "python3",
+        "scripts/stage_live12_daw_import_bundle.py",
+        "--request",
+        "output/daw-mutations/possum-kingdom-afterhours/mutation-request.json",
+        "--launch-ableton",
+        "--confirm-live-mutation",
+        "--operator-approval-reference",
+        "<approval-ref>",
+        "--rollback-copy-reference",
+        "<rollback-copy-ref>"
+      ],
+      "launch_plan_path": "output/daw-import-bundles/possum-kingdom-afterhours/launch-plan.json",
+      "max_for_live_device_ids": [
+        "m4l.aeroband_banjo_mapper",
+        "m4l.roll_probability_engine",
+        "m4l.call_response_router",
+        "m4l.chop_clock_guard",
+        "m4l.slide_phrase_sampler",
+        "m4l.root_motion_limiter",
+        "m4l.fill_trigger",
+        "m4l.house_grid_conductor",
+        "m4l.provenance_sampler",
+        "m4l.spatial_harmonic_field"
+      ],
+      "operator_evidence_path": "output/daw-mutations/possum-kingdom-afterhours/operator-evidence.json",
+      "planned_action_count": 18,
+      "prepare_track_command": [
+        "python3",
+        "scripts/prepare_live12_daw_mutation.py",
+        "--track",
+        "possum-kingdom-afterhours",
+        "--stable"
+      ],
+      "receipt_command": [
+        "python3",
+        "scripts/record_live12_daw_mutation_receipt.py",
+        "--request",
+        "output/daw-import-bundles/possum-kingdom-afterhours/mutation-request.json",
+        "--evidence",
+        "output/daw-mutations/possum-kingdom-afterhours/operator-evidence.json",
+        "--output",
+        "output/daw-import-bundles/possum-kingdom-afterhours/applied-receipt.json"
+      ],
+      "receipt_template_path": "output/daw-mutations/possum-kingdom-afterhours/receipt-template.json",
+      "request_path": "output/daw-mutations/possum-kingdom-afterhours/mutation-request.json",
+      "stage_bundle_command": [
+        "python3",
+        "scripts/stage_live12_daw_import_bundle.py",
+        "--request",
+        "output/daw-mutations/possum-kingdom-afterhours/mutation-request.json",
+        "--stable"
+      ],
+      "staged_midi_path": "output/daw-import-bundles/possum-kingdom-afterhours/midi/possum-kingdom-afterhours.mid",
+      "track_slug": "possum-kingdom-afterhours",
+      "track_title": "Possum Kingdom Afterhours"
+    },
+    {
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "blocked_action_groups": [
+        "mix_and_release_gates"
+      ],
+      "bundle_manifest_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/bundle-manifest.json",
+      "execution_mode": "local_preflight_then_human_approved_daw_mutation",
+      "gated_launch_command": [
+        "python3",
+        "scripts/stage_live12_daw_import_bundle.py",
+        "--request",
+        "output/daw-mutations/the-ballad-of-the-broken-controller/mutation-request.json",
+        "--launch-ableton",
+        "--confirm-live-mutation",
+        "--operator-approval-reference",
+        "<approval-ref>",
+        "--rollback-copy-reference",
+        "<rollback-copy-ref>"
+      ],
+      "launch_plan_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/launch-plan.json",
+      "max_for_live_device_ids": [
+        "m4l.aeroband_banjo_mapper",
+        "m4l.roll_probability_engine",
+        "m4l.call_response_router",
+        "m4l.chop_clock_guard",
+        "m4l.slide_phrase_sampler",
+        "m4l.root_motion_limiter",
+        "m4l.fill_trigger",
+        "m4l.house_grid_conductor",
+        "m4l.provenance_sampler",
+        "m4l.spatial_harmonic_field"
+      ],
+      "operator_evidence_path": "output/daw-mutations/the-ballad-of-the-broken-controller/operator-evidence.json",
+      "planned_action_count": 18,
+      "prepare_track_command": [
+        "python3",
+        "scripts/prepare_live12_daw_mutation.py",
+        "--track",
+        "the-ballad-of-the-broken-controller",
+        "--stable"
+      ],
+      "receipt_command": [
+        "python3",
+        "scripts/record_live12_daw_mutation_receipt.py",
+        "--request",
+        "output/daw-import-bundles/the-ballad-of-the-broken-controller/mutation-request.json",
+        "--evidence",
+        "output/daw-mutations/the-ballad-of-the-broken-controller/operator-evidence.json",
+        "--output",
+        "output/daw-import-bundles/the-ballad-of-the-broken-controller/applied-receipt.json"
+      ],
+      "receipt_template_path": "output/daw-mutations/the-ballad-of-the-broken-controller/receipt-template.json",
+      "request_path": "output/daw-mutations/the-ballad-of-the-broken-controller/mutation-request.json",
+      "stage_bundle_command": [
+        "python3",
+        "scripts/stage_live12_daw_import_bundle.py",
+        "--request",
+        "output/daw-mutations/the-ballad-of-the-broken-controller/mutation-request.json",
+        "--stable"
+      ],
+      "staged_midi_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/midi/the-ballad-of-the-broken-controller.mid",
+      "track_slug": "the-ballad-of-the-broken-controller",
+      "track_title": "The Ballad of the Broken Controller"
+    },
+    {
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "blocked_action_groups": [
+        "mix_and_release_gates"
+      ],
+      "bundle_manifest_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/bundle-manifest.json",
+      "execution_mode": "local_preflight_then_human_approved_daw_mutation",
+      "gated_launch_command": [
+        "python3",
+        "scripts/stage_live12_daw_import_bundle.py",
+        "--request",
+        "output/daw-mutations/rail-yard-ghost-in-the-control-room/mutation-request.json",
+        "--launch-ableton",
+        "--confirm-live-mutation",
+        "--operator-approval-reference",
+        "<approval-ref>",
+        "--rollback-copy-reference",
+        "<rollback-copy-ref>"
+      ],
+      "launch_plan_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/launch-plan.json",
+      "max_for_live_device_ids": [
+        "m4l.aeroband_banjo_mapper",
+        "m4l.roll_probability_engine",
+        "m4l.call_response_router",
+        "m4l.chop_clock_guard",
+        "m4l.slide_phrase_sampler",
+        "m4l.root_motion_limiter",
+        "m4l.fill_trigger",
+        "m4l.house_grid_conductor",
+        "m4l.provenance_sampler",
+        "m4l.spatial_harmonic_field"
+      ],
+      "operator_evidence_path": "output/daw-mutations/rail-yard-ghost-in-the-control-room/operator-evidence.json",
+      "planned_action_count": 21,
+      "prepare_track_command": [
+        "python3",
+        "scripts/prepare_live12_daw_mutation.py",
+        "--track",
+        "rail-yard-ghost-in-the-control-room",
+        "--stable"
+      ],
+      "receipt_command": [
+        "python3",
+        "scripts/record_live12_daw_mutation_receipt.py",
+        "--request",
+        "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/mutation-request.json",
+        "--evidence",
+        "output/daw-mutations/rail-yard-ghost-in-the-control-room/operator-evidence.json",
+        "--output",
+        "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/applied-receipt.json"
+      ],
+      "receipt_template_path": "output/daw-mutations/rail-yard-ghost-in-the-control-room/receipt-template.json",
+      "request_path": "output/daw-mutations/rail-yard-ghost-in-the-control-room/mutation-request.json",
+      "stage_bundle_command": [
+        "python3",
+        "scripts/stage_live12_daw_import_bundle.py",
+        "--request",
+        "output/daw-mutations/rail-yard-ghost-in-the-control-room/mutation-request.json",
+        "--stable"
+      ],
+      "staged_midi_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/midi/rail-yard-ghost-in-the-control-room.mid",
+      "track_slug": "rail-yard-ghost-in-the-control-room",
+      "track_title": "Rail Yard Ghost in the Control Room"
+    }
+  ]
+}
