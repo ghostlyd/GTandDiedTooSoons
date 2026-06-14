@@ -15,6 +15,7 @@ GTandDiedTooSoons is a repeatable production framework for composing spatially a
 
 1. **Source layer**: public-domain or rights-cleared audio references documented in `catalogs/public-domain-bluegrass-sources.json`.
 2. **Library layer**: Ableton/Arturia packs and instruments documented in `catalogs/recommended-packs.json` and local inventory snapshots.
+   Installation readiness and account-gated pack backlog live in `catalogs/library-installation-plan.json`.
 3. **Session layer**: track/routing/device contracts in `automation/live12-session-template.json`.
 4. **Agent layer**: production worker roles in `automation/worker-chain.json`.
 5. **Composition layer**: standalone track briefs in `compositions/down-tempo-punk-bluegrass-set.json`.

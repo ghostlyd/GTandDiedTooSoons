@@ -24,6 +24,7 @@ REQUIRED_FILES = [
     "docs/playwright-source-capture.md",
     "docs/recommended-packs.md",
     "catalogs/recommended-packs.json",
+    "catalogs/library-installation-plan.json",
     "catalogs/public-domain-bluegrass-sources.json",
     "automation/live12-session-template.json",
     "automation/worker-chain.json",
@@ -54,6 +55,28 @@ DOWNLOADABLE_RIGHTS = {"public_domain", "cc0", "cc_by", "no_known_restrictions"}
 SKIP_BINARY_SCAN_PARTS = {".git", "output", "__pycache__"}
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 LEDGER_CATALOG_MIRRORED_FIELDS = ["name", "source_url", "rights_status", "credit_line", "browser_evidence", "rights_evidence"]
+PACK_VENDORS = {"Ableton", "Arturia"}
+PACK_PRIORITIES = {"high", "medium", "low"}
+RECOMMENDED_PACK_STATUSES = {
+    "observed_local",
+    "installed",
+    "live_database_available_not_installed",
+    "account_login_required",
+    "account_or_purchase_required",
+    "official_free_not_installed",
+}
+INSTALL_PLAN_STATUSES = {
+    "live_database_available_not_installed",
+    "account_login_required",
+    "account_or_purchase_required",
+    "official_free_not_installed",
+    "official_free_download_manual_install",
+}
+LOCAL_RECOMMENDATION_STATUSES = {"observed_local", "installed"}
+OFFICIAL_PACK_HOSTS = {
+    "Ableton": {"www.ableton.com"},
+    "Arturia": {"www.arturia.com"},
+}
 
 
 def https_host(value: str) -> str | None:
@@ -125,6 +148,8 @@ def validate_required_files(root: Path, errors: list[str]) -> None:
 
 def validate_recommended_packs(root: Path, errors: list[str]) -> None:
     data = load_json(root / "catalogs/recommended-packs.json", errors)
+    install_plan = load_json(root / "catalogs/library-installation-plan.json", errors)
+    install_plan_ids = {item.get("id") for item in install_plan.get("items", []) if item.get("id")}
     ids = set()
     for item in data.get("items", []):
         for field in ["id", "vendor", "name", "priority", "status", "source_url", "license_action", "project_use"]:
@@ -133,8 +158,45 @@ def validate_recommended_packs(root: Path, errors: list[str]) -> None:
         if item.get("id") in ids:
             fail(errors, f"Duplicate recommended pack id: {item.get('id')}")
         ids.add(item.get("id"))
-        if not str(item.get("source_url", "")).startswith("https://"):
+        if item.get("vendor") not in PACK_VENDORS:
+            fail(errors, f"Unknown recommended pack vendor: {item.get('id')}: {item.get('vendor')}")
+        if item.get("priority") not in PACK_PRIORITIES:
+            fail(errors, f"Unknown recommended pack priority: {item.get('id')}: {item.get('priority')}")
+        if item.get("status") not in RECOMMENDED_PACK_STATUSES:
+            fail(errors, f"Unknown recommended pack status: {item.get('id')}: {item.get('status')}")
+        source_host = https_host(item.get("source_url", ""))
+        if not source_host:
             fail(errors, f"Pack source_url must be https: {item.get('id')}")
+        elif source_host not in OFFICIAL_PACK_HOSTS.get(item.get("vendor"), set()):
+            fail(errors, f"Pack source_url must use official {item.get('vendor')} host: {item.get('id')}: {source_host}")
+        if item.get("status") not in LOCAL_RECOMMENDATION_STATUSES and item.get("id") not in install_plan_ids:
+            fail(errors, f"Non-local recommended pack missing from installation plan: {item.get('id')}")
+
+
+def validate_library_installation_plan(root: Path, errors: list[str]) -> None:
+    data = load_json(root / "catalogs/library-installation-plan.json", errors)
+    if data and data.get("schema_version") != 1:
+        fail(errors, "catalogs/library-installation-plan.json: expected schema_version 1")
+
+    ids = set()
+    for item in data.get("items", []):
+        for field in ["id", "vendor", "name", "priority", "status", "source_url", "install_route", "local_signal", "project_use"]:
+            if not item.get(field):
+                fail(errors, f"library installation plan item missing {field}: {item}")
+        if item.get("id") in ids:
+            fail(errors, f"Duplicate library installation plan id: {item.get('id')}")
+        ids.add(item.get("id"))
+        if item.get("vendor") not in PACK_VENDORS:
+            fail(errors, f"Unknown library installation plan vendor: {item.get('id')}: {item.get('vendor')}")
+        if item.get("priority") not in PACK_PRIORITIES:
+            fail(errors, f"Unknown library installation plan priority: {item.get('id')}: {item.get('priority')}")
+        if item.get("status") not in INSTALL_PLAN_STATUSES:
+            fail(errors, f"Unknown library installation plan status: {item.get('id')}: {item.get('status')}")
+        source_host = https_host(item.get("source_url", ""))
+        if not source_host:
+            fail(errors, f"Library installation plan source_url must be https: {item.get('id')}")
+        elif source_host not in OFFICIAL_PACK_HOSTS.get(item.get("vendor"), set()):
+            fail(errors, f"Library installation plan source_url must use official {item.get('vendor')} host: {item.get('id')}: {source_host}")
 
 
 def validate_sources(root: Path, errors: list[str]) -> None:
@@ -328,6 +390,7 @@ def main() -> int:
 
     validate_required_files(root, errors)
     validate_recommended_packs(root, errors)
+    validate_library_installation_plan(root, errors)
     validate_sources(root, errors)
     validate_download_ledger(root, errors)
     validate_json_contracts(root, errors)

@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "generated_for": "GTandDiedTooSoons",
+  "reviewed_on": "2026-06-14",
+  "policy": "Install only through official Ableton, Arturia, or vendor account flows. Do not commit downloaded pack installers, samples, presets, plugins, or account artifacts.",
+  "automation_boundary": "This repository may inventory and verify installed libraries, but account-gated installs must be completed in Ableton Live, Arturia Software Center, or the vendor in-app store by an authorized user.",
+  "items": [
+    {
+      "id": "ableton-drum-booth",
+      "vendor": "Ableton",
+      "name": "Drum Booth",
+      "priority": "high",
+      "status": "live_database_available_not_installed",
+      "source_url": "https://www.ableton.com/en/packs/drum-booth/",
+      "install_route": "Ableton Live Browser > Packs, or Ableton account if licensed.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "project_use": "Dry room acoustic drums for punk kit attack and reinforcement under electronic drums."
+    },
+    {
+      "id": "ableton-drum-essentials",
+      "vendor": "Ableton",
+      "name": "Drum Essentials",
+      "priority": "high",
+      "status": "live_database_available_not_installed",
+      "source_url": "https://www.ableton.com/en/packs/drum-essentials/",
+      "install_route": "Ableton Live Browser > Packs; official page lists Live 12 compatibility.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "project_use": "Core drum racks, MIDI clips, and one-shots for fast beat sketching and kit layering."
+    },
+    {
+      "id": "ableton-string-quartet",
+      "vendor": "Ableton",
+      "name": "String Quartet by Spitfire Audio",
+      "priority": "high",
+      "status": "live_database_available_not_installed",
+      "source_url": "https://www.ableton.com/en/packs/string-quartet/",
+      "install_route": "Ableton Live Browser > Packs, or Ableton account if licensed.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "project_use": "Bowed, pizzicato, and tremolo string gestures for fiddle-family arrangements."
+    },
+    {
+      "id": "ableton-sequencers",
+      "vendor": "Ableton",
+      "name": "Sequencers",
+      "priority": "high",
+      "status": "live_database_available_not_installed",
+      "source_url": "https://www.ableton.com/en/packs/sequencers/",
+      "install_route": "Ableton Live Browser > Packs; requires compatible Max for Live license.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "project_use": "Generative MIDI sequencing for banjo rolls, house stabs, and worker-agent arrangement sketches."
+    },
+    {
+      "id": "ableton-chop-and-swing",
+      "vendor": "Ableton",
+      "name": "Chop and Swing",
+      "priority": "high",
+      "status": "live_database_available_not_installed",
+      "source_url": "https://www.ableton.com/en/packs/chop-and-swing/",
+      "install_route": "Ableton Live Browser > Packs.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "project_use": "Sampling-first grooves and chops for transforming public-domain fiddle/banjo fragments."
+    },
+    {
+      "id": "ableton-drive-and-glow",
+      "vendor": "Ableton",
+      "name": "Drive and Glow",
+      "priority": "high",
+      "status": "live_database_available_not_installed",
+      "source_url": "https://www.ableton.com/en/packs/drive-and-glow/",
+      "install_route": "Purchase/install through Ableton account or Live Browser if entitled.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "project_use": "Saturated indie guitars, basses, drums, and synth textures for punk/electronic crossover."
+    },
+    {
+      "id": "ableton-electric-keyboards",
+      "vendor": "Ableton",
+      "name": "Electric Keyboards",
+      "priority": "medium",
+      "status": "live_database_available_not_installed",
+      "source_url": "https://www.ableton.com/en/packs/electric-keyboards/",
+      "install_route": "Ableton Live Browser > Packs.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "project_use": "Organic EP/organ layers for deep-house harmonic anchors."
+    },
+    {
+      "id": "ableton-generators-by-iftah",
+      "vendor": "Ableton",
+      "name": "Generators by Iftah",
+      "priority": "medium",
+      "status": "live_database_available_not_installed",
+      "source_url": "https://www.ableton.com/en/packs/generators-by-iftah/",
+      "install_route": "Ableton Live Browser > Packs; requires compatible Live/Max for Live license.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "project_use": "Pattern and phrase generation for controlled swarm-composition experiments."
+    },
+    {
+      "id": "ableton-performance-pack-by-iftah",
+      "vendor": "Ableton",
+      "name": "Performance Pack by Iftah",
+      "priority": "medium",
+      "status": "live_database_available_not_installed",
+      "source_url": "https://www.ableton.com/en/packs/performance-pack/",
+      "install_route": "Ableton Live Browser > Packs; requires compatible Live/Max for Live license.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "project_use": "Live set control, macros, and performance operations for DJ/lead-controller execution."
+    },
+    {
+      "id": "ableton-dm-307a-free-pack",
+      "vendor": "Ableton",
+      "name": "DM-307A Free Pack",
+      "priority": "medium",
+      "status": "account_login_required",
+      "source_url": "https://www.ableton.com/en/packs/dm-307a-free-pack/",
+      "install_route": "Log in to Ableton, download official .alp if entitled, open with Ableton Live, then delete installer.",
+      "local_signal": "Not present in Live database pack index; official page marks it discontinued but downloadable.",
+      "project_use": "Industrial, house, techno, and organic percussion for alien drum layers."
+    },
+    {
+      "id": "ableton-spectral-textures",
+      "vendor": "Ableton",
+      "name": "Spectral Textures",
+      "priority": "high",
+      "status": "account_login_required",
+      "source_url": "https://www.ableton.com/en/packs/spectral-textures/",
+      "install_route": "Log in to Ableton, download/install from the official pack page or account if entitled.",
+      "local_signal": "Not present in installed Factory Packs places or current Live database pack candidates.",
+      "project_use": "Field-recording and additive-synthesis atmospheres for alien transitions."
+    },
+    {
+      "id": "arturia-electronica-selection",
+      "vendor": "Arturia",
+      "name": "Electronica Selection",
+      "priority": "high",
+      "status": "account_or_purchase_required",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/electronica-selection",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "project_use": "Organic motion, granular detail, cinematic layers, and abstract analog tones."
+    },
+    {
+      "id": "arturia-dancefloor-selection",
+      "vendor": "Arturia",
+      "name": "Dancefloor Selection",
+      "priority": "high",
+      "status": "account_or_purchase_required",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/dancefloor-selection",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "project_use": "House grooves, euphoric builds, and UKG-adjacent club motion for the deep-house layer."
+    },
+    {
+      "id": "arturia-house-explorations",
+      "vendor": "Arturia",
+      "name": "House Explorations",
+      "priority": "high",
+      "status": "account_or_purchase_required",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/house_explorations",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "project_use": "Deep-house sub bass, chord stabs, EP keys, pads, and leads."
+    },
+    {
+      "id": "arturia-guitar-deconstructed",
+      "vendor": "Arturia",
+      "name": "Guitar Deconstructed",
+      "priority": "high",
+      "status": "account_or_purchase_required",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/rock-music/guitar_deconstructed",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "project_use": "Granular guitar-source presets that bridge punk strum energy and abstract ambience."
+    },
+    {
+      "id": "arturia-post-rock-guitars",
+      "vendor": "Arturia",
+      "name": "Post-Rock Guitars",
+      "priority": "medium",
+      "status": "account_or_purchase_required",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/post_rock_guitars",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "project_use": "Guitar drones, swells, and cinematic expression for punk/ambient crossover."
+    },
+    {
+      "id": "arturia-folkloric-strings",
+      "vendor": "Arturia",
+      "name": "Folkloric Strings",
+      "priority": "medium",
+      "status": "account_or_purchase_required",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/cinematic-fx/folkloric_strings",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "project_use": "Old-world drones, bowed color, and roots-adjacent string atmosphere."
+    },
+    {
+      "id": "arturia-cities-in-dust",
+      "vendor": "Arturia",
+      "name": "Cities In Dust",
+      "priority": "medium",
+      "status": "account_or_purchase_required",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/cities_in_dust",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "project_use": "Ambient, IDM, crystalline, and granular alien-electronica palette."
+    },
+    {
+      "id": "arturia-industrial-force",
+      "vendor": "Arturia",
+      "name": "Industrial Force",
+      "priority": "medium",
+      "status": "account_or_purchase_required",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/industrial_force",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "project_use": "Aggressive underground synth and percussion energy for punk-electronica impact."
+    },
+    {
+      "id": "arturia-idm-grooves",
+      "vendor": "Arturia",
+      "name": "IDM Grooves",
+      "priority": "medium",
+      "status": "account_or_purchase_required",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/idm_grooves",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "project_use": "Cerebral drum mechanics and fractured movement for alien-electronica transitions."
+    }
+  ]
+}

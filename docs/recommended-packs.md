@@ -18,11 +18,13 @@ The current host has Ableton Live 12 Suite 12.4.2 and these Ableton Factory Pack
 
 The current host also has a broad Arturia installation under `/Applications/Arturia`, including Pigments, Analog Lab V, multiple Augmented instruments, V Collection instruments, and Arturia Software Center.
 
-Refresh exact state with:
+The local Live database also indexes 43 Pack candidates. Of those, 34 are not installed as Factory Pack places on this host, including Drum Booth, Drum Essentials, String Quartet by Spitfire Audio, Sequencers, Chop and Swing, Drive and Glow, Electric Keyboards, Generators by Iftah, and Performance Pack by Iftah. The Arturia resource root at `/Library/Arturia` contains 94 product folders, 98 preset product folders, and 24 sample product folders. Refresh the exact local state with:
 
 ```bash
 python3 scripts/inventory_live_suite.py
 ```
+
+The install backlog is versioned in `catalogs/library-installation-plan.json`.
 
 ## Priority Additions
 
@@ -46,5 +48,6 @@ python3 scripts/inventory_live_suite.py
 
 ## Install Notes
 
-- Ableton packs: use Live Browser `Packs`, Ableton account pages, or official `.alp` downloads. See https://help.ableton.com/hc/en-us/articles/115001930644-Installing-Live-Packs and https://help.ableton.com/hc/en-us/articles/209072029-Ableton-Live-Pack-FAQ.
+- Ableton packs: use Live Browser `Packs`, Ableton account pages, or official `.alp` downloads. Even free Ableton downloads can require login. See https://help.ableton.com/hc/en-us/articles/115001930644-Installing-Live-Packs and https://help.ableton.com/hc/en-us/articles/209072029-Ableton-Live-Pack-FAQ.
 - Arturia banks: use the official Sound Bank Store, Analog Lab/Pigments in-app store, `My Products`, or Arturia Software Center where applicable. See https://support.arturia.com/hc/en-us/articles/4409624180882-How-to-acquire-and-install-my-sound-banks.
+- Do not automate around account, purchase, or authorization gates. After installing through vendor tools, rerun `python3 scripts/inventory_live_suite.py` and commit only the updated inventory and plan status, never `.alp`, `.vst3`, `.component`, samples, presets, or Arturia/Ableton account files.

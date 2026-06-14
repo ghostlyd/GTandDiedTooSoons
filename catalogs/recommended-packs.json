@@ -8,7 +8,7 @@
       "vendor": "Ableton",
       "name": "Drum Booth",
       "priority": "high",
-      "status": "recommended",
+      "status": "live_database_available_not_installed",
       "source_url": "https://www.ableton.com/en/packs/drum-booth/",
       "license_action": "Install only through Ableton account or Live Browser Packs.",
       "project_use": "Dry acoustic drums for punk kit energy and human reinforcement under electronic drums."
@@ -18,7 +18,7 @@
       "vendor": "Ableton",
       "name": "String Quartet",
       "priority": "high",
-      "status": "recommended",
+      "status": "live_database_available_not_installed",
       "source_url": "https://www.ableton.com/en/packs/string-quartet/",
       "license_action": "Paid pack; verify account entitlement before installation.",
       "project_use": "Fiddle-like bowed lines, pizzicato pulses, tremolo tension, and chamber counterpoint."
@@ -28,7 +28,7 @@
       "vendor": "Ableton",
       "name": "Sequencers",
       "priority": "high",
-      "status": "recommended",
+      "status": "live_database_available_not_installed",
       "source_url": "https://www.ableton.com/en/packs/sequencers/",
       "license_action": "Install through official Ableton pack flow; requires compatible Live/Max for Live license.",
       "project_use": "Generative and probability sequencing for banjo rolls, house stabs, and modular arrangement sketches."
@@ -38,9 +38,9 @@
       "vendor": "Ableton",
       "name": "Spectral Textures",
       "priority": "high",
-      "status": "recommended",
+      "status": "account_login_required",
       "source_url": "https://www.ableton.com/en/packs/spectral-textures/",
-      "license_action": "Free official Ableton pack; install through official download flow.",
+      "license_action": "USD 0 official Ableton pack; install through Ableton account or official download flow.",
       "project_use": "Field-recording and additive-synthesis atmospheres for alien transitions."
     },
     {
@@ -68,7 +68,7 @@
       "vendor": "Arturia",
       "name": "House Explorations",
       "priority": "high",
-      "status": "recommended",
+      "status": "account_or_purchase_required",
       "source_url": "https://www.arturia.com/store/presets-sound-banks/house_explorations",
       "license_action": "Purchase/install through Arturia account, in-app store, or official sound bank store.",
       "project_use": "Deep-house sub bass, chord stabs, EP keys, pads, and leads."
@@ -78,7 +78,7 @@
       "vendor": "Arturia",
       "name": "Guitar Deconstructed",
       "priority": "high",
-      "status": "recommended",
+      "status": "account_or_purchase_required",
       "source_url": "https://www.arturia.com/store/presets-sound-banks/rock-music/guitar_deconstructed",
       "license_action": "Purchase/install through Arturia account, in-app store, or official sound bank store.",
       "project_use": "Granular guitar-source presets that bridge punk strum energy and abstract ambience."
@@ -108,7 +108,7 @@
       "vendor": "Arturia",
       "name": "Folkloric Strings",
       "priority": "medium",
-      "status": "recommended",
+      "status": "account_or_purchase_required",
       "source_url": "https://www.arturia.com/store/presets-sound-banks/cinematic-fx/folkloric_strings",
       "license_action": "Purchase/install through Arturia account, in-app store, or official sound bank store.",
       "project_use": "Old-world drones, bowed color, and roots-adjacent string atmosphere."
@@ -118,7 +118,7 @@
       "vendor": "Arturia",
       "name": "Cities In Dust",
       "priority": "medium",
-      "status": "recommended",
+      "status": "account_or_purchase_required",
       "source_url": "https://www.arturia.com/store/presets-sound-banks/cities_in_dust",
       "license_action": "Purchase/install through Arturia account, in-app store, or official sound bank store.",
       "project_use": "Ambient, IDM, crystalline, and granular alien-electronica palette."
