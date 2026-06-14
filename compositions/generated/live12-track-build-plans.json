@@ -1,0 +1,1334 @@
+{
+  "schema_version": 1,
+  "generated_at": "1970-01-01T00:00:00Z",
+  "generator": "scripts/render_composition_sketches.py",
+  "source_files": [
+    "compositions/down-tempo-punk-bluegrass-set.json",
+    "automation/live12-session-template.json"
+  ],
+  "source_file_sha256": {
+    "compositions/down-tempo-punk-bluegrass-set.json": "4e9c3c69f1e031522cfdb850a64ef976aa77f8cf052afa1e475b172a17ef6dd2",
+    "automation/live12-session-template.json": "f17640bd3d24a4f6953836393c3286a45c7ba9c9064399590611dac566c76c51"
+  },
+  "purpose": "Deterministic MIDI and Live-build plans for standalone downtempo punk-bluegrass tracks.",
+  "ableton_import_notes": [
+    "Create or open a Live 12 session from automation/live12-session-template.json.",
+    "Drag each .mid file into Live and route generated MIDI tracks to matching session tracks.",
+    "Replace GM placeholder sounds with the documented Ableton/Arturia instruments only after license verification.",
+    "Use Max for Live device contracts in each plan as the automation target list."
+  ],
+  "tracks": [
+    {
+      "title": "Good Vibrations in a Burned Barn",
+      "slug": "good-vibrations-in-a-burned-barn",
+      "tempo_bpm": 96,
+      "key_center": "D mixolydian",
+      "duration_target": "4:20",
+      "approximate_bars": 120,
+      "midi_file": "compositions/generated/midi/good-vibrations-in-a-burned-barn.mid",
+      "midi_sha256": "9dd16949691ef1477ffab2b66fb86ad01efb8384f69ca8a16d3d07550ee78cf0",
+      "midi_byte_size": 54481,
+      "scenes": [
+        {
+          "index": 1,
+          "name": "01 field-texture intro with public-domain source deck muted until cleared",
+          "bar_start": 1,
+          "bar_length": 20,
+          "arrangement_note": "field-texture intro with public-domain source deck muted until cleared"
+        },
+        {
+          "index": 2,
+          "name": "02 banjo roll establishes hook over kick-free pulse",
+          "bar_start": 21,
+          "bar_length": 20,
+          "arrangement_note": "banjo roll establishes hook over kick-free pulse"
+        },
+        {
+          "index": 3,
+          "name": "03 deep-house kick enters under mandolin chop",
+          "bar_start": 41,
+          "bar_length": 20,
+          "arrangement_note": "deep-house kick enters under mandolin chop"
+        },
+        {
+          "index": 4,
+          "name": "04 fiddle answer bends into granular sky",
+          "bar_start": 61,
+          "bar_length": 20,
+          "arrangement_note": "fiddle answer bends into granular sky"
+        },
+        {
+          "index": 5,
+          "name": "05 half-time punk break",
+          "bar_start": 81,
+          "bar_length": 20,
+          "arrangement_note": "half-time punk break"
+        },
+        {
+          "index": 6,
+          "name": "06 final chorus with source deck slices if provenance approved",
+          "bar_start": 101,
+          "bar_length": 20,
+          "arrangement_note": "final chorus with source deck slices if provenance approved"
+        }
+      ],
+      "layers": [
+        {
+          "id": "aeroband_banjo_lead",
+          "session_track": "AeroBand Banjo Lead",
+          "midi_track": "AeroBand Banjo Lead",
+          "midi_channels": [
+            1
+          ],
+          "gm_sound": "Banjo",
+          "motif": "Sixteenth-note forward roll with section-density changes.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.aeroband_banjo_mapper",
+            "m4l.roll_probability_engine"
+          ],
+          "automation_targets": [
+            "velocity_curve",
+            "roll_density",
+            "pluck_decay",
+            "humanize_ms"
+          ]
+        },
+        {
+          "id": "fiddle_hybrid_strings",
+          "session_track": "Fiddle / Hybrid Strings",
+          "midi_track": "Fiddle / Hybrid Strings",
+          "midi_channels": [
+            2
+          ],
+          "gm_sound": "Violin",
+          "motif": "Long root/fifth drones and answer tones for fiddle-family contour.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.call_response_router"
+          ],
+          "automation_targets": [
+            "bow_noise",
+            "vibrato_depth",
+            "send_spatial"
+          ]
+        },
+        {
+          "id": "mandolin_chop",
+          "session_track": "Mandolin Chop",
+          "midi_track": "Mandolin Chop",
+          "midi_channels": [
+            3
+          ],
+          "gm_sound": "Steel Guitar proxy",
+          "motif": "Short offbeat chop chords on beats two and four.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.chop_clock_guard"
+          ],
+          "automation_targets": [
+            "chop_gate",
+            "ghost_note_probability"
+          ]
+        },
+        {
+          "id": "dobro_metallic_slide",
+          "session_track": "Dobro / Metallic Slide",
+          "midi_track": "Dobro / Metallic Slide",
+          "midi_channels": [
+            4
+          ],
+          "gm_sound": "Jazz Guitar proxy",
+          "motif": "Sparse slide-like approaches into section roots.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.slide_phrase_sampler"
+          ],
+          "automation_targets": [
+            "glide_time",
+            "feedback",
+            "spectral_tilt"
+          ]
+        },
+        {
+          "id": "upright_bass_sub",
+          "session_track": "Upright Bass / Sub",
+          "midi_track": "Upright Bass / Sub",
+          "midi_channels": [
+            5
+          ],
+          "gm_sound": "Acoustic Bass",
+          "motif": "Root/fifth walk doubled conceptually by sidechained sub.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.root_motion_limiter"
+          ],
+          "automation_targets": [
+            "sub_blend",
+            "sidechain_depth",
+            "note_length"
+          ]
+        },
+        {
+          "id": "acoustic_guitar_boom_chuck",
+          "session_track": "Acoustic Guitar Boom-Chuck",
+          "midi_track": "Acoustic Guitar Boom-Chuck",
+          "midi_channels": [
+            6
+          ],
+          "gm_sound": "Steel Guitar",
+          "motif": "Alternating bass-note boom and short chord chuck for bluegrass rhythm drive.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.chop_clock_guard",
+            "m4l.call_response_router"
+          ],
+          "automation_targets": [
+            "boom_chuck_balance",
+            "strum_velocity",
+            "room_send",
+            "downstroke_bias"
+          ]
+        },
+        {
+          "id": "punk_kit",
+          "session_track": "Punk Kit",
+          "midi_track": "Punk Kit",
+          "midi_channels": [
+            10
+          ],
+          "gm_sound": "GM Drum Kit",
+          "motif": "Dry kick/snare/hat hits with end-of-section fills.",
+          "traditional_bluegrass_layer": false,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.fill_trigger"
+          ],
+          "automation_targets": [
+            "parallel_drive",
+            "room_send",
+            "fill_probability"
+          ]
+        },
+        {
+          "id": "deep_house_machines",
+          "session_track": "Deep House Machines",
+          "midi_track": "Deep House Machines",
+          "midi_channels": [
+            10,
+            11
+          ],
+          "gm_sound": "GM drum machine plus synth-stab channel",
+          "motif": "Four-on-floor kick, hats, claps, and minor chord stabs.",
+          "traditional_bluegrass_layer": false,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.house_grid_conductor"
+          ],
+          "automation_targets": [
+            "filter_cutoff",
+            "accent",
+            "swing_amount"
+          ]
+        },
+        {
+          "id": "alien_sky",
+          "session_track": "Alien Sky",
+          "midi_track": "Alien Sky",
+          "midi_channels": [
+            12
+          ],
+          "gm_sound": "Warm Pad",
+          "motif": "Wide held tones for Granulator/PitchLoop/spectral processing.",
+          "traditional_bluegrass_layer": false,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.spatial_harmonic_field"
+          ],
+          "automation_targets": [
+            "azimuth",
+            "width",
+            "grain_density",
+            "freeze"
+          ]
+        }
+      ],
+      "max_for_live_focus": [
+        "roll_probability_engine",
+        "spatial_harmonic_field"
+      ],
+      "bluegrass_core": [
+        "AeroBand banjo lead",
+        "fiddle drone",
+        "mandolin chop",
+        "upright bass"
+      ],
+      "electronic_dna": [
+        "sidechained sub",
+        "granular vocal-like pads",
+        "909 hat pulse"
+      ],
+      "punk_spirit": [
+        "two-chord chorus",
+        "dry kit hits",
+        "shouted gang-response placeholders"
+      ],
+      "production_constraints": [
+        "Import MIDI into Ableton Live 12, then map each MIDI track to the matching session-template track.",
+        "Keep Public Domain Source Deck muted until the source ledger approves the selected audio.",
+        "Do not commit rendered audio, .als, .amxd, commercial packs, samples, presets, or controller recordings.",
+        "Before Live-set mutation, save a local rollback copy and record the affected tracks/devices."
+      ]
+    },
+    {
+      "title": "A.P. Carter in the Warehouse",
+      "slug": "a-p-carter-in-the-warehouse",
+      "tempo_bpm": 88,
+      "key_center": "A minor / dorian interchange",
+      "duration_target": "3:45",
+      "approximate_bars": 100,
+      "midi_file": "compositions/generated/midi/a-p-carter-in-the-warehouse.mid",
+      "midi_sha256": "eb5dffb6e310e7794b3a72ff8fd02799720029d9456e4091e63e3a42249e6920",
+      "midi_byte_size": 45395,
+      "scenes": [
+        {
+          "index": 1,
+          "name": "01 dobro hook alone",
+          "bar_start": 1,
+          "bar_length": 20,
+          "arrangement_note": "dobro hook alone"
+        },
+        {
+          "index": 2,
+          "name": "02 warehouse kick and sub enter",
+          "bar_start": 21,
+          "bar_length": 20,
+          "arrangement_note": "warehouse kick and sub enter"
+        },
+        {
+          "index": 3,
+          "name": "03 call-and-response between banjo and stab",
+          "bar_start": 41,
+          "bar_length": 20,
+          "arrangement_note": "call-and-response between banjo and stab"
+        },
+        {
+          "index": 4,
+          "name": "04 bridge strips to voice, stomp, and bowed harmonic",
+          "bar_start": 61,
+          "bar_length": 20,
+          "arrangement_note": "bridge strips to voice, stomp, and bowed harmonic"
+        },
+        {
+          "index": 5,
+          "name": "05 return with doubled banjo/dobro riff",
+          "bar_start": 81,
+          "bar_length": 20,
+          "arrangement_note": "return with doubled banjo/dobro riff"
+        }
+      ],
+      "layers": [
+        {
+          "id": "aeroband_banjo_lead",
+          "session_track": "AeroBand Banjo Lead",
+          "midi_track": "AeroBand Banjo Lead",
+          "midi_channels": [
+            1
+          ],
+          "gm_sound": "Banjo",
+          "motif": "Sixteenth-note forward roll with section-density changes.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.aeroband_banjo_mapper",
+            "m4l.roll_probability_engine"
+          ],
+          "automation_targets": [
+            "velocity_curve",
+            "roll_density",
+            "pluck_decay",
+            "humanize_ms"
+          ]
+        },
+        {
+          "id": "fiddle_hybrid_strings",
+          "session_track": "Fiddle / Hybrid Strings",
+          "midi_track": "Fiddle / Hybrid Strings",
+          "midi_channels": [
+            2
+          ],
+          "gm_sound": "Violin",
+          "motif": "Long root/fifth drones and answer tones for fiddle-family contour.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.call_response_router"
+          ],
+          "automation_targets": [
+            "bow_noise",
+            "vibrato_depth",
+            "send_spatial"
+          ]
+        },
+        {
+          "id": "mandolin_chop",
+          "session_track": "Mandolin Chop",
+          "midi_track": "Mandolin Chop",
+          "midi_channels": [
+            3
+          ],
+          "gm_sound": "Steel Guitar proxy",
+          "motif": "Short offbeat chop chords on beats two and four.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.chop_clock_guard"
+          ],
+          "automation_targets": [
+            "chop_gate",
+            "ghost_note_probability"
+          ]
+        },
+        {
+          "id": "dobro_metallic_slide",
+          "session_track": "Dobro / Metallic Slide",
+          "midi_track": "Dobro / Metallic Slide",
+          "midi_channels": [
+            4
+          ],
+          "gm_sound": "Jazz Guitar proxy",
+          "motif": "Sparse slide-like approaches into section roots.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.slide_phrase_sampler"
+          ],
+          "automation_targets": [
+            "glide_time",
+            "feedback",
+            "spectral_tilt"
+          ]
+        },
+        {
+          "id": "upright_bass_sub",
+          "session_track": "Upright Bass / Sub",
+          "midi_track": "Upright Bass / Sub",
+          "midi_channels": [
+            5
+          ],
+          "gm_sound": "Acoustic Bass",
+          "motif": "Root/fifth walk doubled conceptually by sidechained sub.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.root_motion_limiter"
+          ],
+          "automation_targets": [
+            "sub_blend",
+            "sidechain_depth",
+            "note_length"
+          ]
+        },
+        {
+          "id": "acoustic_guitar_boom_chuck",
+          "session_track": "Acoustic Guitar Boom-Chuck",
+          "midi_track": "Acoustic Guitar Boom-Chuck",
+          "midi_channels": [
+            6
+          ],
+          "gm_sound": "Steel Guitar",
+          "motif": "Alternating bass-note boom and short chord chuck for bluegrass rhythm drive.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.chop_clock_guard",
+            "m4l.call_response_router"
+          ],
+          "automation_targets": [
+            "boom_chuck_balance",
+            "strum_velocity",
+            "room_send",
+            "downstroke_bias"
+          ]
+        },
+        {
+          "id": "punk_kit",
+          "session_track": "Punk Kit",
+          "midi_track": "Punk Kit",
+          "midi_channels": [
+            10
+          ],
+          "gm_sound": "GM Drum Kit",
+          "motif": "Dry kick/snare/hat hits with end-of-section fills.",
+          "traditional_bluegrass_layer": false,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.fill_trigger"
+          ],
+          "automation_targets": [
+            "parallel_drive",
+            "room_send",
+            "fill_probability"
+          ]
+        },
+        {
+          "id": "deep_house_machines",
+          "session_track": "Deep House Machines",
+          "midi_track": "Deep House Machines",
+          "midi_channels": [
+            10,
+            11
+          ],
+          "gm_sound": "GM drum machine plus synth-stab channel",
+          "motif": "Four-on-floor kick, hats, claps, and minor chord stabs.",
+          "traditional_bluegrass_layer": false,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.house_grid_conductor"
+          ],
+          "automation_targets": [
+            "filter_cutoff",
+            "accent",
+            "swing_amount"
+          ]
+        },
+        {
+          "id": "alien_sky",
+          "session_track": "Alien Sky",
+          "midi_track": "Alien Sky",
+          "midi_channels": [
+            12
+          ],
+          "gm_sound": "Warm Pad",
+          "motif": "Wide held tones for Granulator/PitchLoop/spectral processing.",
+          "traditional_bluegrass_layer": false,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.spatial_harmonic_field"
+          ],
+          "automation_targets": [
+            "azimuth",
+            "width",
+            "grain_density",
+            "freeze"
+          ]
+        }
+      ],
+      "max_for_live_focus": [
+        "call_response_router",
+        "house_grid_conductor"
+      ],
+      "bluegrass_core": [
+        "banjo imitation",
+        "dobro slide",
+        "acoustic guitar boom-chuck",
+        "fiddle tremolo"
+      ],
+      "electronic_dna": [
+        "lowpassed deep-house chord stab",
+        "dub send",
+        "granular reverse tails"
+      ],
+      "punk_spirit": [
+        "plainspoken topline",
+        "minimal bridge",
+        "distorted room crush"
+      ],
+      "production_constraints": [
+        "Import MIDI into Ableton Live 12, then map each MIDI track to the matching session-template track.",
+        "Keep Public Domain Source Deck muted until the source ledger approves the selected audio.",
+        "Do not commit rendered audio, .als, .amxd, commercial packs, samples, presets, or controller recordings.",
+        "Before Live-set mutation, save a local rollback copy and record the affected tracks/devices."
+      ]
+    },
+    {
+      "title": "No Gods, No Masters, No Quantize",
+      "slug": "no-gods-no-masters-no-quantize",
+      "tempo_bpm": 104,
+      "key_center": "G major with flat-7 pressure",
+      "duration_target": "3:10",
+      "approximate_bars": 100,
+      "midi_file": "compositions/generated/midi/no-gods-no-masters-no-quantize.mid",
+      "midi_sha256": "cea40e19e0a6be6e47a97eacf4fcbef65a901694aad7d77d746e5f24de79d59b",
+      "midi_byte_size": 45360,
+      "scenes": [
+        {
+          "index": 1,
+          "name": "01 count-off into unquantized banjo",
+          "bar_start": 1,
+          "bar_length": 20,
+          "arrangement_note": "count-off into unquantized banjo"
+        },
+        {
+          "index": 2,
+          "name": "02 kick locks after four bars",
+          "bar_start": 21,
+          "bar_length": 20,
+          "arrangement_note": "kick locks after four bars"
+        },
+        {
+          "index": 3,
+          "name": "03 acid line mirrors bass roots",
+          "bar_start": 41,
+          "bar_length": 20,
+          "arrangement_note": "acid line mirrors bass roots"
+        },
+        {
+          "index": 4,
+          "name": "04 stop-time chorus",
+          "bar_start": 61,
+          "bar_length": 20,
+          "arrangement_note": "stop-time chorus"
+        },
+        {
+          "index": 5,
+          "name": "05 fiddle and spectral freeze outro",
+          "bar_start": 81,
+          "bar_length": 20,
+          "arrangement_note": "fiddle and spectral freeze outro"
+        }
+      ],
+      "layers": [
+        {
+          "id": "aeroband_banjo_lead",
+          "session_track": "AeroBand Banjo Lead",
+          "midi_track": "AeroBand Banjo Lead",
+          "midi_channels": [
+            1
+          ],
+          "gm_sound": "Banjo",
+          "motif": "Sixteenth-note forward roll with section-density changes.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.aeroband_banjo_mapper",
+            "m4l.roll_probability_engine"
+          ],
+          "automation_targets": [
+            "velocity_curve",
+            "roll_density",
+            "pluck_decay",
+            "humanize_ms"
+          ]
+        },
+        {
+          "id": "fiddle_hybrid_strings",
+          "session_track": "Fiddle / Hybrid Strings",
+          "midi_track": "Fiddle / Hybrid Strings",
+          "midi_channels": [
+            2
+          ],
+          "gm_sound": "Violin",
+          "motif": "Long root/fifth drones and answer tones for fiddle-family contour.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.call_response_router"
+          ],
+          "automation_targets": [
+            "bow_noise",
+            "vibrato_depth",
+            "send_spatial"
+          ]
+        },
+        {
+          "id": "mandolin_chop",
+          "session_track": "Mandolin Chop",
+          "midi_track": "Mandolin Chop",
+          "midi_channels": [
+            3
+          ],
+          "gm_sound": "Steel Guitar proxy",
+          "motif": "Short offbeat chop chords on beats two and four.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.chop_clock_guard"
+          ],
+          "automation_targets": [
+            "chop_gate",
+            "ghost_note_probability"
+          ]
+        },
+        {
+          "id": "dobro_metallic_slide",
+          "session_track": "Dobro / Metallic Slide",
+          "midi_track": "Dobro / Metallic Slide",
+          "midi_channels": [
+            4
+          ],
+          "gm_sound": "Jazz Guitar proxy",
+          "motif": "Sparse slide-like approaches into section roots.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.slide_phrase_sampler"
+          ],
+          "automation_targets": [
+            "glide_time",
+            "feedback",
+            "spectral_tilt"
+          ]
+        },
+        {
+          "id": "upright_bass_sub",
+          "session_track": "Upright Bass / Sub",
+          "midi_track": "Upright Bass / Sub",
+          "midi_channels": [
+            5
+          ],
+          "gm_sound": "Acoustic Bass",
+          "motif": "Root/fifth walk doubled conceptually by sidechained sub.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.root_motion_limiter"
+          ],
+          "automation_targets": [
+            "sub_blend",
+            "sidechain_depth",
+            "note_length"
+          ]
+        },
+        {
+          "id": "acoustic_guitar_boom_chuck",
+          "session_track": "Acoustic Guitar Boom-Chuck",
+          "midi_track": "Acoustic Guitar Boom-Chuck",
+          "midi_channels": [
+            6
+          ],
+          "gm_sound": "Steel Guitar",
+          "motif": "Alternating bass-note boom and short chord chuck for bluegrass rhythm drive.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.chop_clock_guard",
+            "m4l.call_response_router"
+          ],
+          "automation_targets": [
+            "boom_chuck_balance",
+            "strum_velocity",
+            "room_send",
+            "downstroke_bias"
+          ]
+        },
+        {
+          "id": "punk_kit",
+          "session_track": "Punk Kit",
+          "midi_track": "Punk Kit",
+          "midi_channels": [
+            10
+          ],
+          "gm_sound": "GM Drum Kit",
+          "motif": "Dry kick/snare/hat hits with end-of-section fills.",
+          "traditional_bluegrass_layer": false,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.fill_trigger"
+          ],
+          "automation_targets": [
+            "parallel_drive",
+            "room_send",
+            "fill_probability"
+          ]
+        },
+        {
+          "id": "deep_house_machines",
+          "session_track": "Deep House Machines",
+          "midi_track": "Deep House Machines",
+          "midi_channels": [
+            10,
+            11
+          ],
+          "gm_sound": "GM drum machine plus synth-stab channel",
+          "motif": "Four-on-floor kick, hats, claps, and minor chord stabs.",
+          "traditional_bluegrass_layer": false,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.house_grid_conductor"
+          ],
+          "automation_targets": [
+            "filter_cutoff",
+            "accent",
+            "swing_amount"
+          ]
+        },
+        {
+          "id": "alien_sky",
+          "session_track": "Alien Sky",
+          "midi_track": "Alien Sky",
+          "midi_channels": [
+            12
+          ],
+          "gm_sound": "Warm Pad",
+          "motif": "Wide held tones for Granulator/PitchLoop/spectral processing.",
+          "traditional_bluegrass_layer": false,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.spatial_harmonic_field"
+          ],
+          "automation_targets": [
+            "azimuth",
+            "width",
+            "grain_density",
+            "freeze"
+          ]
+        }
+      ],
+      "max_for_live_focus": [
+        "chop_clock_guard",
+        "root_motion_limiter"
+      ],
+      "bluegrass_core": [
+        "fast banjo roll",
+        "mandolin offbeats",
+        "upright bass walk",
+        "fiddle double-stop"
+      ],
+      "electronic_dna": [
+        "acid bass shadow",
+        "bitcrushed percussion",
+        "spectral freeze fills"
+      ],
+      "punk_spirit": [
+        "raw kit",
+        "abrupt stops",
+        "anti-polish vocal cadence"
+      ],
+      "production_constraints": [
+        "Import MIDI into Ableton Live 12, then map each MIDI track to the matching session-template track.",
+        "Keep Public Domain Source Deck muted until the source ledger approves the selected audio.",
+        "Do not commit rendered audio, .als, .amxd, commercial packs, samples, presets, or controller recordings.",
+        "Before Live-set mutation, save a local rollback copy and record the affected tracks/devices."
+      ]
+    },
+    {
+      "title": "Possum Kingdom Afterhours",
+      "slug": "possum-kingdom-afterhours",
+      "tempo_bpm": 82,
+      "key_center": "E minor pentatonic",
+      "duration_target": "5:30",
+      "approximate_bars": 120,
+      "midi_file": "compositions/generated/midi/possum-kingdom-afterhours.mid",
+      "midi_sha256": "070a6a4f7432eb8ea68aac2d1f62c763ed0c6b059540c390894b3b9dff47aa95",
+      "midi_byte_size": 54358,
+      "scenes": [
+        {
+          "index": 1,
+          "name": "01 drone and fiddle establish place",
+          "bar_start": 1,
+          "bar_length": 24,
+          "arrangement_note": "drone and fiddle establish place"
+        },
+        {
+          "index": 2,
+          "name": "02 brush kit and dub chords pulse",
+          "bar_start": 25,
+          "bar_length": 24,
+          "arrangement_note": "brush kit and dub chords pulse"
+        },
+        {
+          "index": 3,
+          "name": "03 banjo harmonics become granular particles",
+          "bar_start": 49,
+          "bar_length": 24,
+          "arrangement_note": "banjo harmonics become granular particles"
+        },
+        {
+          "index": 4,
+          "name": "04 dobro swell chorus",
+          "bar_start": 73,
+          "bar_length": 24,
+          "arrangement_note": "dobro swell chorus"
+        },
+        {
+          "index": 5,
+          "name": "05 long spatial fade with low-end discipline",
+          "bar_start": 97,
+          "bar_length": 24,
+          "arrangement_note": "long spatial fade with low-end discipline"
+        }
+      ],
+      "layers": [
+        {
+          "id": "aeroband_banjo_lead",
+          "session_track": "AeroBand Banjo Lead",
+          "midi_track": "AeroBand Banjo Lead",
+          "midi_channels": [
+            1
+          ],
+          "gm_sound": "Banjo",
+          "motif": "Sixteenth-note forward roll with section-density changes.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.aeroband_banjo_mapper",
+            "m4l.roll_probability_engine"
+          ],
+          "automation_targets": [
+            "velocity_curve",
+            "roll_density",
+            "pluck_decay",
+            "humanize_ms"
+          ]
+        },
+        {
+          "id": "fiddle_hybrid_strings",
+          "session_track": "Fiddle / Hybrid Strings",
+          "midi_track": "Fiddle / Hybrid Strings",
+          "midi_channels": [
+            2
+          ],
+          "gm_sound": "Violin",
+          "motif": "Long root/fifth drones and answer tones for fiddle-family contour.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.call_response_router"
+          ],
+          "automation_targets": [
+            "bow_noise",
+            "vibrato_depth",
+            "send_spatial"
+          ]
+        },
+        {
+          "id": "mandolin_chop",
+          "session_track": "Mandolin Chop",
+          "midi_track": "Mandolin Chop",
+          "midi_channels": [
+            3
+          ],
+          "gm_sound": "Steel Guitar proxy",
+          "motif": "Short offbeat chop chords on beats two and four.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.chop_clock_guard"
+          ],
+          "automation_targets": [
+            "chop_gate",
+            "ghost_note_probability"
+          ]
+        },
+        {
+          "id": "dobro_metallic_slide",
+          "session_track": "Dobro / Metallic Slide",
+          "midi_track": "Dobro / Metallic Slide",
+          "midi_channels": [
+            4
+          ],
+          "gm_sound": "Jazz Guitar proxy",
+          "motif": "Sparse slide-like approaches into section roots.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.slide_phrase_sampler"
+          ],
+          "automation_targets": [
+            "glide_time",
+            "feedback",
+            "spectral_tilt"
+          ]
+        },
+        {
+          "id": "upright_bass_sub",
+          "session_track": "Upright Bass / Sub",
+          "midi_track": "Upright Bass / Sub",
+          "midi_channels": [
+            5
+          ],
+          "gm_sound": "Acoustic Bass",
+          "motif": "Root/fifth walk doubled conceptually by sidechained sub.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.root_motion_limiter"
+          ],
+          "automation_targets": [
+            "sub_blend",
+            "sidechain_depth",
+            "note_length"
+          ]
+        },
+        {
+          "id": "acoustic_guitar_boom_chuck",
+          "session_track": "Acoustic Guitar Boom-Chuck",
+          "midi_track": "Acoustic Guitar Boom-Chuck",
+          "midi_channels": [
+            6
+          ],
+          "gm_sound": "Steel Guitar",
+          "motif": "Alternating bass-note boom and short chord chuck for bluegrass rhythm drive.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.chop_clock_guard",
+            "m4l.call_response_router"
+          ],
+          "automation_targets": [
+            "boom_chuck_balance",
+            "strum_velocity",
+            "room_send",
+            "downstroke_bias"
+          ]
+        },
+        {
+          "id": "punk_kit",
+          "session_track": "Punk Kit",
+          "midi_track": "Punk Kit",
+          "midi_channels": [
+            10
+          ],
+          "gm_sound": "GM Drum Kit",
+          "motif": "Dry kick/snare/hat hits with end-of-section fills.",
+          "traditional_bluegrass_layer": false,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.fill_trigger"
+          ],
+          "automation_targets": [
+            "parallel_drive",
+            "room_send",
+            "fill_probability"
+          ]
+        },
+        {
+          "id": "deep_house_machines",
+          "session_track": "Deep House Machines",
+          "midi_track": "Deep House Machines",
+          "midi_channels": [
+            10,
+            11
+          ],
+          "gm_sound": "GM drum machine plus synth-stab channel",
+          "motif": "Four-on-floor kick, hats, claps, and minor chord stabs.",
+          "traditional_bluegrass_layer": false,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.house_grid_conductor"
+          ],
+          "automation_targets": [
+            "filter_cutoff",
+            "accent",
+            "swing_amount"
+          ]
+        },
+        {
+          "id": "alien_sky",
+          "session_track": "Alien Sky",
+          "midi_track": "Alien Sky",
+          "midi_channels": [
+            12
+          ],
+          "gm_sound": "Warm Pad",
+          "motif": "Wide held tones for Granulator/PitchLoop/spectral processing.",
+          "traditional_bluegrass_layer": false,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.spatial_harmonic_field"
+          ],
+          "automation_targets": [
+            "azimuth",
+            "width",
+            "grain_density",
+            "freeze"
+          ]
+        }
+      ],
+      "max_for_live_focus": [
+        "spatial_harmonic_field",
+        "provenance_sampler"
+      ],
+      "bluegrass_core": [
+        "modal fiddle",
+        "banjo harmonics",
+        "dobro swells",
+        "brush kit"
+      ],
+      "electronic_dna": [
+        "slow dub-techno chords",
+        "sub drone",
+        "Inspired by Nature modulation"
+      ],
+      "punk_spirit": [
+        "one-take lead rule",
+        "feedback edges",
+        "no glossy breakdown"
+      ],
+      "production_constraints": [
+        "Import MIDI into Ableton Live 12, then map each MIDI track to the matching session-template track.",
+        "Keep Public Domain Source Deck muted until the source ledger approves the selected audio.",
+        "Do not commit rendered audio, .als, .amxd, commercial packs, samples, presets, or controller recordings.",
+        "Before Live-set mutation, save a local rollback copy and record the affected tracks/devices."
+      ]
+    },
+    {
+      "title": "The Ballad of the Broken Controller",
+      "slug": "the-ballad-of-the-broken-controller",
+      "tempo_bpm": 100,
+      "key_center": "B flat major with punk chromatic passing tones",
+      "duration_target": "4:00",
+      "approximate_bars": 100,
+      "midi_file": "compositions/generated/midi/the-ballad-of-the-broken-controller.mid",
+      "midi_sha256": "0806d648fef1d4388b926ded3f4958573b1fbd61c5c2a016c69e3bf991d299fd",
+      "midi_byte_size": 45431,
+      "scenes": [
+        {
+          "index": 1,
+          "name": "01 controller calibration noises become rhythm",
+          "bar_start": 1,
+          "bar_length": 20,
+          "arrangement_note": "controller calibration noises become rhythm"
+        },
+        {
+          "index": 2,
+          "name": "02 banjo riff locks to glitch percussion",
+          "bar_start": 21,
+          "bar_length": 20,
+          "arrangement_note": "banjo riff locks to glitch percussion"
+        },
+        {
+          "index": 3,
+          "name": "03 mandolin tremolo lifts refrain",
+          "bar_start": 41,
+          "bar_length": 20,
+          "arrangement_note": "mandolin tremolo lifts refrain"
+        },
+        {
+          "index": 4,
+          "name": "04 breakdown exposes failed notes",
+          "bar_start": 61,
+          "bar_length": 20,
+          "arrangement_note": "breakdown exposes failed notes"
+        },
+        {
+          "index": 5,
+          "name": "05 final refrain stacks all traditional instruments over alien choir",
+          "bar_start": 81,
+          "bar_length": 20,
+          "arrangement_note": "final refrain stacks all traditional instruments over alien choir"
+        }
+      ],
+      "layers": [
+        {
+          "id": "aeroband_banjo_lead",
+          "session_track": "AeroBand Banjo Lead",
+          "midi_track": "AeroBand Banjo Lead",
+          "midi_channels": [
+            1
+          ],
+          "gm_sound": "Banjo",
+          "motif": "Sixteenth-note forward roll with section-density changes.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.aeroband_banjo_mapper",
+            "m4l.roll_probability_engine"
+          ],
+          "automation_targets": [
+            "velocity_curve",
+            "roll_density",
+            "pluck_decay",
+            "humanize_ms"
+          ]
+        },
+        {
+          "id": "fiddle_hybrid_strings",
+          "session_track": "Fiddle / Hybrid Strings",
+          "midi_track": "Fiddle / Hybrid Strings",
+          "midi_channels": [
+            2
+          ],
+          "gm_sound": "Violin",
+          "motif": "Long root/fifth drones and answer tones for fiddle-family contour.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.call_response_router"
+          ],
+          "automation_targets": [
+            "bow_noise",
+            "vibrato_depth",
+            "send_spatial"
+          ]
+        },
+        {
+          "id": "mandolin_chop",
+          "session_track": "Mandolin Chop",
+          "midi_track": "Mandolin Chop",
+          "midi_channels": [
+            3
+          ],
+          "gm_sound": "Steel Guitar proxy",
+          "motif": "Short offbeat chop chords on beats two and four.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.chop_clock_guard"
+          ],
+          "automation_targets": [
+            "chop_gate",
+            "ghost_note_probability"
+          ]
+        },
+        {
+          "id": "dobro_metallic_slide",
+          "session_track": "Dobro / Metallic Slide",
+          "midi_track": "Dobro / Metallic Slide",
+          "midi_channels": [
+            4
+          ],
+          "gm_sound": "Jazz Guitar proxy",
+          "motif": "Sparse slide-like approaches into section roots.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.slide_phrase_sampler"
+          ],
+          "automation_targets": [
+            "glide_time",
+            "feedback",
+            "spectral_tilt"
+          ]
+        },
+        {
+          "id": "upright_bass_sub",
+          "session_track": "Upright Bass / Sub",
+          "midi_track": "Upright Bass / Sub",
+          "midi_channels": [
+            5
+          ],
+          "gm_sound": "Acoustic Bass",
+          "motif": "Root/fifth walk doubled conceptually by sidechained sub.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.root_motion_limiter"
+          ],
+          "automation_targets": [
+            "sub_blend",
+            "sidechain_depth",
+            "note_length"
+          ]
+        },
+        {
+          "id": "acoustic_guitar_boom_chuck",
+          "session_track": "Acoustic Guitar Boom-Chuck",
+          "midi_track": "Acoustic Guitar Boom-Chuck",
+          "midi_channels": [
+            6
+          ],
+          "gm_sound": "Steel Guitar",
+          "motif": "Alternating bass-note boom and short chord chuck for bluegrass rhythm drive.",
+          "traditional_bluegrass_layer": true,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.chop_clock_guard",
+            "m4l.call_response_router"
+          ],
+          "automation_targets": [
+            "boom_chuck_balance",
+            "strum_velocity",
+            "room_send",
+            "downstroke_bias"
+          ]
+        },
+        {
+          "id": "punk_kit",
+          "session_track": "Punk Kit",
+          "midi_track": "Punk Kit",
+          "midi_channels": [
+            10
+          ],
+          "gm_sound": "GM Drum Kit",
+          "motif": "Dry kick/snare/hat hits with end-of-section fills.",
+          "traditional_bluegrass_layer": false,
+          "alien_electronic_layer": false,
+          "device_contracts": [
+            "m4l.fill_trigger"
+          ],
+          "automation_targets": [
+            "parallel_drive",
+            "room_send",
+            "fill_probability"
+          ]
+        },
+        {
+          "id": "deep_house_machines",
+          "session_track": "Deep House Machines",
+          "midi_track": "Deep House Machines",
+          "midi_channels": [
+            10,
+            11
+          ],
+          "gm_sound": "GM drum machine plus synth-stab channel",
+          "motif": "Four-on-floor kick, hats, claps, and minor chord stabs.",
+          "traditional_bluegrass_layer": false,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.house_grid_conductor"
+          ],
+          "automation_targets": [
+            "filter_cutoff",
+            "accent",
+            "swing_amount"
+          ]
+        },
+        {
+          "id": "alien_sky",
+          "session_track": "Alien Sky",
+          "midi_track": "Alien Sky",
+          "midi_channels": [
+            12
+          ],
+          "gm_sound": "Warm Pad",
+          "motif": "Wide held tones for Granulator/PitchLoop/spectral processing.",
+          "traditional_bluegrass_layer": false,
+          "alien_electronic_layer": true,
+          "device_contracts": [
+            "m4l.spatial_harmonic_field"
+          ],
+          "automation_targets": [
+            "azimuth",
+            "width",
+            "grain_density",
+            "freeze"
+          ]
+        }
+      ],
+      "max_for_live_focus": [
+        "aeroband_banjo_mapper",
+        "fill_trigger"
+      ],
+      "bluegrass_core": [
+        "AeroBand banjo lead",
+        "mandolin tremolo",
+        "upright slap",
+        "fiddle saw"
+      ],
+      "electronic_dna": [
+        "glitch percussion",
+        "resampled controller errors",
+        "wide synthetic choir"
+      ],
+      "punk_spirit": [
+        "failure-as-hook",
+        "short loud refrain",
+        "live controller risk retained"
+      ],
+      "production_constraints": [
+        "Import MIDI into Ableton Live 12, then map each MIDI track to the matching session-template track.",
+        "Keep Public Domain Source Deck muted until the source ledger approves the selected audio.",
+        "Do not commit rendered audio, .als, .amxd, commercial packs, samples, presets, or controller recordings.",
+        "Before Live-set mutation, save a local rollback copy and record the affected tracks/devices."
+      ]
+    }
+  ]
+}

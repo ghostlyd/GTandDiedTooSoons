@@ -39,6 +39,14 @@
       "automation_targets": ["glide_time", "feedback", "spectral_tilt"]
     },
     {
+      "name": "Acoustic Guitar Boom-Chuck",
+      "role": "Bluegrass rhythm bed and punk strum anchor",
+      "input": "MIDI clips or performed strums",
+      "instrument_strategy": "Steel-string guitar rack or verified Arturia guitar-source patch with tight low-mid control and transient-preserved strums.",
+      "device_contracts": ["m4l.chop_clock_guard", "m4l.call_response_router"],
+      "automation_targets": ["boom_chuck_balance", "strum_velocity", "room_send", "downstroke_bias"]
+    },
+    {
       "name": "Upright Bass / Sub",
       "role": "Bluegrass root movement fused with deep-house low end",
       "input": "MIDI",

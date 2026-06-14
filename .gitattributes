@@ -5,6 +5,9 @@
 *.yaml text eol=lf
 *.txt text eol=lf
 
+# Deterministic generated MIDI sketches are reviewable through their JSON build plan.
+compositions/generated/midi/*.mid -text -diff -merge
+
 # Future binary project artifacts should move through reviewed Git LFS policy.
 *.als filter=lfs diff=lfs merge=lfs -text
 *.amxd filter=lfs diff=lfs merge=lfs -text

@@ -34,6 +34,12 @@ jobs:
           python3 scripts/render_openai_worker_briefs.py --stable --output /tmp/openai-worker-briefs.json
           diff -u automation/generated/openai-worker-briefs.json /tmp/openai-worker-briefs.json
 
+      - name: Verify generated composition sketches are in sync
+        run: |
+          rm -rf /tmp/composition-sketches
+          python3 scripts/render_composition_sketches.py --stable --output-dir /tmp/composition-sketches
+          diff -ru compositions/generated /tmp/composition-sketches
+
       - name: Exercise inventory script in dry-run mode
         run: python3 scripts/inventory_live_suite.py --dry-run --output inventory/live12-local-inventory.json
 
@@ -56,6 +62,12 @@ jobs:
         run: |
           python3 scripts/render_openai_worker_briefs.py --stable --output /tmp/openai-worker-briefs.json
           diff -u automation/generated/openai-worker-briefs.json /tmp/openai-worker-briefs.json
+
+      - name: Verify generated composition sketches are in sync
+        run: |
+          rm -rf /tmp/composition-sketches
+          python3 scripts/render_composition_sketches.py --stable --output-dir /tmp/composition-sketches
+          diff -ru compositions/generated /tmp/composition-sketches
 
       - name: Generate non-sensitive host inventory snapshot
         run: python3 scripts/inventory_live_suite.py --dry-run

@@ -138,7 +138,7 @@
     },
     {
       "id": "propose_session_change",
-      "input_scope": ["automation/live12-session-template.json", "compositions/down-tempo-punk-bluegrass-set.json", "inventory/live12-local-inventory.json"],
+      "input_scope": ["automation/live12-session-template.json", "compositions/down-tempo-punk-bluegrass-set.json", "compositions/generated/live12-track-build-plans.json", "inventory/live12-local-inventory.json"],
       "output": "Reviewable JSON patch proposal for Live/Max for Live implementation.",
       "approval_required": true,
       "must_not": ["mutate a Live set without approval", "commit .als or .amxd binaries", "create unbounded automation loops"]
@@ -152,7 +152,7 @@
     },
     {
       "id": "automate_daw_session",
-      "input_scope": ["automation/live12-session-template.json", "automation/generated/openai-worker-briefs.json"],
+      "input_scope": ["automation/live12-session-template.json", "automation/generated/openai-worker-briefs.json", "compositions/generated/live12-track-build-plans.json"],
       "output": "Human-reviewable DAW action plan, Max for Live contract update, or local-only session receipt.",
       "approval_required": true,
       "must_not": ["export or publish without release QA", "disable provenance checks", "log private performance content by default"]
