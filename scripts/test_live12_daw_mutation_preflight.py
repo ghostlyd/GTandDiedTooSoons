@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PYTHON = sys.executable
 TRACK_SLUG = "good-vibrations-in-a-burned-barn"
 TRACK_TITLE = "Good Vibrations in a Burned Barn"
+MAX_CONTRACTS_PATH = ROOT / "automation" / "generated" / "max-for-live-device-contracts.json"
 EXPECTED_TRACK_SLUGS = [
     "good-vibrations-in-a-burned-barn",
     "a-p-carter-in-the-warehouse",
@@ -138,6 +139,18 @@ def main() -> int:
         if queue_manifest.get("total_planned_action_count") != expected_action_count:
             print("DAW mutation queue must summarize planned action count across all tracks.", file=sys.stderr)
             return 1
+        max_contracts = load_json(MAX_CONTRACTS_PATH)
+        queue_max_contracts = queue_manifest.get("max_for_live_contracts", {})
+        if queue_max_contracts.get("path") != "automation/generated/max-for-live-device-contracts.json":
+            print("DAW mutation queue must reference the generated Max for Live contract bundle.", file=sys.stderr)
+            return 1
+        if queue_max_contracts.get("sha256") is None or queue_max_contracts.get("device_count") != max_contracts["device_count"]:
+            print("DAW mutation queue must include the Max for Live contract hash and device count.", file=sys.stderr)
+            return 1
+        if queue_max_contracts.get("git_policy") != "source_only_no_amxd":
+            print("DAW mutation queue must keep Max for Live artifacts source-only.", file=sys.stderr)
+            return 1
+        expected_device_ids = [device["id"] for device in max_contracts["devices"]]
         for track in queue_tracks:
             for key in ["request", "receipt_template", "bundle_manifest", "launch_plan", "operator_evidence_template", "staged_midi"]:
                 track_path = temp_root / track[key]["path"]
@@ -148,6 +161,18 @@ def main() -> int:
             if launch_plan.get("launch_status") != "blocked_until_confirm_live_mutation":
                 print("DAW mutation queue must keep each Ableton launch blocked.", file=sys.stderr)
                 return 1
+            max_devices = track.get("max_for_live_devices", [])
+            if [device.get("id") for device in max_devices] != expected_device_ids:
+                print("DAW mutation queue must include ordered Max for Live device contracts for each track.", file=sys.stderr)
+                return 1
+            for device in max_devices:
+                patch_path = ROOT / device.get("source_patch", "")
+                if patch_path.suffix != ".maxpat" or not patch_path.exists():
+                    print(f"DAW mutation queue Max device must reference a committed .maxpat source patch: {patch_path}", file=sys.stderr)
+                    return 1
+                if device.get("approval_gate") != "live_set_mutation":
+                    print("DAW mutation queue Max device entries must require live_set_mutation approval.", file=sys.stderr)
+                    return 1
         assert_no_sensitive_paths(queue_manifest, "DAW mutation queue")
 
         output_dir = temp_root / "preflight"
