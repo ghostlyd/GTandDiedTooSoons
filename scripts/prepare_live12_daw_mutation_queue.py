@@ -94,6 +94,7 @@ def build_track_queue_entry(
     request: dict[str, Any],
     request_path: Path,
     receipt_template_path: Path,
+    evidence_draft_path: Path,
     bundle_root: Path,
     staged_midi: Path,
     bundle_manifest: dict[str, Any],
@@ -118,6 +119,10 @@ def build_track_queue_entry(
         "receipt_template": {
             "path": artifact_ref(receipt_template_path, artifact_base),
             "sha256": preflight.sha256_file(receipt_template_path),
+        },
+        "operator_evidence_draft": {
+            "path": artifact_ref(evidence_draft_path, artifact_base),
+            "sha256": preflight.sha256_file(evidence_draft_path),
         },
         "bundle_manifest": {
             "path": artifact_ref(bundle_manifest_path, artifact_base),
@@ -206,12 +211,15 @@ def prepare_track(
     if not request["midi_verification"]["verified"]:
         raise ValueError(f"MIDI hash mismatch for track {job['track_slug']}")
     receipt = preflight.build_receipt_template(package, request)
+    evidence_draft = preflight.build_operator_evidence_draft(request)
 
     track_output = mutation_output_dir / job["track_slug"]
     request_path = track_output / "mutation-request.json"
     receipt_template_path = track_output / "receipt-template.json"
+    evidence_draft_path = track_output / "operator-evidence.json"
     write_json(request_path, request)
     write_json(receipt_template_path, receipt)
+    write_json(evidence_draft_path, evidence_draft)
 
     staged_midi, bundle_manifest, launch_plan = bundle_stage.stage_bundle(
         request,
@@ -227,6 +235,7 @@ def prepare_track(
         request,
         request_path,
         receipt_template_path,
+        evidence_draft_path,
         bundle_root,
         staged_midi,
         bundle_manifest,

@@ -42,6 +42,7 @@ Public Domain Source Deck remains muted until provenance review.
 - Affected tracks: `10`
 - Max for Live source devices: `10`
 - Source deck state: `muted_until_human_provenance_review`
+- Operator evidence draft: `output/daw-mutations/good-vibrations-in-a-burned-barn/operator-evidence.json`
 
 Preflight:
 
@@ -96,6 +97,7 @@ Postflight checks:
 - Affected tracks: `10`
 - Max for Live source devices: `10`
 - Source deck state: `muted_until_human_provenance_review`
+- Operator evidence draft: `output/daw-mutations/a-p-carter-in-the-warehouse/operator-evidence.json`
 
 Preflight:
 
@@ -150,6 +152,7 @@ Postflight checks:
 - Affected tracks: `10`
 - Max for Live source devices: `10`
 - Source deck state: `muted_until_human_provenance_review`
+- Operator evidence draft: `output/daw-mutations/no-gods-no-masters-no-quantize/operator-evidence.json`
 
 Preflight:
 
@@ -204,6 +207,7 @@ Postflight checks:
 - Affected tracks: `10`
 - Max for Live source devices: `10`
 - Source deck state: `muted_until_human_provenance_review`
+- Operator evidence draft: `output/daw-mutations/possum-kingdom-afterhours/operator-evidence.json`
 
 Preflight:
 
@@ -258,6 +262,7 @@ Postflight checks:
 - Affected tracks: `10`
 - Max for Live source devices: `10`
 - Source deck state: `muted_until_human_provenance_review`
+- Operator evidence draft: `output/daw-mutations/the-ballad-of-the-broken-controller/operator-evidence.json`
 
 Preflight:
 
