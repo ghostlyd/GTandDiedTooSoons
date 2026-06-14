@@ -53,13 +53,21 @@ For future Max device work:
 2. Install packs locally through official vendor account flows.
 3. Refresh inventory.
 4. Build or update Live set locally.
-5. Write local mutation requests and receipt templates under `output/daw-mutations/`:
+5. Prepare and stage the full five-track DAW mutation queue under ignored `output/` folders:
+
+```bash
+python3 scripts/prepare_live12_daw_mutation_queue.py
+```
+
+This writes `output/daw-mutation-queue/queue-manifest.json` plus per-track mutation requests, receipt templates, Ableton import bundles, launch plans, and operator evidence templates. The queue manifest paths are relative to its `artifact_base`, normally `output/`.
+
+6. For targeted single-track work, write local mutation requests and receipt templates under `output/daw-mutations/`:
 
 ```bash
 python3 scripts/prepare_live12_daw_mutation.py --track good-vibrations-in-a-burned-barn
 ```
 
-6. Stage a local Ableton import bundle with the generated MIDI and launch plan:
+7. Stage a local Ableton import bundle with the generated MIDI and launch plan:
 
 ```bash
 python3 scripts/stage_live12_daw_import_bundle.py \
@@ -77,7 +85,7 @@ python3 scripts/stage_live12_daw_import_bundle.py \
   --rollback-copy-reference <rollback-note>
 ```
 
-7. After an approved local Ableton/Max mutation attempt, record operator evidence against the prepared request:
+8. After an approved local Ableton/Max mutation attempt, record operator evidence against the prepared request:
 
 ```bash
 python3 scripts/record_live12_daw_mutation_receipt.py \
@@ -85,4 +93,4 @@ python3 scripts/record_live12_daw_mutation_receipt.py \
   --evidence output/daw-mutations/good-vibrations-in-a-burned-barn/operator-evidence.json
 ```
 
-8. Export stems/renders to an artifact store or release process with provenance, not directly into the source repo.
+9. Export stems/renders to an artifact store or release process with provenance, not directly into the source repo.
