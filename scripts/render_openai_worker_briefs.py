@@ -117,28 +117,40 @@ def split_role_inputs(inputs: list[str]) -> tuple[list[str], list[str]]:
     return repo_inputs, local_only_inputs
 
 
+def as_dict(value: object) -> dict[str, Any]:
+    return value if isinstance(value, dict) else {}
+
+
+def as_list(value: object) -> list[Any]:
+    return value if isinstance(value, list) else []
+
+
 def summarize_inventory(inventory: dict[str, Any]) -> dict[str, Any]:
-    ableton = inventory.get("ableton", {})
-    arturia = inventory.get("arturia", {})
-    live_database = ableton.get("live_database", {})
-    factory_packs = ableton.get("factory_packs", [])
+    ableton = as_dict(inventory.get("ableton"))
+    arturia = as_dict(inventory.get("arturia"))
+    arturia_resources = as_dict(arturia.get("resources"))
+    live_database = as_dict(ableton.get("live_database"))
+    factory_packs = as_list(ableton.get("factory_packs"))
+    ableton_app = as_dict(ableton.get("app"))
 
     return {
         "ableton_live": {
-            "exists": ableton.get("app", {}).get("exists", False),
-            "name": ableton.get("app", {}).get("name"),
-            "version": ableton.get("app", {}).get("version"),
+            "exists": ableton_app.get("exists", False),
+            "name": ableton_app.get("name"),
+            "version": ableton_app.get("version"),
             "factory_pack_count": len(factory_packs),
-            "installed_factory_packs": [item.get("name") for item in factory_packs if item.get("name")],
-            "indexed_pack_candidate_count": len(live_database.get("indexed_pack_candidates", [])),
-            "available_not_installed_count": len(live_database.get("available_not_installed", [])),
+            "installed_factory_packs": [
+                item.get("name") for item in factory_packs if isinstance(item, dict) and item.get("name")
+            ],
+            "indexed_pack_candidate_count": len(as_list(live_database.get("indexed_pack_candidates"))),
+            "available_not_installed_count": len(as_list(live_database.get("available_not_installed"))),
             "live_database_read_status": live_database.get("read_status", "unknown"),
         },
         "arturia": {
-            "application_count": len(arturia.get("applications", [])),
-            "resource_product_count": len(arturia.get("resource_products", [])),
-            "preset_product_folder_count": len(arturia.get("preset_product_folders", [])),
-            "sample_product_folder_count": len(arturia.get("sample_product_folders", [])),
+            "application_count": len(as_list(arturia.get("applications"))),
+            "resource_product_count": len(as_list(arturia_resources.get("products"))),
+            "preset_product_folder_count": len(as_list(arturia_resources.get("preset_products"))),
+            "sample_product_folder_count": len(as_list(arturia_resources.get("sample_products"))),
         },
     }
 
