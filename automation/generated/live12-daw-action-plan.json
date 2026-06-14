@@ -1,0 +1,2934 @@
+{
+  "approved_source_pool": [
+    {
+      "byte_size": 1208108,
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "name": "Carnival of Venice - excerpt 001",
+      "project_use": "Virtuosic melodic ornament source for banjo-roll variation, alien granular flourishes, and lead-controller pitch-bend studies.",
+      "rights_status": "public_domain",
+      "sha256": "a62d633eb195f0ecacceedc1831f05fc87db9da07eec114e9d6af667b93b4adb",
+      "source_id": "loc-citizen-dj-carnival-of-venice-260123-001",
+      "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+    },
+    {
+      "byte_size": 5778092,
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "name": "Devil's dream reel - excerpt 001",
+      "project_use": "Old-time fiddle reel source for banjo/fiddle chop, granular sampler, and call-and-response arrangement experiments.",
+      "rights_status": "public_domain",
+      "sha256": "f0b80ccd67d28210b62e9b4bcae1fb6b7066855da34c3c1b1a80d7a47f1f7a14",
+      "source_id": "loc-citizen-dj-devils-dream-reel-123798-001",
+      "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+    },
+    {
+      "byte_size": 1887980,
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "name": "Duke of Marlborough - excerpt 001",
+      "project_use": "Ballad-contour and modal phrase source for A.P. Carter-style narrative hooks, fiddle drone reharmonization, and slow-house vocal-chop beds.",
+      "rights_status": "public_domain",
+      "sha256": "a896860d2f155d2f93203b15534ad833c1fd1c174d5192a045cc022687e5243f",
+      "source_id": "loc-citizen-dj-duke-of-marlborough-12147-001",
+      "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+    },
+    {
+      "byte_size": 5809196,
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "name": "Turkey in the straw medley - excerpt 001",
+      "project_use": "Early banjo/traditional-country rhythmic DNA for AeroBand banjo mapping, boom-chuck counter-rhythm, and chopped call-and-response studies.",
+      "rights_status": "public_domain",
+      "sha256": "3f5ed365b48faa2a21fb9d9ab7dbe467af01cdb8d709413ab324008472113baa",
+      "source_id": "loc-citizen-dj-turkey-in-the-straw-medley-247928-001",
+      "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+    }
+  ],
+  "composition_set": "Down-Tempo Punk Bluegrass / Alien House Suite",
+  "generated_at": "1970-01-01T00:00:00Z",
+  "generator": "scripts/render_live12_daw_action_plan.py",
+  "inventory_summary": {
+    "ableton_live_version": "12.4.2 (2026-06-04_a687113d71)",
+    "arturia_application_count": 56,
+    "factory_pack_count": 9
+  },
+  "live_template": {
+    "master_bus_targets": [
+      "headroom >= -6 dBFS pre-master",
+      "mono-compatible low end",
+      "documented reference mix notes"
+    ],
+    "name": "GTandDiedTooSoons Live 12 Foundation Template",
+    "return_count": 4,
+    "target_runtime": "Ableton Live 12 Suite with Max for Live",
+    "tempo_range_bpm": [
+      82,
+      106
+    ],
+    "track_count": 10
+  },
+  "openai_tool_contract": {
+    "approval_required": true,
+    "id": "automate_daw_session",
+    "source_contract": {
+      "approval_required": true,
+      "id": "automate_daw_session",
+      "input_scope": [
+        "automation/live12-session-template.json",
+        "automation/generated/openai-worker-briefs.json",
+        "automation/generated/live12-daw-action-plan.json",
+        "compositions/generated/live12-track-build-plans.json"
+      ],
+      "must_not": [
+        "export or publish without release QA",
+        "disable provenance checks",
+        "log private performance content by default"
+      ],
+      "output": "Human-reviewable DAW action plan, Max for Live contract update, or local-only session receipt."
+    }
+  },
+  "purpose": "Reviewable proposal queue for building the generated downtempo punk-bluegrass suite in Ableton Live 12 with Max for Live.",
+  "safety": {
+    "must_not": [
+      "commit .als, .amxd, .alp, plugins, presets, samples, renders, credentials, cookies, or license files",
+      "write raw public-domain sample paths into tracked generated artifacts",
+      "use unapproved source audio in the Public Domain Source Deck",
+      "claim scientific psyche effects without a reviewed study protocol and evidence"
+    ],
+    "proposal_only": true,
+    "requires_human_approval_before": [
+      "account-gated vendor action",
+      "Live-set mutation",
+      "Max for Live device mutation",
+      "private audio upload",
+      "export or release"
+    ]
+  },
+  "schema_version": 1,
+  "source_file_sha256": {
+    "automation/live12-session-template.json": "f17640bd3d24a4f6953836393c3286a45c7ba9c9064399590611dac566c76c51",
+    "automation/openai-production-orchestration.json": "d951542e3acf034bcd848674e586015483d5bb0d5aa411a1d135fbcb9f77e605",
+    "catalogs/public-domain-bluegrass-sources.json": "ffd31092e6c9914fc8e91f14e298ebfb093beb3348134ebd23a289abea192bd9",
+    "compositions/down-tempo-punk-bluegrass-set.json": "4e9c3c69f1e031522cfdb850a64ef976aa77f8cf052afa1e475b172a17ef6dd2",
+    "compositions/generated/live12-track-build-plans.json": "4f08ba22b55b0c61a9fd688e353a97ca4caa6de74f52e6d89d339ae2b9ac2498",
+    "inventory/live12-local-inventory.json": "2ea81c2ccdcb76fdb0c12fcfec4a8fb792499c90a05d3bfa6ddc1dd2f648b094",
+    "sources/public-domain/download-ledger.json": "0e85c95b9beaf356a4fd1a4e2c7c5db1add06d89a09f86aa3d830844a87e0ebf"
+  },
+  "source_files": [
+    "automation/openai-production-orchestration.json",
+    "automation/live12-session-template.json",
+    "compositions/down-tempo-punk-bluegrass-set.json",
+    "compositions/generated/live12-track-build-plans.json",
+    "catalogs/public-domain-bluegrass-sources.json",
+    "sources/public-domain/download-ledger.json",
+    "inventory/live12-local-inventory.json"
+  ],
+  "tracks": [
+    {
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "approximate_bars": 120,
+      "duration_target": "4:20",
+      "key_center": "D mixolydian",
+      "layer_actions": [
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "velocity_curve",
+            "roll_density",
+            "pluck_decay",
+            "humanize_ms"
+          ],
+          "device_contracts": [
+            "m4l.aeroband_banjo_mapper",
+            "m4l.roll_probability_engine"
+          ],
+          "gm_placeholder": "Banjo",
+          "id": "good-vibrations-in-a-burned-barn.layer.aeroband_banjo_lead",
+          "instrument_strategy": "Banjo-imitation rack using pluck envelope, resonator EQ, velocity layers, and MPE/pitch-bend articulation where available.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "velocity_curve"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "roll_density"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "pluck_decay"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "humanize_ms"
+            }
+          ],
+          "midi_channels": [
+            1
+          ],
+          "midi_file": "compositions/generated/midi/good-vibrations-in-a-burned-barn.mid",
+          "midi_track": "AeroBand Banjo Lead",
+          "session_role": "Lead performer controller track",
+          "session_track": "AeroBand Banjo Lead",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "bow_noise",
+            "vibrato_depth",
+            "send_spatial"
+          ],
+          "device_contracts": [
+            "m4l.call_response_router"
+          ],
+          "gm_placeholder": "Violin",
+          "id": "good-vibrations-in-a-burned-barn.layer.fiddle_hybrid_strings",
+          "instrument_strategy": "Ableton String Quartet or Arturia Augmented STRINGS, layered with subtle pitch drift.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "bow_noise"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "vibrato_depth"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "send_spatial"
+            }
+          ],
+          "midi_channels": [
+            2
+          ],
+          "midi_file": "compositions/generated/midi/good-vibrations-in-a-burned-barn.mid",
+          "midi_track": "Fiddle / Hybrid Strings",
+          "session_role": "Melodic answer, drones, and tension",
+          "session_track": "Fiddle / Hybrid Strings",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "chop_gate",
+            "ghost_note_probability"
+          ],
+          "device_contracts": [
+            "m4l.chop_clock_guard"
+          ],
+          "gm_placeholder": "Steel Guitar proxy",
+          "id": "good-vibrations-in-a-burned-barn.layer.mandolin_chop",
+          "instrument_strategy": "Short plucked sampler/rack layer, high-mid transient emphasis, gated room.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "chop_gate"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "ghost_note_probability"
+            }
+          ],
+          "midi_channels": [
+            3
+          ],
+          "midi_file": "compositions/generated/midi/good-vibrations-in-a-burned-barn.mid",
+          "midi_track": "Mandolin Chop",
+          "session_role": "Offbeat bluegrass pulse",
+          "session_track": "Mandolin Chop",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "glide_time",
+            "feedback",
+            "spectral_tilt"
+          ],
+          "device_contracts": [
+            "m4l.slide_phrase_sampler"
+          ],
+          "gm_placeholder": "Jazz Guitar proxy",
+          "id": "good-vibrations-in-a-burned-barn.layer.dobro_metallic_slide",
+          "instrument_strategy": "Resonator-like slide layer or guitar-source Arturia bank routed through granular delay.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "glide_time"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "feedback"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "spectral_tilt"
+            }
+          ],
+          "midi_channels": [
+            4
+          ],
+          "midi_file": "compositions/generated/midi/good-vibrations-in-a-burned-barn.mid",
+          "midi_track": "Dobro / Metallic Slide",
+          "session_role": "Haunting hooks and punk-bluegrass bends",
+          "session_track": "Dobro / Metallic Slide",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "sub_blend",
+            "sidechain_depth",
+            "note_length"
+          ],
+          "device_contracts": [
+            "m4l.root_motion_limiter"
+          ],
+          "gm_placeholder": "Acoustic Bass",
+          "id": "good-vibrations-in-a-burned-barn.layer.upright_bass_sub",
+          "instrument_strategy": "Layer upright-like transient with sine/triangle sub; sidechain from kick.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "sub_blend"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "sidechain_depth"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "note_length"
+            }
+          ],
+          "midi_channels": [
+            5
+          ],
+          "midi_file": "compositions/generated/midi/good-vibrations-in-a-burned-barn.mid",
+          "midi_track": "Upright Bass / Sub",
+          "session_role": "Bluegrass root movement fused with deep-house low end",
+          "session_track": "Upright Bass / Sub",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "boom_chuck_balance",
+            "strum_velocity",
+            "room_send",
+            "downstroke_bias"
+          ],
+          "device_contracts": [
+            "m4l.chop_clock_guard",
+            "m4l.call_response_router"
+          ],
+          "gm_placeholder": "Steel Guitar",
+          "id": "good-vibrations-in-a-burned-barn.layer.acoustic_guitar_boom_chuck",
+          "instrument_strategy": "Steel-string guitar rack or verified Arturia guitar-source patch with tight low-mid control and transient-preserved strums.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "boom_chuck_balance"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "strum_velocity"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "room_send"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "downstroke_bias"
+            }
+          ],
+          "midi_channels": [
+            6
+          ],
+          "midi_file": "compositions/generated/midi/good-vibrations-in-a-burned-barn.mid",
+          "midi_track": "Acoustic Guitar Boom-Chuck",
+          "session_role": "Bluegrass rhythm bed and punk strum anchor",
+          "session_track": "Acoustic Guitar Boom-Chuck",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "parallel_drive",
+            "room_send",
+            "fill_probability"
+          ],
+          "device_contracts": [
+            "m4l.fill_trigger"
+          ],
+          "gm_placeholder": "GM Drum Kit",
+          "id": "good-vibrations-in-a-burned-barn.layer.punk_kit",
+          "instrument_strategy": "Dry acoustic kit, parallel saturation, short room.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "parallel_drive"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "room_send"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "fill_probability"
+            }
+          ],
+          "midi_channels": [
+            10
+          ],
+          "midi_file": "compositions/generated/midi/good-vibrations-in-a-burned-barn.mid",
+          "midi_track": "Punk Kit",
+          "session_role": "Human drum aggression",
+          "session_track": "Punk Kit",
+          "traditional_bluegrass_layer": false,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "filter_cutoff",
+            "accent",
+            "swing_amount"
+          ],
+          "device_contracts": [
+            "m4l.house_grid_conductor"
+          ],
+          "gm_placeholder": "GM drum machine plus synth-stab channel",
+          "id": "good-vibrations-in-a-burned-barn.layer.deep_house_machines",
+          "instrument_strategy": "Classic drum-machine racks, 303/101-style bass or stabs, restrained sidechain.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "filter_cutoff"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "accent"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "swing_amount"
+            }
+          ],
+          "midi_channels": [
+            10,
+            11
+          ],
+          "midi_file": "compositions/generated/midi/good-vibrations-in-a-burned-barn.mid",
+          "midi_track": "Deep House Machines",
+          "session_role": "Kick, hats, stabs, and dance-floor continuity",
+          "session_track": "Deep House Machines",
+          "traditional_bluegrass_layer": false,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "azimuth",
+            "width",
+            "grain_density",
+            "freeze"
+          ],
+          "device_contracts": [
+            "m4l.spatial_harmonic_field"
+          ],
+          "gm_placeholder": "Warm Pad",
+          "id": "good-vibrations-in-a-burned-barn.layer.alien_sky",
+          "instrument_strategy": "Granulator III, Inspired by Nature, PitchLoop89, spectral/freeform processing.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "azimuth"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "width"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "grain_density"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "freeze"
+            }
+          ],
+          "midi_channels": [
+            12
+          ],
+          "midi_file": "compositions/generated/midi/good-vibrations-in-a-burned-barn.mid",
+          "midi_track": "Alien Sky",
+          "session_role": "Granular, spectral, and spatial atmosphere",
+          "session_track": "Alien Sky",
+          "traditional_bluegrass_layer": false,
+          "type": "route_midi_layer_and_configure_devices"
+        }
+      ],
+      "midi_file": "compositions/generated/midi/good-vibrations-in-a-burned-barn.mid",
+      "midi_sha256": "9dd16949691ef1477ffab2b66fb86ad01efb8384f69ca8a16d3d07550ee78cf0",
+      "mix_and_release_gates": [
+        {
+          "approval_gate": "export_or_release",
+          "id": "good-vibrations-in-a-burned-barn.mix.headroom-check",
+          "instruction": "Confirm pre-master headroom is at least -6 dBFS before any limiter.",
+          "type": "operator_check"
+        },
+        {
+          "approval_gate": "export_or_release",
+          "id": "good-vibrations-in-a-burned-barn.release.provenance-check",
+          "instruction": "Confirm source credits, source ledger records, CI status, and local install receipts before export or release.",
+          "type": "operator_check"
+        }
+      ],
+      "preflight_actions": [
+        {
+          "approval_gate": null,
+          "expected_sha256": "9dd16949691ef1477ffab2b66fb86ad01efb8384f69ca8a16d3d07550ee78cf0",
+          "id": "good-vibrations-in-a-burned-barn.preflight.verify-midi-hash",
+          "input": "compositions/generated/midi/good-vibrations-in-a-burned-barn.mid",
+          "type": "verify_artifact"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "id": "good-vibrations-in-a-burned-barn.preflight.create-local-rollback-copy",
+          "instruction": "Before any Live-set mutation, save a timestamped local rollback copy outside Git.",
+          "type": "operator_check"
+        },
+        {
+          "approval_gate": "private_audio_upload",
+          "id": "good-vibrations-in-a-burned-barn.preflight.confirm-no-private-audio-upload",
+          "instruction": "Do not upload private rehearsal audio, unreleased lyrics, or controller recordings without session-specific consent.",
+          "type": "operator_check"
+        }
+      ],
+      "scene_actions": [
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "field-texture intro with public-domain source deck muted until cleared",
+          "bar_length": 20,
+          "bar_start": 1,
+          "id": "good-vibrations-in-a-burned-barn.scene.01",
+          "scene_name": "01 field-texture intro with public-domain source deck muted until cleared",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "banjo roll establishes hook over kick-free pulse",
+          "bar_length": 20,
+          "bar_start": 21,
+          "id": "good-vibrations-in-a-burned-barn.scene.02",
+          "scene_name": "02 banjo roll establishes hook over kick-free pulse",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "deep-house kick enters under mandolin chop",
+          "bar_length": 20,
+          "bar_start": 41,
+          "id": "good-vibrations-in-a-burned-barn.scene.03",
+          "scene_name": "03 deep-house kick enters under mandolin chop",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "fiddle answer bends into granular sky",
+          "bar_length": 20,
+          "bar_start": 61,
+          "id": "good-vibrations-in-a-burned-barn.scene.04",
+          "scene_name": "04 fiddle answer bends into granular sky",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "half-time punk break",
+          "bar_length": 20,
+          "bar_start": 81,
+          "id": "good-vibrations-in-a-burned-barn.scene.05",
+          "scene_name": "05 half-time punk break",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "final chorus with source deck slices if provenance approved",
+          "bar_length": 20,
+          "bar_start": 101,
+          "id": "good-vibrations-in-a-burned-barn.scene.06",
+          "scene_name": "06 final chorus with source deck slices if provenance approved",
+          "type": "create_arrangement_locator"
+        }
+      ],
+      "session_actions": [
+        {
+          "approval_gate": "live_set_mutation",
+          "global_swing": "54-61%",
+          "id": "good-vibrations-in-a-burned-barn.session.set-tempo-and-swing",
+          "tempo_bpm": 96,
+          "type": "set_session_tempo_and_groove"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "expected_sha256": "9dd16949691ef1477ffab2b66fb86ad01efb8384f69ca8a16d3d07550ee78cf0",
+          "id": "good-vibrations-in-a-burned-barn.session.import-midi",
+          "midi_file": "compositions/generated/midi/good-vibrations-in-a-burned-barn.mid",
+          "type": "import_generated_midi"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "id": "good-vibrations-in-a-burned-barn.session.configure-returns",
+          "returns": [
+            {
+              "name": "A Short Spring",
+              "role": "bluegrass room and slap"
+            },
+            {
+              "name": "B Deep Dub",
+              "role": "house delay and modulation"
+            },
+            {
+              "name": "C Alien Bloom",
+              "role": "granular/spectral send"
+            },
+            {
+              "name": "D Punk Crush",
+              "role": "parallel saturation"
+            }
+          ],
+          "type": "create_or_verify_return_tracks"
+        }
+      ],
+      "slug": "good-vibrations-in-a-burned-barn",
+      "source_deck": {
+        "approval_gate": "live_set_mutation",
+        "automation_targets": [
+          "slice_index",
+          "grain_size",
+          "reverse_probability"
+        ],
+        "candidate_sources": [
+          {
+            "byte_size": 5778092,
+            "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+            "name": "Devil's dream reel - excerpt 001",
+            "project_use": "Old-time fiddle reel source for banjo/fiddle chop, granular sampler, and call-and-response arrangement experiments.",
+            "rights_status": "public_domain",
+            "sha256": "f0b80ccd67d28210b62e9b4bcae1fb6b7066855da34c3c1b1a80d7a47f1f7a14",
+            "source_id": "loc-citizen-dj-devils-dream-reel-123798-001",
+            "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+          },
+          {
+            "byte_size": 1208108,
+            "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+            "name": "Carnival of Venice - excerpt 001",
+            "project_use": "Virtuosic melodic ornament source for banjo-roll variation, alien granular flourishes, and lead-controller pitch-bend studies.",
+            "rights_status": "public_domain",
+            "sha256": "a62d633eb195f0ecacceedc1831f05fc87db9da07eec114e9d6af667b93b4adb",
+            "source_id": "loc-citizen-dj-carnival-of-venice-260123-001",
+            "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+          },
+          {
+            "byte_size": 1887980,
+            "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+            "name": "Duke of Marlborough - excerpt 001",
+            "project_use": "Ballad-contour and modal phrase source for A.P. Carter-style narrative hooks, fiddle drone reharmonization, and slow-house vocal-chop beds.",
+            "rights_status": "public_domain",
+            "sha256": "a896860d2f155d2f93203b15534ad833c1fd1c174d5192a045cc022687e5243f",
+            "source_id": "loc-citizen-dj-duke-of-marlborough-12147-001",
+            "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+          }
+        ],
+        "default_state": "muted_until_human_provenance_review",
+        "device_contracts": [
+          "m4l.provenance_sampler"
+        ],
+        "instrument_strategy": "Sampler or Simpler loaded from provenance-checked local source folder.",
+        "macro_initialization": [
+          {
+            "mode": "write_initial_clip_envelope_or_macro_default",
+            "target": "slice_index"
+          },
+          {
+            "mode": "write_initial_clip_envelope_or_macro_default",
+            "target": "grain_size"
+          },
+          {
+            "mode": "write_initial_clip_envelope_or_macro_default",
+            "target": "reverse_probability"
+          }
+        ],
+        "required_checks": [
+          "source_id appears in sources/public-domain/download-ledger.json",
+          "rights_status is public_domain, cc0, or cc_by",
+          "credit line is carried into release notes",
+          "no raw sample path is written into tracked repo artifacts"
+        ],
+        "session_role": "Auditable historical fragments",
+        "session_track": "Public Domain Source Deck"
+      },
+      "tempo_bpm": 96,
+      "title": "Good Vibrations in a Burned Barn"
+    },
+    {
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "approximate_bars": 100,
+      "duration_target": "3:45",
+      "key_center": "A minor / dorian interchange",
+      "layer_actions": [
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "velocity_curve",
+            "roll_density",
+            "pluck_decay",
+            "humanize_ms"
+          ],
+          "device_contracts": [
+            "m4l.aeroband_banjo_mapper",
+            "m4l.roll_probability_engine"
+          ],
+          "gm_placeholder": "Banjo",
+          "id": "a-p-carter-in-the-warehouse.layer.aeroband_banjo_lead",
+          "instrument_strategy": "Banjo-imitation rack using pluck envelope, resonator EQ, velocity layers, and MPE/pitch-bend articulation where available.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "velocity_curve"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "roll_density"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "pluck_decay"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "humanize_ms"
+            }
+          ],
+          "midi_channels": [
+            1
+          ],
+          "midi_file": "compositions/generated/midi/a-p-carter-in-the-warehouse.mid",
+          "midi_track": "AeroBand Banjo Lead",
+          "session_role": "Lead performer controller track",
+          "session_track": "AeroBand Banjo Lead",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "bow_noise",
+            "vibrato_depth",
+            "send_spatial"
+          ],
+          "device_contracts": [
+            "m4l.call_response_router"
+          ],
+          "gm_placeholder": "Violin",
+          "id": "a-p-carter-in-the-warehouse.layer.fiddle_hybrid_strings",
+          "instrument_strategy": "Ableton String Quartet or Arturia Augmented STRINGS, layered with subtle pitch drift.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "bow_noise"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "vibrato_depth"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "send_spatial"
+            }
+          ],
+          "midi_channels": [
+            2
+          ],
+          "midi_file": "compositions/generated/midi/a-p-carter-in-the-warehouse.mid",
+          "midi_track": "Fiddle / Hybrid Strings",
+          "session_role": "Melodic answer, drones, and tension",
+          "session_track": "Fiddle / Hybrid Strings",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "chop_gate",
+            "ghost_note_probability"
+          ],
+          "device_contracts": [
+            "m4l.chop_clock_guard"
+          ],
+          "gm_placeholder": "Steel Guitar proxy",
+          "id": "a-p-carter-in-the-warehouse.layer.mandolin_chop",
+          "instrument_strategy": "Short plucked sampler/rack layer, high-mid transient emphasis, gated room.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "chop_gate"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "ghost_note_probability"
+            }
+          ],
+          "midi_channels": [
+            3
+          ],
+          "midi_file": "compositions/generated/midi/a-p-carter-in-the-warehouse.mid",
+          "midi_track": "Mandolin Chop",
+          "session_role": "Offbeat bluegrass pulse",
+          "session_track": "Mandolin Chop",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "glide_time",
+            "feedback",
+            "spectral_tilt"
+          ],
+          "device_contracts": [
+            "m4l.slide_phrase_sampler"
+          ],
+          "gm_placeholder": "Jazz Guitar proxy",
+          "id": "a-p-carter-in-the-warehouse.layer.dobro_metallic_slide",
+          "instrument_strategy": "Resonator-like slide layer or guitar-source Arturia bank routed through granular delay.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "glide_time"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "feedback"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "spectral_tilt"
+            }
+          ],
+          "midi_channels": [
+            4
+          ],
+          "midi_file": "compositions/generated/midi/a-p-carter-in-the-warehouse.mid",
+          "midi_track": "Dobro / Metallic Slide",
+          "session_role": "Haunting hooks and punk-bluegrass bends",
+          "session_track": "Dobro / Metallic Slide",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "sub_blend",
+            "sidechain_depth",
+            "note_length"
+          ],
+          "device_contracts": [
+            "m4l.root_motion_limiter"
+          ],
+          "gm_placeholder": "Acoustic Bass",
+          "id": "a-p-carter-in-the-warehouse.layer.upright_bass_sub",
+          "instrument_strategy": "Layer upright-like transient with sine/triangle sub; sidechain from kick.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "sub_blend"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "sidechain_depth"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "note_length"
+            }
+          ],
+          "midi_channels": [
+            5
+          ],
+          "midi_file": "compositions/generated/midi/a-p-carter-in-the-warehouse.mid",
+          "midi_track": "Upright Bass / Sub",
+          "session_role": "Bluegrass root movement fused with deep-house low end",
+          "session_track": "Upright Bass / Sub",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "boom_chuck_balance",
+            "strum_velocity",
+            "room_send",
+            "downstroke_bias"
+          ],
+          "device_contracts": [
+            "m4l.chop_clock_guard",
+            "m4l.call_response_router"
+          ],
+          "gm_placeholder": "Steel Guitar",
+          "id": "a-p-carter-in-the-warehouse.layer.acoustic_guitar_boom_chuck",
+          "instrument_strategy": "Steel-string guitar rack or verified Arturia guitar-source patch with tight low-mid control and transient-preserved strums.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "boom_chuck_balance"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "strum_velocity"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "room_send"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "downstroke_bias"
+            }
+          ],
+          "midi_channels": [
+            6
+          ],
+          "midi_file": "compositions/generated/midi/a-p-carter-in-the-warehouse.mid",
+          "midi_track": "Acoustic Guitar Boom-Chuck",
+          "session_role": "Bluegrass rhythm bed and punk strum anchor",
+          "session_track": "Acoustic Guitar Boom-Chuck",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "parallel_drive",
+            "room_send",
+            "fill_probability"
+          ],
+          "device_contracts": [
+            "m4l.fill_trigger"
+          ],
+          "gm_placeholder": "GM Drum Kit",
+          "id": "a-p-carter-in-the-warehouse.layer.punk_kit",
+          "instrument_strategy": "Dry acoustic kit, parallel saturation, short room.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "parallel_drive"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "room_send"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "fill_probability"
+            }
+          ],
+          "midi_channels": [
+            10
+          ],
+          "midi_file": "compositions/generated/midi/a-p-carter-in-the-warehouse.mid",
+          "midi_track": "Punk Kit",
+          "session_role": "Human drum aggression",
+          "session_track": "Punk Kit",
+          "traditional_bluegrass_layer": false,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "filter_cutoff",
+            "accent",
+            "swing_amount"
+          ],
+          "device_contracts": [
+            "m4l.house_grid_conductor"
+          ],
+          "gm_placeholder": "GM drum machine plus synth-stab channel",
+          "id": "a-p-carter-in-the-warehouse.layer.deep_house_machines",
+          "instrument_strategy": "Classic drum-machine racks, 303/101-style bass or stabs, restrained sidechain.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "filter_cutoff"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "accent"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "swing_amount"
+            }
+          ],
+          "midi_channels": [
+            10,
+            11
+          ],
+          "midi_file": "compositions/generated/midi/a-p-carter-in-the-warehouse.mid",
+          "midi_track": "Deep House Machines",
+          "session_role": "Kick, hats, stabs, and dance-floor continuity",
+          "session_track": "Deep House Machines",
+          "traditional_bluegrass_layer": false,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "azimuth",
+            "width",
+            "grain_density",
+            "freeze"
+          ],
+          "device_contracts": [
+            "m4l.spatial_harmonic_field"
+          ],
+          "gm_placeholder": "Warm Pad",
+          "id": "a-p-carter-in-the-warehouse.layer.alien_sky",
+          "instrument_strategy": "Granulator III, Inspired by Nature, PitchLoop89, spectral/freeform processing.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "azimuth"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "width"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "grain_density"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "freeze"
+            }
+          ],
+          "midi_channels": [
+            12
+          ],
+          "midi_file": "compositions/generated/midi/a-p-carter-in-the-warehouse.mid",
+          "midi_track": "Alien Sky",
+          "session_role": "Granular, spectral, and spatial atmosphere",
+          "session_track": "Alien Sky",
+          "traditional_bluegrass_layer": false,
+          "type": "route_midi_layer_and_configure_devices"
+        }
+      ],
+      "midi_file": "compositions/generated/midi/a-p-carter-in-the-warehouse.mid",
+      "midi_sha256": "eb5dffb6e310e7794b3a72ff8fd02799720029d9456e4091e63e3a42249e6920",
+      "mix_and_release_gates": [
+        {
+          "approval_gate": "export_or_release",
+          "id": "a-p-carter-in-the-warehouse.mix.headroom-check",
+          "instruction": "Confirm pre-master headroom is at least -6 dBFS before any limiter.",
+          "type": "operator_check"
+        },
+        {
+          "approval_gate": "export_or_release",
+          "id": "a-p-carter-in-the-warehouse.release.provenance-check",
+          "instruction": "Confirm source credits, source ledger records, CI status, and local install receipts before export or release.",
+          "type": "operator_check"
+        }
+      ],
+      "preflight_actions": [
+        {
+          "approval_gate": null,
+          "expected_sha256": "eb5dffb6e310e7794b3a72ff8fd02799720029d9456e4091e63e3a42249e6920",
+          "id": "a-p-carter-in-the-warehouse.preflight.verify-midi-hash",
+          "input": "compositions/generated/midi/a-p-carter-in-the-warehouse.mid",
+          "type": "verify_artifact"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "id": "a-p-carter-in-the-warehouse.preflight.create-local-rollback-copy",
+          "instruction": "Before any Live-set mutation, save a timestamped local rollback copy outside Git.",
+          "type": "operator_check"
+        },
+        {
+          "approval_gate": "private_audio_upload",
+          "id": "a-p-carter-in-the-warehouse.preflight.confirm-no-private-audio-upload",
+          "instruction": "Do not upload private rehearsal audio, unreleased lyrics, or controller recordings without session-specific consent.",
+          "type": "operator_check"
+        }
+      ],
+      "scene_actions": [
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "dobro hook alone",
+          "bar_length": 20,
+          "bar_start": 1,
+          "id": "a-p-carter-in-the-warehouse.scene.01",
+          "scene_name": "01 dobro hook alone",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "warehouse kick and sub enter",
+          "bar_length": 20,
+          "bar_start": 21,
+          "id": "a-p-carter-in-the-warehouse.scene.02",
+          "scene_name": "02 warehouse kick and sub enter",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "call-and-response between banjo and stab",
+          "bar_length": 20,
+          "bar_start": 41,
+          "id": "a-p-carter-in-the-warehouse.scene.03",
+          "scene_name": "03 call-and-response between banjo and stab",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "bridge strips to voice, stomp, and bowed harmonic",
+          "bar_length": 20,
+          "bar_start": 61,
+          "id": "a-p-carter-in-the-warehouse.scene.04",
+          "scene_name": "04 bridge strips to voice, stomp, and bowed harmonic",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "return with doubled banjo/dobro riff",
+          "bar_length": 20,
+          "bar_start": 81,
+          "id": "a-p-carter-in-the-warehouse.scene.05",
+          "scene_name": "05 return with doubled banjo/dobro riff",
+          "type": "create_arrangement_locator"
+        }
+      ],
+      "session_actions": [
+        {
+          "approval_gate": "live_set_mutation",
+          "global_swing": "54-61%",
+          "id": "a-p-carter-in-the-warehouse.session.set-tempo-and-swing",
+          "tempo_bpm": 88,
+          "type": "set_session_tempo_and_groove"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "expected_sha256": "eb5dffb6e310e7794b3a72ff8fd02799720029d9456e4091e63e3a42249e6920",
+          "id": "a-p-carter-in-the-warehouse.session.import-midi",
+          "midi_file": "compositions/generated/midi/a-p-carter-in-the-warehouse.mid",
+          "type": "import_generated_midi"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "id": "a-p-carter-in-the-warehouse.session.configure-returns",
+          "returns": [
+            {
+              "name": "A Short Spring",
+              "role": "bluegrass room and slap"
+            },
+            {
+              "name": "B Deep Dub",
+              "role": "house delay and modulation"
+            },
+            {
+              "name": "C Alien Bloom",
+              "role": "granular/spectral send"
+            },
+            {
+              "name": "D Punk Crush",
+              "role": "parallel saturation"
+            }
+          ],
+          "type": "create_or_verify_return_tracks"
+        }
+      ],
+      "slug": "a-p-carter-in-the-warehouse",
+      "source_deck": {
+        "approval_gate": "live_set_mutation",
+        "automation_targets": [
+          "slice_index",
+          "grain_size",
+          "reverse_probability"
+        ],
+        "candidate_sources": [
+          {
+            "byte_size": 1887980,
+            "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+            "name": "Duke of Marlborough - excerpt 001",
+            "project_use": "Ballad-contour and modal phrase source for A.P. Carter-style narrative hooks, fiddle drone reharmonization, and slow-house vocal-chop beds.",
+            "rights_status": "public_domain",
+            "sha256": "a896860d2f155d2f93203b15534ad833c1fd1c174d5192a045cc022687e5243f",
+            "source_id": "loc-citizen-dj-duke-of-marlborough-12147-001",
+            "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+          },
+          {
+            "byte_size": 5778092,
+            "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+            "name": "Devil's dream reel - excerpt 001",
+            "project_use": "Old-time fiddle reel source for banjo/fiddle chop, granular sampler, and call-and-response arrangement experiments.",
+            "rights_status": "public_domain",
+            "sha256": "f0b80ccd67d28210b62e9b4bcae1fb6b7066855da34c3c1b1a80d7a47f1f7a14",
+            "source_id": "loc-citizen-dj-devils-dream-reel-123798-001",
+            "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+          },
+          {
+            "byte_size": 5809196,
+            "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+            "name": "Turkey in the straw medley - excerpt 001",
+            "project_use": "Early banjo/traditional-country rhythmic DNA for AeroBand banjo mapping, boom-chuck counter-rhythm, and chopped call-and-response studies.",
+            "rights_status": "public_domain",
+            "sha256": "3f5ed365b48faa2a21fb9d9ab7dbe467af01cdb8d709413ab324008472113baa",
+            "source_id": "loc-citizen-dj-turkey-in-the-straw-medley-247928-001",
+            "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+          }
+        ],
+        "default_state": "muted_until_human_provenance_review",
+        "device_contracts": [
+          "m4l.provenance_sampler"
+        ],
+        "instrument_strategy": "Sampler or Simpler loaded from provenance-checked local source folder.",
+        "macro_initialization": [
+          {
+            "mode": "write_initial_clip_envelope_or_macro_default",
+            "target": "slice_index"
+          },
+          {
+            "mode": "write_initial_clip_envelope_or_macro_default",
+            "target": "grain_size"
+          },
+          {
+            "mode": "write_initial_clip_envelope_or_macro_default",
+            "target": "reverse_probability"
+          }
+        ],
+        "required_checks": [
+          "source_id appears in sources/public-domain/download-ledger.json",
+          "rights_status is public_domain, cc0, or cc_by",
+          "credit line is carried into release notes",
+          "no raw sample path is written into tracked repo artifacts"
+        ],
+        "session_role": "Auditable historical fragments",
+        "session_track": "Public Domain Source Deck"
+      },
+      "tempo_bpm": 88,
+      "title": "A.P. Carter in the Warehouse"
+    },
+    {
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "approximate_bars": 100,
+      "duration_target": "3:10",
+      "key_center": "G major with flat-7 pressure",
+      "layer_actions": [
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "velocity_curve",
+            "roll_density",
+            "pluck_decay",
+            "humanize_ms"
+          ],
+          "device_contracts": [
+            "m4l.aeroband_banjo_mapper",
+            "m4l.roll_probability_engine"
+          ],
+          "gm_placeholder": "Banjo",
+          "id": "no-gods-no-masters-no-quantize.layer.aeroband_banjo_lead",
+          "instrument_strategy": "Banjo-imitation rack using pluck envelope, resonator EQ, velocity layers, and MPE/pitch-bend articulation where available.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "velocity_curve"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "roll_density"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "pluck_decay"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "humanize_ms"
+            }
+          ],
+          "midi_channels": [
+            1
+          ],
+          "midi_file": "compositions/generated/midi/no-gods-no-masters-no-quantize.mid",
+          "midi_track": "AeroBand Banjo Lead",
+          "session_role": "Lead performer controller track",
+          "session_track": "AeroBand Banjo Lead",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "bow_noise",
+            "vibrato_depth",
+            "send_spatial"
+          ],
+          "device_contracts": [
+            "m4l.call_response_router"
+          ],
+          "gm_placeholder": "Violin",
+          "id": "no-gods-no-masters-no-quantize.layer.fiddle_hybrid_strings",
+          "instrument_strategy": "Ableton String Quartet or Arturia Augmented STRINGS, layered with subtle pitch drift.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "bow_noise"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "vibrato_depth"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "send_spatial"
+            }
+          ],
+          "midi_channels": [
+            2
+          ],
+          "midi_file": "compositions/generated/midi/no-gods-no-masters-no-quantize.mid",
+          "midi_track": "Fiddle / Hybrid Strings",
+          "session_role": "Melodic answer, drones, and tension",
+          "session_track": "Fiddle / Hybrid Strings",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "chop_gate",
+            "ghost_note_probability"
+          ],
+          "device_contracts": [
+            "m4l.chop_clock_guard"
+          ],
+          "gm_placeholder": "Steel Guitar proxy",
+          "id": "no-gods-no-masters-no-quantize.layer.mandolin_chop",
+          "instrument_strategy": "Short plucked sampler/rack layer, high-mid transient emphasis, gated room.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "chop_gate"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "ghost_note_probability"
+            }
+          ],
+          "midi_channels": [
+            3
+          ],
+          "midi_file": "compositions/generated/midi/no-gods-no-masters-no-quantize.mid",
+          "midi_track": "Mandolin Chop",
+          "session_role": "Offbeat bluegrass pulse",
+          "session_track": "Mandolin Chop",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "glide_time",
+            "feedback",
+            "spectral_tilt"
+          ],
+          "device_contracts": [
+            "m4l.slide_phrase_sampler"
+          ],
+          "gm_placeholder": "Jazz Guitar proxy",
+          "id": "no-gods-no-masters-no-quantize.layer.dobro_metallic_slide",
+          "instrument_strategy": "Resonator-like slide layer or guitar-source Arturia bank routed through granular delay.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "glide_time"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "feedback"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "spectral_tilt"
+            }
+          ],
+          "midi_channels": [
+            4
+          ],
+          "midi_file": "compositions/generated/midi/no-gods-no-masters-no-quantize.mid",
+          "midi_track": "Dobro / Metallic Slide",
+          "session_role": "Haunting hooks and punk-bluegrass bends",
+          "session_track": "Dobro / Metallic Slide",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "sub_blend",
+            "sidechain_depth",
+            "note_length"
+          ],
+          "device_contracts": [
+            "m4l.root_motion_limiter"
+          ],
+          "gm_placeholder": "Acoustic Bass",
+          "id": "no-gods-no-masters-no-quantize.layer.upright_bass_sub",
+          "instrument_strategy": "Layer upright-like transient with sine/triangle sub; sidechain from kick.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "sub_blend"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "sidechain_depth"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "note_length"
+            }
+          ],
+          "midi_channels": [
+            5
+          ],
+          "midi_file": "compositions/generated/midi/no-gods-no-masters-no-quantize.mid",
+          "midi_track": "Upright Bass / Sub",
+          "session_role": "Bluegrass root movement fused with deep-house low end",
+          "session_track": "Upright Bass / Sub",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "boom_chuck_balance",
+            "strum_velocity",
+            "room_send",
+            "downstroke_bias"
+          ],
+          "device_contracts": [
+            "m4l.chop_clock_guard",
+            "m4l.call_response_router"
+          ],
+          "gm_placeholder": "Steel Guitar",
+          "id": "no-gods-no-masters-no-quantize.layer.acoustic_guitar_boom_chuck",
+          "instrument_strategy": "Steel-string guitar rack or verified Arturia guitar-source patch with tight low-mid control and transient-preserved strums.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "boom_chuck_balance"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "strum_velocity"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "room_send"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "downstroke_bias"
+            }
+          ],
+          "midi_channels": [
+            6
+          ],
+          "midi_file": "compositions/generated/midi/no-gods-no-masters-no-quantize.mid",
+          "midi_track": "Acoustic Guitar Boom-Chuck",
+          "session_role": "Bluegrass rhythm bed and punk strum anchor",
+          "session_track": "Acoustic Guitar Boom-Chuck",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "parallel_drive",
+            "room_send",
+            "fill_probability"
+          ],
+          "device_contracts": [
+            "m4l.fill_trigger"
+          ],
+          "gm_placeholder": "GM Drum Kit",
+          "id": "no-gods-no-masters-no-quantize.layer.punk_kit",
+          "instrument_strategy": "Dry acoustic kit, parallel saturation, short room.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "parallel_drive"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "room_send"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "fill_probability"
+            }
+          ],
+          "midi_channels": [
+            10
+          ],
+          "midi_file": "compositions/generated/midi/no-gods-no-masters-no-quantize.mid",
+          "midi_track": "Punk Kit",
+          "session_role": "Human drum aggression",
+          "session_track": "Punk Kit",
+          "traditional_bluegrass_layer": false,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "filter_cutoff",
+            "accent",
+            "swing_amount"
+          ],
+          "device_contracts": [
+            "m4l.house_grid_conductor"
+          ],
+          "gm_placeholder": "GM drum machine plus synth-stab channel",
+          "id": "no-gods-no-masters-no-quantize.layer.deep_house_machines",
+          "instrument_strategy": "Classic drum-machine racks, 303/101-style bass or stabs, restrained sidechain.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "filter_cutoff"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "accent"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "swing_amount"
+            }
+          ],
+          "midi_channels": [
+            10,
+            11
+          ],
+          "midi_file": "compositions/generated/midi/no-gods-no-masters-no-quantize.mid",
+          "midi_track": "Deep House Machines",
+          "session_role": "Kick, hats, stabs, and dance-floor continuity",
+          "session_track": "Deep House Machines",
+          "traditional_bluegrass_layer": false,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "azimuth",
+            "width",
+            "grain_density",
+            "freeze"
+          ],
+          "device_contracts": [
+            "m4l.spatial_harmonic_field"
+          ],
+          "gm_placeholder": "Warm Pad",
+          "id": "no-gods-no-masters-no-quantize.layer.alien_sky",
+          "instrument_strategy": "Granulator III, Inspired by Nature, PitchLoop89, spectral/freeform processing.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "azimuth"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "width"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "grain_density"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "freeze"
+            }
+          ],
+          "midi_channels": [
+            12
+          ],
+          "midi_file": "compositions/generated/midi/no-gods-no-masters-no-quantize.mid",
+          "midi_track": "Alien Sky",
+          "session_role": "Granular, spectral, and spatial atmosphere",
+          "session_track": "Alien Sky",
+          "traditional_bluegrass_layer": false,
+          "type": "route_midi_layer_and_configure_devices"
+        }
+      ],
+      "midi_file": "compositions/generated/midi/no-gods-no-masters-no-quantize.mid",
+      "midi_sha256": "cea40e19e0a6be6e47a97eacf4fcbef65a901694aad7d77d746e5f24de79d59b",
+      "mix_and_release_gates": [
+        {
+          "approval_gate": "export_or_release",
+          "id": "no-gods-no-masters-no-quantize.mix.headroom-check",
+          "instruction": "Confirm pre-master headroom is at least -6 dBFS before any limiter.",
+          "type": "operator_check"
+        },
+        {
+          "approval_gate": "export_or_release",
+          "id": "no-gods-no-masters-no-quantize.release.provenance-check",
+          "instruction": "Confirm source credits, source ledger records, CI status, and local install receipts before export or release.",
+          "type": "operator_check"
+        }
+      ],
+      "preflight_actions": [
+        {
+          "approval_gate": null,
+          "expected_sha256": "cea40e19e0a6be6e47a97eacf4fcbef65a901694aad7d77d746e5f24de79d59b",
+          "id": "no-gods-no-masters-no-quantize.preflight.verify-midi-hash",
+          "input": "compositions/generated/midi/no-gods-no-masters-no-quantize.mid",
+          "type": "verify_artifact"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "id": "no-gods-no-masters-no-quantize.preflight.create-local-rollback-copy",
+          "instruction": "Before any Live-set mutation, save a timestamped local rollback copy outside Git.",
+          "type": "operator_check"
+        },
+        {
+          "approval_gate": "private_audio_upload",
+          "id": "no-gods-no-masters-no-quantize.preflight.confirm-no-private-audio-upload",
+          "instruction": "Do not upload private rehearsal audio, unreleased lyrics, or controller recordings without session-specific consent.",
+          "type": "operator_check"
+        }
+      ],
+      "scene_actions": [
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "count-off into unquantized banjo",
+          "bar_length": 20,
+          "bar_start": 1,
+          "id": "no-gods-no-masters-no-quantize.scene.01",
+          "scene_name": "01 count-off into unquantized banjo",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "kick locks after four bars",
+          "bar_length": 20,
+          "bar_start": 21,
+          "id": "no-gods-no-masters-no-quantize.scene.02",
+          "scene_name": "02 kick locks after four bars",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "acid line mirrors bass roots",
+          "bar_length": 20,
+          "bar_start": 41,
+          "id": "no-gods-no-masters-no-quantize.scene.03",
+          "scene_name": "03 acid line mirrors bass roots",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "stop-time chorus",
+          "bar_length": 20,
+          "bar_start": 61,
+          "id": "no-gods-no-masters-no-quantize.scene.04",
+          "scene_name": "04 stop-time chorus",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "fiddle and spectral freeze outro",
+          "bar_length": 20,
+          "bar_start": 81,
+          "id": "no-gods-no-masters-no-quantize.scene.05",
+          "scene_name": "05 fiddle and spectral freeze outro",
+          "type": "create_arrangement_locator"
+        }
+      ],
+      "session_actions": [
+        {
+          "approval_gate": "live_set_mutation",
+          "global_swing": "54-61%",
+          "id": "no-gods-no-masters-no-quantize.session.set-tempo-and-swing",
+          "tempo_bpm": 104,
+          "type": "set_session_tempo_and_groove"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "expected_sha256": "cea40e19e0a6be6e47a97eacf4fcbef65a901694aad7d77d746e5f24de79d59b",
+          "id": "no-gods-no-masters-no-quantize.session.import-midi",
+          "midi_file": "compositions/generated/midi/no-gods-no-masters-no-quantize.mid",
+          "type": "import_generated_midi"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "id": "no-gods-no-masters-no-quantize.session.configure-returns",
+          "returns": [
+            {
+              "name": "A Short Spring",
+              "role": "bluegrass room and slap"
+            },
+            {
+              "name": "B Deep Dub",
+              "role": "house delay and modulation"
+            },
+            {
+              "name": "C Alien Bloom",
+              "role": "granular/spectral send"
+            },
+            {
+              "name": "D Punk Crush",
+              "role": "parallel saturation"
+            }
+          ],
+          "type": "create_or_verify_return_tracks"
+        }
+      ],
+      "slug": "no-gods-no-masters-no-quantize",
+      "source_deck": {
+        "approval_gate": "live_set_mutation",
+        "automation_targets": [
+          "slice_index",
+          "grain_size",
+          "reverse_probability"
+        ],
+        "candidate_sources": [
+          {
+            "byte_size": 5778092,
+            "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+            "name": "Devil's dream reel - excerpt 001",
+            "project_use": "Old-time fiddle reel source for banjo/fiddle chop, granular sampler, and call-and-response arrangement experiments.",
+            "rights_status": "public_domain",
+            "sha256": "f0b80ccd67d28210b62e9b4bcae1fb6b7066855da34c3c1b1a80d7a47f1f7a14",
+            "source_id": "loc-citizen-dj-devils-dream-reel-123798-001",
+            "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+          },
+          {
+            "byte_size": 1887980,
+            "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+            "name": "Duke of Marlborough - excerpt 001",
+            "project_use": "Ballad-contour and modal phrase source for A.P. Carter-style narrative hooks, fiddle drone reharmonization, and slow-house vocal-chop beds.",
+            "rights_status": "public_domain",
+            "sha256": "a896860d2f155d2f93203b15534ad833c1fd1c174d5192a045cc022687e5243f",
+            "source_id": "loc-citizen-dj-duke-of-marlborough-12147-001",
+            "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+          },
+          {
+            "byte_size": 1208108,
+            "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+            "name": "Carnival of Venice - excerpt 001",
+            "project_use": "Virtuosic melodic ornament source for banjo-roll variation, alien granular flourishes, and lead-controller pitch-bend studies.",
+            "rights_status": "public_domain",
+            "sha256": "a62d633eb195f0ecacceedc1831f05fc87db9da07eec114e9d6af667b93b4adb",
+            "source_id": "loc-citizen-dj-carnival-of-venice-260123-001",
+            "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+          }
+        ],
+        "default_state": "muted_until_human_provenance_review",
+        "device_contracts": [
+          "m4l.provenance_sampler"
+        ],
+        "instrument_strategy": "Sampler or Simpler loaded from provenance-checked local source folder.",
+        "macro_initialization": [
+          {
+            "mode": "write_initial_clip_envelope_or_macro_default",
+            "target": "slice_index"
+          },
+          {
+            "mode": "write_initial_clip_envelope_or_macro_default",
+            "target": "grain_size"
+          },
+          {
+            "mode": "write_initial_clip_envelope_or_macro_default",
+            "target": "reverse_probability"
+          }
+        ],
+        "required_checks": [
+          "source_id appears in sources/public-domain/download-ledger.json",
+          "rights_status is public_domain, cc0, or cc_by",
+          "credit line is carried into release notes",
+          "no raw sample path is written into tracked repo artifacts"
+        ],
+        "session_role": "Auditable historical fragments",
+        "session_track": "Public Domain Source Deck"
+      },
+      "tempo_bpm": 104,
+      "title": "No Gods, No Masters, No Quantize"
+    },
+    {
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "approximate_bars": 120,
+      "duration_target": "5:30",
+      "key_center": "E minor pentatonic",
+      "layer_actions": [
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "velocity_curve",
+            "roll_density",
+            "pluck_decay",
+            "humanize_ms"
+          ],
+          "device_contracts": [
+            "m4l.aeroband_banjo_mapper",
+            "m4l.roll_probability_engine"
+          ],
+          "gm_placeholder": "Banjo",
+          "id": "possum-kingdom-afterhours.layer.aeroband_banjo_lead",
+          "instrument_strategy": "Banjo-imitation rack using pluck envelope, resonator EQ, velocity layers, and MPE/pitch-bend articulation where available.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "velocity_curve"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "roll_density"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "pluck_decay"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "humanize_ms"
+            }
+          ],
+          "midi_channels": [
+            1
+          ],
+          "midi_file": "compositions/generated/midi/possum-kingdom-afterhours.mid",
+          "midi_track": "AeroBand Banjo Lead",
+          "session_role": "Lead performer controller track",
+          "session_track": "AeroBand Banjo Lead",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "bow_noise",
+            "vibrato_depth",
+            "send_spatial"
+          ],
+          "device_contracts": [
+            "m4l.call_response_router"
+          ],
+          "gm_placeholder": "Violin",
+          "id": "possum-kingdom-afterhours.layer.fiddle_hybrid_strings",
+          "instrument_strategy": "Ableton String Quartet or Arturia Augmented STRINGS, layered with subtle pitch drift.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "bow_noise"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "vibrato_depth"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "send_spatial"
+            }
+          ],
+          "midi_channels": [
+            2
+          ],
+          "midi_file": "compositions/generated/midi/possum-kingdom-afterhours.mid",
+          "midi_track": "Fiddle / Hybrid Strings",
+          "session_role": "Melodic answer, drones, and tension",
+          "session_track": "Fiddle / Hybrid Strings",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "chop_gate",
+            "ghost_note_probability"
+          ],
+          "device_contracts": [
+            "m4l.chop_clock_guard"
+          ],
+          "gm_placeholder": "Steel Guitar proxy",
+          "id": "possum-kingdom-afterhours.layer.mandolin_chop",
+          "instrument_strategy": "Short plucked sampler/rack layer, high-mid transient emphasis, gated room.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "chop_gate"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "ghost_note_probability"
+            }
+          ],
+          "midi_channels": [
+            3
+          ],
+          "midi_file": "compositions/generated/midi/possum-kingdom-afterhours.mid",
+          "midi_track": "Mandolin Chop",
+          "session_role": "Offbeat bluegrass pulse",
+          "session_track": "Mandolin Chop",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "glide_time",
+            "feedback",
+            "spectral_tilt"
+          ],
+          "device_contracts": [
+            "m4l.slide_phrase_sampler"
+          ],
+          "gm_placeholder": "Jazz Guitar proxy",
+          "id": "possum-kingdom-afterhours.layer.dobro_metallic_slide",
+          "instrument_strategy": "Resonator-like slide layer or guitar-source Arturia bank routed through granular delay.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "glide_time"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "feedback"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "spectral_tilt"
+            }
+          ],
+          "midi_channels": [
+            4
+          ],
+          "midi_file": "compositions/generated/midi/possum-kingdom-afterhours.mid",
+          "midi_track": "Dobro / Metallic Slide",
+          "session_role": "Haunting hooks and punk-bluegrass bends",
+          "session_track": "Dobro / Metallic Slide",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "sub_blend",
+            "sidechain_depth",
+            "note_length"
+          ],
+          "device_contracts": [
+            "m4l.root_motion_limiter"
+          ],
+          "gm_placeholder": "Acoustic Bass",
+          "id": "possum-kingdom-afterhours.layer.upright_bass_sub",
+          "instrument_strategy": "Layer upright-like transient with sine/triangle sub; sidechain from kick.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "sub_blend"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "sidechain_depth"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "note_length"
+            }
+          ],
+          "midi_channels": [
+            5
+          ],
+          "midi_file": "compositions/generated/midi/possum-kingdom-afterhours.mid",
+          "midi_track": "Upright Bass / Sub",
+          "session_role": "Bluegrass root movement fused with deep-house low end",
+          "session_track": "Upright Bass / Sub",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "boom_chuck_balance",
+            "strum_velocity",
+            "room_send",
+            "downstroke_bias"
+          ],
+          "device_contracts": [
+            "m4l.chop_clock_guard",
+            "m4l.call_response_router"
+          ],
+          "gm_placeholder": "Steel Guitar",
+          "id": "possum-kingdom-afterhours.layer.acoustic_guitar_boom_chuck",
+          "instrument_strategy": "Steel-string guitar rack or verified Arturia guitar-source patch with tight low-mid control and transient-preserved strums.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "boom_chuck_balance"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "strum_velocity"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "room_send"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "downstroke_bias"
+            }
+          ],
+          "midi_channels": [
+            6
+          ],
+          "midi_file": "compositions/generated/midi/possum-kingdom-afterhours.mid",
+          "midi_track": "Acoustic Guitar Boom-Chuck",
+          "session_role": "Bluegrass rhythm bed and punk strum anchor",
+          "session_track": "Acoustic Guitar Boom-Chuck",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "parallel_drive",
+            "room_send",
+            "fill_probability"
+          ],
+          "device_contracts": [
+            "m4l.fill_trigger"
+          ],
+          "gm_placeholder": "GM Drum Kit",
+          "id": "possum-kingdom-afterhours.layer.punk_kit",
+          "instrument_strategy": "Dry acoustic kit, parallel saturation, short room.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "parallel_drive"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "room_send"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "fill_probability"
+            }
+          ],
+          "midi_channels": [
+            10
+          ],
+          "midi_file": "compositions/generated/midi/possum-kingdom-afterhours.mid",
+          "midi_track": "Punk Kit",
+          "session_role": "Human drum aggression",
+          "session_track": "Punk Kit",
+          "traditional_bluegrass_layer": false,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "filter_cutoff",
+            "accent",
+            "swing_amount"
+          ],
+          "device_contracts": [
+            "m4l.house_grid_conductor"
+          ],
+          "gm_placeholder": "GM drum machine plus synth-stab channel",
+          "id": "possum-kingdom-afterhours.layer.deep_house_machines",
+          "instrument_strategy": "Classic drum-machine racks, 303/101-style bass or stabs, restrained sidechain.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "filter_cutoff"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "accent"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "swing_amount"
+            }
+          ],
+          "midi_channels": [
+            10,
+            11
+          ],
+          "midi_file": "compositions/generated/midi/possum-kingdom-afterhours.mid",
+          "midi_track": "Deep House Machines",
+          "session_role": "Kick, hats, stabs, and dance-floor continuity",
+          "session_track": "Deep House Machines",
+          "traditional_bluegrass_layer": false,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "azimuth",
+            "width",
+            "grain_density",
+            "freeze"
+          ],
+          "device_contracts": [
+            "m4l.spatial_harmonic_field"
+          ],
+          "gm_placeholder": "Warm Pad",
+          "id": "possum-kingdom-afterhours.layer.alien_sky",
+          "instrument_strategy": "Granulator III, Inspired by Nature, PitchLoop89, spectral/freeform processing.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "azimuth"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "width"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "grain_density"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "freeze"
+            }
+          ],
+          "midi_channels": [
+            12
+          ],
+          "midi_file": "compositions/generated/midi/possum-kingdom-afterhours.mid",
+          "midi_track": "Alien Sky",
+          "session_role": "Granular, spectral, and spatial atmosphere",
+          "session_track": "Alien Sky",
+          "traditional_bluegrass_layer": false,
+          "type": "route_midi_layer_and_configure_devices"
+        }
+      ],
+      "midi_file": "compositions/generated/midi/possum-kingdom-afterhours.mid",
+      "midi_sha256": "070a6a4f7432eb8ea68aac2d1f62c763ed0c6b059540c390894b3b9dff47aa95",
+      "mix_and_release_gates": [
+        {
+          "approval_gate": "export_or_release",
+          "id": "possum-kingdom-afterhours.mix.headroom-check",
+          "instruction": "Confirm pre-master headroom is at least -6 dBFS before any limiter.",
+          "type": "operator_check"
+        },
+        {
+          "approval_gate": "export_or_release",
+          "id": "possum-kingdom-afterhours.release.provenance-check",
+          "instruction": "Confirm source credits, source ledger records, CI status, and local install receipts before export or release.",
+          "type": "operator_check"
+        }
+      ],
+      "preflight_actions": [
+        {
+          "approval_gate": null,
+          "expected_sha256": "070a6a4f7432eb8ea68aac2d1f62c763ed0c6b059540c390894b3b9dff47aa95",
+          "id": "possum-kingdom-afterhours.preflight.verify-midi-hash",
+          "input": "compositions/generated/midi/possum-kingdom-afterhours.mid",
+          "type": "verify_artifact"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "id": "possum-kingdom-afterhours.preflight.create-local-rollback-copy",
+          "instruction": "Before any Live-set mutation, save a timestamped local rollback copy outside Git.",
+          "type": "operator_check"
+        },
+        {
+          "approval_gate": "private_audio_upload",
+          "id": "possum-kingdom-afterhours.preflight.confirm-no-private-audio-upload",
+          "instruction": "Do not upload private rehearsal audio, unreleased lyrics, or controller recordings without session-specific consent.",
+          "type": "operator_check"
+        }
+      ],
+      "scene_actions": [
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "drone and fiddle establish place",
+          "bar_length": 24,
+          "bar_start": 1,
+          "id": "possum-kingdom-afterhours.scene.01",
+          "scene_name": "01 drone and fiddle establish place",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "brush kit and dub chords pulse",
+          "bar_length": 24,
+          "bar_start": 25,
+          "id": "possum-kingdom-afterhours.scene.02",
+          "scene_name": "02 brush kit and dub chords pulse",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "banjo harmonics become granular particles",
+          "bar_length": 24,
+          "bar_start": 49,
+          "id": "possum-kingdom-afterhours.scene.03",
+          "scene_name": "03 banjo harmonics become granular particles",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "dobro swell chorus",
+          "bar_length": 24,
+          "bar_start": 73,
+          "id": "possum-kingdom-afterhours.scene.04",
+          "scene_name": "04 dobro swell chorus",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "long spatial fade with low-end discipline",
+          "bar_length": 24,
+          "bar_start": 97,
+          "id": "possum-kingdom-afterhours.scene.05",
+          "scene_name": "05 long spatial fade with low-end discipline",
+          "type": "create_arrangement_locator"
+        }
+      ],
+      "session_actions": [
+        {
+          "approval_gate": "live_set_mutation",
+          "global_swing": "54-61%",
+          "id": "possum-kingdom-afterhours.session.set-tempo-and-swing",
+          "tempo_bpm": 82,
+          "type": "set_session_tempo_and_groove"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "expected_sha256": "070a6a4f7432eb8ea68aac2d1f62c763ed0c6b059540c390894b3b9dff47aa95",
+          "id": "possum-kingdom-afterhours.session.import-midi",
+          "midi_file": "compositions/generated/midi/possum-kingdom-afterhours.mid",
+          "type": "import_generated_midi"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "id": "possum-kingdom-afterhours.session.configure-returns",
+          "returns": [
+            {
+              "name": "A Short Spring",
+              "role": "bluegrass room and slap"
+            },
+            {
+              "name": "B Deep Dub",
+              "role": "house delay and modulation"
+            },
+            {
+              "name": "C Alien Bloom",
+              "role": "granular/spectral send"
+            },
+            {
+              "name": "D Punk Crush",
+              "role": "parallel saturation"
+            }
+          ],
+          "type": "create_or_verify_return_tracks"
+        }
+      ],
+      "slug": "possum-kingdom-afterhours",
+      "source_deck": {
+        "approval_gate": "live_set_mutation",
+        "automation_targets": [
+          "slice_index",
+          "grain_size",
+          "reverse_probability"
+        ],
+        "candidate_sources": [
+          {
+            "byte_size": 5778092,
+            "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+            "name": "Devil's dream reel - excerpt 001",
+            "project_use": "Old-time fiddle reel source for banjo/fiddle chop, granular sampler, and call-and-response arrangement experiments.",
+            "rights_status": "public_domain",
+            "sha256": "f0b80ccd67d28210b62e9b4bcae1fb6b7066855da34c3c1b1a80d7a47f1f7a14",
+            "source_id": "loc-citizen-dj-devils-dream-reel-123798-001",
+            "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+          },
+          {
+            "byte_size": 1887980,
+            "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+            "name": "Duke of Marlborough - excerpt 001",
+            "project_use": "Ballad-contour and modal phrase source for A.P. Carter-style narrative hooks, fiddle drone reharmonization, and slow-house vocal-chop beds.",
+            "rights_status": "public_domain",
+            "sha256": "a896860d2f155d2f93203b15534ad833c1fd1c174d5192a045cc022687e5243f",
+            "source_id": "loc-citizen-dj-duke-of-marlborough-12147-001",
+            "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+          },
+          {
+            "byte_size": 1208108,
+            "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+            "name": "Carnival of Venice - excerpt 001",
+            "project_use": "Virtuosic melodic ornament source for banjo-roll variation, alien granular flourishes, and lead-controller pitch-bend studies.",
+            "rights_status": "public_domain",
+            "sha256": "a62d633eb195f0ecacceedc1831f05fc87db9da07eec114e9d6af667b93b4adb",
+            "source_id": "loc-citizen-dj-carnival-of-venice-260123-001",
+            "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+          }
+        ],
+        "default_state": "muted_until_human_provenance_review",
+        "device_contracts": [
+          "m4l.provenance_sampler"
+        ],
+        "instrument_strategy": "Sampler or Simpler loaded from provenance-checked local source folder.",
+        "macro_initialization": [
+          {
+            "mode": "write_initial_clip_envelope_or_macro_default",
+            "target": "slice_index"
+          },
+          {
+            "mode": "write_initial_clip_envelope_or_macro_default",
+            "target": "grain_size"
+          },
+          {
+            "mode": "write_initial_clip_envelope_or_macro_default",
+            "target": "reverse_probability"
+          }
+        ],
+        "required_checks": [
+          "source_id appears in sources/public-domain/download-ledger.json",
+          "rights_status is public_domain, cc0, or cc_by",
+          "credit line is carried into release notes",
+          "no raw sample path is written into tracked repo artifacts"
+        ],
+        "session_role": "Auditable historical fragments",
+        "session_track": "Public Domain Source Deck"
+      },
+      "tempo_bpm": 82,
+      "title": "Possum Kingdom Afterhours"
+    },
+    {
+      "approval_gates_required": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "approximate_bars": 100,
+      "duration_target": "4:00",
+      "key_center": "B flat major with punk chromatic passing tones",
+      "layer_actions": [
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "velocity_curve",
+            "roll_density",
+            "pluck_decay",
+            "humanize_ms"
+          ],
+          "device_contracts": [
+            "m4l.aeroband_banjo_mapper",
+            "m4l.roll_probability_engine"
+          ],
+          "gm_placeholder": "Banjo",
+          "id": "the-ballad-of-the-broken-controller.layer.aeroband_banjo_lead",
+          "instrument_strategy": "Banjo-imitation rack using pluck envelope, resonator EQ, velocity layers, and MPE/pitch-bend articulation where available.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "velocity_curve"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "roll_density"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "pluck_decay"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "humanize_ms"
+            }
+          ],
+          "midi_channels": [
+            1
+          ],
+          "midi_file": "compositions/generated/midi/the-ballad-of-the-broken-controller.mid",
+          "midi_track": "AeroBand Banjo Lead",
+          "session_role": "Lead performer controller track",
+          "session_track": "AeroBand Banjo Lead",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "bow_noise",
+            "vibrato_depth",
+            "send_spatial"
+          ],
+          "device_contracts": [
+            "m4l.call_response_router"
+          ],
+          "gm_placeholder": "Violin",
+          "id": "the-ballad-of-the-broken-controller.layer.fiddle_hybrid_strings",
+          "instrument_strategy": "Ableton String Quartet or Arturia Augmented STRINGS, layered with subtle pitch drift.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "bow_noise"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "vibrato_depth"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "send_spatial"
+            }
+          ],
+          "midi_channels": [
+            2
+          ],
+          "midi_file": "compositions/generated/midi/the-ballad-of-the-broken-controller.mid",
+          "midi_track": "Fiddle / Hybrid Strings",
+          "session_role": "Melodic answer, drones, and tension",
+          "session_track": "Fiddle / Hybrid Strings",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "chop_gate",
+            "ghost_note_probability"
+          ],
+          "device_contracts": [
+            "m4l.chop_clock_guard"
+          ],
+          "gm_placeholder": "Steel Guitar proxy",
+          "id": "the-ballad-of-the-broken-controller.layer.mandolin_chop",
+          "instrument_strategy": "Short plucked sampler/rack layer, high-mid transient emphasis, gated room.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "chop_gate"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "ghost_note_probability"
+            }
+          ],
+          "midi_channels": [
+            3
+          ],
+          "midi_file": "compositions/generated/midi/the-ballad-of-the-broken-controller.mid",
+          "midi_track": "Mandolin Chop",
+          "session_role": "Offbeat bluegrass pulse",
+          "session_track": "Mandolin Chop",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "glide_time",
+            "feedback",
+            "spectral_tilt"
+          ],
+          "device_contracts": [
+            "m4l.slide_phrase_sampler"
+          ],
+          "gm_placeholder": "Jazz Guitar proxy",
+          "id": "the-ballad-of-the-broken-controller.layer.dobro_metallic_slide",
+          "instrument_strategy": "Resonator-like slide layer or guitar-source Arturia bank routed through granular delay.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "glide_time"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "feedback"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "spectral_tilt"
+            }
+          ],
+          "midi_channels": [
+            4
+          ],
+          "midi_file": "compositions/generated/midi/the-ballad-of-the-broken-controller.mid",
+          "midi_track": "Dobro / Metallic Slide",
+          "session_role": "Haunting hooks and punk-bluegrass bends",
+          "session_track": "Dobro / Metallic Slide",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "sub_blend",
+            "sidechain_depth",
+            "note_length"
+          ],
+          "device_contracts": [
+            "m4l.root_motion_limiter"
+          ],
+          "gm_placeholder": "Acoustic Bass",
+          "id": "the-ballad-of-the-broken-controller.layer.upright_bass_sub",
+          "instrument_strategy": "Layer upright-like transient with sine/triangle sub; sidechain from kick.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "sub_blend"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "sidechain_depth"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "note_length"
+            }
+          ],
+          "midi_channels": [
+            5
+          ],
+          "midi_file": "compositions/generated/midi/the-ballad-of-the-broken-controller.mid",
+          "midi_track": "Upright Bass / Sub",
+          "session_role": "Bluegrass root movement fused with deep-house low end",
+          "session_track": "Upright Bass / Sub",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "boom_chuck_balance",
+            "strum_velocity",
+            "room_send",
+            "downstroke_bias"
+          ],
+          "device_contracts": [
+            "m4l.chop_clock_guard",
+            "m4l.call_response_router"
+          ],
+          "gm_placeholder": "Steel Guitar",
+          "id": "the-ballad-of-the-broken-controller.layer.acoustic_guitar_boom_chuck",
+          "instrument_strategy": "Steel-string guitar rack or verified Arturia guitar-source patch with tight low-mid control and transient-preserved strums.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "boom_chuck_balance"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "strum_velocity"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "room_send"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "downstroke_bias"
+            }
+          ],
+          "midi_channels": [
+            6
+          ],
+          "midi_file": "compositions/generated/midi/the-ballad-of-the-broken-controller.mid",
+          "midi_track": "Acoustic Guitar Boom-Chuck",
+          "session_role": "Bluegrass rhythm bed and punk strum anchor",
+          "session_track": "Acoustic Guitar Boom-Chuck",
+          "traditional_bluegrass_layer": true,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": false,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "parallel_drive",
+            "room_send",
+            "fill_probability"
+          ],
+          "device_contracts": [
+            "m4l.fill_trigger"
+          ],
+          "gm_placeholder": "GM Drum Kit",
+          "id": "the-ballad-of-the-broken-controller.layer.punk_kit",
+          "instrument_strategy": "Dry acoustic kit, parallel saturation, short room.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "parallel_drive"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "room_send"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "fill_probability"
+            }
+          ],
+          "midi_channels": [
+            10
+          ],
+          "midi_file": "compositions/generated/midi/the-ballad-of-the-broken-controller.mid",
+          "midi_track": "Punk Kit",
+          "session_role": "Human drum aggression",
+          "session_track": "Punk Kit",
+          "traditional_bluegrass_layer": false,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "filter_cutoff",
+            "accent",
+            "swing_amount"
+          ],
+          "device_contracts": [
+            "m4l.house_grid_conductor"
+          ],
+          "gm_placeholder": "GM drum machine plus synth-stab channel",
+          "id": "the-ballad-of-the-broken-controller.layer.deep_house_machines",
+          "instrument_strategy": "Classic drum-machine racks, 303/101-style bass or stabs, restrained sidechain.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "filter_cutoff"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "accent"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "swing_amount"
+            }
+          ],
+          "midi_channels": [
+            10,
+            11
+          ],
+          "midi_file": "compositions/generated/midi/the-ballad-of-the-broken-controller.mid",
+          "midi_track": "Deep House Machines",
+          "session_role": "Kick, hats, stabs, and dance-floor continuity",
+          "session_track": "Deep House Machines",
+          "traditional_bluegrass_layer": false,
+          "type": "route_midi_layer_and_configure_devices"
+        },
+        {
+          "alien_electronic_layer": true,
+          "approval_gate": "live_set_mutation",
+          "automation_targets": [
+            "azimuth",
+            "width",
+            "grain_density",
+            "freeze"
+          ],
+          "device_contracts": [
+            "m4l.spatial_harmonic_field"
+          ],
+          "gm_placeholder": "Warm Pad",
+          "id": "the-ballad-of-the-broken-controller.layer.alien_sky",
+          "instrument_strategy": "Granulator III, Inspired by Nature, PitchLoop89, spectral/freeform processing.",
+          "macro_initialization": [
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "azimuth"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "width"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "grain_density"
+            },
+            {
+              "mode": "write_initial_clip_envelope_or_macro_default",
+              "target": "freeze"
+            }
+          ],
+          "midi_channels": [
+            12
+          ],
+          "midi_file": "compositions/generated/midi/the-ballad-of-the-broken-controller.mid",
+          "midi_track": "Alien Sky",
+          "session_role": "Granular, spectral, and spatial atmosphere",
+          "session_track": "Alien Sky",
+          "traditional_bluegrass_layer": false,
+          "type": "route_midi_layer_and_configure_devices"
+        }
+      ],
+      "midi_file": "compositions/generated/midi/the-ballad-of-the-broken-controller.mid",
+      "midi_sha256": "0806d648fef1d4388b926ded3f4958573b1fbd61c5c2a016c69e3bf991d299fd",
+      "mix_and_release_gates": [
+        {
+          "approval_gate": "export_or_release",
+          "id": "the-ballad-of-the-broken-controller.mix.headroom-check",
+          "instruction": "Confirm pre-master headroom is at least -6 dBFS before any limiter.",
+          "type": "operator_check"
+        },
+        {
+          "approval_gate": "export_or_release",
+          "id": "the-ballad-of-the-broken-controller.release.provenance-check",
+          "instruction": "Confirm source credits, source ledger records, CI status, and local install receipts before export or release.",
+          "type": "operator_check"
+        }
+      ],
+      "preflight_actions": [
+        {
+          "approval_gate": null,
+          "expected_sha256": "0806d648fef1d4388b926ded3f4958573b1fbd61c5c2a016c69e3bf991d299fd",
+          "id": "the-ballad-of-the-broken-controller.preflight.verify-midi-hash",
+          "input": "compositions/generated/midi/the-ballad-of-the-broken-controller.mid",
+          "type": "verify_artifact"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "id": "the-ballad-of-the-broken-controller.preflight.create-local-rollback-copy",
+          "instruction": "Before any Live-set mutation, save a timestamped local rollback copy outside Git.",
+          "type": "operator_check"
+        },
+        {
+          "approval_gate": "private_audio_upload",
+          "id": "the-ballad-of-the-broken-controller.preflight.confirm-no-private-audio-upload",
+          "instruction": "Do not upload private rehearsal audio, unreleased lyrics, or controller recordings without session-specific consent.",
+          "type": "operator_check"
+        }
+      ],
+      "scene_actions": [
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "controller calibration noises become rhythm",
+          "bar_length": 20,
+          "bar_start": 1,
+          "id": "the-ballad-of-the-broken-controller.scene.01",
+          "scene_name": "01 controller calibration noises become rhythm",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "banjo riff locks to glitch percussion",
+          "bar_length": 20,
+          "bar_start": 21,
+          "id": "the-ballad-of-the-broken-controller.scene.02",
+          "scene_name": "02 banjo riff locks to glitch percussion",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "mandolin tremolo lifts refrain",
+          "bar_length": 20,
+          "bar_start": 41,
+          "id": "the-ballad-of-the-broken-controller.scene.03",
+          "scene_name": "03 mandolin tremolo lifts refrain",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "breakdown exposes failed notes",
+          "bar_length": 20,
+          "bar_start": 61,
+          "id": "the-ballad-of-the-broken-controller.scene.04",
+          "scene_name": "04 breakdown exposes failed notes",
+          "type": "create_arrangement_locator"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "arrangement_note": "final refrain stacks all traditional instruments over alien choir",
+          "bar_length": 20,
+          "bar_start": 81,
+          "id": "the-ballad-of-the-broken-controller.scene.05",
+          "scene_name": "05 final refrain stacks all traditional instruments over alien choir",
+          "type": "create_arrangement_locator"
+        }
+      ],
+      "session_actions": [
+        {
+          "approval_gate": "live_set_mutation",
+          "global_swing": "54-61%",
+          "id": "the-ballad-of-the-broken-controller.session.set-tempo-and-swing",
+          "tempo_bpm": 100,
+          "type": "set_session_tempo_and_groove"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "expected_sha256": "0806d648fef1d4388b926ded3f4958573b1fbd61c5c2a016c69e3bf991d299fd",
+          "id": "the-ballad-of-the-broken-controller.session.import-midi",
+          "midi_file": "compositions/generated/midi/the-ballad-of-the-broken-controller.mid",
+          "type": "import_generated_midi"
+        },
+        {
+          "approval_gate": "live_set_mutation",
+          "id": "the-ballad-of-the-broken-controller.session.configure-returns",
+          "returns": [
+            {
+              "name": "A Short Spring",
+              "role": "bluegrass room and slap"
+            },
+            {
+              "name": "B Deep Dub",
+              "role": "house delay and modulation"
+            },
+            {
+              "name": "C Alien Bloom",
+              "role": "granular/spectral send"
+            },
+            {
+              "name": "D Punk Crush",
+              "role": "parallel saturation"
+            }
+          ],
+          "type": "create_or_verify_return_tracks"
+        }
+      ],
+      "slug": "the-ballad-of-the-broken-controller",
+      "source_deck": {
+        "approval_gate": "live_set_mutation",
+        "automation_targets": [
+          "slice_index",
+          "grain_size",
+          "reverse_probability"
+        ],
+        "candidate_sources": [
+          {
+            "byte_size": 1208108,
+            "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+            "name": "Carnival of Venice - excerpt 001",
+            "project_use": "Virtuosic melodic ornament source for banjo-roll variation, alien granular flourishes, and lead-controller pitch-bend studies.",
+            "rights_status": "public_domain",
+            "sha256": "a62d633eb195f0ecacceedc1831f05fc87db9da07eec114e9d6af667b93b4adb",
+            "source_id": "loc-citizen-dj-carnival-of-venice-260123-001",
+            "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+          },
+          {
+            "byte_size": 1887980,
+            "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+            "name": "Duke of Marlborough - excerpt 001",
+            "project_use": "Ballad-contour and modal phrase source for A.P. Carter-style narrative hooks, fiddle drone reharmonization, and slow-house vocal-chop beds.",
+            "rights_status": "public_domain",
+            "sha256": "a896860d2f155d2f93203b15534ad833c1fd1c174d5192a045cc022687e5243f",
+            "source_id": "loc-citizen-dj-duke-of-marlborough-12147-001",
+            "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+          },
+          {
+            "byte_size": 5809196,
+            "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+            "name": "Turkey in the straw medley - excerpt 001",
+            "project_use": "Early banjo/traditional-country rhythmic DNA for AeroBand banjo mapping, boom-chuck counter-rhythm, and chopped call-and-response studies.",
+            "rights_status": "public_domain",
+            "sha256": "3f5ed365b48faa2a21fb9d9ab7dbe467af01cdb8d709413ab324008472113baa",
+            "source_id": "loc-citizen-dj-turkey-in-the-straw-medley-247928-001",
+            "transformation": "none; raw source audio fetched for local Ableton/Sampler use"
+          }
+        ],
+        "default_state": "muted_until_human_provenance_review",
+        "device_contracts": [
+          "m4l.provenance_sampler"
+        ],
+        "instrument_strategy": "Sampler or Simpler loaded from provenance-checked local source folder.",
+        "macro_initialization": [
+          {
+            "mode": "write_initial_clip_envelope_or_macro_default",
+            "target": "slice_index"
+          },
+          {
+            "mode": "write_initial_clip_envelope_or_macro_default",
+            "target": "grain_size"
+          },
+          {
+            "mode": "write_initial_clip_envelope_or_macro_default",
+            "target": "reverse_probability"
+          }
+        ],
+        "required_checks": [
+          "source_id appears in sources/public-domain/download-ledger.json",
+          "rights_status is public_domain, cc0, or cc_by",
+          "credit line is carried into release notes",
+          "no raw sample path is written into tracked repo artifacts"
+        ],
+        "session_role": "Auditable historical fragments",
+        "session_track": "Public Domain Source Deck"
+      },
+      "tempo_bpm": 100,
+      "title": "The Ballad of the Broken Controller"
+    }
+  ]
+}

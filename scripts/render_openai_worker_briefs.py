@@ -59,26 +59,31 @@ ROLE_CONTEXT_MAP = {
     ],
     "controller_engineer": [
         "automation/live12-session-template.json",
+        "automation/generated/live12-daw-action-plan.json",
         "inventory/live12-local-inventory.json",
         "docs/live12-m4l-ci-cd.md",
     ],
     "max_device_builder": [
         "automation/live12-session-template.json",
+        "automation/generated/live12-daw-action-plan.json",
         "automation/openai-production-orchestration.json",
         "docs/live12-m4l-ci-cd.md",
     ],
     "arrangement_producer": [
         "compositions/down-tempo-punk-bluegrass-set.json",
+        "automation/generated/live12-daw-action-plan.json",
         "automation/live12-session-template.json",
         "docs/production-system.md",
     ],
     "mix_engineer": [
         "automation/live12-session-template.json",
+        "automation/generated/live12-daw-action-plan.json",
         "inventory/live12-local-inventory.json",
         "docs/production-system.md",
     ],
     "release_qa": [
         ".github/workflows/live12-foundation-ci.yml",
+        "automation/generated/live12-daw-action-plan.json",
         "catalogs/library-installation-plan.json",
         "catalogs/public-domain-bluegrass-sources.json",
         "sources/public-domain/download-ledger.json",
