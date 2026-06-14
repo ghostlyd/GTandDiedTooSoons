@@ -1,0 +1,3417 @@
+{
+  "generated_at": "1970-01-01T00:00:00Z",
+  "generator": "scripts/render_openai_production_swarm_queue.py",
+  "official_docs_basis": [
+    {
+      "project_use": "Track and role packets can be sent as structured inputs for proposal generation without mutating local state.",
+      "surface": "Responses API structured outputs",
+      "url": "https://developers.openai.com/api/docs/guides/structured-outputs"
+    },
+    {
+      "project_use": "Role order is represented as explicit task dependencies and handoff targets.",
+      "surface": "Agents SDK handoffs",
+      "url": "https://openai.github.io/openai-agents-python/handoffs/"
+    },
+    {
+      "project_use": "Future runs should keep redacted traces for handoffs, tool calls, approvals, and unresolved risk notes.",
+      "surface": "Agents SDK tracing",
+      "url": "https://openai.github.io/openai-agents-python/tracing/"
+    },
+    {
+      "project_use": "Future ChatGPT control surfaces should expose narrow project tools instead of arbitrary shell, account, or DAW access.",
+      "surface": "Apps SDK MCP",
+      "url": "https://developers.openai.com/apps-sdk/build/mcp-server"
+    }
+  ],
+  "purpose": "Metadata-only OpenAI production swarm queue tying role-scoped worker briefs to each generated track and DAW mutation handoff.",
+  "queue_policy": {
+    "api_execution_status": "not_called_ci_safe",
+    "blocked_without_approval": [
+      "source_download",
+      "private_audio_upload",
+      "vendor_account_action",
+      "purchase_or_license_change",
+      "live_set_mutation",
+      "export_or_release"
+    ],
+    "credentials_required_for_generation": false,
+    "execution_status": "planned_not_executed",
+    "git_policy": "metadata_only_no_private_audio",
+    "local_output_root": "output/openai-swarm",
+    "must_not_commit": [
+      "raw private audio",
+      "raw source audio",
+      "unreleased lyrics",
+      "OpenAI API keys",
+      "vendor credentials",
+      "cookies",
+      "license files",
+      "Ableton sets",
+      "compiled Max for Live devices",
+      "rendered audio"
+    ],
+    "trace_policy": "redacted_agent_traces_only"
+  },
+  "role_count": 6,
+  "role_order": [
+    "archivist",
+    "controller_engineer",
+    "max_device_builder",
+    "arrangement_producer",
+    "mix_engineer",
+    "release_qa"
+  ],
+  "schema_version": 1,
+  "source_file_sha256": {
+    "automation/generated/live12-daw-mutation-package.json": "1a2e88db2cb7868a60bca8fbe0ca62c130c741a99b6e7f9bd71827834c14266a",
+    "automation/generated/live12-daw-mutation-queue-runbook.json": "178f8350cc83b7135250f51a4c31282ae0b6e4f3af7fee6aa40897c8c48c95f7",
+    "automation/generated/openai-worker-briefs.json": "01f6bf2b7ebce0abc60a391e268304ebb51c5b55cc71e78c77127d44ee0fa32d",
+    "automation/generated/public-domain-source-deck.json": "775657b7c095a137c10e14ddf8da36b6309049156ba7f4e81e8f8c2e58dd626d",
+    "automation/openai-production-orchestration.json": "d951542e3acf034bcd848674e586015483d5bb0d5aa411a1d135fbcb9f77e605",
+    "automation/worker-chain.json": "ca970b4096d7ef183aa589bffe358ff50bf0917e96d20976cd6b0f2a48120d83",
+    "compositions/generated/live12-track-build-plans.json": "0893e3a502e4b451f5d2b5b4da5848e732fd1c14bdd4f39512c745e5f7921bce"
+  },
+  "source_files": [
+    "automation/openai-production-orchestration.json",
+    "automation/worker-chain.json",
+    "automation/generated/openai-worker-briefs.json",
+    "automation/generated/live12-daw-mutation-package.json",
+    "automation/generated/live12-daw-mutation-queue-runbook.json",
+    "automation/generated/public-domain-source-deck.json",
+    "compositions/generated/live12-track-build-plans.json"
+  ],
+  "task_count": 36,
+  "track_count": 6,
+  "tracks": [
+    {
+      "daw_queue": {
+        "bundle_manifest_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/bundle-manifest.json",
+        "launch_plan_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/launch-plan.json",
+        "launch_status": "blocked_until_per_track_confirm_live_mutation",
+        "request_path": "output/daw-mutations/good-vibrations-in-a-burned-barn/mutation-request.json"
+      },
+      "duration_target": "4:20",
+      "key_center": "D mixolydian",
+      "mutation_job_id": "daw-mutation.good-vibrations-in-a-burned-barn",
+      "planned_daw_action_count": 19,
+      "source_candidate_ids": [
+        "loc-citizen-dj-devils-dream-reel-123798-001",
+        "loc-citizen-dj-carnival-of-venice-260123-001",
+        "loc-citizen-dj-duke-of-marlborough-12147-001"
+      ],
+      "source_deck_state": "muted_until_human_provenance_review",
+      "tasks": [
+        {
+          "allowed_repo_inputs": [
+            "catalogs/public-domain-bluegrass-sources.json",
+            "sources/public-domain/download-ledger.json",
+            "docs/source-acquisition-policy.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "source_download"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/good-vibrations-in-a-burned-barn/mutation-request.json"
+          },
+          "depends_on": [],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "approved source manifest entries",
+            "historical motif notes"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "good-vibrations-in-a-burned-barn.controller_engineer.02",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/good-vibrations-in-a-burned-barn/archivist.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=archivist",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=good-vibrations-in-a-burned-barn",
+            "instruction": "Review public-domain source candidates and historical motif notes for Good Vibrations in a Burned Barn; return rights/provenance notes and unresolved risks only.",
+            "must_not": [
+              "approve unclear rights",
+              "download copyrighted commercial recordings",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=good-vibrations-in-a-burned-barn",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=good-vibrations-in-a-burned-barn",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=good-vibrations-in-a-burned-barn",
+            "track_summary": {
+              "duration_target": "4:20",
+              "key_center": "D mixolydian",
+              "max_for_live_focus": [
+                "roll_probability_engine",
+                "spatial_harmonic_field"
+              ],
+              "planned_daw_action_count": 19,
+              "source_candidate_count": 3,
+              "tempo_bpm": 96,
+              "title": "Good Vibrations in a Burned Barn"
+            }
+          },
+          "role_id": "archivist",
+          "role_name": "Music Library Scientist",
+          "sequence": 1,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "good-vibrations-in-a-burned-barn.archivist.01",
+          "tool_contract_ids": [
+            "validate_source_rights",
+            "render_worker_brief"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "inventory/live12-local-inventory.json",
+            "docs/live12-m4l-ci-cd.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/good-vibrations-in-a-burned-barn/mutation-request.json"
+          },
+          "depends_on": [
+            "good-vibrations-in-a-burned-barn.archivist.01"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "Max device contract updates",
+            "controller test notes"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "good-vibrations-in-a-burned-barn.max_device_builder.03",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/good-vibrations-in-a-burned-barn/controller_engineer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=controller_engineer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=good-vibrations-in-a-burned-barn",
+            "instruction": "Map AeroBand banjo-controller performance constraints for Good Vibrations in a Burned Barn; return controller and MIDI articulation proposals only.",
+            "must_not": [
+              "break live playability for theoretical complexity",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=good-vibrations-in-a-burned-barn",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=good-vibrations-in-a-burned-barn",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=good-vibrations-in-a-burned-barn",
+            "track_summary": {
+              "duration_target": "4:20",
+              "key_center": "D mixolydian",
+              "max_for_live_focus": [
+                "roll_probability_engine",
+                "spatial_harmonic_field"
+              ],
+              "planned_daw_action_count": 19,
+              "source_candidate_count": 3,
+              "tempo_bpm": 96,
+              "title": "Good Vibrations in a Burned Barn"
+            }
+          },
+          "role_id": "controller_engineer",
+          "role_name": "AeroBand Banjo Controller Engineer",
+          "sequence": 2,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "good-vibrations-in-a-burned-barn.controller_engineer.02",
+          "tool_contract_ids": [
+            "read_inventory",
+            "propose_session_change",
+            "automate_daw_session"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/openai-production-orchestration.json",
+            "docs/live12-m4l-ci-cd.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/good-vibrations-in-a-burned-barn/mutation-request.json"
+          },
+          "depends_on": [
+            "good-vibrations-in-a-burned-barn.controller_engineer.02"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "reviewable .maxpat source or documented device prototype"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "good-vibrations-in-a-burned-barn.arrangement_producer.04",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/good-vibrations-in-a-burned-barn/max_device_builder.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=max_device_builder",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=good-vibrations-in-a-burned-barn",
+            "instruction": "Translate Good Vibrations in a Burned Barn device needs into Max for Live source-contract work items; return source-only patch notes and automation targets.",
+            "must_not": [
+              "commit binary .amxd without Git LFS and review",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=good-vibrations-in-a-burned-barn",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=good-vibrations-in-a-burned-barn",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=good-vibrations-in-a-burned-barn",
+            "track_summary": {
+              "duration_target": "4:20",
+              "key_center": "D mixolydian",
+              "max_for_live_focus": [
+                "roll_probability_engine",
+                "spatial_harmonic_field"
+              ],
+              "planned_daw_action_count": 19,
+              "source_candidate_count": 3,
+              "tempo_bpm": 96,
+              "title": "Good Vibrations in a Burned Barn"
+            }
+          },
+          "role_id": "max_device_builder",
+          "role_name": "Max for Live Device Builder",
+          "sequence": 3,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "good-vibrations-in-a-burned-barn.max_device_builder.03",
+          "tool_contract_ids": [
+            "read_inventory",
+            "propose_session_change",
+            "automate_daw_session"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "compositions/down-tempo-punk-bluegrass-set.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/live12-session-template.json",
+            "docs/production-system.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation",
+            "private_audio_upload"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/good-vibrations-in-a-burned-barn/mutation-request.json"
+          },
+          "depends_on": [
+            "good-vibrations-in-a-burned-barn.max_device_builder.03"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "updated arrangement maps",
+            "session TODOs"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "good-vibrations-in-a-burned-barn.mix_engineer.05",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/good-vibrations-in-a-burned-barn/arrangement_producer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=arrangement_producer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=good-vibrations-in-a-burned-barn",
+            "instruction": "Refine Good Vibrations in a Burned Barn arrangement tension, hook density, and bluegrass/electronic/punk balance; return structured arrangement deltas.",
+            "must_not": [
+              "erase bluegrass instrumentation in favor of generic electronica",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=good-vibrations-in-a-burned-barn",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=good-vibrations-in-a-burned-barn",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=good-vibrations-in-a-burned-barn",
+            "track_summary": {
+              "duration_target": "4:20",
+              "key_center": "D mixolydian",
+              "max_for_live_focus": [
+                "roll_probability_engine",
+                "spatial_harmonic_field"
+              ],
+              "planned_daw_action_count": 19,
+              "source_candidate_count": 3,
+              "tempo_bpm": 96,
+              "title": "Good Vibrations in a Burned Barn"
+            }
+          },
+          "role_id": "arrangement_producer",
+          "role_name": "Arrangement Producer",
+          "sequence": 4,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "good-vibrations-in-a-burned-barn.arrangement_producer.04",
+          "tool_contract_ids": [
+            "render_worker_brief",
+            "propose_session_change"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "inventory/live12-local-inventory.json",
+            "docs/production-system.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "private_audio_upload",
+            "live_set_mutation",
+            "export_or_release"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/good-vibrations-in-a-burned-barn/mutation-request.json"
+          },
+          "depends_on": [
+            "good-vibrations-in-a-burned-barn.arrangement_producer.04"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "mix notes",
+            "render checklist",
+            "problem frequencies"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "good-vibrations-in-a-burned-barn.release_qa.06",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/good-vibrations-in-a-burned-barn/mix_engineer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=mix_engineer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=good-vibrations-in-a-burned-barn",
+            "instruction": "Prepare Good Vibrations in a Burned Barn mix translation and spatial review notes; return checklist items and problem-frequency hypotheses, not audio.",
+            "must_not": [
+              "log private vocal takes or unreleased lyrics without need",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=good-vibrations-in-a-burned-barn",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=good-vibrations-in-a-burned-barn",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=good-vibrations-in-a-burned-barn",
+            "track_summary": {
+              "duration_target": "4:20",
+              "key_center": "D mixolydian",
+              "max_for_live_focus": [
+                "roll_probability_engine",
+                "spatial_harmonic_field"
+              ],
+              "planned_daw_action_count": 19,
+              "source_candidate_count": 3,
+              "tempo_bpm": 96,
+              "title": "Good Vibrations in a Burned Barn"
+            }
+          },
+          "role_id": "mix_engineer",
+          "role_name": "Masterclass Audio Technician",
+          "sequence": 5,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "good-vibrations-in-a-burned-barn.mix_engineer.05",
+          "tool_contract_ids": [
+            "read_inventory",
+            "automate_daw_session",
+            "render_release_checklist"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            ".github/workflows/live12-foundation-ci.yml",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "catalogs/library-installation-plan.json",
+            "catalogs/public-domain-bluegrass-sources.json",
+            "sources/public-domain/download-ledger.json",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "source_download",
+            "vendor_account_action",
+            "purchase_or_license_change",
+            "export_or_release"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/good-vibrations-in-a-burned-barn/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/good-vibrations-in-a-burned-barn/mutation-request.json"
+          },
+          "depends_on": [
+            "good-vibrations-in-a-burned-barn.mix_engineer.05"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "release readiness report"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": null,
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/good-vibrations-in-a-burned-barn/release_qa.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=release_qa",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=good-vibrations-in-a-burned-barn",
+            "instruction": "Gate Good Vibrations in a Burned Barn for provenance, CI, source credits, export readiness, and residual risk; return release blockers and required evidence.",
+            "must_not": [
+              "ship missing sample credits or failed CI",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=good-vibrations-in-a-burned-barn",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=good-vibrations-in-a-burned-barn",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=good-vibrations-in-a-burned-barn",
+            "track_summary": {
+              "duration_target": "4:20",
+              "key_center": "D mixolydian",
+              "max_for_live_focus": [
+                "roll_probability_engine",
+                "spatial_harmonic_field"
+              ],
+              "planned_daw_action_count": 19,
+              "source_candidate_count": 3,
+              "tempo_bpm": 96,
+              "title": "Good Vibrations in a Burned Barn"
+            }
+          },
+          "role_id": "release_qa",
+          "role_name": "Release and Provenance QA",
+          "sequence": 6,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "good-vibrations-in-a-burned-barn.release_qa.06",
+          "tool_contract_ids": [
+            "validate_source_rights",
+            "read_inventory",
+            "render_release_checklist"
+          ]
+        }
+      ],
+      "tempo_bpm": 96,
+      "track_slug": "good-vibrations-in-a-burned-barn",
+      "track_title": "Good Vibrations in a Burned Barn"
+    },
+    {
+      "daw_queue": {
+        "bundle_manifest_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/bundle-manifest.json",
+        "launch_plan_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/launch-plan.json",
+        "launch_status": "blocked_until_per_track_confirm_live_mutation",
+        "request_path": "output/daw-mutations/a-p-carter-in-the-warehouse/mutation-request.json"
+      },
+      "duration_target": "3:45",
+      "key_center": "A minor / dorian interchange",
+      "mutation_job_id": "daw-mutation.a-p-carter-in-the-warehouse",
+      "planned_daw_action_count": 18,
+      "source_candidate_ids": [
+        "loc-citizen-dj-duke-of-marlborough-12147-001",
+        "loc-citizen-dj-devils-dream-reel-123798-001",
+        "loc-citizen-dj-turkey-in-the-straw-medley-247928-001"
+      ],
+      "source_deck_state": "muted_until_human_provenance_review",
+      "tasks": [
+        {
+          "allowed_repo_inputs": [
+            "catalogs/public-domain-bluegrass-sources.json",
+            "sources/public-domain/download-ledger.json",
+            "docs/source-acquisition-policy.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "source_download"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/a-p-carter-in-the-warehouse/mutation-request.json"
+          },
+          "depends_on": [],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "approved source manifest entries",
+            "historical motif notes"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "a-p-carter-in-the-warehouse.controller_engineer.02",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/a-p-carter-in-the-warehouse/archivist.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=archivist",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=a-p-carter-in-the-warehouse",
+            "instruction": "Review public-domain source candidates and historical motif notes for A.P. Carter in the Warehouse; return rights/provenance notes and unresolved risks only.",
+            "must_not": [
+              "approve unclear rights",
+              "download copyrighted commercial recordings",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=a-p-carter-in-the-warehouse",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=a-p-carter-in-the-warehouse",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=a-p-carter-in-the-warehouse",
+            "track_summary": {
+              "duration_target": "3:45",
+              "key_center": "A minor / dorian interchange",
+              "max_for_live_focus": [
+                "call_response_router",
+                "house_grid_conductor"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 88,
+              "title": "A.P. Carter in the Warehouse"
+            }
+          },
+          "role_id": "archivist",
+          "role_name": "Music Library Scientist",
+          "sequence": 1,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "a-p-carter-in-the-warehouse.archivist.01",
+          "tool_contract_ids": [
+            "validate_source_rights",
+            "render_worker_brief"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "inventory/live12-local-inventory.json",
+            "docs/live12-m4l-ci-cd.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/a-p-carter-in-the-warehouse/mutation-request.json"
+          },
+          "depends_on": [
+            "a-p-carter-in-the-warehouse.archivist.01"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "Max device contract updates",
+            "controller test notes"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "a-p-carter-in-the-warehouse.max_device_builder.03",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/a-p-carter-in-the-warehouse/controller_engineer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=controller_engineer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=a-p-carter-in-the-warehouse",
+            "instruction": "Map AeroBand banjo-controller performance constraints for A.P. Carter in the Warehouse; return controller and MIDI articulation proposals only.",
+            "must_not": [
+              "break live playability for theoretical complexity",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=a-p-carter-in-the-warehouse",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=a-p-carter-in-the-warehouse",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=a-p-carter-in-the-warehouse",
+            "track_summary": {
+              "duration_target": "3:45",
+              "key_center": "A minor / dorian interchange",
+              "max_for_live_focus": [
+                "call_response_router",
+                "house_grid_conductor"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 88,
+              "title": "A.P. Carter in the Warehouse"
+            }
+          },
+          "role_id": "controller_engineer",
+          "role_name": "AeroBand Banjo Controller Engineer",
+          "sequence": 2,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "a-p-carter-in-the-warehouse.controller_engineer.02",
+          "tool_contract_ids": [
+            "read_inventory",
+            "propose_session_change",
+            "automate_daw_session"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/openai-production-orchestration.json",
+            "docs/live12-m4l-ci-cd.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/a-p-carter-in-the-warehouse/mutation-request.json"
+          },
+          "depends_on": [
+            "a-p-carter-in-the-warehouse.controller_engineer.02"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "reviewable .maxpat source or documented device prototype"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "a-p-carter-in-the-warehouse.arrangement_producer.04",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/a-p-carter-in-the-warehouse/max_device_builder.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=max_device_builder",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=a-p-carter-in-the-warehouse",
+            "instruction": "Translate A.P. Carter in the Warehouse device needs into Max for Live source-contract work items; return source-only patch notes and automation targets.",
+            "must_not": [
+              "commit binary .amxd without Git LFS and review",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=a-p-carter-in-the-warehouse",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=a-p-carter-in-the-warehouse",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=a-p-carter-in-the-warehouse",
+            "track_summary": {
+              "duration_target": "3:45",
+              "key_center": "A minor / dorian interchange",
+              "max_for_live_focus": [
+                "call_response_router",
+                "house_grid_conductor"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 88,
+              "title": "A.P. Carter in the Warehouse"
+            }
+          },
+          "role_id": "max_device_builder",
+          "role_name": "Max for Live Device Builder",
+          "sequence": 3,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "a-p-carter-in-the-warehouse.max_device_builder.03",
+          "tool_contract_ids": [
+            "read_inventory",
+            "propose_session_change",
+            "automate_daw_session"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "compositions/down-tempo-punk-bluegrass-set.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/live12-session-template.json",
+            "docs/production-system.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation",
+            "private_audio_upload"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/a-p-carter-in-the-warehouse/mutation-request.json"
+          },
+          "depends_on": [
+            "a-p-carter-in-the-warehouse.max_device_builder.03"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "updated arrangement maps",
+            "session TODOs"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "a-p-carter-in-the-warehouse.mix_engineer.05",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/a-p-carter-in-the-warehouse/arrangement_producer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=arrangement_producer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=a-p-carter-in-the-warehouse",
+            "instruction": "Refine A.P. Carter in the Warehouse arrangement tension, hook density, and bluegrass/electronic/punk balance; return structured arrangement deltas.",
+            "must_not": [
+              "erase bluegrass instrumentation in favor of generic electronica",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=a-p-carter-in-the-warehouse",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=a-p-carter-in-the-warehouse",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=a-p-carter-in-the-warehouse",
+            "track_summary": {
+              "duration_target": "3:45",
+              "key_center": "A minor / dorian interchange",
+              "max_for_live_focus": [
+                "call_response_router",
+                "house_grid_conductor"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 88,
+              "title": "A.P. Carter in the Warehouse"
+            }
+          },
+          "role_id": "arrangement_producer",
+          "role_name": "Arrangement Producer",
+          "sequence": 4,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "a-p-carter-in-the-warehouse.arrangement_producer.04",
+          "tool_contract_ids": [
+            "render_worker_brief",
+            "propose_session_change"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "inventory/live12-local-inventory.json",
+            "docs/production-system.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "private_audio_upload",
+            "live_set_mutation",
+            "export_or_release"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/a-p-carter-in-the-warehouse/mutation-request.json"
+          },
+          "depends_on": [
+            "a-p-carter-in-the-warehouse.arrangement_producer.04"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "mix notes",
+            "render checklist",
+            "problem frequencies"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "a-p-carter-in-the-warehouse.release_qa.06",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/a-p-carter-in-the-warehouse/mix_engineer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=mix_engineer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=a-p-carter-in-the-warehouse",
+            "instruction": "Prepare A.P. Carter in the Warehouse mix translation and spatial review notes; return checklist items and problem-frequency hypotheses, not audio.",
+            "must_not": [
+              "log private vocal takes or unreleased lyrics without need",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=a-p-carter-in-the-warehouse",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=a-p-carter-in-the-warehouse",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=a-p-carter-in-the-warehouse",
+            "track_summary": {
+              "duration_target": "3:45",
+              "key_center": "A minor / dorian interchange",
+              "max_for_live_focus": [
+                "call_response_router",
+                "house_grid_conductor"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 88,
+              "title": "A.P. Carter in the Warehouse"
+            }
+          },
+          "role_id": "mix_engineer",
+          "role_name": "Masterclass Audio Technician",
+          "sequence": 5,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "a-p-carter-in-the-warehouse.mix_engineer.05",
+          "tool_contract_ids": [
+            "read_inventory",
+            "automate_daw_session",
+            "render_release_checklist"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            ".github/workflows/live12-foundation-ci.yml",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "catalogs/library-installation-plan.json",
+            "catalogs/public-domain-bluegrass-sources.json",
+            "sources/public-domain/download-ledger.json",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "source_download",
+            "vendor_account_action",
+            "purchase_or_license_change",
+            "export_or_release"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/a-p-carter-in-the-warehouse/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/a-p-carter-in-the-warehouse/mutation-request.json"
+          },
+          "depends_on": [
+            "a-p-carter-in-the-warehouse.mix_engineer.05"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "release readiness report"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": null,
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/a-p-carter-in-the-warehouse/release_qa.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=release_qa",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=a-p-carter-in-the-warehouse",
+            "instruction": "Gate A.P. Carter in the Warehouse for provenance, CI, source credits, export readiness, and residual risk; return release blockers and required evidence.",
+            "must_not": [
+              "ship missing sample credits or failed CI",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=a-p-carter-in-the-warehouse",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=a-p-carter-in-the-warehouse",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=a-p-carter-in-the-warehouse",
+            "track_summary": {
+              "duration_target": "3:45",
+              "key_center": "A minor / dorian interchange",
+              "max_for_live_focus": [
+                "call_response_router",
+                "house_grid_conductor"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 88,
+              "title": "A.P. Carter in the Warehouse"
+            }
+          },
+          "role_id": "release_qa",
+          "role_name": "Release and Provenance QA",
+          "sequence": 6,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "a-p-carter-in-the-warehouse.release_qa.06",
+          "tool_contract_ids": [
+            "validate_source_rights",
+            "read_inventory",
+            "render_release_checklist"
+          ]
+        }
+      ],
+      "tempo_bpm": 88,
+      "track_slug": "a-p-carter-in-the-warehouse",
+      "track_title": "A.P. Carter in the Warehouse"
+    },
+    {
+      "daw_queue": {
+        "bundle_manifest_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/bundle-manifest.json",
+        "launch_plan_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/launch-plan.json",
+        "launch_status": "blocked_until_per_track_confirm_live_mutation",
+        "request_path": "output/daw-mutations/no-gods-no-masters-no-quantize/mutation-request.json"
+      },
+      "duration_target": "3:10",
+      "key_center": "G major with flat-7 pressure",
+      "mutation_job_id": "daw-mutation.no-gods-no-masters-no-quantize",
+      "planned_daw_action_count": 18,
+      "source_candidate_ids": [
+        "loc-citizen-dj-devils-dream-reel-123798-001",
+        "loc-citizen-dj-duke-of-marlborough-12147-001",
+        "loc-citizen-dj-carnival-of-venice-260123-001"
+      ],
+      "source_deck_state": "muted_until_human_provenance_review",
+      "tasks": [
+        {
+          "allowed_repo_inputs": [
+            "catalogs/public-domain-bluegrass-sources.json",
+            "sources/public-domain/download-ledger.json",
+            "docs/source-acquisition-policy.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "source_download"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/no-gods-no-masters-no-quantize/mutation-request.json"
+          },
+          "depends_on": [],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "approved source manifest entries",
+            "historical motif notes"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "no-gods-no-masters-no-quantize.controller_engineer.02",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/no-gods-no-masters-no-quantize/archivist.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=archivist",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=no-gods-no-masters-no-quantize",
+            "instruction": "Review public-domain source candidates and historical motif notes for No Gods, No Masters, No Quantize; return rights/provenance notes and unresolved risks only.",
+            "must_not": [
+              "approve unclear rights",
+              "download copyrighted commercial recordings",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=no-gods-no-masters-no-quantize",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=no-gods-no-masters-no-quantize",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=no-gods-no-masters-no-quantize",
+            "track_summary": {
+              "duration_target": "3:10",
+              "key_center": "G major with flat-7 pressure",
+              "max_for_live_focus": [
+                "chop_clock_guard",
+                "root_motion_limiter"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 104,
+              "title": "No Gods, No Masters, No Quantize"
+            }
+          },
+          "role_id": "archivist",
+          "role_name": "Music Library Scientist",
+          "sequence": 1,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "no-gods-no-masters-no-quantize.archivist.01",
+          "tool_contract_ids": [
+            "validate_source_rights",
+            "render_worker_brief"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "inventory/live12-local-inventory.json",
+            "docs/live12-m4l-ci-cd.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/no-gods-no-masters-no-quantize/mutation-request.json"
+          },
+          "depends_on": [
+            "no-gods-no-masters-no-quantize.archivist.01"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "Max device contract updates",
+            "controller test notes"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "no-gods-no-masters-no-quantize.max_device_builder.03",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/no-gods-no-masters-no-quantize/controller_engineer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=controller_engineer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=no-gods-no-masters-no-quantize",
+            "instruction": "Map AeroBand banjo-controller performance constraints for No Gods, No Masters, No Quantize; return controller and MIDI articulation proposals only.",
+            "must_not": [
+              "break live playability for theoretical complexity",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=no-gods-no-masters-no-quantize",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=no-gods-no-masters-no-quantize",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=no-gods-no-masters-no-quantize",
+            "track_summary": {
+              "duration_target": "3:10",
+              "key_center": "G major with flat-7 pressure",
+              "max_for_live_focus": [
+                "chop_clock_guard",
+                "root_motion_limiter"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 104,
+              "title": "No Gods, No Masters, No Quantize"
+            }
+          },
+          "role_id": "controller_engineer",
+          "role_name": "AeroBand Banjo Controller Engineer",
+          "sequence": 2,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "no-gods-no-masters-no-quantize.controller_engineer.02",
+          "tool_contract_ids": [
+            "read_inventory",
+            "propose_session_change",
+            "automate_daw_session"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/openai-production-orchestration.json",
+            "docs/live12-m4l-ci-cd.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/no-gods-no-masters-no-quantize/mutation-request.json"
+          },
+          "depends_on": [
+            "no-gods-no-masters-no-quantize.controller_engineer.02"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "reviewable .maxpat source or documented device prototype"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "no-gods-no-masters-no-quantize.arrangement_producer.04",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/no-gods-no-masters-no-quantize/max_device_builder.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=max_device_builder",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=no-gods-no-masters-no-quantize",
+            "instruction": "Translate No Gods, No Masters, No Quantize device needs into Max for Live source-contract work items; return source-only patch notes and automation targets.",
+            "must_not": [
+              "commit binary .amxd without Git LFS and review",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=no-gods-no-masters-no-quantize",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=no-gods-no-masters-no-quantize",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=no-gods-no-masters-no-quantize",
+            "track_summary": {
+              "duration_target": "3:10",
+              "key_center": "G major with flat-7 pressure",
+              "max_for_live_focus": [
+                "chop_clock_guard",
+                "root_motion_limiter"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 104,
+              "title": "No Gods, No Masters, No Quantize"
+            }
+          },
+          "role_id": "max_device_builder",
+          "role_name": "Max for Live Device Builder",
+          "sequence": 3,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "no-gods-no-masters-no-quantize.max_device_builder.03",
+          "tool_contract_ids": [
+            "read_inventory",
+            "propose_session_change",
+            "automate_daw_session"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "compositions/down-tempo-punk-bluegrass-set.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/live12-session-template.json",
+            "docs/production-system.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation",
+            "private_audio_upload"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/no-gods-no-masters-no-quantize/mutation-request.json"
+          },
+          "depends_on": [
+            "no-gods-no-masters-no-quantize.max_device_builder.03"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "updated arrangement maps",
+            "session TODOs"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "no-gods-no-masters-no-quantize.mix_engineer.05",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/no-gods-no-masters-no-quantize/arrangement_producer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=arrangement_producer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=no-gods-no-masters-no-quantize",
+            "instruction": "Refine No Gods, No Masters, No Quantize arrangement tension, hook density, and bluegrass/electronic/punk balance; return structured arrangement deltas.",
+            "must_not": [
+              "erase bluegrass instrumentation in favor of generic electronica",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=no-gods-no-masters-no-quantize",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=no-gods-no-masters-no-quantize",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=no-gods-no-masters-no-quantize",
+            "track_summary": {
+              "duration_target": "3:10",
+              "key_center": "G major with flat-7 pressure",
+              "max_for_live_focus": [
+                "chop_clock_guard",
+                "root_motion_limiter"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 104,
+              "title": "No Gods, No Masters, No Quantize"
+            }
+          },
+          "role_id": "arrangement_producer",
+          "role_name": "Arrangement Producer",
+          "sequence": 4,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "no-gods-no-masters-no-quantize.arrangement_producer.04",
+          "tool_contract_ids": [
+            "render_worker_brief",
+            "propose_session_change"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "inventory/live12-local-inventory.json",
+            "docs/production-system.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "private_audio_upload",
+            "live_set_mutation",
+            "export_or_release"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/no-gods-no-masters-no-quantize/mutation-request.json"
+          },
+          "depends_on": [
+            "no-gods-no-masters-no-quantize.arrangement_producer.04"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "mix notes",
+            "render checklist",
+            "problem frequencies"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "no-gods-no-masters-no-quantize.release_qa.06",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/no-gods-no-masters-no-quantize/mix_engineer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=mix_engineer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=no-gods-no-masters-no-quantize",
+            "instruction": "Prepare No Gods, No Masters, No Quantize mix translation and spatial review notes; return checklist items and problem-frequency hypotheses, not audio.",
+            "must_not": [
+              "log private vocal takes or unreleased lyrics without need",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=no-gods-no-masters-no-quantize",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=no-gods-no-masters-no-quantize",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=no-gods-no-masters-no-quantize",
+            "track_summary": {
+              "duration_target": "3:10",
+              "key_center": "G major with flat-7 pressure",
+              "max_for_live_focus": [
+                "chop_clock_guard",
+                "root_motion_limiter"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 104,
+              "title": "No Gods, No Masters, No Quantize"
+            }
+          },
+          "role_id": "mix_engineer",
+          "role_name": "Masterclass Audio Technician",
+          "sequence": 5,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "no-gods-no-masters-no-quantize.mix_engineer.05",
+          "tool_contract_ids": [
+            "read_inventory",
+            "automate_daw_session",
+            "render_release_checklist"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            ".github/workflows/live12-foundation-ci.yml",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "catalogs/library-installation-plan.json",
+            "catalogs/public-domain-bluegrass-sources.json",
+            "sources/public-domain/download-ledger.json",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "source_download",
+            "vendor_account_action",
+            "purchase_or_license_change",
+            "export_or_release"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/no-gods-no-masters-no-quantize/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/no-gods-no-masters-no-quantize/mutation-request.json"
+          },
+          "depends_on": [
+            "no-gods-no-masters-no-quantize.mix_engineer.05"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "release readiness report"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": null,
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/no-gods-no-masters-no-quantize/release_qa.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=release_qa",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=no-gods-no-masters-no-quantize",
+            "instruction": "Gate No Gods, No Masters, No Quantize for provenance, CI, source credits, export readiness, and residual risk; return release blockers and required evidence.",
+            "must_not": [
+              "ship missing sample credits or failed CI",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=no-gods-no-masters-no-quantize",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=no-gods-no-masters-no-quantize",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=no-gods-no-masters-no-quantize",
+            "track_summary": {
+              "duration_target": "3:10",
+              "key_center": "G major with flat-7 pressure",
+              "max_for_live_focus": [
+                "chop_clock_guard",
+                "root_motion_limiter"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 104,
+              "title": "No Gods, No Masters, No Quantize"
+            }
+          },
+          "role_id": "release_qa",
+          "role_name": "Release and Provenance QA",
+          "sequence": 6,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "no-gods-no-masters-no-quantize.release_qa.06",
+          "tool_contract_ids": [
+            "validate_source_rights",
+            "read_inventory",
+            "render_release_checklist"
+          ]
+        }
+      ],
+      "tempo_bpm": 104,
+      "track_slug": "no-gods-no-masters-no-quantize",
+      "track_title": "No Gods, No Masters, No Quantize"
+    },
+    {
+      "daw_queue": {
+        "bundle_manifest_path": "output/daw-import-bundles/possum-kingdom-afterhours/bundle-manifest.json",
+        "launch_plan_path": "output/daw-import-bundles/possum-kingdom-afterhours/launch-plan.json",
+        "launch_status": "blocked_until_per_track_confirm_live_mutation",
+        "request_path": "output/daw-mutations/possum-kingdom-afterhours/mutation-request.json"
+      },
+      "duration_target": "5:30",
+      "key_center": "E minor pentatonic",
+      "mutation_job_id": "daw-mutation.possum-kingdom-afterhours",
+      "planned_daw_action_count": 18,
+      "source_candidate_ids": [
+        "loc-citizen-dj-devils-dream-reel-123798-001",
+        "loc-citizen-dj-duke-of-marlborough-12147-001",
+        "loc-citizen-dj-carnival-of-venice-260123-001"
+      ],
+      "source_deck_state": "muted_until_human_provenance_review",
+      "tasks": [
+        {
+          "allowed_repo_inputs": [
+            "catalogs/public-domain-bluegrass-sources.json",
+            "sources/public-domain/download-ledger.json",
+            "docs/source-acquisition-policy.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "source_download"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/possum-kingdom-afterhours/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/possum-kingdom-afterhours/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/possum-kingdom-afterhours/mutation-request.json"
+          },
+          "depends_on": [],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "approved source manifest entries",
+            "historical motif notes"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "possum-kingdom-afterhours.controller_engineer.02",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/possum-kingdom-afterhours/archivist.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=archivist",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=possum-kingdom-afterhours",
+            "instruction": "Review public-domain source candidates and historical motif notes for Possum Kingdom Afterhours; return rights/provenance notes and unresolved risks only.",
+            "must_not": [
+              "approve unclear rights",
+              "download copyrighted commercial recordings",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=possum-kingdom-afterhours",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=possum-kingdom-afterhours",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=possum-kingdom-afterhours",
+            "track_summary": {
+              "duration_target": "5:30",
+              "key_center": "E minor pentatonic",
+              "max_for_live_focus": [
+                "spatial_harmonic_field",
+                "provenance_sampler"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 82,
+              "title": "Possum Kingdom Afterhours"
+            }
+          },
+          "role_id": "archivist",
+          "role_name": "Music Library Scientist",
+          "sequence": 1,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "possum-kingdom-afterhours.archivist.01",
+          "tool_contract_ids": [
+            "validate_source_rights",
+            "render_worker_brief"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "inventory/live12-local-inventory.json",
+            "docs/live12-m4l-ci-cd.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/possum-kingdom-afterhours/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/possum-kingdom-afterhours/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/possum-kingdom-afterhours/mutation-request.json"
+          },
+          "depends_on": [
+            "possum-kingdom-afterhours.archivist.01"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "Max device contract updates",
+            "controller test notes"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "possum-kingdom-afterhours.max_device_builder.03",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/possum-kingdom-afterhours/controller_engineer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=controller_engineer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=possum-kingdom-afterhours",
+            "instruction": "Map AeroBand banjo-controller performance constraints for Possum Kingdom Afterhours; return controller and MIDI articulation proposals only.",
+            "must_not": [
+              "break live playability for theoretical complexity",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=possum-kingdom-afterhours",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=possum-kingdom-afterhours",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=possum-kingdom-afterhours",
+            "track_summary": {
+              "duration_target": "5:30",
+              "key_center": "E minor pentatonic",
+              "max_for_live_focus": [
+                "spatial_harmonic_field",
+                "provenance_sampler"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 82,
+              "title": "Possum Kingdom Afterhours"
+            }
+          },
+          "role_id": "controller_engineer",
+          "role_name": "AeroBand Banjo Controller Engineer",
+          "sequence": 2,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "possum-kingdom-afterhours.controller_engineer.02",
+          "tool_contract_ids": [
+            "read_inventory",
+            "propose_session_change",
+            "automate_daw_session"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/openai-production-orchestration.json",
+            "docs/live12-m4l-ci-cd.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/possum-kingdom-afterhours/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/possum-kingdom-afterhours/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/possum-kingdom-afterhours/mutation-request.json"
+          },
+          "depends_on": [
+            "possum-kingdom-afterhours.controller_engineer.02"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "reviewable .maxpat source or documented device prototype"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "possum-kingdom-afterhours.arrangement_producer.04",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/possum-kingdom-afterhours/max_device_builder.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=max_device_builder",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=possum-kingdom-afterhours",
+            "instruction": "Translate Possum Kingdom Afterhours device needs into Max for Live source-contract work items; return source-only patch notes and automation targets.",
+            "must_not": [
+              "commit binary .amxd without Git LFS and review",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=possum-kingdom-afterhours",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=possum-kingdom-afterhours",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=possum-kingdom-afterhours",
+            "track_summary": {
+              "duration_target": "5:30",
+              "key_center": "E minor pentatonic",
+              "max_for_live_focus": [
+                "spatial_harmonic_field",
+                "provenance_sampler"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 82,
+              "title": "Possum Kingdom Afterhours"
+            }
+          },
+          "role_id": "max_device_builder",
+          "role_name": "Max for Live Device Builder",
+          "sequence": 3,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "possum-kingdom-afterhours.max_device_builder.03",
+          "tool_contract_ids": [
+            "read_inventory",
+            "propose_session_change",
+            "automate_daw_session"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "compositions/down-tempo-punk-bluegrass-set.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/live12-session-template.json",
+            "docs/production-system.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation",
+            "private_audio_upload"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/possum-kingdom-afterhours/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/possum-kingdom-afterhours/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/possum-kingdom-afterhours/mutation-request.json"
+          },
+          "depends_on": [
+            "possum-kingdom-afterhours.max_device_builder.03"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "updated arrangement maps",
+            "session TODOs"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "possum-kingdom-afterhours.mix_engineer.05",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/possum-kingdom-afterhours/arrangement_producer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=arrangement_producer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=possum-kingdom-afterhours",
+            "instruction": "Refine Possum Kingdom Afterhours arrangement tension, hook density, and bluegrass/electronic/punk balance; return structured arrangement deltas.",
+            "must_not": [
+              "erase bluegrass instrumentation in favor of generic electronica",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=possum-kingdom-afterhours",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=possum-kingdom-afterhours",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=possum-kingdom-afterhours",
+            "track_summary": {
+              "duration_target": "5:30",
+              "key_center": "E minor pentatonic",
+              "max_for_live_focus": [
+                "spatial_harmonic_field",
+                "provenance_sampler"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 82,
+              "title": "Possum Kingdom Afterhours"
+            }
+          },
+          "role_id": "arrangement_producer",
+          "role_name": "Arrangement Producer",
+          "sequence": 4,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "possum-kingdom-afterhours.arrangement_producer.04",
+          "tool_contract_ids": [
+            "render_worker_brief",
+            "propose_session_change"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "inventory/live12-local-inventory.json",
+            "docs/production-system.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "private_audio_upload",
+            "live_set_mutation",
+            "export_or_release"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/possum-kingdom-afterhours/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/possum-kingdom-afterhours/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/possum-kingdom-afterhours/mutation-request.json"
+          },
+          "depends_on": [
+            "possum-kingdom-afterhours.arrangement_producer.04"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "mix notes",
+            "render checklist",
+            "problem frequencies"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "possum-kingdom-afterhours.release_qa.06",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/possum-kingdom-afterhours/mix_engineer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=mix_engineer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=possum-kingdom-afterhours",
+            "instruction": "Prepare Possum Kingdom Afterhours mix translation and spatial review notes; return checklist items and problem-frequency hypotheses, not audio.",
+            "must_not": [
+              "log private vocal takes or unreleased lyrics without need",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=possum-kingdom-afterhours",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=possum-kingdom-afterhours",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=possum-kingdom-afterhours",
+            "track_summary": {
+              "duration_target": "5:30",
+              "key_center": "E minor pentatonic",
+              "max_for_live_focus": [
+                "spatial_harmonic_field",
+                "provenance_sampler"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 82,
+              "title": "Possum Kingdom Afterhours"
+            }
+          },
+          "role_id": "mix_engineer",
+          "role_name": "Masterclass Audio Technician",
+          "sequence": 5,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "possum-kingdom-afterhours.mix_engineer.05",
+          "tool_contract_ids": [
+            "read_inventory",
+            "automate_daw_session",
+            "render_release_checklist"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            ".github/workflows/live12-foundation-ci.yml",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "catalogs/library-installation-plan.json",
+            "catalogs/public-domain-bluegrass-sources.json",
+            "sources/public-domain/download-ledger.json",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "source_download",
+            "vendor_account_action",
+            "purchase_or_license_change",
+            "export_or_release"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/possum-kingdom-afterhours/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/possum-kingdom-afterhours/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/possum-kingdom-afterhours/mutation-request.json"
+          },
+          "depends_on": [
+            "possum-kingdom-afterhours.mix_engineer.05"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "release readiness report"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": null,
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/possum-kingdom-afterhours/release_qa.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=release_qa",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=possum-kingdom-afterhours",
+            "instruction": "Gate Possum Kingdom Afterhours for provenance, CI, source credits, export readiness, and residual risk; return release blockers and required evidence.",
+            "must_not": [
+              "ship missing sample credits or failed CI",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=possum-kingdom-afterhours",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=possum-kingdom-afterhours",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=possum-kingdom-afterhours",
+            "track_summary": {
+              "duration_target": "5:30",
+              "key_center": "E minor pentatonic",
+              "max_for_live_focus": [
+                "spatial_harmonic_field",
+                "provenance_sampler"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 82,
+              "title": "Possum Kingdom Afterhours"
+            }
+          },
+          "role_id": "release_qa",
+          "role_name": "Release and Provenance QA",
+          "sequence": 6,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "possum-kingdom-afterhours.release_qa.06",
+          "tool_contract_ids": [
+            "validate_source_rights",
+            "read_inventory",
+            "render_release_checklist"
+          ]
+        }
+      ],
+      "tempo_bpm": 82,
+      "track_slug": "possum-kingdom-afterhours",
+      "track_title": "Possum Kingdom Afterhours"
+    },
+    {
+      "daw_queue": {
+        "bundle_manifest_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/bundle-manifest.json",
+        "launch_plan_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/launch-plan.json",
+        "launch_status": "blocked_until_per_track_confirm_live_mutation",
+        "request_path": "output/daw-mutations/the-ballad-of-the-broken-controller/mutation-request.json"
+      },
+      "duration_target": "4:00",
+      "key_center": "B flat major with punk chromatic passing tones",
+      "mutation_job_id": "daw-mutation.the-ballad-of-the-broken-controller",
+      "planned_daw_action_count": 18,
+      "source_candidate_ids": [
+        "loc-citizen-dj-carnival-of-venice-260123-001",
+        "loc-citizen-dj-duke-of-marlborough-12147-001",
+        "loc-citizen-dj-turkey-in-the-straw-medley-247928-001"
+      ],
+      "source_deck_state": "muted_until_human_provenance_review",
+      "tasks": [
+        {
+          "allowed_repo_inputs": [
+            "catalogs/public-domain-bluegrass-sources.json",
+            "sources/public-domain/download-ledger.json",
+            "docs/source-acquisition-policy.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "source_download"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/the-ballad-of-the-broken-controller/mutation-request.json"
+          },
+          "depends_on": [],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "approved source manifest entries",
+            "historical motif notes"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "the-ballad-of-the-broken-controller.controller_engineer.02",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/the-ballad-of-the-broken-controller/archivist.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=archivist",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=the-ballad-of-the-broken-controller",
+            "instruction": "Review public-domain source candidates and historical motif notes for The Ballad of the Broken Controller; return rights/provenance notes and unresolved risks only.",
+            "must_not": [
+              "approve unclear rights",
+              "download copyrighted commercial recordings",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=the-ballad-of-the-broken-controller",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=the-ballad-of-the-broken-controller",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=the-ballad-of-the-broken-controller",
+            "track_summary": {
+              "duration_target": "4:00",
+              "key_center": "B flat major with punk chromatic passing tones",
+              "max_for_live_focus": [
+                "aeroband_banjo_mapper",
+                "fill_trigger"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 100,
+              "title": "The Ballad of the Broken Controller"
+            }
+          },
+          "role_id": "archivist",
+          "role_name": "Music Library Scientist",
+          "sequence": 1,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "the-ballad-of-the-broken-controller.archivist.01",
+          "tool_contract_ids": [
+            "validate_source_rights",
+            "render_worker_brief"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "inventory/live12-local-inventory.json",
+            "docs/live12-m4l-ci-cd.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/the-ballad-of-the-broken-controller/mutation-request.json"
+          },
+          "depends_on": [
+            "the-ballad-of-the-broken-controller.archivist.01"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "Max device contract updates",
+            "controller test notes"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "the-ballad-of-the-broken-controller.max_device_builder.03",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/the-ballad-of-the-broken-controller/controller_engineer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=controller_engineer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=the-ballad-of-the-broken-controller",
+            "instruction": "Map AeroBand banjo-controller performance constraints for The Ballad of the Broken Controller; return controller and MIDI articulation proposals only.",
+            "must_not": [
+              "break live playability for theoretical complexity",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=the-ballad-of-the-broken-controller",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=the-ballad-of-the-broken-controller",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=the-ballad-of-the-broken-controller",
+            "track_summary": {
+              "duration_target": "4:00",
+              "key_center": "B flat major with punk chromatic passing tones",
+              "max_for_live_focus": [
+                "aeroband_banjo_mapper",
+                "fill_trigger"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 100,
+              "title": "The Ballad of the Broken Controller"
+            }
+          },
+          "role_id": "controller_engineer",
+          "role_name": "AeroBand Banjo Controller Engineer",
+          "sequence": 2,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "the-ballad-of-the-broken-controller.controller_engineer.02",
+          "tool_contract_ids": [
+            "read_inventory",
+            "propose_session_change",
+            "automate_daw_session"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/openai-production-orchestration.json",
+            "docs/live12-m4l-ci-cd.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/the-ballad-of-the-broken-controller/mutation-request.json"
+          },
+          "depends_on": [
+            "the-ballad-of-the-broken-controller.controller_engineer.02"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "reviewable .maxpat source or documented device prototype"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "the-ballad-of-the-broken-controller.arrangement_producer.04",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/the-ballad-of-the-broken-controller/max_device_builder.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=max_device_builder",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=the-ballad-of-the-broken-controller",
+            "instruction": "Translate The Ballad of the Broken Controller device needs into Max for Live source-contract work items; return source-only patch notes and automation targets.",
+            "must_not": [
+              "commit binary .amxd without Git LFS and review",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=the-ballad-of-the-broken-controller",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=the-ballad-of-the-broken-controller",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=the-ballad-of-the-broken-controller",
+            "track_summary": {
+              "duration_target": "4:00",
+              "key_center": "B flat major with punk chromatic passing tones",
+              "max_for_live_focus": [
+                "aeroband_banjo_mapper",
+                "fill_trigger"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 100,
+              "title": "The Ballad of the Broken Controller"
+            }
+          },
+          "role_id": "max_device_builder",
+          "role_name": "Max for Live Device Builder",
+          "sequence": 3,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "the-ballad-of-the-broken-controller.max_device_builder.03",
+          "tool_contract_ids": [
+            "read_inventory",
+            "propose_session_change",
+            "automate_daw_session"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "compositions/down-tempo-punk-bluegrass-set.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/live12-session-template.json",
+            "docs/production-system.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation",
+            "private_audio_upload"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/the-ballad-of-the-broken-controller/mutation-request.json"
+          },
+          "depends_on": [
+            "the-ballad-of-the-broken-controller.max_device_builder.03"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "updated arrangement maps",
+            "session TODOs"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "the-ballad-of-the-broken-controller.mix_engineer.05",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/the-ballad-of-the-broken-controller/arrangement_producer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=arrangement_producer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=the-ballad-of-the-broken-controller",
+            "instruction": "Refine The Ballad of the Broken Controller arrangement tension, hook density, and bluegrass/electronic/punk balance; return structured arrangement deltas.",
+            "must_not": [
+              "erase bluegrass instrumentation in favor of generic electronica",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=the-ballad-of-the-broken-controller",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=the-ballad-of-the-broken-controller",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=the-ballad-of-the-broken-controller",
+            "track_summary": {
+              "duration_target": "4:00",
+              "key_center": "B flat major with punk chromatic passing tones",
+              "max_for_live_focus": [
+                "aeroband_banjo_mapper",
+                "fill_trigger"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 100,
+              "title": "The Ballad of the Broken Controller"
+            }
+          },
+          "role_id": "arrangement_producer",
+          "role_name": "Arrangement Producer",
+          "sequence": 4,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "the-ballad-of-the-broken-controller.arrangement_producer.04",
+          "tool_contract_ids": [
+            "render_worker_brief",
+            "propose_session_change"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "inventory/live12-local-inventory.json",
+            "docs/production-system.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "private_audio_upload",
+            "live_set_mutation",
+            "export_or_release"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/the-ballad-of-the-broken-controller/mutation-request.json"
+          },
+          "depends_on": [
+            "the-ballad-of-the-broken-controller.arrangement_producer.04"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "mix notes",
+            "render checklist",
+            "problem frequencies"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "the-ballad-of-the-broken-controller.release_qa.06",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/the-ballad-of-the-broken-controller/mix_engineer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=mix_engineer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=the-ballad-of-the-broken-controller",
+            "instruction": "Prepare The Ballad of the Broken Controller mix translation and spatial review notes; return checklist items and problem-frequency hypotheses, not audio.",
+            "must_not": [
+              "log private vocal takes or unreleased lyrics without need",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=the-ballad-of-the-broken-controller",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=the-ballad-of-the-broken-controller",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=the-ballad-of-the-broken-controller",
+            "track_summary": {
+              "duration_target": "4:00",
+              "key_center": "B flat major with punk chromatic passing tones",
+              "max_for_live_focus": [
+                "aeroband_banjo_mapper",
+                "fill_trigger"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 100,
+              "title": "The Ballad of the Broken Controller"
+            }
+          },
+          "role_id": "mix_engineer",
+          "role_name": "Masterclass Audio Technician",
+          "sequence": 5,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "the-ballad-of-the-broken-controller.mix_engineer.05",
+          "tool_contract_ids": [
+            "read_inventory",
+            "automate_daw_session",
+            "render_release_checklist"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            ".github/workflows/live12-foundation-ci.yml",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "catalogs/library-installation-plan.json",
+            "catalogs/public-domain-bluegrass-sources.json",
+            "sources/public-domain/download-ledger.json",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "source_download",
+            "vendor_account_action",
+            "purchase_or_license_change",
+            "export_or_release"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/the-ballad-of-the-broken-controller/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/the-ballad-of-the-broken-controller/mutation-request.json"
+          },
+          "depends_on": [
+            "the-ballad-of-the-broken-controller.mix_engineer.05"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "release readiness report"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": null,
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/the-ballad-of-the-broken-controller/release_qa.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=release_qa",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=the-ballad-of-the-broken-controller",
+            "instruction": "Gate The Ballad of the Broken Controller for provenance, CI, source credits, export readiness, and residual risk; return release blockers and required evidence.",
+            "must_not": [
+              "ship missing sample credits or failed CI",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=the-ballad-of-the-broken-controller",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=the-ballad-of-the-broken-controller",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=the-ballad-of-the-broken-controller",
+            "track_summary": {
+              "duration_target": "4:00",
+              "key_center": "B flat major with punk chromatic passing tones",
+              "max_for_live_focus": [
+                "aeroband_banjo_mapper",
+                "fill_trigger"
+              ],
+              "planned_daw_action_count": 18,
+              "source_candidate_count": 3,
+              "tempo_bpm": 100,
+              "title": "The Ballad of the Broken Controller"
+            }
+          },
+          "role_id": "release_qa",
+          "role_name": "Release and Provenance QA",
+          "sequence": 6,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "the-ballad-of-the-broken-controller.release_qa.06",
+          "tool_contract_ids": [
+            "validate_source_rights",
+            "read_inventory",
+            "render_release_checklist"
+          ]
+        }
+      ],
+      "tempo_bpm": 100,
+      "track_slug": "the-ballad-of-the-broken-controller",
+      "track_title": "The Ballad of the Broken Controller"
+    },
+    {
+      "daw_queue": {
+        "bundle_manifest_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/bundle-manifest.json",
+        "launch_plan_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/launch-plan.json",
+        "launch_status": "blocked_until_per_track_confirm_live_mutation",
+        "request_path": "output/daw-mutations/rail-yard-ghost-in-the-control-room/mutation-request.json"
+      },
+      "duration_target": "4:48",
+      "key_center": "C dorian",
+      "mutation_job_id": "daw-mutation.rail-yard-ghost-in-the-control-room",
+      "planned_daw_action_count": 21,
+      "source_candidate_ids": [
+        "loc-citizen-dj-devils-dream-reel-123798-001",
+        "loc-citizen-dj-duke-of-marlborough-12147-001",
+        "loc-citizen-dj-turkey-in-the-straw-medley-247928-001"
+      ],
+      "source_deck_state": "muted_until_human_provenance_review",
+      "tasks": [
+        {
+          "allowed_repo_inputs": [
+            "catalogs/public-domain-bluegrass-sources.json",
+            "sources/public-domain/download-ledger.json",
+            "docs/source-acquisition-policy.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "source_download"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/rail-yard-ghost-in-the-control-room/mutation-request.json"
+          },
+          "depends_on": [],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "approved source manifest entries",
+            "historical motif notes"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "rail-yard-ghost-in-the-control-room.controller_engineer.02",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/rail-yard-ghost-in-the-control-room/archivist.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=archivist",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "instruction": "Review public-domain source candidates and historical motif notes for Rail Yard Ghost in the Control Room; return rights/provenance notes and unresolved risks only.",
+            "must_not": [
+              "approve unclear rights",
+              "download copyrighted commercial recordings",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "track_summary": {
+              "duration_target": "4:48",
+              "key_center": "C dorian",
+              "max_for_live_focus": [
+                "aeroband_banjo_mapper",
+                "roll_probability_engine",
+                "call_response_router",
+                "chop_clock_guard",
+                "slide_phrase_sampler",
+                "root_motion_limiter",
+                "fill_trigger",
+                "house_grid_conductor",
+                "provenance_sampler",
+                "spatial_harmonic_field"
+              ],
+              "planned_daw_action_count": 21,
+              "source_candidate_count": 3,
+              "tempo_bpm": 94,
+              "title": "Rail Yard Ghost in the Control Room"
+            }
+          },
+          "role_id": "archivist",
+          "role_name": "Music Library Scientist",
+          "sequence": 1,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "rail-yard-ghost-in-the-control-room.archivist.01",
+          "tool_contract_ids": [
+            "validate_source_rights",
+            "render_worker_brief"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "inventory/live12-local-inventory.json",
+            "docs/live12-m4l-ci-cd.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/rail-yard-ghost-in-the-control-room/mutation-request.json"
+          },
+          "depends_on": [
+            "rail-yard-ghost-in-the-control-room.archivist.01"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "Max device contract updates",
+            "controller test notes"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "rail-yard-ghost-in-the-control-room.max_device_builder.03",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/rail-yard-ghost-in-the-control-room/controller_engineer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=controller_engineer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "instruction": "Map AeroBand banjo-controller performance constraints for Rail Yard Ghost in the Control Room; return controller and MIDI articulation proposals only.",
+            "must_not": [
+              "break live playability for theoretical complexity",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "track_summary": {
+              "duration_target": "4:48",
+              "key_center": "C dorian",
+              "max_for_live_focus": [
+                "aeroband_banjo_mapper",
+                "roll_probability_engine",
+                "call_response_router",
+                "chop_clock_guard",
+                "slide_phrase_sampler",
+                "root_motion_limiter",
+                "fill_trigger",
+                "house_grid_conductor",
+                "provenance_sampler",
+                "spatial_harmonic_field"
+              ],
+              "planned_daw_action_count": 21,
+              "source_candidate_count": 3,
+              "tempo_bpm": 94,
+              "title": "Rail Yard Ghost in the Control Room"
+            }
+          },
+          "role_id": "controller_engineer",
+          "role_name": "AeroBand Banjo Controller Engineer",
+          "sequence": 2,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "rail-yard-ghost-in-the-control-room.controller_engineer.02",
+          "tool_contract_ids": [
+            "read_inventory",
+            "propose_session_change",
+            "automate_daw_session"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/openai-production-orchestration.json",
+            "docs/live12-m4l-ci-cd.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/rail-yard-ghost-in-the-control-room/mutation-request.json"
+          },
+          "depends_on": [
+            "rail-yard-ghost-in-the-control-room.controller_engineer.02"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "reviewable .maxpat source or documented device prototype"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "rail-yard-ghost-in-the-control-room.arrangement_producer.04",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/rail-yard-ghost-in-the-control-room/max_device_builder.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=max_device_builder",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "instruction": "Translate Rail Yard Ghost in the Control Room device needs into Max for Live source-contract work items; return source-only patch notes and automation targets.",
+            "must_not": [
+              "commit binary .amxd without Git LFS and review",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "track_summary": {
+              "duration_target": "4:48",
+              "key_center": "C dorian",
+              "max_for_live_focus": [
+                "aeroband_banjo_mapper",
+                "roll_probability_engine",
+                "call_response_router",
+                "chop_clock_guard",
+                "slide_phrase_sampler",
+                "root_motion_limiter",
+                "fill_trigger",
+                "house_grid_conductor",
+                "provenance_sampler",
+                "spatial_harmonic_field"
+              ],
+              "planned_daw_action_count": 21,
+              "source_candidate_count": 3,
+              "tempo_bpm": 94,
+              "title": "Rail Yard Ghost in the Control Room"
+            }
+          },
+          "role_id": "max_device_builder",
+          "role_name": "Max for Live Device Builder",
+          "sequence": 3,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "rail-yard-ghost-in-the-control-room.max_device_builder.03",
+          "tool_contract_ids": [
+            "read_inventory",
+            "propose_session_change",
+            "automate_daw_session"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "compositions/down-tempo-punk-bluegrass-set.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "automation/live12-session-template.json",
+            "docs/production-system.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "live_set_mutation",
+            "private_audio_upload"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/rail-yard-ghost-in-the-control-room/mutation-request.json"
+          },
+          "depends_on": [
+            "rail-yard-ghost-in-the-control-room.max_device_builder.03"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "updated arrangement maps",
+            "session TODOs"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "rail-yard-ghost-in-the-control-room.mix_engineer.05",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/rail-yard-ghost-in-the-control-room/arrangement_producer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=arrangement_producer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "instruction": "Refine Rail Yard Ghost in the Control Room arrangement tension, hook density, and bluegrass/electronic/punk balance; return structured arrangement deltas.",
+            "must_not": [
+              "erase bluegrass instrumentation in favor of generic electronica",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "track_summary": {
+              "duration_target": "4:48",
+              "key_center": "C dorian",
+              "max_for_live_focus": [
+                "aeroband_banjo_mapper",
+                "roll_probability_engine",
+                "call_response_router",
+                "chop_clock_guard",
+                "slide_phrase_sampler",
+                "root_motion_limiter",
+                "fill_trigger",
+                "house_grid_conductor",
+                "provenance_sampler",
+                "spatial_harmonic_field"
+              ],
+              "planned_daw_action_count": 21,
+              "source_candidate_count": 3,
+              "tempo_bpm": 94,
+              "title": "Rail Yard Ghost in the Control Room"
+            }
+          },
+          "role_id": "arrangement_producer",
+          "role_name": "Arrangement Producer",
+          "sequence": 4,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "rail-yard-ghost-in-the-control-room.arrangement_producer.04",
+          "tool_contract_ids": [
+            "render_worker_brief",
+            "propose_session_change"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            "automation/live12-session-template.json",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "inventory/live12-local-inventory.json",
+            "docs/production-system.md",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "private_audio_upload",
+            "live_set_mutation",
+            "export_or_release"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/rail-yard-ghost-in-the-control-room/mutation-request.json"
+          },
+          "depends_on": [
+            "rail-yard-ghost-in-the-control-room.arrangement_producer.04"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "mix notes",
+            "render checklist",
+            "problem frequencies"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": "rail-yard-ghost-in-the-control-room.release_qa.06",
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/rail-yard-ghost-in-the-control-room/mix_engineer.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=mix_engineer",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "instruction": "Prepare Rail Yard Ghost in the Control Room mix translation and spatial review notes; return checklist items and problem-frequency hypotheses, not audio.",
+            "must_not": [
+              "log private vocal takes or unreleased lyrics without need",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "track_summary": {
+              "duration_target": "4:48",
+              "key_center": "C dorian",
+              "max_for_live_focus": [
+                "aeroband_banjo_mapper",
+                "roll_probability_engine",
+                "call_response_router",
+                "chop_clock_guard",
+                "slide_phrase_sampler",
+                "root_motion_limiter",
+                "fill_trigger",
+                "house_grid_conductor",
+                "provenance_sampler",
+                "spatial_harmonic_field"
+              ],
+              "planned_daw_action_count": 21,
+              "source_candidate_count": 3,
+              "tempo_bpm": 94,
+              "title": "Rail Yard Ghost in the Control Room"
+            }
+          },
+          "role_id": "mix_engineer",
+          "role_name": "Masterclass Audio Technician",
+          "sequence": 5,
+          "suggested_openai_surface": {
+            "id": "agents_sdk",
+            "name": "Agents SDK",
+            "use": "Coordinate role-specific production agents with handoffs, tool contracts, trace review, and approval boundaries."
+          },
+          "task_id": "rail-yard-ghost-in-the-control-room.mix_engineer.05",
+          "tool_contract_ids": [
+            "read_inventory",
+            "automate_daw_session",
+            "render_release_checklist"
+          ]
+        },
+        {
+          "allowed_repo_inputs": [
+            ".github/workflows/live12-foundation-ci.yml",
+            "automation/generated/live12-daw-action-plan.json",
+            "automation/generated/live12-daw-mutation-package.json",
+            "catalogs/library-installation-plan.json",
+            "catalogs/public-domain-bluegrass-sources.json",
+            "sources/public-domain/download-ledger.json",
+            "automation/generated/openai-worker-briefs.json",
+            "automation/generated/live12-daw-mutation-queue-runbook.json",
+            "automation/generated/public-domain-source-deck.json",
+            "compositions/generated/live12-track-build-plans.json"
+          ],
+          "approval_gate_ids": [
+            "source_download",
+            "vendor_account_action",
+            "purchase_or_license_change",
+            "export_or_release"
+          ],
+          "daw_context": {
+            "bundle_manifest_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/bundle-manifest.json",
+            "launch_plan_path": "output/daw-import-bundles/rail-yard-ghost-in-the-control-room/launch-plan.json",
+            "launch_requires_approval": true,
+            "request_path": "output/daw-mutations/rail-yard-ghost-in-the-control-room/mutation-request.json"
+          },
+          "depends_on": [
+            "rail-yard-ghost-in-the-control-room.mix_engineer.05"
+          ],
+          "execution_status": "not_started",
+          "expected_outputs": [
+            "release readiness report"
+          ],
+          "handoff_contract": {
+            "format": "structured_json_summary",
+            "must_include": [
+              "decisions",
+              "unresolved_risks",
+              "approval_gate_impacts",
+              "next_role_context"
+            ]
+          },
+          "handoff_to_task_id": null,
+          "local_output_policy": {
+            "content": "metadata_only_role_output",
+            "git_policy": "ignored_local_only",
+            "path": "output/openai-swarm/rail-yard-ghost-in-the-control-room/release_qa.json"
+          },
+          "prompt_packet": {
+            "brief_ref": "automation/generated/openai-worker-briefs.json#role_id=release_qa",
+            "daw_queue_ref": "automation/generated/live12-daw-mutation-queue-runbook.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "instruction": "Gate Rail Yard Ghost in the Control Room for provenance, CI, source credits, export readiness, and residual risk; return release blockers and required evidence.",
+            "must_not": [
+              "ship missing sample credits or failed CI",
+              "call OpenAI APIs from CI",
+              "include private rehearsal audio",
+              "include unreleased lyrics",
+              "read credentials, cookies, license files, or account artifacts",
+              "mutate Ableton Live, Max for Live, vendor accounts, exports, or releases without approval evidence"
+            ],
+            "mutation_job_ref": "automation/generated/live12-daw-mutation-package.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "source_deck_ref": "automation/generated/public-domain-source-deck.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "track_ref": "compositions/generated/live12-track-build-plans.json#track_slug=rail-yard-ghost-in-the-control-room",
+            "track_summary": {
+              "duration_target": "4:48",
+              "key_center": "C dorian",
+              "max_for_live_focus": [
+                "aeroband_banjo_mapper",
+                "roll_probability_engine",
+                "call_response_router",
+                "chop_clock_guard",
+                "slide_phrase_sampler",
+                "root_motion_limiter",
+                "fill_trigger",
+                "house_grid_conductor",
+                "provenance_sampler",
+                "spatial_harmonic_field"
+              ],
+              "planned_daw_action_count": 21,
+              "source_candidate_count": 3,
+              "tempo_bpm": 94,
+              "title": "Rail Yard Ghost in the Control Room"
+            }
+          },
+          "role_id": "release_qa",
+          "role_name": "Release and Provenance QA",
+          "sequence": 6,
+          "suggested_openai_surface": {
+            "id": "responses_api",
+            "name": "Responses API",
+            "use": "Generate structured arrangement proposals, worker briefs, source summaries, session patch plans, and release checklists from repository manifests."
+          },
+          "task_id": "rail-yard-ghost-in-the-control-room.release_qa.06",
+          "tool_contract_ids": [
+            "validate_source_rights",
+            "read_inventory",
+            "render_release_checklist"
+          ]
+        }
+      ],
+      "tempo_bpm": 94,
+      "track_slug": "rail-yard-ghost-in-the-control-room",
+      "track_title": "Rail Yard Ghost in the Control Room"
+    }
+  ]
+}

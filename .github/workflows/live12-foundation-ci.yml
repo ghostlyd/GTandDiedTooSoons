@@ -31,6 +31,12 @@ jobs:
           python3 scripts/render_openai_worker_briefs.py --stable --output /tmp/openai-worker-briefs.json
           diff -u automation/generated/openai-worker-briefs.json /tmp/openai-worker-briefs.json
 
+      - name: Verify generated OpenAI production swarm queue is in sync
+        run: |
+          python3 scripts/render_openai_production_swarm_queue.py --stable --output /tmp/openai-production-swarm-queue.json --markdown-output /tmp/openai-production-swarm-queue.md
+          diff -u automation/generated/openai-production-swarm-queue.json /tmp/openai-production-swarm-queue.json
+          diff -u docs/openai-production-swarm-queue.md /tmp/openai-production-swarm-queue.md
+
       - name: Verify generated composition sketches are in sync
         run: |
           rm -rf /tmp/composition-sketches
@@ -78,6 +84,9 @@ jobs:
       - name: Run Max for Live device contract probes
         run: python3 scripts/test_max_for_live_device_contracts.py
 
+      - name: Run OpenAI production swarm queue probes
+        run: python3 scripts/test_openai_production_swarm_queue.py
+
       - name: Run Live 12 DAW mutation preflight probes
         run: python3 scripts/test_live12_daw_mutation_preflight.py
 
@@ -109,6 +118,12 @@ jobs:
         run: |
           python3 scripts/render_openai_worker_briefs.py --stable --output /tmp/openai-worker-briefs.json
           diff -u automation/generated/openai-worker-briefs.json /tmp/openai-worker-briefs.json
+
+      - name: Verify generated OpenAI production swarm queue is in sync
+        run: |
+          python3 scripts/render_openai_production_swarm_queue.py --stable --output /tmp/openai-production-swarm-queue.json --markdown-output /tmp/openai-production-swarm-queue.md
+          diff -u automation/generated/openai-production-swarm-queue.json /tmp/openai-production-swarm-queue.json
+          diff -u docs/openai-production-swarm-queue.md /tmp/openai-production-swarm-queue.md
 
       - name: Verify generated composition sketches are in sync
         run: |
@@ -156,6 +171,9 @@ jobs:
 
       - name: Run Max for Live device contract probes
         run: python3 scripts/test_max_for_live_device_contracts.py
+
+      - name: Run OpenAI production swarm queue probes
+        run: python3 scripts/test_openai_production_swarm_queue.py
 
       - name: Run Live 12 DAW mutation preflight probes
         run: python3 scripts/test_live12_daw_mutation_preflight.py
