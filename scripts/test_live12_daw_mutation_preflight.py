@@ -15,6 +15,13 @@ ROOT = Path(__file__).resolve().parents[1]
 PYTHON = sys.executable
 TRACK_SLUG = "good-vibrations-in-a-burned-barn"
 TRACK_TITLE = "Good Vibrations in a Burned Barn"
+EXPECTED_TRACK_SLUGS = [
+    "good-vibrations-in-a-burned-barn",
+    "a-p-carter-in-the-warehouse",
+    "no-gods-no-masters-no-quantize",
+    "possum-kingdom-afterhours",
+    "the-ballad-of-the-broken-controller",
+]
 APPROVAL_REFERENCE = "operator-approved-live-set-mutation-001"
 ROLLBACK_REFERENCE = "local rollback copy verified outside git"
 
@@ -95,6 +102,53 @@ def main() -> int:
             print("Mutation package must include the muted source deck in affected track scope.", file=sys.stderr)
             return 1
         assert_no_sensitive_paths(package, "mutation package")
+
+        queue_result = run_command(
+            [
+                PYTHON,
+                "scripts/prepare_live12_daw_mutation_queue.py",
+                "--package",
+                str(package_path),
+                "--mutation-output-dir",
+                str(temp_root / "queue-preflight"),
+                "--bundle-output-dir",
+                str(temp_root / "queue-bundles"),
+                "--queue-output-dir",
+                str(temp_root / "queue"),
+                "--stable",
+            ]
+        )
+        if queue_result.returncode != 0:
+            print(queue_result.stdout, file=sys.stderr)
+            print(queue_result.stderr, file=sys.stderr)
+            return queue_result.returncode
+        queue_manifest_path = temp_root / "queue" / "queue-manifest.json"
+        if not queue_manifest_path.exists():
+            print("DAW mutation queue must write queue-manifest.json.", file=sys.stderr)
+            return 1
+        queue_manifest = load_json(queue_manifest_path)
+        if queue_manifest.get("execution_status") != "queued_not_launched":
+            print("DAW mutation queue must not claim Ableton was launched.", file=sys.stderr)
+            return 1
+        queue_tracks = queue_manifest.get("tracks", [])
+        if [track.get("track_slug") for track in queue_tracks] != EXPECTED_TRACK_SLUGS:
+            print("DAW mutation queue must preserve package track order.", file=sys.stderr)
+            return 1
+        expected_action_count = sum(job["mutation_action_count"] for job in jobs)
+        if queue_manifest.get("total_planned_action_count") != expected_action_count:
+            print("DAW mutation queue must summarize planned action count across all tracks.", file=sys.stderr)
+            return 1
+        for track in queue_tracks:
+            for key in ["request", "receipt_template", "bundle_manifest", "launch_plan", "operator_evidence_template", "staged_midi"]:
+                track_path = temp_root / track[key]["path"]
+                if not track_path.exists():
+                    print(f"DAW mutation queue missing staged artifact: {track_path}", file=sys.stderr)
+                    return 1
+            launch_plan = load_json(temp_root / track["launch_plan"]["path"])
+            if launch_plan.get("launch_status") != "blocked_until_confirm_live_mutation":
+                print("DAW mutation queue must keep each Ableton launch blocked.", file=sys.stderr)
+                return 1
+        assert_no_sensitive_paths(queue_manifest, "DAW mutation queue")
 
         output_dir = temp_root / "preflight"
         preflight_result = run_command(

@@ -21,7 +21,7 @@ GTandDiedTooSoons is a repeatable production framework for composing spatially a
 5. **Composition layer**: standalone track briefs in `compositions/down-tempo-punk-bluegrass-set.json`.
 6. **Generated sketch layer**: deterministic Live-import build plans and MIDI sketches in `compositions/generated/`, rendered by `scripts/render_composition_sketches.py`.
 7. **DAW action layer**: approval-gated local Ableton/Max for Live action queues in `automation/generated/live12-daw-action-plan.json`, rendered by `scripts/render_live12_daw_action_plan.py`.
-8. **DAW mutation layer**: local-only preflight jobs and receipt templates in `automation/generated/live12-daw-mutation-package.json`, prepared by `scripts/prepare_live12_daw_mutation.py` under ignored `output/daw-mutations/`.
+8. **DAW mutation layer**: local-only preflight jobs and receipt templates in `automation/generated/live12-daw-mutation-package.json`, batch-staged by `scripts/prepare_live12_daw_mutation_queue.py` under ignored `output/` folders.
 9. **CI layer**: repository checks in `.github/workflows/live12-foundation-ci.yml`.
 
 ## Security and Operational Controls
