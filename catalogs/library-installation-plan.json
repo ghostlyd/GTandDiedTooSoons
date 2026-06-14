@@ -3,7 +3,31 @@
   "generated_for": "GTandDiedTooSoons",
   "reviewed_on": "2026-06-14",
   "policy": "Install only through official Ableton, Arturia, or vendor account flows. Do not commit downloaded pack installers, samples, presets, plugins, or account artifacts.",
-  "automation_boundary": "This repository may inventory and verify installed libraries, but account-gated installs must be completed in Ableton Live, Arturia Software Center, or the vendor in-app store by an authorized user.",
+  "automation_boundary": "DAW/account automation is in scope when it uses official app, account, or in-app store surfaces operated from an authorized session and records only redacted receipts plus refreshed inventory metadata.",
+  "account_automation": {
+    "allowed": true,
+    "allowed_surfaces": [
+      "Ableton Live Browser > Packs",
+      "Ableton account downloads",
+      "Arturia Software Center",
+      "Arturia Sound Store",
+      "Analog Lab or Pigments in-app store"
+    ],
+    "requires_action_time_confirmation": [
+      "download or install click",
+      "account-gated action",
+      "purchase",
+      "license or entitlement change",
+      "privileged helper or OS password prompt",
+      "Live set mutation",
+      "export or publishing action"
+    ],
+    "must_not": [
+      "capture or persist credentials",
+      "bypass paywalls or vendor terms",
+      "commit installers, plugins, samples, presets, browser profiles, cookies, licenses, or account artifacts"
+    ]
+  },
   "items": [
     {
       "id": "ableton-drum-booth",
