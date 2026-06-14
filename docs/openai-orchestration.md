@@ -35,6 +35,7 @@ CI diffs the generated file against a stable render on both Ubuntu and macOS, so
 Generated DAW mutation packages are rendered to `automation/generated/live12-daw-mutation-package.json`:
 
 ```bash
+python3 scripts/render_max_for_live_device_contracts.py --stable
 python3 scripts/render_live12_daw_mutation_package.py --stable
 python3 scripts/prepare_live12_daw_mutation_queue.py --stable
 python3 scripts/prepare_live12_daw_mutation.py --track good-vibrations-in-a-burned-barn
@@ -43,7 +44,7 @@ python3 scripts/record_live12_daw_mutation_receipt.py --request output/daw-mutat
 python3 scripts/test_live12_daw_mutation_preflight.py
 ```
 
-They translate the approval-gated DAW action plan into a full-set local queue, per-track preflight jobs, ignored Ableton import bundles, and receipt templates under `output/`. This is the bridge for Ableton/Max work: prepare the queue, stage import bundles, approve each Live mutation, launch Live locally, then record operator evidence without committing DAW binaries or audio artifacts.
+They translate the source-only Max for Live device contracts and approval-gated DAW action plan into a full-set local queue, per-track preflight jobs, ignored Ableton import bundles, and receipt templates under `output/`. This is the bridge for Ableton/Max work: render `.maxpat` source blueprints, prepare the queue, stage import bundles, approve each Live mutation, launch Live locally, then record operator evidence without committing DAW binaries or audio artifacts.
 
 ## API Fit
 

@@ -1,0 +1,476 @@
+{
+  "artifact_policy": {
+    "allowed_source_extensions": [
+      ".json",
+      ".maxpat"
+    ],
+    "git_policy": "source_only_no_amxd",
+    "notes": [
+      "Commit reviewable Max patch source only.",
+      "Treat compiled Max for Live devices, Live sets, presets, samples, and renders as local or release artifacts.",
+      "Require a rollback copy and operator evidence before applying any device to a Live set."
+    ],
+    "prohibited_extensions": [
+      ".amxd",
+      ".als",
+      ".alp",
+      ".wav",
+      ".aiff",
+      ".flac",
+      ".mp3",
+      ".m4a",
+      ".ogg"
+    ]
+  },
+  "device_count": 10,
+  "devices": [
+    {
+      "alien_electronic_layer": false,
+      "approval_gate": "live_set_mutation",
+      "automation_targets_observed": [
+        "humanize_ms",
+        "pluck_decay",
+        "roll_density",
+        "velocity_curve"
+      ],
+      "device_class": "midi_effect",
+      "display_name": "AeroBand Banjo Mapper",
+      "id": "m4l.aeroband_banjo_mapper",
+      "implementation_hints": [
+        "Preserve the performer input channel and avoid destructive quantization.",
+        "Expose velocity and pluck controls as Live parameters for clip-envelope automation.",
+        "Keep the output MIDI-only until the downstream banjo instrument rack is selected locally."
+      ],
+      "layer_ids": [
+        "aeroband_banjo_lead"
+      ],
+      "macro_controls": [
+        "velocity_curve",
+        "roll_density",
+        "pluck_decay",
+        "humanize_ms"
+      ],
+      "performance_inputs": [
+        "AeroBand MIDI guitar/controller"
+      ],
+      "purpose": "Translate AeroBand MIDI guitar/controller input into banjo-like picking articulation, velocity shaping, and pluck envelope controls.",
+      "source_patch": "max-for-live/patches/m4l_aeroband_banjo_mapper.maxpat",
+      "source_patch_sha256": "abda9d08a3ff66426a3191bf83bfcd0487fffaf49f95c910050b208e0db1d815",
+      "target_tracks": [
+        "AeroBand Banjo Lead"
+      ],
+      "track_slugs": [
+        "a-p-carter-in-the-warehouse",
+        "good-vibrations-in-a-burned-barn",
+        "no-gods-no-masters-no-quantize",
+        "possum-kingdom-afterhours",
+        "the-ballad-of-the-broken-controller"
+      ],
+      "traditional_bluegrass_layer": true
+    },
+    {
+      "alien_electronic_layer": false,
+      "approval_gate": "live_set_mutation",
+      "automation_targets_observed": [
+        "humanize_ms",
+        "pluck_decay",
+        "roll_density",
+        "velocity_curve"
+      ],
+      "device_class": "midi_effect",
+      "display_name": "Roll Probability Engine",
+      "id": "m4l.roll_probability_engine",
+      "implementation_hints": [
+        "Use deterministic seeds in test mode and bounded randomness in performance mode.",
+        "Never emit unbounded note storms.",
+        "Keep probability changes auditable as macro automation."
+      ],
+      "layer_ids": [
+        "aeroband_banjo_lead"
+      ],
+      "macro_controls": [
+        "roll_density",
+        "humanize_ms",
+        "velocity_curve",
+        "pluck_decay"
+      ],
+      "performance_inputs": [
+        "AeroBand MIDI guitar/controller"
+      ],
+      "purpose": "Vary banjo roll density and timing within bounded musical ranges while preserving bluegrass forward-roll identity.",
+      "source_patch": "max-for-live/patches/m4l_roll_probability_engine.maxpat",
+      "source_patch_sha256": "a242603c309ca24f3537353eb1c1d1f194536feb92f9ca1b8d1fd878b69a8cf7",
+      "target_tracks": [
+        "AeroBand Banjo Lead"
+      ],
+      "track_slugs": [
+        "a-p-carter-in-the-warehouse",
+        "good-vibrations-in-a-burned-barn",
+        "no-gods-no-masters-no-quantize",
+        "possum-kingdom-afterhours",
+        "the-ballad-of-the-broken-controller"
+      ],
+      "traditional_bluegrass_layer": true
+    },
+    {
+      "alien_electronic_layer": true,
+      "approval_gate": "live_set_mutation",
+      "automation_targets_observed": [
+        "boom_chuck_balance",
+        "bow_noise",
+        "downstroke_bias",
+        "room_send",
+        "send_spatial",
+        "strum_velocity",
+        "vibrato_depth"
+      ],
+      "device_class": "midi_effect",
+      "display_name": "Call Response Router",
+      "id": "m4l.call_response_router",
+      "implementation_hints": [
+        "Keep routing deterministic by scene and clip region.",
+        "Expose response probability and send depth as Live automation targets.",
+        "Avoid routing private or unapproved source audio."
+      ],
+      "layer_ids": [
+        "acoustic_guitar_boom_chuck",
+        "fiddle_hybrid_strings"
+      ],
+      "macro_controls": [
+        "bow_noise",
+        "vibrato_depth",
+        "send_spatial",
+        "boom_chuck_balance",
+        "downstroke_bias",
+        "room_send",
+        "strum_velocity"
+      ],
+      "performance_inputs": [
+        "MIDI clips or performed parts",
+        "MIDI clips or performed strums"
+      ],
+      "purpose": "Route fiddle, guitar, and hybrid string phrases into controlled call-and-response gestures across sections.",
+      "source_patch": "max-for-live/patches/m4l_call_response_router.maxpat",
+      "source_patch_sha256": "86c0f819c2e6b9eddb76376734c44a223f10e42626d9a47a501d0f254dc599c6",
+      "target_tracks": [
+        "Acoustic Guitar Boom-Chuck",
+        "Fiddle / Hybrid Strings"
+      ],
+      "track_slugs": [
+        "a-p-carter-in-the-warehouse",
+        "good-vibrations-in-a-burned-barn",
+        "no-gods-no-masters-no-quantize",
+        "possum-kingdom-afterhours",
+        "the-ballad-of-the-broken-controller"
+      ],
+      "traditional_bluegrass_layer": true
+    },
+    {
+      "alien_electronic_layer": false,
+      "approval_gate": "live_set_mutation",
+      "automation_targets_observed": [
+        "boom_chuck_balance",
+        "chop_gate",
+        "downstroke_bias",
+        "ghost_note_probability",
+        "room_send",
+        "strum_velocity"
+      ],
+      "device_class": "midi_effect",
+      "display_name": "Chop Clock Guard",
+      "id": "m4l.chop_clock_guard",
+      "implementation_hints": [
+        "Guard against accidental double triggers.",
+        "Expose swing and ghost-note probability as safe bounded controls.",
+        "Use Live tempo and scene position rather than a private external clock."
+      ],
+      "layer_ids": [
+        "acoustic_guitar_boom_chuck",
+        "mandolin_chop"
+      ],
+      "macro_controls": [
+        "chop_gate",
+        "ghost_note_probability",
+        "boom_chuck_balance",
+        "downstroke_bias",
+        "room_send",
+        "strum_velocity"
+      ],
+      "performance_inputs": [
+        "MIDI clips",
+        "MIDI clips or performed strums"
+      ],
+      "purpose": "Constrain mandolin and boom-chuck guitar chops to the intended rhythmic grid while retaining human offbeat push.",
+      "source_patch": "max-for-live/patches/m4l_chop_clock_guard.maxpat",
+      "source_patch_sha256": "5d0d495556538c993db5c4670e02a1c6019dda8e07639c0efd2e80cbff1b976f",
+      "target_tracks": [
+        "Acoustic Guitar Boom-Chuck",
+        "Mandolin Chop"
+      ],
+      "track_slugs": [
+        "a-p-carter-in-the-warehouse",
+        "good-vibrations-in-a-burned-barn",
+        "no-gods-no-masters-no-quantize",
+        "possum-kingdom-afterhours",
+        "the-ballad-of-the-broken-controller"
+      ],
+      "traditional_bluegrass_layer": true
+    },
+    {
+      "alien_electronic_layer": true,
+      "approval_gate": "live_set_mutation",
+      "automation_targets_observed": [
+        "feedback",
+        "glide_time",
+        "spectral_tilt"
+      ],
+      "device_class": "audio_effect",
+      "display_name": "Slide Phrase Sampler",
+      "id": "m4l.slide_phrase_sampler",
+      "implementation_hints": [
+        "Reference only the host track signal.",
+        "Keep feedback bounded to prevent runaway gain.",
+        "Do not bundle samples, presets, or commercial content."
+      ],
+      "layer_ids": [
+        "dobro_metallic_slide"
+      ],
+      "macro_controls": [
+        "glide_time",
+        "feedback",
+        "spectral_tilt"
+      ],
+      "performance_inputs": [
+        "MIDI or audio"
+      ],
+      "purpose": "Shape dobro and metallic slide gestures into spectral repeats without embedding source audio in the device.",
+      "source_patch": "max-for-live/patches/m4l_slide_phrase_sampler.maxpat",
+      "source_patch_sha256": "3d520438056405dd047c88a0348f9e1f003a9b4e1513e087739580b020746cf8",
+      "target_tracks": [
+        "Dobro / Metallic Slide"
+      ],
+      "track_slugs": [
+        "a-p-carter-in-the-warehouse",
+        "good-vibrations-in-a-burned-barn",
+        "no-gods-no-masters-no-quantize",
+        "possum-kingdom-afterhours",
+        "the-ballad-of-the-broken-controller"
+      ],
+      "traditional_bluegrass_layer": true
+    },
+    {
+      "alien_electronic_layer": true,
+      "approval_gate": "live_set_mutation",
+      "automation_targets_observed": [
+        "note_length",
+        "sidechain_depth",
+        "sub_blend"
+      ],
+      "device_class": "midi_effect",
+      "display_name": "Root Motion Limiter",
+      "id": "m4l.root_motion_limiter",
+      "implementation_hints": [
+        "Constrain generated pitch output to approved scale tones.",
+        "Expose sub blend and note length as automation-safe macros.",
+        "Avoid writing audio or sidechain renders to the repository."
+      ],
+      "layer_ids": [
+        "upright_bass_sub"
+      ],
+      "macro_controls": [
+        "sub_blend",
+        "sidechain_depth",
+        "note_length"
+      ],
+      "performance_inputs": [
+        "MIDI"
+      ],
+      "purpose": "Keep upright bass and sub movement anchored to the track key center while allowing house-style sidechain and note-length control.",
+      "source_patch": "max-for-live/patches/m4l_root_motion_limiter.maxpat",
+      "source_patch_sha256": "ccb7853700e0b607a184f346ece4a9f7b769c6d3d3a7a7c167e6d820fd20fbdb",
+      "target_tracks": [
+        "Upright Bass / Sub"
+      ],
+      "track_slugs": [
+        "a-p-carter-in-the-warehouse",
+        "good-vibrations-in-a-burned-barn",
+        "no-gods-no-masters-no-quantize",
+        "possum-kingdom-afterhours",
+        "the-ballad-of-the-broken-controller"
+      ],
+      "traditional_bluegrass_layer": true
+    },
+    {
+      "alien_electronic_layer": false,
+      "approval_gate": "live_set_mutation",
+      "automation_targets_observed": [
+        "fill_probability",
+        "parallel_drive",
+        "room_send"
+      ],
+      "device_class": "midi_effect",
+      "display_name": "Fill Trigger",
+      "id": "m4l.fill_trigger",
+      "implementation_hints": [
+        "Prefer scene and bar-position conditions over free-running randomness.",
+        "Cap fill density to protect arrangement clarity.",
+        "Keep the output MIDI-only until Live drum devices are selected locally."
+      ],
+      "layer_ids": [
+        "punk_kit"
+      ],
+      "macro_controls": [
+        "fill_probability",
+        "parallel_drive",
+        "room_send"
+      ],
+      "performance_inputs": [
+        "MIDI clips or pads"
+      ],
+      "purpose": "Trigger punk drum fills at section boundaries with bounded probability and parallel-crush coordination.",
+      "source_patch": "max-for-live/patches/m4l_fill_trigger.maxpat",
+      "source_patch_sha256": "5616ddf6ef86d056a28a3cf680cd6182507836464b1398d2ac7a583abdd67b15",
+      "target_tracks": [
+        "Punk Kit"
+      ],
+      "track_slugs": [
+        "a-p-carter-in-the-warehouse",
+        "good-vibrations-in-a-burned-barn",
+        "no-gods-no-masters-no-quantize",
+        "possum-kingdom-afterhours",
+        "the-ballad-of-the-broken-controller"
+      ],
+      "traditional_bluegrass_layer": false
+    },
+    {
+      "alien_electronic_layer": true,
+      "approval_gate": "live_set_mutation",
+      "automation_targets_observed": [
+        "accent",
+        "filter_cutoff",
+        "swing_amount"
+      ],
+      "device_class": "midi_effect",
+      "display_name": "House Grid Conductor",
+      "id": "m4l.house_grid_conductor",
+      "implementation_hints": [
+        "Use Live transport timing as the authority.",
+        "Expose accent and filter controls as automation-safe parameters.",
+        "Keep generated MIDI bounded to the selected scene length."
+      ],
+      "layer_ids": [
+        "deep_house_machines"
+      ],
+      "macro_controls": [
+        "swing_amount",
+        "filter_cutoff",
+        "accent"
+      ],
+      "performance_inputs": [
+        "MIDI clips and sequencers"
+      ],
+      "purpose": "Coordinate deep-house machine accents, swing, and filter motion against the bluegrass pulse.",
+      "source_patch": "max-for-live/patches/m4l_house_grid_conductor.maxpat",
+      "source_patch_sha256": "d31e9f188fd7d020400387aeb4a449bc2f142c1ae140c467fbada364f8100b28",
+      "target_tracks": [
+        "Deep House Machines"
+      ],
+      "track_slugs": [
+        "a-p-carter-in-the-warehouse",
+        "good-vibrations-in-a-burned-barn",
+        "no-gods-no-masters-no-quantize",
+        "possum-kingdom-afterhours",
+        "the-ballad-of-the-broken-controller"
+      ],
+      "traditional_bluegrass_layer": false
+    },
+    {
+      "alien_electronic_layer": false,
+      "approval_gate": "live_set_mutation",
+      "automation_targets_observed": [],
+      "device_class": "audio_effect",
+      "display_name": "Provenance Sampler",
+      "id": "m4l.provenance_sampler",
+      "implementation_hints": [
+        "Require rights metadata before enabling source playback.",
+        "Keep source file references local and redacted from Git.",
+        "Expose a visible provenance hold control for operator review."
+      ],
+      "layer_ids": [],
+      "macro_controls": [
+        "source_gate",
+        "slice_density",
+        "provenance_hold"
+      ],
+      "performance_inputs": [
+        "Rights-cleared samples only"
+      ],
+      "purpose": "Gate and document public-domain source deck usage without storing raw source audio or rights-uncertain material in the patch.",
+      "source_patch": "max-for-live/patches/m4l_provenance_sampler.maxpat",
+      "source_patch_sha256": "621c4225e704c710e86c0c66f729928cd3cfd4eda1f578a554de5906f8fdfb11",
+      "target_tracks": [
+        "Public Domain Source Deck"
+      ],
+      "track_slugs": [],
+      "traditional_bluegrass_layer": false
+    },
+    {
+      "alien_electronic_layer": true,
+      "approval_gate": "live_set_mutation",
+      "automation_targets_observed": [
+        "azimuth",
+        "freeze",
+        "grain_density",
+        "width"
+      ],
+      "device_class": "audio_effect",
+      "display_name": "Spatial Harmonic Field",
+      "id": "m4l.spatial_harmonic_field",
+      "implementation_hints": [
+        "Keep freeze buffers local to Live runtime.",
+        "Bound width and azimuth changes to avoid unsafe monitoring surprises.",
+        "Avoid committing rendered spatial audio or device binaries."
+      ],
+      "layer_ids": [
+        "alien_sky"
+      ],
+      "macro_controls": [
+        "grain_density",
+        "freeze",
+        "width",
+        "azimuth"
+      ],
+      "performance_inputs": [
+        "Resampled project audio"
+      ],
+      "purpose": "Create alien spatial bloom from project audio using bounded width, azimuth, freeze, and grain-density controls.",
+      "source_patch": "max-for-live/patches/m4l_spatial_harmonic_field.maxpat",
+      "source_patch_sha256": "5c9524ebced6b61c5d95a8963999aef9b4d6b8520525765c30bced3310ad90f1",
+      "target_tracks": [
+        "Alien Sky"
+      ],
+      "track_slugs": [
+        "a-p-carter-in-the-warehouse",
+        "good-vibrations-in-a-burned-barn",
+        "no-gods-no-masters-no-quantize",
+        "possum-kingdom-afterhours",
+        "the-ballad-of-the-broken-controller"
+      ],
+      "traditional_bluegrass_layer": false
+    }
+  ],
+  "generated_at": "1970-01-01T00:00:00Z",
+  "generator": "scripts/render_max_for_live_device_contracts.py",
+  "purpose": "Source-only Max for Live device blueprints for the Live 12 downtempo punk-bluegrass production system.",
+  "schema_version": 1,
+  "source_file_sha256": {
+    "automation/live12-session-template.json": "f17640bd3d24a4f6953836393c3286a45c7ba9c9064399590611dac566c76c51",
+    "automation/max-for-live-device-contracts.json": "e057cd7e9931b678b0785ab1857aeeff2e2e100d38bc0aa4657c3042c5d467c3",
+    "compositions/generated/live12-track-build-plans.json": "4f08ba22b55b0c61a9fd688e353a97ca4caa6de74f52e6d89d339ae2b9ac2498"
+  },
+  "source_files": [
+    "automation/max-for-live-device-contracts.json",
+    "automation/live12-session-template.json",
+    "compositions/generated/live12-track-build-plans.json"
+  ]
+}

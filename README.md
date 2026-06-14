@@ -16,9 +16,11 @@ The repo intentionally tracks process, manifests, device contracts, session temp
 ```bash
 python3 scripts/render_composition_sketches.py --stable
 python3 scripts/render_openai_worker_briefs.py --stable
+python3 scripts/render_max_for_live_device_contracts.py --stable
 python3 scripts/render_live12_daw_action_plan.py --stable
 python3 scripts/render_live12_daw_mutation_package.py --stable
 python3 scripts/validate_repo.py
+python3 scripts/test_max_for_live_device_contracts.py
 python3 scripts/test_live12_daw_mutation_preflight.py
 python3 scripts/inventory_live_suite.py
 ```
@@ -36,9 +38,12 @@ Generated local inventory lands in `inventory/live12-local-inventory.json` and `
 - `automation/openai-production-orchestration.json` - OpenAI, account automation, DAW automation, and approval-gate contract.
 - `automation/live12-session-template.json` - repeatable Live set structure.
 - `automation/worker-chain.json` - division-of-labor chain for production automation.
+- `automation/max-for-live-device-contracts.json` - source definitions for reviewable Max for Live device blueprints.
 - `automation/generated/openai-worker-briefs.json` - generated role briefs for OpenAI-assisted production workers.
+- `automation/generated/max-for-live-device-contracts.json` - generated source-only Max for Live contract bundle with `.maxpat` patch hashes.
 - `automation/generated/live12-daw-action-plan.json` - generated approval-gated Ableton Live 12 / Max for Live action queue for local session building.
 - `automation/generated/live12-daw-mutation-package.json` - generated local-only preflight package for approved Live 12 / Max for Live session mutations and receipts.
+- `max-for-live/patches/*.maxpat` - reviewable Max patch source blueprints, not compiled `.amxd` devices.
 - `compositions/down-tempo-punk-bluegrass-set.json` - initial standalone track briefs.
 - `compositions/generated/live12-track-build-plans.json` - generated Live-import plan with MIDI hashes and device targets.
 - `compositions/generated/midi/*.mid` - deterministic MIDI sketches for importing each standalone track into Live.

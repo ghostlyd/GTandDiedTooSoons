@@ -10,8 +10,10 @@ GitHub-hosted runners do not include Ableton Live, Max for Live, Arturia Softwar
 - Exercise local inventory code in dry-run mode.
 - Ensure public-domain source entries include rights metadata.
 - Regenerate OpenAI worker briefs and composition MIDI sketches in stable mode, then diff them against committed generated artifacts.
+- Regenerate Max for Live device contracts and `.maxpat` source blueprints in stable mode, then diff them against committed generated artifacts.
 - Regenerate the Live 12 / Max for Live DAW action plan in stable mode, then diff it against the committed generated artifact.
 - Regenerate the Live 12 / Max for Live DAW mutation package in stable mode, then diff it against the committed generated artifact.
+- Run Max for Live source contract probes without compiling `.amxd` devices.
 - Run local DAW mutation preflight probes without opening Ableton or writing `.als`/`.amxd` files.
 
 ## Local Gates
@@ -20,8 +22,10 @@ Run before committing production changes:
 
 ```bash
 python3 scripts/validate_repo.py
+python3 scripts/render_max_for_live_device_contracts.py --stable
 python3 scripts/render_live12_daw_action_plan.py --stable
 python3 scripts/render_live12_daw_mutation_package.py --stable
+python3 scripts/test_max_for_live_device_contracts.py
 python3 scripts/test_live12_daw_mutation_preflight.py
 python3 scripts/inventory_live_suite.py
 ```
@@ -39,6 +43,8 @@ For future Max device work:
 | --- | --- |
 | `automation/live12-session-template.json` | Canonical track layout, routing, devices, sends, and performance controls. |
 | `automation/worker-chain.json` | Agent/worker responsibilities for arrangement, sound design, source research, mix review, and release QA. |
+| `automation/generated/max-for-live-device-contracts.json` | Source-only Max for Live contract bundle and `.maxpat` patch hashes for every session device contract. |
+| `max-for-live/patches/*.maxpat` | Reviewable Max patch source blueprints; compile locally only after approval and rollback evidence. |
 | `automation/generated/live12-daw-action-plan.json` | Approval-gated action queue for building generated tracks locally in Live 12 without committing `.als`, `.amxd`, samples, renders, credentials, or account artifacts. |
 | `automation/generated/live12-daw-mutation-package.json` | Local-only preflight jobs, affected-track scope, blocked export/release groups, and receipt contract for approved Live 12 / Max for Live mutations. |
 | `compositions/generated/live12-track-build-plans.json` | Human-readable import map, device targets, MIDI hashes, and safety constraints for each standalone track. |
