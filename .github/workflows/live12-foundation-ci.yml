@@ -54,6 +54,12 @@ jobs:
           diff -u automation/generated/max-for-live-device-contracts.json /tmp/max-for-live-device-contracts.json
           diff -ru max-for-live/patches /tmp/max-for-live-patches
 
+      - name: Verify generated Live 12 DAW mutation runbook is in sync
+        run: |
+          python3 scripts/render_live12_daw_mutation_runbook.py --stable --output /tmp/live12-daw-mutation-runbook.json --markdown-output /tmp/live12-daw-mutation-runbook.md
+          diff -u automation/generated/live12-daw-mutation-runbook.json /tmp/live12-daw-mutation-runbook.json
+          diff -u docs/live12-daw-mutation-runbook.md /tmp/live12-daw-mutation-runbook.md
+
       - name: Validate manifests, provenance policy, and binary hygiene
         run: python3 scripts/validate_repo.py
 
@@ -62,6 +68,9 @@ jobs:
 
       - name: Run Live 12 DAW mutation preflight probes
         run: python3 scripts/test_live12_daw_mutation_preflight.py
+
+      - name: Run Live 12 DAW mutation runbook probes
+        run: python3 scripts/test_live12_daw_mutation_runbook.py
 
       - name: Exercise inventory script in dry-run mode
         run: python3 scripts/inventory_live_suite.py --dry-run --output inventory/live12-local-inventory.json
@@ -106,6 +115,12 @@ jobs:
           diff -u automation/generated/max-for-live-device-contracts.json /tmp/max-for-live-device-contracts.json
           diff -ru max-for-live/patches /tmp/max-for-live-patches
 
+      - name: Verify generated Live 12 DAW mutation runbook is in sync
+        run: |
+          python3 scripts/render_live12_daw_mutation_runbook.py --stable --output /tmp/live12-daw-mutation-runbook.json --markdown-output /tmp/live12-daw-mutation-runbook.md
+          diff -u automation/generated/live12-daw-mutation-runbook.json /tmp/live12-daw-mutation-runbook.json
+          diff -u docs/live12-daw-mutation-runbook.md /tmp/live12-daw-mutation-runbook.md
+
       - name: Validate repository on macOS
         run: python3 scripts/validate_repo.py
 
@@ -114,6 +129,9 @@ jobs:
 
       - name: Run Live 12 DAW mutation preflight probes
         run: python3 scripts/test_live12_daw_mutation_preflight.py
+
+      - name: Run Live 12 DAW mutation runbook probes
+        run: python3 scripts/test_live12_daw_mutation_runbook.py
 
       - name: Generate non-sensitive host inventory snapshot
         run: python3 scripts/inventory_live_suite.py --dry-run
