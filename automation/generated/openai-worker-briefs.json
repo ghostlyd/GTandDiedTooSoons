@@ -765,9 +765,9 @@
       },
       "arturia": {
         "application_count": 56,
-        "preset_product_folder_count": 0,
-        "resource_product_count": 0,
-        "sample_product_folder_count": 0
+        "preset_product_folder_count": 98,
+        "resource_product_count": 94,
+        "sample_product_folder_count": 24
       }
     },
     "library_installation": {

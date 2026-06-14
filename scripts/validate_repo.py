@@ -64,6 +64,8 @@ SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 LEDGER_CATALOG_MIRRORED_FIELDS = ["name", "source_url", "rights_status", "credit_line", "browser_evidence", "rights_evidence"]
 PACK_VENDORS = {"Ableton", "Arturia"}
 PACK_PRIORITIES = {"high", "medium", "low"}
+INVENTORY_SCHEMA_VERSION = 1
+LIVE_DATABASE_READ_STATUSES = {"ok", "degraded"}
 RECOMMENDED_PACK_STATUSES = {
     "observed_local",
     "installed",
@@ -188,6 +190,69 @@ def load_json(path: Path, errors: list[str]) -> dict:
     except Exception as exc:  # noqa: BLE001 - validator should report any parse/read problem.
         fail(errors, f"{path}: {exc}")
         return {}
+
+
+def as_dict(value: object) -> dict:
+    return value if isinstance(value, dict) else {}
+
+
+def as_list(value: object) -> list:
+    return value if isinstance(value, list) else []
+
+
+def require_dict(value: object, label: str, errors: list[str]) -> dict:
+    if not isinstance(value, dict):
+        fail(errors, f"{label} must be an object")
+        return {}
+    return value
+
+
+def require_list(value: object, label: str, errors: list[str]) -> list:
+    if not isinstance(value, list):
+        fail(errors, f"{label} must be a list")
+        return []
+    return value
+
+
+def require_non_empty_string(value: object, label: str, errors: list[str]) -> None:
+    if not isinstance(value, str) or not value:
+        fail(errors, f"{label} must be a non-empty string")
+
+
+def require_optional_string(value: object, label: str, errors: list[str]) -> None:
+    if value is not None and not isinstance(value, str):
+        fail(errors, f"{label} must be a string or null")
+
+
+def require_bool(value: object, label: str, errors: list[str]) -> None:
+    if not isinstance(value, bool):
+        fail(errors, f"{label} must be a boolean")
+
+
+def validate_string_items(values: list, label: str, errors: list[str]) -> None:
+    for index, item in enumerate(values):
+        if not isinstance(item, str) or not item:
+            fail(errors, f"{label}[{index}] must be a non-empty string")
+
+
+def validate_named_path_items(values: list, label: str, errors: list[str]) -> None:
+    for index, item in enumerate(values):
+        if not isinstance(item, dict):
+            fail(errors, f"{label}[{index}] must be an object")
+            continue
+        for field in ["name", "path"]:
+            require_non_empty_string(item.get(field), f"{label}[{index}].{field}", errors)
+
+
+def validate_plugin_root_items(values: list, label: str, errors: list[str]) -> None:
+    for index, item in enumerate(values):
+        if not isinstance(item, dict):
+            fail(errors, f"{label}[{index}] must be an object")
+            continue
+        require_non_empty_string(item.get("path"), f"{label}[{index}].path", errors)
+        require_bool(item.get("exists"), f"{label}[{index}].exists", errors)
+        arturia_plugins = require_list(item.get("arturia_plugins"), f"{label}[{index}].arturia_plugins", errors)
+        validate_string_items(arturia_plugins, f"{label}[{index}].arturia_plugins", errors)
 
 
 def sha256_file(path: Path) -> str:
@@ -444,6 +509,82 @@ def validate_json_contracts(root: Path, errors: list[str]) -> None:
             fail(errors, f"{rel}: expected schema_version 1")
 
 
+def validate_inventory_snapshot(root: Path, errors: list[str]) -> None:
+    data = require_dict(
+        load_json(root / "inventory/live12-local-inventory.json", errors),
+        "inventory/live12-local-inventory.json",
+        errors,
+    )
+    schema_version = data.get("schema_version")
+    if isinstance(schema_version, bool) or not isinstance(schema_version, int) or schema_version != INVENTORY_SCHEMA_VERSION:
+        fail(errors, "inventory/live12-local-inventory.json: expected schema_version 1")
+
+    ableton = require_dict(data.get("ableton"), "inventory.ableton", errors)
+    arturia = require_dict(data.get("arturia"), "inventory.arturia", errors)
+    plugins = require_dict(data.get("plugins"), "inventory.plugins", errors)
+
+    ableton_app = require_dict(ableton.get("app"), "inventory.ableton.app", errors)
+    require_non_empty_string(ableton_app.get("name"), "inventory.ableton.app.name", errors)
+    require_non_empty_string(ableton_app.get("path"), "inventory.ableton.app.path", errors)
+    require_bool(ableton_app.get("exists"), "inventory.ableton.app.exists", errors)
+    if "version" not in ableton_app:
+        fail(errors, "inventory.ableton.app missing version")
+    else:
+        require_optional_string(ableton_app.get("version"), "inventory.ableton.app.version", errors)
+
+    validate_named_path_items(
+        require_list(ableton.get("factory_packs"), "inventory.ableton.factory_packs", errors),
+        "inventory.ableton.factory_packs",
+        errors,
+    )
+    live_database = require_dict(ableton.get("live_database"), "inventory.ableton.live_database", errors)
+    for field in ["installed_pack_places", "indexed_pack_candidates", "available_not_installed", "read_errors"]:
+        validate_string_items(
+            require_list(live_database.get(field), f"inventory.ableton.live_database.{field}", errors),
+            f"inventory.ableton.live_database.{field}",
+            errors,
+        )
+    for field in ["file_database", "file_database_exists", "read_status"]:
+        if field not in live_database:
+            fail(errors, f"inventory.ableton.live_database missing {field}")
+    require_non_empty_string(live_database.get("file_database"), "inventory.ableton.live_database.file_database", errors)
+    require_bool(live_database.get("file_database_exists"), "inventory.ableton.live_database.file_database_exists", errors)
+    require_non_empty_string(live_database.get("read_status"), "inventory.ableton.live_database.read_status", errors)
+    if live_database.get("read_status") not in LIVE_DATABASE_READ_STATUSES:
+        fail(errors, f"inventory.ableton.live_database.read_status is unsupported: {live_database.get('read_status')}")
+
+    validate_named_path_items(
+        require_list(arturia.get("applications"), "inventory.arturia.applications", errors),
+        "inventory.arturia.applications",
+        errors,
+    )
+    resources = require_dict(arturia.get("resources"), "inventory.arturia.resources", errors)
+    for field in ["products", "preset_products", "sample_products"]:
+        validate_string_items(
+            require_list(resources.get(field), f"inventory.arturia.resources.{field}", errors),
+            f"inventory.arturia.resources.{field}",
+            errors,
+        )
+    for field in ["resource_root", "resource_root_exists", "preset_root", "sample_root"]:
+        if field not in resources:
+            fail(errors, f"inventory.arturia.resources missing {field}")
+    require_non_empty_string(resources.get("resource_root"), "inventory.arturia.resources.resource_root", errors)
+    require_bool(resources.get("resource_root_exists"), "inventory.arturia.resources.resource_root_exists", errors)
+    require_non_empty_string(resources.get("preset_root"), "inventory.arturia.resources.preset_root", errors)
+    require_non_empty_string(resources.get("sample_root"), "inventory.arturia.resources.sample_root", errors)
+
+    validate_plugin_root_items(
+        require_list(plugins.get("vst3_roots"), "inventory.plugins.vst3_roots", errors),
+        "inventory.plugins.vst3_roots",
+        errors,
+    )
+    validate_plugin_root_items(
+        require_list(plugins.get("audio_unit_roots"), "inventory.plugins.audio_unit_roots", errors),
+        "inventory.plugins.audio_unit_roots",
+        errors,
+    )
+
+
 def validate_openai_orchestration(root: Path, errors: list[str]) -> None:
     data = load_json(root / "automation/openai-production-orchestration.json", errors)
     if not data:
@@ -553,6 +694,7 @@ def validate_generated_worker_briefs(root: Path, errors: list[str]) -> None:
     data = load_json(root / "automation/generated/openai-worker-briefs.json", errors)
     orchestration = load_json(root / "automation/openai-production-orchestration.json", errors)
     worker_chain = load_json(root / "automation/worker-chain.json", errors)
+    inventory = as_dict(load_json(root / "inventory/live12-local-inventory.json", errors))
     if not data or not worker_chain:
         return
 
@@ -564,6 +706,41 @@ def validate_generated_worker_briefs(root: Path, errors: list[str]) -> None:
             fail(errors, f"Generated OpenAI worker brief source file is invalid: {source_file}")
     if data.get("generator") != "scripts/render_openai_worker_briefs.py":
         fail(errors, "Generated OpenAI worker briefs must name scripts/render_openai_worker_briefs.py as generator")
+
+    project_context = require_dict(data.get("project_context"), "Generated OpenAI worker briefs project_context", errors)
+    inventory_summary = require_dict(
+        project_context.get("inventory_summary"),
+        "Generated OpenAI worker briefs inventory_summary",
+        errors,
+    )
+    ableton = as_dict(inventory.get("ableton"))
+    live_database = as_dict(ableton.get("live_database"))
+    factory_packs = as_list(ableton.get("factory_packs"))
+    ableton_app = as_dict(ableton.get("app"))
+    arturia = as_dict(inventory.get("arturia"))
+    arturia_resources = as_dict(arturia.get("resources"))
+    expected_inventory_summary = {
+        "ableton_live": {
+            "exists": ableton_app.get("exists", False),
+            "name": ableton_app.get("name"),
+            "version": ableton_app.get("version"),
+            "factory_pack_count": len(factory_packs),
+            "installed_factory_packs": [
+                item.get("name") for item in factory_packs if isinstance(item, dict) and item.get("name")
+            ],
+            "indexed_pack_candidate_count": len(as_list(live_database.get("indexed_pack_candidates"))),
+            "available_not_installed_count": len(as_list(live_database.get("available_not_installed"))),
+            "live_database_read_status": live_database.get("read_status", "unknown"),
+        },
+        "arturia": {
+            "application_count": len(as_list(arturia.get("applications"))),
+            "resource_product_count": len(as_list(arturia_resources.get("products"))),
+            "preset_product_folder_count": len(as_list(arturia_resources.get("preset_products"))),
+            "sample_product_folder_count": len(as_list(arturia_resources.get("sample_products"))),
+        },
+    }
+    if inventory_summary != expected_inventory_summary:
+        fail(errors, "Generated OpenAI worker briefs inventory_summary must match inventory/live12-local-inventory.json")
 
     role_ids = [role.get("id") for role in worker_chain.get("roles", [])]
     brief_ids = [brief.get("role_id") for brief in data.get("briefs", [])]
@@ -881,6 +1058,7 @@ def main() -> int:
     validate_sources(root, errors)
     validate_download_ledger(root, errors)
     validate_json_contracts(root, errors)
+    validate_inventory_snapshot(root, errors)
     validate_openai_orchestration(root, errors)
     validate_generated_worker_briefs(root, errors)
     validate_generated_composition_sketches(root, errors)
