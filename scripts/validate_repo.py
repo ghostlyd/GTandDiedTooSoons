@@ -22,6 +22,7 @@ REQUIRED_FILES = [
     "docs/live12-m4l-ci-cd.md",
     "docs/openai-orchestration.md",
     "docs/openai-production-swarm-queue.md",
+    "docs/production-appeal-scorecards.md",
     "docs/source-acquisition-policy.md",
     "docs/playwright-source-capture.md",
     "docs/recommended-packs.md",
@@ -35,6 +36,7 @@ REQUIRED_FILES = [
     "automation/max-for-live-device-contracts.json",
     "automation/generated/openai-worker-briefs.json",
     "automation/generated/openai-production-swarm-queue.json",
+    "automation/generated/production-appeal-scorecards.json",
     "automation/generated/live12-daw-action-plan.json",
     "automation/generated/live12-daw-mutation-package.json",
     "automation/generated/live12-daw-mutation-runbook.json",
@@ -50,6 +52,7 @@ REQUIRED_FILES = [
     "scripts/fetch_public_domain_audio.py",
     "scripts/render_composition_sketches.py",
     "scripts/render_openai_production_swarm_queue.py",
+    "scripts/render_production_appeal_scorecards.py",
     "scripts/render_live12_daw_action_plan.py",
     "scripts/render_live12_daw_mutation_package.py",
     "scripts/render_live12_daw_mutation_runbook.py",
@@ -62,6 +65,7 @@ REQUIRED_FILES = [
     "scripts/record_live12_daw_mutation_receipt.py",
     "scripts/render_openai_worker_briefs.py",
     "scripts/test_openai_production_swarm_queue.py",
+    "scripts/test_production_appeal_scorecards.py",
     "scripts/test_max_for_live_device_contracts.py",
     "scripts/test_live12_daw_mutation_preflight.py",
     "scripts/test_live12_daw_mutation_runbook.py",
@@ -165,6 +169,23 @@ EXPECTED_COMPOSITION_SKETCH_SOURCES = {
     "compositions/down-tempo-punk-bluegrass-set.json",
     "automation/live12-session-template.json",
 }
+EXPECTED_PRODUCTION_APPEAL_SCORECARD_SOURCES = {
+    "compositions/down-tempo-punk-bluegrass-set.json",
+    "compositions/generated/live12-track-build-plans.json",
+    "automation/generated/max-for-live-device-contracts.json",
+    "automation/generated/live12-daw-action-plan.json",
+    "automation/generated/public-domain-source-deck.json",
+}
+EXPECTED_PRODUCTION_APPEAL_DIMENSIONS = [
+    "entrainment",
+    "hook_repetition",
+    "call_response",
+    "spectral_contrast",
+    "spatial_motion",
+    "dynamic_surprise",
+    "tactile_performance_risk",
+    "provenance_resonance",
+]
 EXPECTED_DAW_ACTION_PLAN_SOURCES = {
     "automation/openai-production-orchestration.json",
     "automation/live12-session-template.json",
@@ -741,6 +762,7 @@ def validate_json_contracts(root: Path, errors: list[str]) -> None:
         "automation/generated/live12-daw-mutation-runbook.json",
         "automation/generated/live12-daw-mutation-queue-runbook.json",
         "automation/generated/openai-production-swarm-queue.json",
+        "automation/generated/production-appeal-scorecards.json",
         "automation/generated/public-domain-source-deck.json",
         "automation/live12-session-template.json",
         "automation/worker-chain.json",
@@ -1203,6 +1225,125 @@ def validate_openai_production_swarm_queue(root: Path, errors: list[str]) -> Non
             fail(errors, "Generated OpenAI production swarm queue must not contain API tokens or bearer credentials")
     if "/Users/" in markdown or "sources/public-domain/raw/" in markdown or SECRET_VALUE_PATTERN.search(markdown):
         fail(errors, "Generated OpenAI production swarm queue markdown contains sensitive local data")
+
+
+def validate_production_appeal_scorecards(root: Path, errors: list[str]) -> None:
+    data = load_json(root / "automation/generated/production-appeal-scorecards.json", errors)
+    markdown_path = root / "docs/production-appeal-scorecards.md"
+    build_plans = load_json(root / "compositions/generated/live12-track-build-plans.json", errors)
+    daw_action_plan = load_json(root / "automation/generated/live12-daw-action-plan.json", errors)
+    source_deck = load_json(root / "automation/generated/public-domain-source-deck.json", errors)
+    max_contracts = load_json(root / "automation/generated/max-for-live-device-contracts.json", errors)
+    if not data or not build_plans:
+        return
+
+    if data.get("schema_version") != 1:
+        fail(errors, "Generated production appeal scorecards must use schema_version 1")
+    if data.get("generated_at") != STABLE_GENERATED_AT:
+        fail(errors, "Generated production appeal scorecards must be committed with stable generated_at")
+    if data.get("generator") != "scripts/render_production_appeal_scorecards.py":
+        fail(errors, "Generated production appeal scorecards must name scripts/render_production_appeal_scorecards.py as generator")
+
+    source_files = set(data.get("source_files", []))
+    if source_files != EXPECTED_PRODUCTION_APPEAL_SCORECARD_SOURCES:
+        fail(errors, "Generated production appeal scorecards source_files must match expected source manifests")
+    source_hashes = data.get("source_file_sha256") or {}
+    if set(source_hashes) != EXPECTED_PRODUCTION_APPEAL_SCORECARD_SOURCES:
+        fail(errors, "Generated production appeal scorecards source_file_sha256 keys must match expected source manifests")
+    for source_file in source_files:
+        if Path(source_file).is_absolute() or ".." in Path(source_file).parts or not (root / source_file).exists():
+            fail(errors, f"Generated production appeal scorecards source file is invalid: {source_file}")
+            continue
+        expected_hash = source_hashes.get(source_file)
+        if not SHA256_PATTERN.match(str(expected_hash or "")):
+            fail(errors, f"Generated production appeal scorecards source hash is invalid: {source_file}")
+        elif expected_hash != sha256_file(root / source_file):
+            fail(errors, f"Generated production appeal scorecards source hash is stale: {source_file}")
+
+    claims_policy = require_dict(data.get("claims_policy"), "Generated production appeal scorecards claims_policy", errors)
+    if claims_policy.get("claim_status") != "hypotheses_not_proof":
+        fail(errors, "Generated production appeal scorecards must stay hypotheses_not_proof")
+    if claims_policy.get("strong_claims_allowed") is not False:
+        fail(errors, "Generated production appeal scorecards must block strong psychological claims")
+    required_before_claim = set(claims_policy.get("required_before_strong_claim", []))
+    for required_item in ["approved study protocol", "consent model", "data handling plan", "listener results", "analysis notes"]:
+        if required_item not in required_before_claim:
+            fail(errors, f"Generated production appeal scorecards missing strong-claim requirement: {required_item}")
+    blocked_language = " ".join(claims_policy.get("blocked_language", []))
+    if "scientifically proven" not in blocked_language:
+        fail(errors, "Generated production appeal scorecards must block scientifically proven claims")
+    if data.get("dimension_order") != EXPECTED_PRODUCTION_APPEAL_DIMENSIONS:
+        fail(errors, "Generated production appeal scorecards dimension_order is stale")
+
+    cards = data.get("scorecards", [])
+    build_tracks = build_plans.get("tracks", [])
+    action_by_slug = {track.get("slug"): track for track in daw_action_plan.get("tracks", [])}
+    source_by_slug = {assignment.get("track_slug"): assignment for assignment in source_deck.get("track_assignments", [])}
+    max_device_ids = {device.get("id") for device in max_contracts.get("devices", [])}
+    if data.get("track_count") != len(build_tracks) or len(cards) != len(build_tracks):
+        fail(errors, "Generated production appeal scorecards track_count must mirror build plans")
+    if [card.get("track_slug") for card in cards] != [track.get("slug") for track in build_tracks]:
+        fail(errors, "Generated production appeal scorecards track order must mirror build plans")
+    for card, build_track in zip(cards, build_tracks, strict=False):
+        slug = build_track.get("slug")
+        if card.get("track_title") != build_track.get("title"):
+            fail(errors, f"Generated production appeal scorecard track title is stale: {slug}")
+        if card.get("tempo_bpm") != build_track.get("tempo_bpm") or card.get("key_center") != build_track.get("key_center"):
+            fail(errors, f"Generated production appeal scorecard musical identity is stale: {slug}")
+        if card.get("claim_status") != "hypothesis_not_validated":
+            fail(errors, f"Generated production appeal scorecard must stay hypothesis_not_validated: {slug}")
+        action_track = action_by_slug.get(slug, {})
+        expected_gates = set(action_track.get("approval_gates_required", [])) | {"export_or_release"}
+        if set(card.get("approval_gates", [])) != expected_gates:
+            fail(errors, f"Generated production appeal scorecard approval gates are stale: {slug}")
+        if card.get("study_gate", {}).get("requires_listener_protocol") is not True:
+            fail(errors, f"Generated production appeal scorecard must require listener protocol: {slug}")
+        gate_evidence = set(card.get("study_gate", {}).get("minimum_evidence_before_strong_claim", []))
+        if "approved study protocol" not in gate_evidence or "results linked to release notes" not in gate_evidence:
+            fail(errors, f"Generated production appeal scorecard study gate is incomplete: {slug}")
+        focus_ids = {
+            focus if str(focus).startswith("m4l.") else f"m4l.{focus}"
+            for focus in build_track.get("max_for_live_focus", [])
+        }
+        lever_ids = {lever.get("device_id") for lever in card.get("max_for_live_levers", [])}
+        if lever_ids != focus_ids:
+            fail(errors, f"Generated production appeal scorecard Max for Live levers must mirror track focus: {slug}")
+        if not lever_ids.issubset(max_device_ids):
+            fail(errors, f"Generated production appeal scorecard references unknown Max for Live lever: {slug}")
+        dimensions = card.get("dimensions", [])
+        if [dimension.get("id") for dimension in dimensions] != EXPECTED_PRODUCTION_APPEAL_DIMENSIONS:
+            fail(errors, f"Generated production appeal scorecard dimensions are stale: {slug}")
+        for dimension_item in dimensions:
+            dimension_id = dimension_item.get("id")
+            if dimension_item.get("score") not in {1, 2, 3, 4, 5}:
+                fail(errors, f"Generated production appeal scorecard dimension score is invalid: {slug}: {dimension_id}")
+            for field in ["production_evidence", "daw_levers", "measurement_prompt"]:
+                if not dimension_item.get(field):
+                    fail(errors, f"Generated production appeal scorecard dimension missing {field}: {slug}: {dimension_id}")
+        source_assignment = source_by_slug.get(slug, {})
+        provenance_dimension = next((item for item in dimensions if item.get("id") == "provenance_resonance"), {})
+        if str(source_assignment.get("candidate_source_count", 0)) not in " ".join(provenance_dimension.get("production_evidence", [])):
+            fail(errors, f"Generated production appeal scorecard provenance evidence is stale: {slug}")
+
+    markdown = markdown_path.read_text(encoding="utf-8") if markdown_path.exists() else ""
+    for expected_text in [
+        "# Production Appeal Scorecards",
+        "Hypotheses, not proof.",
+        "Do not claim scientifically proven psychological effects",
+        "approved study protocol",
+    ]:
+        if expected_text not in markdown:
+            fail(errors, f"Generated production appeal scorecard markdown is missing required text: {expected_text}")
+
+    for string_value in iter_string_values(data):
+        if "/Users/" in string_value:
+            fail(errors, "Generated production appeal scorecards must not contain absolute user paths")
+        if "sources/public-domain/raw/" in string_value or AUDIO_PATH_PATTERN.search(string_value):
+            fail(errors, f"Generated production appeal scorecards must not contain raw audio paths: {string_value}")
+        if SECRET_VALUE_PATTERN.search(string_value):
+            fail(errors, "Generated production appeal scorecards must not contain API tokens or bearer credentials")
+    if "/Users/" in markdown or "sources/public-domain/raw/" in markdown or SECRET_VALUE_PATTERN.search(markdown):
+        fail(errors, "Generated production appeal scorecard markdown contains sensitive local data")
 
 
 def validate_generated_daw_action_plan(root: Path, errors: list[str]) -> None:
@@ -2366,6 +2507,7 @@ def main() -> int:
     validate_openai_orchestration(root, errors)
     validate_generated_worker_briefs(root, errors)
     validate_openai_production_swarm_queue(root, errors)
+    validate_production_appeal_scorecards(root, errors)
     validate_generated_daw_action_plan(root, errors)
     validate_public_domain_source_deck(root, errors)
     validate_generated_daw_mutation_package(root, errors)

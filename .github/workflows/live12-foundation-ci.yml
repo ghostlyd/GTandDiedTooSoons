@@ -43,6 +43,12 @@ jobs:
           python3 scripts/render_composition_sketches.py --stable --output-dir /tmp/composition-sketches
           diff -ru compositions/generated /tmp/composition-sketches
 
+      - name: Verify generated production appeal scorecards are in sync
+        run: |
+          python3 scripts/render_production_appeal_scorecards.py --stable --output /tmp/production-appeal-scorecards.json --markdown-output /tmp/production-appeal-scorecards.md
+          diff -u automation/generated/production-appeal-scorecards.json /tmp/production-appeal-scorecards.json
+          diff -u docs/production-appeal-scorecards.md /tmp/production-appeal-scorecards.md
+
       - name: Verify generated Live 12 DAW action plan is in sync
         run: |
           python3 scripts/render_live12_daw_action_plan.py --stable --output /tmp/live12-daw-action-plan.json
@@ -86,6 +92,9 @@ jobs:
 
       - name: Run OpenAI production swarm queue probes
         run: python3 scripts/test_openai_production_swarm_queue.py
+
+      - name: Run production appeal scorecard probes
+        run: python3 scripts/test_production_appeal_scorecards.py
 
       - name: Run Live 12 DAW mutation preflight probes
         run: python3 scripts/test_live12_daw_mutation_preflight.py
@@ -131,6 +140,12 @@ jobs:
           python3 scripts/render_composition_sketches.py --stable --output-dir /tmp/composition-sketches
           diff -ru compositions/generated /tmp/composition-sketches
 
+      - name: Verify generated production appeal scorecards are in sync
+        run: |
+          python3 scripts/render_production_appeal_scorecards.py --stable --output /tmp/production-appeal-scorecards.json --markdown-output /tmp/production-appeal-scorecards.md
+          diff -u automation/generated/production-appeal-scorecards.json /tmp/production-appeal-scorecards.json
+          diff -u docs/production-appeal-scorecards.md /tmp/production-appeal-scorecards.md
+
       - name: Verify generated Live 12 DAW action plan is in sync
         run: |
           python3 scripts/render_live12_daw_action_plan.py --stable --output /tmp/live12-daw-action-plan.json
@@ -174,6 +189,9 @@ jobs:
 
       - name: Run OpenAI production swarm queue probes
         run: python3 scripts/test_openai_production_swarm_queue.py
+
+      - name: Run production appeal scorecard probes
+        run: python3 scripts/test_production_appeal_scorecards.py
 
       - name: Run Live 12 DAW mutation preflight probes
         run: python3 scripts/test_live12_daw_mutation_preflight.py
