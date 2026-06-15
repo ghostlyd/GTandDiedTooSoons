@@ -1,0 +1,1221 @@
+{
+  "claims_policy": {
+    "allowed_language": [
+      "evidence-informed production hypothesis",
+      "listening-test candidate",
+      "requires validation before psychological claims"
+    ],
+    "blocked_language": [
+      "scientifically proven to affect the human psyche",
+      "guaranteed listener response",
+      "therapeutic or medical effect"
+    ],
+    "claim_status": "hypotheses_not_proof",
+    "required_before_strong_claim": [
+      "approved study protocol",
+      "consent model",
+      "data handling plan",
+      "listener results",
+      "analysis notes"
+    ],
+    "strong_claims_allowed": false
+  },
+  "dimension_order": [
+    "entrainment",
+    "hook_repetition",
+    "call_response",
+    "spectral_contrast",
+    "spatial_motion",
+    "dynamic_surprise",
+    "tactile_performance_risk",
+    "provenance_resonance"
+  ],
+  "generated_at": "1970-01-01T00:00:00Z",
+  "generator": "scripts/render_production_appeal_scorecards.py",
+  "purpose": "Evidence-readiness scorecards for production decisions that may support listener appeal hypotheses without claiming proof.",
+  "schema_version": 1,
+  "scorecards": [
+    {
+      "approval_gates": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "claim_status": "hypothesis_not_validated",
+      "dimensions": [
+        {
+          "daw_levers": [
+            "m4l.house_grid_conductor",
+            "sidechain_depth",
+            "accent",
+            "swing_amount"
+          ],
+          "id": "entrainment",
+          "label": "Tempo, pulse, and motor-lock potential",
+          "measurement_prompt": "After staging, rate whether the pulse invites head-nod/body-lock within the first 30 seconds without masking the banjo lead.",
+          "production_evidence": [
+            "Tempo is 96 BPM.",
+            "Deep-house pulse or kick language is present."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.roll_probability_engine",
+            "roll_density",
+            "ghost_note_probability",
+            "fill_probability"
+          ],
+          "id": "hook_repetition",
+          "label": "Recognizable hook recurrence",
+          "measurement_prompt": "Mark the first timestamp where the core motif is recognized, then note whether it returns with meaningful variation.",
+          "production_evidence": [
+            "Arrangement has 6 generated scenes.",
+            "Hook, roll, or refrain language appears in the track brief."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.call_response_router",
+            "send_spatial",
+            "vibrato_depth",
+            "room_send"
+          ],
+          "id": "call_response",
+          "label": "Human call-response contour",
+          "measurement_prompt": "During a rough playback, log whether response phrases feel conversational rather than stacked or ornamental.",
+          "production_evidence": [
+            "Call-response routing or answer phrases are declared.",
+            "Banjo/fiddle language supports human conversational contour."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.spatial_harmonic_field",
+            "grain_density",
+            "freeze",
+            "spectral_tilt",
+            "filter_cutoff"
+          ],
+          "id": "spectral_contrast",
+          "label": "Contrast between acoustic core and alien electronics",
+          "measurement_prompt": "Compare acoustic-core audibility against alien texture density; note any section where identity collapses into generic wash.",
+          "production_evidence": [
+            "Traditional layer count: 6.",
+            "Alien/electronic layer count: 5."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.spatial_harmonic_field",
+            "azimuth",
+            "width",
+            "send_spatial",
+            "grain_density",
+            "freeze"
+          ],
+          "id": "spatial_motion",
+          "label": "Width, azimuth, depth, and freeze movement",
+          "measurement_prompt": "On headphones and speakers, rate whether spatial movement supports form without pulling the lead instrument out of focus.",
+          "production_evidence": [
+            "Spatial harmonic field or spatial send targets are present.",
+            "Brief references width, dub, fade, bloom, or spatial movement."
+          ],
+          "score": 4
+        },
+        {
+          "daw_levers": [
+            "m4l.fill_trigger",
+            "parallel_drive",
+            "fill_probability",
+            "chop_gate"
+          ],
+          "id": "dynamic_surprise",
+          "label": "Breaks, stops, fills, and expectation resets",
+          "measurement_prompt": "Log whether a break, stop, or fill changes attention without feeling like a random edit.",
+          "production_evidence": [
+            "Break, stop, fill, or anti-polish language is present.",
+            "Punk constraint language appears in the source brief."
+          ],
+          "score": 4
+        },
+        {
+          "daw_levers": [
+            "m4l.aeroband_banjo_mapper",
+            "velocity_curve",
+            "humanize_ms",
+            "pluck_decay",
+            "downstroke_bias"
+          ],
+          "id": "tactile_performance_risk",
+          "label": "Audible live-controller and one-take risk",
+          "measurement_prompt": "During controller rehearsal, note whether imperfections read as human urgency rather than technical failure.",
+          "production_evidence": [
+            "AeroBand/controller/live-risk language is present.",
+            "Humanization or velocity articulation targets are available."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.provenance_sampler",
+            "source_deck_gain",
+            "slice_gate",
+            "credit_review"
+          ],
+          "id": "provenance_resonance",
+          "label": "Historically grounded source-deck resonance",
+          "measurement_prompt": "Before any unmute, verify whether source use has audible purpose, credit clarity, and rights evidence.",
+          "production_evidence": [
+            "Approved source candidate count: 3.",
+            "Source deck state: muted_until_human_provenance_review."
+          ],
+          "score": 5
+        }
+      ],
+      "duration_target": "4:20",
+      "key_center": "D mixolydian",
+      "max_for_live_levers": [
+        {
+          "device_id": "m4l.roll_probability_engine",
+          "display_name": "Roll Probability Engine",
+          "macro_controls": [
+            "roll_density",
+            "humanize_ms",
+            "velocity_curve",
+            "pluck_decay"
+          ]
+        },
+        {
+          "device_id": "m4l.spatial_harmonic_field",
+          "display_name": "Spatial Harmonic Field",
+          "macro_controls": [
+            "grain_density",
+            "freeze",
+            "width",
+            "azimuth"
+          ]
+        }
+      ],
+      "overall_hypothesis_score": 4.75,
+      "study_gate": {
+        "minimum_evidence_before_strong_claim": [
+          "approved study protocol",
+          "consent model",
+          "defined listener sample and inclusion criteria",
+          "pre/post listening measures or repeated-rating instrument",
+          "analysis plan",
+          "results linked to release notes"
+        ],
+        "requires_listener_protocol": true
+      },
+      "tempo_bpm": 96,
+      "track_slug": "good-vibrations-in-a-burned-barn",
+      "track_title": "Good Vibrations in a Burned Barn"
+    },
+    {
+      "approval_gates": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "claim_status": "hypothesis_not_validated",
+      "dimensions": [
+        {
+          "daw_levers": [
+            "m4l.house_grid_conductor",
+            "sidechain_depth",
+            "accent",
+            "swing_amount"
+          ],
+          "id": "entrainment",
+          "label": "Tempo, pulse, and motor-lock potential",
+          "measurement_prompt": "After staging, rate whether the pulse invites head-nod/body-lock within the first 30 seconds without masking the banjo lead.",
+          "production_evidence": [
+            "Tempo is 88 BPM.",
+            "Deep-house pulse or kick language is present."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.roll_probability_engine",
+            "roll_density",
+            "ghost_note_probability",
+            "fill_probability"
+          ],
+          "id": "hook_repetition",
+          "label": "Recognizable hook recurrence",
+          "measurement_prompt": "Mark the first timestamp where the core motif is recognized, then note whether it returns with meaningful variation.",
+          "production_evidence": [
+            "Arrangement has 5 generated scenes.",
+            "Hook, roll, or refrain language appears in the track brief."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.call_response_router",
+            "send_spatial",
+            "vibrato_depth",
+            "room_send"
+          ],
+          "id": "call_response",
+          "label": "Human call-response contour",
+          "measurement_prompt": "During a rough playback, log whether response phrases feel conversational rather than stacked or ornamental.",
+          "production_evidence": [
+            "Call-response routing or answer phrases are declared.",
+            "Banjo/fiddle language supports human conversational contour."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.spatial_harmonic_field",
+            "grain_density",
+            "freeze",
+            "spectral_tilt",
+            "filter_cutoff"
+          ],
+          "id": "spectral_contrast",
+          "label": "Contrast between acoustic core and alien electronics",
+          "measurement_prompt": "Compare acoustic-core audibility against alien texture density; note any section where identity collapses into generic wash.",
+          "production_evidence": [
+            "Traditional layer count: 6.",
+            "Alien/electronic layer count: 5."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.spatial_harmonic_field",
+            "azimuth",
+            "width",
+            "send_spatial",
+            "grain_density",
+            "freeze"
+          ],
+          "id": "spatial_motion",
+          "label": "Width, azimuth, depth, and freeze movement",
+          "measurement_prompt": "On headphones and speakers, rate whether spatial movement supports form without pulling the lead instrument out of focus.",
+          "production_evidence": [
+            "Spatial harmonic field or spatial send targets are present.",
+            "Brief references width, dub, fade, bloom, or spatial movement."
+          ],
+          "score": 4
+        },
+        {
+          "daw_levers": [
+            "m4l.fill_trigger",
+            "parallel_drive",
+            "fill_probability",
+            "chop_gate"
+          ],
+          "id": "dynamic_surprise",
+          "label": "Breaks, stops, fills, and expectation resets",
+          "measurement_prompt": "Log whether a break, stop, or fill changes attention without feeling like a random edit.",
+          "production_evidence": [
+            "Break, stop, fill, or anti-polish language is present.",
+            "Punk constraint language appears in the source brief."
+          ],
+          "score": 4
+        },
+        {
+          "daw_levers": [
+            "m4l.aeroband_banjo_mapper",
+            "velocity_curve",
+            "humanize_ms",
+            "pluck_decay",
+            "downstroke_bias"
+          ],
+          "id": "tactile_performance_risk",
+          "label": "Audible live-controller and one-take risk",
+          "measurement_prompt": "During controller rehearsal, note whether imperfections read as human urgency rather than technical failure.",
+          "production_evidence": [
+            "AeroBand/controller/live-risk language is present.",
+            "Humanization or velocity articulation targets are available."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.provenance_sampler",
+            "source_deck_gain",
+            "slice_gate",
+            "credit_review"
+          ],
+          "id": "provenance_resonance",
+          "label": "Historically grounded source-deck resonance",
+          "measurement_prompt": "Before any unmute, verify whether source use has audible purpose, credit clarity, and rights evidence.",
+          "production_evidence": [
+            "Approved source candidate count: 3.",
+            "Source deck state: muted_until_human_provenance_review."
+          ],
+          "score": 5
+        }
+      ],
+      "duration_target": "3:45",
+      "key_center": "A minor / dorian interchange",
+      "max_for_live_levers": [
+        {
+          "device_id": "m4l.call_response_router",
+          "display_name": "Call Response Router",
+          "macro_controls": [
+            "bow_noise",
+            "vibrato_depth",
+            "send_spatial",
+            "boom_chuck_balance",
+            "downstroke_bias",
+            "room_send",
+            "strum_velocity"
+          ]
+        },
+        {
+          "device_id": "m4l.house_grid_conductor",
+          "display_name": "House Grid Conductor",
+          "macro_controls": [
+            "swing_amount",
+            "filter_cutoff",
+            "accent"
+          ]
+        }
+      ],
+      "overall_hypothesis_score": 4.75,
+      "study_gate": {
+        "minimum_evidence_before_strong_claim": [
+          "approved study protocol",
+          "consent model",
+          "defined listener sample and inclusion criteria",
+          "pre/post listening measures or repeated-rating instrument",
+          "analysis plan",
+          "results linked to release notes"
+        ],
+        "requires_listener_protocol": true
+      },
+      "tempo_bpm": 88,
+      "track_slug": "a-p-carter-in-the-warehouse",
+      "track_title": "A.P. Carter in the Warehouse"
+    },
+    {
+      "approval_gates": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "claim_status": "hypothesis_not_validated",
+      "dimensions": [
+        {
+          "daw_levers": [
+            "m4l.house_grid_conductor",
+            "sidechain_depth",
+            "accent",
+            "swing_amount"
+          ],
+          "id": "entrainment",
+          "label": "Tempo, pulse, and motor-lock potential",
+          "measurement_prompt": "After staging, rate whether the pulse invites head-nod/body-lock within the first 30 seconds without masking the banjo lead.",
+          "production_evidence": [
+            "Tempo is 104 BPM.",
+            "Deep-house pulse or kick language is present."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.roll_probability_engine",
+            "roll_density",
+            "ghost_note_probability",
+            "fill_probability"
+          ],
+          "id": "hook_repetition",
+          "label": "Recognizable hook recurrence",
+          "measurement_prompt": "Mark the first timestamp where the core motif is recognized, then note whether it returns with meaningful variation.",
+          "production_evidence": [
+            "Arrangement has 5 generated scenes.",
+            "Hook, roll, or refrain language appears in the track brief."
+          ],
+          "score": 4
+        },
+        {
+          "daw_levers": [
+            "m4l.call_response_router",
+            "send_spatial",
+            "vibrato_depth",
+            "room_send"
+          ],
+          "id": "call_response",
+          "label": "Human call-response contour",
+          "measurement_prompt": "During a rough playback, log whether response phrases feel conversational rather than stacked or ornamental.",
+          "production_evidence": [
+            "Call-response routing or answer phrases are declared.",
+            "Banjo/fiddle language supports human conversational contour."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.spatial_harmonic_field",
+            "grain_density",
+            "freeze",
+            "spectral_tilt",
+            "filter_cutoff"
+          ],
+          "id": "spectral_contrast",
+          "label": "Contrast between acoustic core and alien electronics",
+          "measurement_prompt": "Compare acoustic-core audibility against alien texture density; note any section where identity collapses into generic wash.",
+          "production_evidence": [
+            "Traditional layer count: 6.",
+            "Alien/electronic layer count: 5."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.spatial_harmonic_field",
+            "azimuth",
+            "width",
+            "send_spatial",
+            "grain_density",
+            "freeze"
+          ],
+          "id": "spatial_motion",
+          "label": "Width, azimuth, depth, and freeze movement",
+          "measurement_prompt": "On headphones and speakers, rate whether spatial movement supports form without pulling the lead instrument out of focus.",
+          "production_evidence": [
+            "Spatial harmonic field or spatial send targets are present.",
+            "Brief references width, dub, fade, bloom, or spatial movement."
+          ],
+          "score": 4
+        },
+        {
+          "daw_levers": [
+            "m4l.fill_trigger",
+            "parallel_drive",
+            "fill_probability",
+            "chop_gate"
+          ],
+          "id": "dynamic_surprise",
+          "label": "Breaks, stops, fills, and expectation resets",
+          "measurement_prompt": "Log whether a break, stop, or fill changes attention without feeling like a random edit.",
+          "production_evidence": [
+            "Break, stop, fill, or anti-polish language is present.",
+            "Punk constraint language appears in the source brief."
+          ],
+          "score": 4
+        },
+        {
+          "daw_levers": [
+            "m4l.aeroband_banjo_mapper",
+            "velocity_curve",
+            "humanize_ms",
+            "pluck_decay",
+            "downstroke_bias"
+          ],
+          "id": "tactile_performance_risk",
+          "label": "Audible live-controller and one-take risk",
+          "measurement_prompt": "During controller rehearsal, note whether imperfections read as human urgency rather than technical failure.",
+          "production_evidence": [
+            "AeroBand/controller/live-risk language is present.",
+            "Humanization or velocity articulation targets are available."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.provenance_sampler",
+            "source_deck_gain",
+            "slice_gate",
+            "credit_review"
+          ],
+          "id": "provenance_resonance",
+          "label": "Historically grounded source-deck resonance",
+          "measurement_prompt": "Before any unmute, verify whether source use has audible purpose, credit clarity, and rights evidence.",
+          "production_evidence": [
+            "Approved source candidate count: 3.",
+            "Source deck state: muted_until_human_provenance_review."
+          ],
+          "score": 5
+        }
+      ],
+      "duration_target": "3:10",
+      "key_center": "G major with flat-7 pressure",
+      "max_for_live_levers": [
+        {
+          "device_id": "m4l.chop_clock_guard",
+          "display_name": "Chop Clock Guard",
+          "macro_controls": [
+            "chop_gate",
+            "ghost_note_probability",
+            "boom_chuck_balance",
+            "downstroke_bias",
+            "room_send",
+            "strum_velocity"
+          ]
+        },
+        {
+          "device_id": "m4l.root_motion_limiter",
+          "display_name": "Root Motion Limiter",
+          "macro_controls": [
+            "sub_blend",
+            "sidechain_depth",
+            "note_length"
+          ]
+        }
+      ],
+      "overall_hypothesis_score": 4.62,
+      "study_gate": {
+        "minimum_evidence_before_strong_claim": [
+          "approved study protocol",
+          "consent model",
+          "defined listener sample and inclusion criteria",
+          "pre/post listening measures or repeated-rating instrument",
+          "analysis plan",
+          "results linked to release notes"
+        ],
+        "requires_listener_protocol": true
+      },
+      "tempo_bpm": 104,
+      "track_slug": "no-gods-no-masters-no-quantize",
+      "track_title": "No Gods, No Masters, No Quantize"
+    },
+    {
+      "approval_gates": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "claim_status": "hypothesis_not_validated",
+      "dimensions": [
+        {
+          "daw_levers": [
+            "m4l.house_grid_conductor",
+            "sidechain_depth",
+            "accent",
+            "swing_amount"
+          ],
+          "id": "entrainment",
+          "label": "Tempo, pulse, and motor-lock potential",
+          "measurement_prompt": "After staging, rate whether the pulse invites head-nod/body-lock within the first 30 seconds without masking the banjo lead.",
+          "production_evidence": [
+            "Tempo is 82 BPM.",
+            "Deep-house pulse or kick language is present."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.roll_probability_engine",
+            "roll_density",
+            "ghost_note_probability",
+            "fill_probability"
+          ],
+          "id": "hook_repetition",
+          "label": "Recognizable hook recurrence",
+          "measurement_prompt": "Mark the first timestamp where the core motif is recognized, then note whether it returns with meaningful variation.",
+          "production_evidence": [
+            "Arrangement has 5 generated scenes.",
+            "Hook, roll, or refrain language appears in the track brief."
+          ],
+          "score": 4
+        },
+        {
+          "daw_levers": [
+            "m4l.call_response_router",
+            "send_spatial",
+            "vibrato_depth",
+            "room_send"
+          ],
+          "id": "call_response",
+          "label": "Human call-response contour",
+          "measurement_prompt": "During a rough playback, log whether response phrases feel conversational rather than stacked or ornamental.",
+          "production_evidence": [
+            "Call-response routing or answer phrases are declared.",
+            "Banjo/fiddle language supports human conversational contour."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.spatial_harmonic_field",
+            "grain_density",
+            "freeze",
+            "spectral_tilt",
+            "filter_cutoff"
+          ],
+          "id": "spectral_contrast",
+          "label": "Contrast between acoustic core and alien electronics",
+          "measurement_prompt": "Compare acoustic-core audibility against alien texture density; note any section where identity collapses into generic wash.",
+          "production_evidence": [
+            "Traditional layer count: 6.",
+            "Alien/electronic layer count: 5."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.spatial_harmonic_field",
+            "azimuth",
+            "width",
+            "send_spatial",
+            "grain_density",
+            "freeze"
+          ],
+          "id": "spatial_motion",
+          "label": "Width, azimuth, depth, and freeze movement",
+          "measurement_prompt": "On headphones and speakers, rate whether spatial movement supports form without pulling the lead instrument out of focus.",
+          "production_evidence": [
+            "Spatial harmonic field or spatial send targets are present.",
+            "Brief references width, dub, fade, bloom, or spatial movement."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.fill_trigger",
+            "parallel_drive",
+            "fill_probability",
+            "chop_gate"
+          ],
+          "id": "dynamic_surprise",
+          "label": "Breaks, stops, fills, and expectation resets",
+          "measurement_prompt": "Log whether a break, stop, or fill changes attention without feeling like a random edit.",
+          "production_evidence": [
+            "Break, stop, fill, or anti-polish language is present.",
+            "Punk constraint language appears in the source brief."
+          ],
+          "score": 4
+        },
+        {
+          "daw_levers": [
+            "m4l.aeroband_banjo_mapper",
+            "velocity_curve",
+            "humanize_ms",
+            "pluck_decay",
+            "downstroke_bias"
+          ],
+          "id": "tactile_performance_risk",
+          "label": "Audible live-controller and one-take risk",
+          "measurement_prompt": "During controller rehearsal, note whether imperfections read as human urgency rather than technical failure.",
+          "production_evidence": [
+            "AeroBand/controller/live-risk language is present.",
+            "Humanization or velocity articulation targets are available."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.provenance_sampler",
+            "source_deck_gain",
+            "slice_gate",
+            "credit_review"
+          ],
+          "id": "provenance_resonance",
+          "label": "Historically grounded source-deck resonance",
+          "measurement_prompt": "Before any unmute, verify whether source use has audible purpose, credit clarity, and rights evidence.",
+          "production_evidence": [
+            "Approved source candidate count: 3.",
+            "Source deck state: muted_until_human_provenance_review."
+          ],
+          "score": 5
+        }
+      ],
+      "duration_target": "5:30",
+      "key_center": "E minor pentatonic",
+      "max_for_live_levers": [
+        {
+          "device_id": "m4l.spatial_harmonic_field",
+          "display_name": "Spatial Harmonic Field",
+          "macro_controls": [
+            "grain_density",
+            "freeze",
+            "width",
+            "azimuth"
+          ]
+        },
+        {
+          "device_id": "m4l.provenance_sampler",
+          "display_name": "Provenance Sampler",
+          "macro_controls": [
+            "source_gate",
+            "slice_density",
+            "provenance_hold"
+          ]
+        }
+      ],
+      "overall_hypothesis_score": 4.75,
+      "study_gate": {
+        "minimum_evidence_before_strong_claim": [
+          "approved study protocol",
+          "consent model",
+          "defined listener sample and inclusion criteria",
+          "pre/post listening measures or repeated-rating instrument",
+          "analysis plan",
+          "results linked to release notes"
+        ],
+        "requires_listener_protocol": true
+      },
+      "tempo_bpm": 82,
+      "track_slug": "possum-kingdom-afterhours",
+      "track_title": "Possum Kingdom Afterhours"
+    },
+    {
+      "approval_gates": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "claim_status": "hypothesis_not_validated",
+      "dimensions": [
+        {
+          "daw_levers": [
+            "m4l.house_grid_conductor",
+            "sidechain_depth",
+            "accent",
+            "swing_amount"
+          ],
+          "id": "entrainment",
+          "label": "Tempo, pulse, and motor-lock potential",
+          "measurement_prompt": "After staging, rate whether the pulse invites head-nod/body-lock within the first 30 seconds without masking the banjo lead.",
+          "production_evidence": [
+            "Tempo is 100 BPM.",
+            "Deep-house pulse or kick language is present."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.roll_probability_engine",
+            "roll_density",
+            "ghost_note_probability",
+            "fill_probability"
+          ],
+          "id": "hook_repetition",
+          "label": "Recognizable hook recurrence",
+          "measurement_prompt": "Mark the first timestamp where the core motif is recognized, then note whether it returns with meaningful variation.",
+          "production_evidence": [
+            "Arrangement has 5 generated scenes.",
+            "Hook, roll, or refrain language appears in the track brief."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.call_response_router",
+            "send_spatial",
+            "vibrato_depth",
+            "room_send"
+          ],
+          "id": "call_response",
+          "label": "Human call-response contour",
+          "measurement_prompt": "During a rough playback, log whether response phrases feel conversational rather than stacked or ornamental.",
+          "production_evidence": [
+            "Call-response routing or answer phrases are declared.",
+            "Banjo/fiddle language supports human conversational contour."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.spatial_harmonic_field",
+            "grain_density",
+            "freeze",
+            "spectral_tilt",
+            "filter_cutoff"
+          ],
+          "id": "spectral_contrast",
+          "label": "Contrast between acoustic core and alien electronics",
+          "measurement_prompt": "Compare acoustic-core audibility against alien texture density; note any section where identity collapses into generic wash.",
+          "production_evidence": [
+            "Traditional layer count: 6.",
+            "Alien/electronic layer count: 5."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.spatial_harmonic_field",
+            "azimuth",
+            "width",
+            "send_spatial",
+            "grain_density",
+            "freeze"
+          ],
+          "id": "spatial_motion",
+          "label": "Width, azimuth, depth, and freeze movement",
+          "measurement_prompt": "On headphones and speakers, rate whether spatial movement supports form without pulling the lead instrument out of focus.",
+          "production_evidence": [
+            "Spatial harmonic field or spatial send targets are present.",
+            "Brief references width, dub, fade, bloom, or spatial movement."
+          ],
+          "score": 4
+        },
+        {
+          "daw_levers": [
+            "m4l.fill_trigger",
+            "parallel_drive",
+            "fill_probability",
+            "chop_gate"
+          ],
+          "id": "dynamic_surprise",
+          "label": "Breaks, stops, fills, and expectation resets",
+          "measurement_prompt": "Log whether a break, stop, or fill changes attention without feeling like a random edit.",
+          "production_evidence": [
+            "Break, stop, fill, or anti-polish language is present.",
+            "Punk constraint language appears in the source brief."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.aeroband_banjo_mapper",
+            "velocity_curve",
+            "humanize_ms",
+            "pluck_decay",
+            "downstroke_bias"
+          ],
+          "id": "tactile_performance_risk",
+          "label": "Audible live-controller and one-take risk",
+          "measurement_prompt": "During controller rehearsal, note whether imperfections read as human urgency rather than technical failure.",
+          "production_evidence": [
+            "AeroBand/controller/live-risk language is present.",
+            "Humanization or velocity articulation targets are available."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.provenance_sampler",
+            "source_deck_gain",
+            "slice_gate",
+            "credit_review"
+          ],
+          "id": "provenance_resonance",
+          "label": "Historically grounded source-deck resonance",
+          "measurement_prompt": "Before any unmute, verify whether source use has audible purpose, credit clarity, and rights evidence.",
+          "production_evidence": [
+            "Approved source candidate count: 3.",
+            "Source deck state: muted_until_human_provenance_review."
+          ],
+          "score": 5
+        }
+      ],
+      "duration_target": "4:00",
+      "key_center": "B flat major with punk chromatic passing tones",
+      "max_for_live_levers": [
+        {
+          "device_id": "m4l.aeroband_banjo_mapper",
+          "display_name": "AeroBand Banjo Mapper",
+          "macro_controls": [
+            "velocity_curve",
+            "roll_density",
+            "pluck_decay",
+            "humanize_ms"
+          ]
+        },
+        {
+          "device_id": "m4l.fill_trigger",
+          "display_name": "Fill Trigger",
+          "macro_controls": [
+            "fill_probability",
+            "parallel_drive",
+            "room_send"
+          ]
+        }
+      ],
+      "overall_hypothesis_score": 4.88,
+      "study_gate": {
+        "minimum_evidence_before_strong_claim": [
+          "approved study protocol",
+          "consent model",
+          "defined listener sample and inclusion criteria",
+          "pre/post listening measures or repeated-rating instrument",
+          "analysis plan",
+          "results linked to release notes"
+        ],
+        "requires_listener_protocol": true
+      },
+      "tempo_bpm": 100,
+      "track_slug": "the-ballad-of-the-broken-controller",
+      "track_title": "The Ballad of the Broken Controller"
+    },
+    {
+      "approval_gates": [
+        "private_audio_upload",
+        "live_set_mutation",
+        "export_or_release"
+      ],
+      "claim_status": "hypothesis_not_validated",
+      "dimensions": [
+        {
+          "daw_levers": [
+            "m4l.house_grid_conductor",
+            "sidechain_depth",
+            "accent",
+            "swing_amount"
+          ],
+          "id": "entrainment",
+          "label": "Tempo, pulse, and motor-lock potential",
+          "measurement_prompt": "After staging, rate whether the pulse invites head-nod/body-lock within the first 30 seconds without masking the banjo lead.",
+          "production_evidence": [
+            "Tempo is 94 BPM.",
+            "Deep-house pulse or kick language is present."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.roll_probability_engine",
+            "roll_density",
+            "ghost_note_probability",
+            "fill_probability"
+          ],
+          "id": "hook_repetition",
+          "label": "Recognizable hook recurrence",
+          "measurement_prompt": "Mark the first timestamp where the core motif is recognized, then note whether it returns with meaningful variation.",
+          "production_evidence": [
+            "Arrangement has 8 generated scenes.",
+            "Hook, roll, or refrain language appears in the track brief."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.call_response_router",
+            "send_spatial",
+            "vibrato_depth",
+            "room_send"
+          ],
+          "id": "call_response",
+          "label": "Human call-response contour",
+          "measurement_prompt": "During a rough playback, log whether response phrases feel conversational rather than stacked or ornamental.",
+          "production_evidence": [
+            "Call-response routing or answer phrases are declared.",
+            "Banjo/fiddle language supports human conversational contour."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.spatial_harmonic_field",
+            "grain_density",
+            "freeze",
+            "spectral_tilt",
+            "filter_cutoff"
+          ],
+          "id": "spectral_contrast",
+          "label": "Contrast between acoustic core and alien electronics",
+          "measurement_prompt": "Compare acoustic-core audibility against alien texture density; note any section where identity collapses into generic wash.",
+          "production_evidence": [
+            "Traditional layer count: 6.",
+            "Alien/electronic layer count: 5."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.spatial_harmonic_field",
+            "azimuth",
+            "width",
+            "send_spatial",
+            "grain_density",
+            "freeze"
+          ],
+          "id": "spatial_motion",
+          "label": "Width, azimuth, depth, and freeze movement",
+          "measurement_prompt": "On headphones and speakers, rate whether spatial movement supports form without pulling the lead instrument out of focus.",
+          "production_evidence": [
+            "Spatial harmonic field or spatial send targets are present.",
+            "Brief references width, dub, fade, bloom, or spatial movement."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.fill_trigger",
+            "parallel_drive",
+            "fill_probability",
+            "chop_gate"
+          ],
+          "id": "dynamic_surprise",
+          "label": "Breaks, stops, fills, and expectation resets",
+          "measurement_prompt": "Log whether a break, stop, or fill changes attention without feeling like a random edit.",
+          "production_evidence": [
+            "Break, stop, fill, or anti-polish language is present.",
+            "Punk constraint language appears in the source brief."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.aeroband_banjo_mapper",
+            "velocity_curve",
+            "humanize_ms",
+            "pluck_decay",
+            "downstroke_bias"
+          ],
+          "id": "tactile_performance_risk",
+          "label": "Audible live-controller and one-take risk",
+          "measurement_prompt": "During controller rehearsal, note whether imperfections read as human urgency rather than technical failure.",
+          "production_evidence": [
+            "AeroBand/controller/live-risk language is present.",
+            "Humanization or velocity articulation targets are available."
+          ],
+          "score": 5
+        },
+        {
+          "daw_levers": [
+            "m4l.provenance_sampler",
+            "source_deck_gain",
+            "slice_gate",
+            "credit_review"
+          ],
+          "id": "provenance_resonance",
+          "label": "Historically grounded source-deck resonance",
+          "measurement_prompt": "Before any unmute, verify whether source use has audible purpose, credit clarity, and rights evidence.",
+          "production_evidence": [
+            "Approved source candidate count: 3.",
+            "Source deck state: muted_until_human_provenance_review."
+          ],
+          "score": 5
+        }
+      ],
+      "duration_target": "4:48",
+      "key_center": "C dorian",
+      "max_for_live_levers": [
+        {
+          "device_id": "m4l.aeroband_banjo_mapper",
+          "display_name": "AeroBand Banjo Mapper",
+          "macro_controls": [
+            "velocity_curve",
+            "roll_density",
+            "pluck_decay",
+            "humanize_ms"
+          ]
+        },
+        {
+          "device_id": "m4l.roll_probability_engine",
+          "display_name": "Roll Probability Engine",
+          "macro_controls": [
+            "roll_density",
+            "humanize_ms",
+            "velocity_curve",
+            "pluck_decay"
+          ]
+        },
+        {
+          "device_id": "m4l.call_response_router",
+          "display_name": "Call Response Router",
+          "macro_controls": [
+            "bow_noise",
+            "vibrato_depth",
+            "send_spatial",
+            "boom_chuck_balance",
+            "downstroke_bias",
+            "room_send",
+            "strum_velocity"
+          ]
+        },
+        {
+          "device_id": "m4l.chop_clock_guard",
+          "display_name": "Chop Clock Guard",
+          "macro_controls": [
+            "chop_gate",
+            "ghost_note_probability",
+            "boom_chuck_balance",
+            "downstroke_bias",
+            "room_send",
+            "strum_velocity"
+          ]
+        },
+        {
+          "device_id": "m4l.slide_phrase_sampler",
+          "display_name": "Slide Phrase Sampler",
+          "macro_controls": [
+            "glide_time",
+            "feedback",
+            "spectral_tilt"
+          ]
+        },
+        {
+          "device_id": "m4l.root_motion_limiter",
+          "display_name": "Root Motion Limiter",
+          "macro_controls": [
+            "sub_blend",
+            "sidechain_depth",
+            "note_length"
+          ]
+        },
+        {
+          "device_id": "m4l.fill_trigger",
+          "display_name": "Fill Trigger",
+          "macro_controls": [
+            "fill_probability",
+            "parallel_drive",
+            "room_send"
+          ]
+        },
+        {
+          "device_id": "m4l.house_grid_conductor",
+          "display_name": "House Grid Conductor",
+          "macro_controls": [
+            "swing_amount",
+            "filter_cutoff",
+            "accent"
+          ]
+        },
+        {
+          "device_id": "m4l.provenance_sampler",
+          "display_name": "Provenance Sampler",
+          "macro_controls": [
+            "source_gate",
+            "slice_density",
+            "provenance_hold"
+          ]
+        },
+        {
+          "device_id": "m4l.spatial_harmonic_field",
+          "display_name": "Spatial Harmonic Field",
+          "macro_controls": [
+            "grain_density",
+            "freeze",
+            "width",
+            "azimuth"
+          ]
+        }
+      ],
+      "overall_hypothesis_score": 5.0,
+      "study_gate": {
+        "minimum_evidence_before_strong_claim": [
+          "approved study protocol",
+          "consent model",
+          "defined listener sample and inclusion criteria",
+          "pre/post listening measures or repeated-rating instrument",
+          "analysis plan",
+          "results linked to release notes"
+        ],
+        "requires_listener_protocol": true
+      },
+      "tempo_bpm": 94,
+      "track_slug": "rail-yard-ghost-in-the-control-room",
+      "track_title": "Rail Yard Ghost in the Control Room"
+    }
+  ],
+  "source_file_sha256": {
+    "automation/generated/live12-daw-action-plan.json": "dbe1b210945519be06e0fed556563be219b213f5f0017df043bd67c47fa0b4fc",
+    "automation/generated/max-for-live-device-contracts.json": "25613153f7ed60871411911a4572f10448a6f0298a62ba63bc2aa285e10b51d0",
+    "automation/generated/public-domain-source-deck.json": "775657b7c095a137c10e14ddf8da36b6309049156ba7f4e81e8f8c2e58dd626d",
+    "compositions/down-tempo-punk-bluegrass-set.json": "d7ace3ba0abc6d17758caa587c052818002f76825a024dab5f5ced531bdff488",
+    "compositions/generated/live12-track-build-plans.json": "0893e3a502e4b451f5d2b5b4da5848e732fd1c14bdd4f39512c745e5f7921bce"
+  },
+  "source_files": [
+    "compositions/down-tempo-punk-bluegrass-set.json",
+    "compositions/generated/live12-track-build-plans.json",
+    "automation/generated/max-for-live-device-contracts.json",
+    "automation/generated/live12-daw-action-plan.json",
+    "automation/generated/public-domain-source-deck.json"
+  ],
+  "track_count": 6
+}

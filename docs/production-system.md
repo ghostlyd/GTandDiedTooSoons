@@ -21,9 +21,10 @@ GTandDiedTooSoons is a repeatable production framework for composing spatially a
 5. **Agent layer**: production worker roles in `automation/worker-chain.json`, role briefs in `automation/generated/openai-worker-briefs.json`, and per-track swarm queue handoffs in `automation/generated/openai-production-swarm-queue.json` plus `docs/openai-production-swarm-queue.md`.
 6. **Composition layer**: standalone track briefs in `compositions/down-tempo-punk-bluegrass-set.json`.
 7. **Generated sketch layer**: deterministic Live-import build plans and MIDI sketches in `compositions/generated/`, rendered by `scripts/render_composition_sketches.py`.
-8. **DAW action layer**: approval-gated local Ableton/Max for Live action queues in `automation/generated/live12-daw-action-plan.json`, rendered by `scripts/render_live12_daw_action_plan.py`.
-9. **DAW mutation layer**: local-only preflight jobs and receipt templates in `automation/generated/live12-daw-mutation-package.json`, batch-staged by `scripts/prepare_live12_daw_mutation_queue.py` under ignored `output/` folders with per-track Max for Live source patch references. The generated operator runbooks in `automation/generated/live12-daw-mutation-runbook.json`, `automation/generated/live12-daw-mutation-queue-runbook.json`, `docs/live12-daw-mutation-runbook.md`, and `docs/live12-daw-mutation-queue-runbook.md` turn that queue into auditable per-track commands.
-10. **CI layer**: repository checks in `.github/workflows/live12-foundation-ci.yml`.
+8. **Production appeal layer**: generated non-overclaiming listening hypotheses in `automation/generated/production-appeal-scorecards.json` and `docs/production-appeal-scorecards.md`, rendered by `scripts/render_production_appeal_scorecards.py`.
+9. **DAW action layer**: approval-gated local Ableton/Max for Live action queues in `automation/generated/live12-daw-action-plan.json`, rendered by `scripts/render_live12_daw_action_plan.py`.
+10. **DAW mutation layer**: local-only preflight jobs and receipt templates in `automation/generated/live12-daw-mutation-package.json`, batch-staged by `scripts/prepare_live12_daw_mutation_queue.py` under ignored `output/` folders with per-track Max for Live source patch references. The generated operator runbooks in `automation/generated/live12-daw-mutation-runbook.json`, `automation/generated/live12-daw-mutation-queue-runbook.json`, `docs/live12-daw-mutation-runbook.md`, and `docs/live12-daw-mutation-queue-runbook.md` turn that queue into auditable per-track commands.
+11. **CI layer**: repository checks in `.github/workflows/live12-foundation-ci.yml`.
 
 ## Security and Operational Controls
 
@@ -34,6 +35,7 @@ GTandDiedTooSoons is a repeatable production framework for composing spatially a
 - Generated DAW action plans are proposal-only text. They may describe Live/Max for Live actions, but they must not mutate `.als`, `.amxd`, account state, exports, or local devices without approval and rollback evidence.
 - Generated DAW mutation packages are execution preflight text. They may prepare local ignored mutation requests and receipt templates, but they must not claim a Live-set mutation was applied before Ableton/Max confirms the change and a rollback reference exists.
 - Generated DAW mutation runbooks and queue runbooks are operator checklists. They may include local command paths under ignored `output/` roots, but they must keep Ableton launches approval-gated and must not contain absolute user paths, raw source audio paths, secrets, or committed DAW binary references.
+- Generated production appeal scorecards are hypotheses and listening-test gates. They may guide arrangement, Max for Live macro choices, and mix review, but they must not claim scientifically proven psychological effects without approved protocol and results.
 - Inventory scripts record names, versions, and home-relative paths only.
 - Audio acquisition requires explicit rights metadata and `approved_for_download: true`.
 - Generated public-domain source decks are metadata-only handoffs. They may include source IDs, rights evidence, credit summaries, SHA-256 values, and per-track source candidates, but they must not expose raw local audio paths or download URLs in tracked generated artifacts.
