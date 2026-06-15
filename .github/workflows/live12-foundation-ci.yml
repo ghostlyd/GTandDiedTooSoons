@@ -49,6 +49,12 @@ jobs:
           diff -u automation/generated/production-appeal-scorecards.json /tmp/production-appeal-scorecards.json
           diff -u docs/production-appeal-scorecards.md /tmp/production-appeal-scorecards.md
 
+      - name: Verify generated library installation queue is in sync
+        run: |
+          python3 scripts/render_library_installation_queue.py --stable --output /tmp/library-installation-queue.json --markdown-output /tmp/library-installation-queue.md
+          diff -u automation/generated/library-installation-queue.json /tmp/library-installation-queue.json
+          diff -u docs/library-installation-queue.md /tmp/library-installation-queue.md
+
       - name: Verify generated Live 12 DAW action plan is in sync
         run: |
           python3 scripts/render_live12_daw_action_plan.py --stable --output /tmp/live12-daw-action-plan.json
@@ -95,6 +101,9 @@ jobs:
 
       - name: Run production appeal scorecard probes
         run: python3 scripts/test_production_appeal_scorecards.py
+
+      - name: Run library installation queue probes
+        run: python3 scripts/test_library_installation_queue.py
 
       - name: Run Live 12 DAW mutation preflight probes
         run: python3 scripts/test_live12_daw_mutation_preflight.py
@@ -146,6 +155,12 @@ jobs:
           diff -u automation/generated/production-appeal-scorecards.json /tmp/production-appeal-scorecards.json
           diff -u docs/production-appeal-scorecards.md /tmp/production-appeal-scorecards.md
 
+      - name: Verify generated library installation queue is in sync
+        run: |
+          python3 scripts/render_library_installation_queue.py --stable --output /tmp/library-installation-queue.json --markdown-output /tmp/library-installation-queue.md
+          diff -u automation/generated/library-installation-queue.json /tmp/library-installation-queue.json
+          diff -u docs/library-installation-queue.md /tmp/library-installation-queue.md
+
       - name: Verify generated Live 12 DAW action plan is in sync
         run: |
           python3 scripts/render_live12_daw_action_plan.py --stable --output /tmp/live12-daw-action-plan.json
@@ -192,6 +207,9 @@ jobs:
 
       - name: Run production appeal scorecard probes
         run: python3 scripts/test_production_appeal_scorecards.py
+
+      - name: Run library installation queue probes
+        run: python3 scripts/test_library_installation_queue.py
 
       - name: Run Live 12 DAW mutation preflight probes
         run: python3 scripts/test_live12_daw_mutation_preflight.py

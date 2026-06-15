@@ -1,0 +1,1387 @@
+{
+  "approval_gates": [
+    {
+      "approver": "human",
+      "id": "vendor_account_action",
+      "required_evidence": [
+        "official host or app",
+        "redacted log",
+        "requested install or account action",
+        "no credential capture"
+      ],
+      "trigger": "Use an authenticated Ableton, Arturia, or other vendor account session."
+    },
+    {
+      "approver": "human",
+      "id": "purchase_or_license_change",
+      "required_evidence": [
+        "official product page",
+        "price or license terms visible to user",
+        "explicit confirmation"
+      ],
+      "trigger": "Buy, license, activate, or materially change entitlement state for a vendor product."
+    }
+  ],
+  "generated_at": "1970-01-01T00:00:00Z",
+  "generator": "scripts/render_library_installation_queue.py",
+  "install_item_count": 20,
+  "inventory_summary": {
+    "ableton_live": {
+      "available_not_installed_count": 34,
+      "exists": true,
+      "factory_pack_count": 9,
+      "indexed_pack_candidate_count": 43,
+      "live_database_read_status": "ok",
+      "name": "Ableton Live 12 Suite.app",
+      "version": "12.4.2 (2026-06-04_a687113d71)"
+    },
+    "arturia": {
+      "application_count": 56,
+      "preset_product_folder_count": 98,
+      "resource_product_count": 94,
+      "sample_product_folder_count": 24,
+      "software_center_present": true
+    },
+    "plugins": {
+      "audio_unit_root_count": 2,
+      "vst3_root_count": 2
+    }
+  },
+  "local_recommended_items": [
+    {
+      "id": "ableton-inspired-by-nature",
+      "name": "Inspired by Nature",
+      "project_use": "Generative soundscapes, evolving modulation, and natural-force Max for Live control.",
+      "source_url": "https://www.ableton.com/en/packs/inspired-nature/",
+      "status": "observed_local",
+      "vendor": "Ableton"
+    },
+    {
+      "id": "ableton-granulator-iii",
+      "name": "Granulator III",
+      "project_use": "Granular transformation of banjo, fiddle, voice, and public-domain source fragments.",
+      "source_url": "https://www.ableton.com/en/packs/granulator-iii/",
+      "status": "observed_local",
+      "vendor": "Ableton"
+    },
+    {
+      "id": "arturia-augmented-strings",
+      "name": "Augmented STRINGS",
+      "project_use": "Hybrid acoustic/synthetic string layers for fiddle-family gestures and cinematic swells.",
+      "source_url": "https://www.arturia.com/products/software-instruments/augmented/strings",
+      "status": "observed_local",
+      "vendor": "Arturia"
+    },
+    {
+      "id": "arturia-augmented-woodwinds",
+      "name": "Augmented WOODWINDS",
+      "project_use": "Breath-like hybrid motion, ghost harmonies, and eerie counterlines.",
+      "source_url": "https://www.arturia.com/products/software-instruments/augmented/woodwinds",
+      "status": "observed_local",
+      "vendor": "Arturia"
+    }
+  ],
+  "official_vendor_routes": [
+    {
+      "allowed_hosts": [
+        "www.ableton.com"
+      ],
+      "operator_route": "Ableton Live Browser > Packs, or authenticated Ableton account page for already licensed content.",
+      "supervised_automation_boundary": "Use official Ableton UI/account surfaces only after approval; record redacted receipts and refresh inventory.",
+      "vendor": "Ableton"
+    },
+    {
+      "allowed_hosts": [
+        "www.arturia.com"
+      ],
+      "operator_route": "Arturia Software Center, Arturia product page, or authenticated Arturia account page.",
+      "supervised_automation_boundary": "Use official Arturia UI/account surfaces only after approval; record redacted receipts and refresh inventory.",
+      "vendor": "Arturia"
+    }
+  ],
+  "operator_commands": {
+    "probe_queue": [
+      "python3",
+      "scripts/test_library_installation_queue.py"
+    ],
+    "refresh_inventory_after_action": [
+      "python3",
+      "scripts/inventory_live_suite.py",
+      "--output",
+      "inventory/live12-local-inventory.json"
+    ],
+    "validate_repo": [
+      "python3",
+      "scripts/validate_repo.py"
+    ]
+  },
+  "purpose": "Metadata-only operator queue for approval-gated Ableton and Arturia library/account actions.",
+  "queue": [
+    {
+      "action_class": "available_in_live_database_pending_operator_action",
+      "approval_gates_required": [
+        "vendor_account_action"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "ableton-drum-booth",
+      "ci_install_allowed": false,
+      "id": "library-install.ableton-drum-booth",
+      "install_route": "Ableton Live Browser > Packs, or Ableton account if licensed.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "name": "Drum Booth",
+      "operator_next_step": "Check the Live Browser database entry, then act through the official Ableton surface after approval.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "high",
+      "project_use": "Dry room acoustic drums for punk kit attack and reinforcement under electronic drums.",
+      "queue_order": 1,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/ableton-drum-booth/receipt.json"
+      },
+      "recommended": true,
+      "recommended_catalog_ref": "catalogs/recommended-packs.json#id=ableton-drum-booth",
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=ableton-drum-booth",
+      "source_url": "https://www.ableton.com/en/packs/drum-booth/",
+      "status": "live_database_available_not_installed",
+      "vendor": "Ableton"
+    },
+    {
+      "action_class": "available_in_live_database_pending_operator_action",
+      "approval_gates_required": [
+        "vendor_account_action"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "ableton-drum-essentials",
+      "ci_install_allowed": false,
+      "id": "library-install.ableton-drum-essentials",
+      "install_route": "Ableton Live Browser > Packs; official page lists Live 12 compatibility.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "name": "Drum Essentials",
+      "operator_next_step": "Check the Live Browser database entry, then act through the official Ableton surface after approval.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "high",
+      "project_use": "Core drum racks, MIDI clips, and one-shots for fast beat sketching and kit layering.",
+      "queue_order": 2,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/ableton-drum-essentials/receipt.json"
+      },
+      "recommended": false,
+      "recommended_catalog_ref": null,
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=ableton-drum-essentials",
+      "source_url": "https://www.ableton.com/en/packs/drum-essentials/",
+      "status": "live_database_available_not_installed",
+      "vendor": "Ableton"
+    },
+    {
+      "action_class": "available_in_live_database_pending_operator_action",
+      "approval_gates_required": [
+        "vendor_account_action"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "ableton-string-quartet",
+      "ci_install_allowed": false,
+      "id": "library-install.ableton-string-quartet",
+      "install_route": "Ableton Live Browser > Packs, or Ableton account if licensed.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "name": "String Quartet by Spitfire Audio",
+      "operator_next_step": "Check the Live Browser database entry, then act through the official Ableton surface after approval.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "high",
+      "project_use": "Bowed, pizzicato, and tremolo string gestures for fiddle-family arrangements.",
+      "queue_order": 3,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/ableton-string-quartet/receipt.json"
+      },
+      "recommended": true,
+      "recommended_catalog_ref": "catalogs/recommended-packs.json#id=ableton-string-quartet",
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=ableton-string-quartet",
+      "source_url": "https://www.ableton.com/en/packs/string-quartet/",
+      "status": "live_database_available_not_installed",
+      "vendor": "Ableton"
+    },
+    {
+      "action_class": "available_in_live_database_pending_operator_action",
+      "approval_gates_required": [
+        "vendor_account_action"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "ableton-sequencers",
+      "ci_install_allowed": false,
+      "id": "library-install.ableton-sequencers",
+      "install_route": "Ableton Live Browser > Packs; requires compatible Max for Live license.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "name": "Sequencers",
+      "operator_next_step": "Check the Live Browser database entry, then act through the official Ableton surface after approval.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "high",
+      "project_use": "Generative MIDI sequencing for banjo rolls, house stabs, and worker-agent arrangement sketches.",
+      "queue_order": 4,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/ableton-sequencers/receipt.json"
+      },
+      "recommended": true,
+      "recommended_catalog_ref": "catalogs/recommended-packs.json#id=ableton-sequencers",
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=ableton-sequencers",
+      "source_url": "https://www.ableton.com/en/packs/sequencers/",
+      "status": "live_database_available_not_installed",
+      "vendor": "Ableton"
+    },
+    {
+      "action_class": "available_in_live_database_pending_operator_action",
+      "approval_gates_required": [
+        "vendor_account_action"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "ableton-chop-and-swing",
+      "ci_install_allowed": false,
+      "id": "library-install.ableton-chop-and-swing",
+      "install_route": "Ableton Live Browser > Packs.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "name": "Chop and Swing",
+      "operator_next_step": "Check the Live Browser database entry, then act through the official Ableton surface after approval.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "high",
+      "project_use": "Sampling-first grooves and chops for transforming public-domain fiddle/banjo fragments.",
+      "queue_order": 5,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/ableton-chop-and-swing/receipt.json"
+      },
+      "recommended": false,
+      "recommended_catalog_ref": null,
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=ableton-chop-and-swing",
+      "source_url": "https://www.ableton.com/en/packs/chop-and-swing/",
+      "status": "live_database_available_not_installed",
+      "vendor": "Ableton"
+    },
+    {
+      "action_class": "available_in_live_database_pending_operator_action",
+      "approval_gates_required": [
+        "vendor_account_action"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "ableton-drive-and-glow",
+      "ci_install_allowed": false,
+      "id": "library-install.ableton-drive-and-glow",
+      "install_route": "Purchase/install through Ableton account or Live Browser if entitled.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "name": "Drive and Glow",
+      "operator_next_step": "Check the Live Browser database entry, then act through the official Ableton surface after approval.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "high",
+      "project_use": "Saturated indie guitars, basses, drums, and synth textures for punk/electronic crossover.",
+      "queue_order": 6,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/ableton-drive-and-glow/receipt.json"
+      },
+      "recommended": false,
+      "recommended_catalog_ref": null,
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=ableton-drive-and-glow",
+      "source_url": "https://www.ableton.com/en/packs/drive-and-glow/",
+      "status": "live_database_available_not_installed",
+      "vendor": "Ableton"
+    },
+    {
+      "action_class": "available_in_live_database_pending_operator_action",
+      "approval_gates_required": [
+        "vendor_account_action"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "ableton-electric-keyboards",
+      "ci_install_allowed": false,
+      "id": "library-install.ableton-electric-keyboards",
+      "install_route": "Ableton Live Browser > Packs.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "name": "Electric Keyboards",
+      "operator_next_step": "Check the Live Browser database entry, then act through the official Ableton surface after approval.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "medium",
+      "project_use": "Organic EP/organ layers for deep-house harmonic anchors.",
+      "queue_order": 7,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/ableton-electric-keyboards/receipt.json"
+      },
+      "recommended": false,
+      "recommended_catalog_ref": null,
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=ableton-electric-keyboards",
+      "source_url": "https://www.ableton.com/en/packs/electric-keyboards/",
+      "status": "live_database_available_not_installed",
+      "vendor": "Ableton"
+    },
+    {
+      "action_class": "available_in_live_database_pending_operator_action",
+      "approval_gates_required": [
+        "vendor_account_action"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "ableton-generators-by-iftah",
+      "ci_install_allowed": false,
+      "id": "library-install.ableton-generators-by-iftah",
+      "install_route": "Ableton Live Browser > Packs; requires compatible Live/Max for Live license.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "name": "Generators by Iftah",
+      "operator_next_step": "Check the Live Browser database entry, then act through the official Ableton surface after approval.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "medium",
+      "project_use": "Pattern and phrase generation for controlled swarm-composition experiments.",
+      "queue_order": 8,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/ableton-generators-by-iftah/receipt.json"
+      },
+      "recommended": false,
+      "recommended_catalog_ref": null,
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=ableton-generators-by-iftah",
+      "source_url": "https://www.ableton.com/en/packs/generators-by-iftah/",
+      "status": "live_database_available_not_installed",
+      "vendor": "Ableton"
+    },
+    {
+      "action_class": "available_in_live_database_pending_operator_action",
+      "approval_gates_required": [
+        "vendor_account_action"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "ableton-performance-pack-by-iftah",
+      "ci_install_allowed": false,
+      "id": "library-install.ableton-performance-pack-by-iftah",
+      "install_route": "Ableton Live Browser > Packs; requires compatible Live/Max for Live license.",
+      "local_signal": "Present in Live database pack index; absent from installed Factory Packs places.",
+      "name": "Performance Pack by Iftah",
+      "operator_next_step": "Check the Live Browser database entry, then act through the official Ableton surface after approval.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "medium",
+      "project_use": "Live set control, macros, and performance operations for DJ/lead-controller execution.",
+      "queue_order": 9,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/ableton-performance-pack-by-iftah/receipt.json"
+      },
+      "recommended": false,
+      "recommended_catalog_ref": null,
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=ableton-performance-pack-by-iftah",
+      "source_url": "https://www.ableton.com/en/packs/performance-pack/",
+      "status": "live_database_available_not_installed",
+      "vendor": "Ableton"
+    },
+    {
+      "action_class": "account_entitlement_review_required",
+      "approval_gates_required": [
+        "vendor_account_action"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "ableton-dm-307a-free-pack",
+      "ci_install_allowed": false,
+      "id": "library-install.ableton-dm-307a-free-pack",
+      "install_route": "Log in to Ableton, download official .alp if entitled, open with Ableton Live, then delete installer.",
+      "local_signal": "Not present in Live database pack index; official page marks it discontinued but downloadable.",
+      "name": "DM-307A Free Pack",
+      "operator_next_step": "Confirm account entitlement through the official vendor surface after approval.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "medium",
+      "project_use": "Industrial, house, techno, and organic percussion for alien drum layers.",
+      "queue_order": 10,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/ableton-dm-307a-free-pack/receipt.json"
+      },
+      "recommended": false,
+      "recommended_catalog_ref": null,
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=ableton-dm-307a-free-pack",
+      "source_url": "https://www.ableton.com/en/packs/dm-307a-free-pack/",
+      "status": "account_login_required",
+      "vendor": "Ableton"
+    },
+    {
+      "action_class": "account_entitlement_review_required",
+      "approval_gates_required": [
+        "vendor_account_action"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "ableton-spectral-textures",
+      "ci_install_allowed": false,
+      "id": "library-install.ableton-spectral-textures",
+      "install_route": "Log in to Ableton, download/install from the official pack page or account if entitled.",
+      "local_signal": "Not present in installed Factory Packs places or current Live database pack candidates.",
+      "name": "Spectral Textures",
+      "operator_next_step": "Confirm account entitlement through the official vendor surface after approval.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "high",
+      "project_use": "Field-recording and additive-synthesis atmospheres for alien transitions.",
+      "queue_order": 11,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/ableton-spectral-textures/receipt.json"
+      },
+      "recommended": true,
+      "recommended_catalog_ref": "catalogs/recommended-packs.json#id=ableton-spectral-textures",
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=ableton-spectral-textures",
+      "source_url": "https://www.ableton.com/en/packs/spectral-textures/",
+      "status": "account_login_required",
+      "vendor": "Ableton"
+    },
+    {
+      "action_class": "entitlement_or_purchase_review_required",
+      "approval_gates_required": [
+        "vendor_account_action",
+        "purchase_or_license_change"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "arturia-electronica-selection",
+      "ci_install_allowed": false,
+      "id": "library-install.arturia-electronica-selection",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "name": "Electronica Selection",
+      "operator_next_step": "Confirm entitlement first; any purchase or license change needs separate approval evidence.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "high",
+      "project_use": "Organic motion, granular detail, cinematic layers, and abstract analog tones.",
+      "queue_order": 12,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/arturia-electronica-selection/receipt.json"
+      },
+      "recommended": false,
+      "recommended_catalog_ref": null,
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=arturia-electronica-selection",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/electronica-selection",
+      "status": "account_or_purchase_required",
+      "vendor": "Arturia"
+    },
+    {
+      "action_class": "entitlement_or_purchase_review_required",
+      "approval_gates_required": [
+        "vendor_account_action",
+        "purchase_or_license_change"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "arturia-dancefloor-selection",
+      "ci_install_allowed": false,
+      "id": "library-install.arturia-dancefloor-selection",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "name": "Dancefloor Selection",
+      "operator_next_step": "Confirm entitlement first; any purchase or license change needs separate approval evidence.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "high",
+      "project_use": "House grooves, euphoric builds, and UKG-adjacent club motion for the deep-house layer.",
+      "queue_order": 13,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/arturia-dancefloor-selection/receipt.json"
+      },
+      "recommended": false,
+      "recommended_catalog_ref": null,
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=arturia-dancefloor-selection",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/dancefloor-selection",
+      "status": "account_or_purchase_required",
+      "vendor": "Arturia"
+    },
+    {
+      "action_class": "entitlement_or_purchase_review_required",
+      "approval_gates_required": [
+        "vendor_account_action",
+        "purchase_or_license_change"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "arturia-house-explorations",
+      "ci_install_allowed": false,
+      "id": "library-install.arturia-house-explorations",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "name": "House Explorations",
+      "operator_next_step": "Confirm entitlement first; any purchase or license change needs separate approval evidence.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "high",
+      "project_use": "Deep-house sub bass, chord stabs, EP keys, pads, and leads.",
+      "queue_order": 14,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/arturia-house-explorations/receipt.json"
+      },
+      "recommended": true,
+      "recommended_catalog_ref": "catalogs/recommended-packs.json#id=arturia-house-explorations",
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=arturia-house-explorations",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/house_explorations",
+      "status": "account_or_purchase_required",
+      "vendor": "Arturia"
+    },
+    {
+      "action_class": "entitlement_or_purchase_review_required",
+      "approval_gates_required": [
+        "vendor_account_action",
+        "purchase_or_license_change"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "arturia-guitar-deconstructed",
+      "ci_install_allowed": false,
+      "id": "library-install.arturia-guitar-deconstructed",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "name": "Guitar Deconstructed",
+      "operator_next_step": "Confirm entitlement first; any purchase or license change needs separate approval evidence.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "high",
+      "project_use": "Granular guitar-source presets that bridge punk strum energy and abstract ambience.",
+      "queue_order": 15,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/arturia-guitar-deconstructed/receipt.json"
+      },
+      "recommended": true,
+      "recommended_catalog_ref": "catalogs/recommended-packs.json#id=arturia-guitar-deconstructed",
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=arturia-guitar-deconstructed",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/rock-music/guitar_deconstructed",
+      "status": "account_or_purchase_required",
+      "vendor": "Arturia"
+    },
+    {
+      "action_class": "entitlement_or_purchase_review_required",
+      "approval_gates_required": [
+        "vendor_account_action",
+        "purchase_or_license_change"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "arturia-post-rock-guitars",
+      "ci_install_allowed": false,
+      "id": "library-install.arturia-post-rock-guitars",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "name": "Post-Rock Guitars",
+      "operator_next_step": "Confirm entitlement first; any purchase or license change needs separate approval evidence.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "medium",
+      "project_use": "Guitar drones, swells, and cinematic expression for punk/ambient crossover.",
+      "queue_order": 16,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/arturia-post-rock-guitars/receipt.json"
+      },
+      "recommended": false,
+      "recommended_catalog_ref": null,
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=arturia-post-rock-guitars",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/post_rock_guitars",
+      "status": "account_or_purchase_required",
+      "vendor": "Arturia"
+    },
+    {
+      "action_class": "entitlement_or_purchase_review_required",
+      "approval_gates_required": [
+        "vendor_account_action",
+        "purchase_or_license_change"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "arturia-folkloric-strings",
+      "ci_install_allowed": false,
+      "id": "library-install.arturia-folkloric-strings",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "name": "Folkloric Strings",
+      "operator_next_step": "Confirm entitlement first; any purchase or license change needs separate approval evidence.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "medium",
+      "project_use": "Old-world drones, bowed color, and roots-adjacent string atmosphere.",
+      "queue_order": 17,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/arturia-folkloric-strings/receipt.json"
+      },
+      "recommended": true,
+      "recommended_catalog_ref": "catalogs/recommended-packs.json#id=arturia-folkloric-strings",
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=arturia-folkloric-strings",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/cinematic-fx/folkloric_strings",
+      "status": "account_or_purchase_required",
+      "vendor": "Arturia"
+    },
+    {
+      "action_class": "entitlement_or_purchase_review_required",
+      "approval_gates_required": [
+        "vendor_account_action",
+        "purchase_or_license_change"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "arturia-cities-in-dust",
+      "ci_install_allowed": false,
+      "id": "library-install.arturia-cities-in-dust",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "name": "Cities In Dust",
+      "operator_next_step": "Confirm entitlement first; any purchase or license change needs separate approval evidence.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "medium",
+      "project_use": "Ambient, IDM, crystalline, and granular alien-electronica palette.",
+      "queue_order": 18,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/arturia-cities-in-dust/receipt.json"
+      },
+      "recommended": true,
+      "recommended_catalog_ref": "catalogs/recommended-packs.json#id=arturia-cities-in-dust",
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=arturia-cities-in-dust",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/cities_in_dust",
+      "status": "account_or_purchase_required",
+      "vendor": "Arturia"
+    },
+    {
+      "action_class": "entitlement_or_purchase_review_required",
+      "approval_gates_required": [
+        "vendor_account_action",
+        "purchase_or_license_change"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "arturia-industrial-force",
+      "ci_install_allowed": false,
+      "id": "library-install.arturia-industrial-force",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "name": "Industrial Force",
+      "operator_next_step": "Confirm entitlement first; any purchase or license change needs separate approval evidence.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "medium",
+      "project_use": "Aggressive underground synth and percussion energy for punk-electronica impact.",
+      "queue_order": 19,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/arturia-industrial-force/receipt.json"
+      },
+      "recommended": false,
+      "recommended_catalog_ref": null,
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=arturia-industrial-force",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/industrial_force",
+      "status": "account_or_purchase_required",
+      "vendor": "Arturia"
+    },
+    {
+      "action_class": "entitlement_or_purchase_review_required",
+      "approval_gates_required": [
+        "vendor_account_action",
+        "purchase_or_license_change"
+      ],
+      "automation_mode": "supervised_official_surface_after_approval",
+      "automation_steps": [
+        "Review source_url on the official vendor host.",
+        "Confirm entitlement, account session, and purchase boundary outside CI.",
+        "Perform the approved vendor UI/app action through a supervised authenticated session.",
+        "Refresh inventory with the tracked inventory script.",
+        "Record a redacted receipt under the ignored local receipt root before updating tracked metadata."
+      ],
+      "catalog_id": "arturia-idm-grooves",
+      "ci_install_allowed": false,
+      "id": "library-install.arturia-idm-grooves",
+      "install_route": "Acquire through Arturia Sound Store, then synchronize/install in Analog Lab, Pigments, or Arturia Software Center.",
+      "local_signal": "Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.",
+      "name": "IDM Grooves",
+      "operator_next_step": "Confirm entitlement first; any purchase or license change needs separate approval evidence.",
+      "post_action_validation": [
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+        "python3 scripts/validate_repo.py",
+        "python3 scripts/test_library_installation_queue.py"
+      ],
+      "priority": "medium",
+      "project_use": "Cerebral drum mechanics and fractured movement for alien-electronica transitions.",
+      "queue_order": 20,
+      "receipt": {
+        "git_policy": "ignored_local_only",
+        "required_fields": [
+          "run_id",
+          "catalog_id",
+          "vendor",
+          "name",
+          "execution_status",
+          "operator_approval_reference",
+          "source_url",
+          "official_surface",
+          "entitlement_reference_redacted",
+          "purchase_or_license_change_reference",
+          "inventory_before_sha256",
+          "inventory_after_sha256",
+          "observed_local_signal",
+          "created_artifacts",
+          "redactions",
+          "post_action_validation"
+        ],
+        "template_path": "output/library-installation/arturia-idm-grooves/receipt.json"
+      },
+      "recommended": false,
+      "recommended_catalog_ref": null,
+      "requires_human_confirmation": true,
+      "source_catalog_ref": "catalogs/library-installation-plan.json#id=arturia-idm-grooves",
+      "source_url": "https://www.arturia.com/store/presets-sound-banks/idm_grooves",
+      "status": "account_or_purchase_required",
+      "vendor": "Arturia"
+    }
+  ],
+  "queue_policy": {
+    "api_execution_status": "not_called_ci_safe",
+    "automation_scope": "official_surface_metadata_queue_only",
+    "blocked_without_approval": [
+      "vendor_account_action",
+      "purchase_or_license_change"
+    ],
+    "ci_install_allowed": false,
+    "credentials_required_for_generation": false,
+    "execution_status": "planned_not_executed",
+    "git_policy": "metadata_only_no_commercial_assets",
+    "local_output_root": "output/library-installation",
+    "must_not_commit": [
+      "vendor credentials",
+      "session cookies",
+      "license files",
+      "installer packages",
+      "commercial pack content",
+      "presets",
+      "samples",
+      "renders"
+    ],
+    "requires_human_confirmation": true
+  },
+  "receipt_contract": {
+    "git_policy": "ignored_local_only",
+    "output_root": "output/library-installation",
+    "prohibited_artifacts": [
+      "vendor credentials",
+      "session cookies",
+      "license files",
+      "installer packages",
+      "commercial pack content",
+      "presets",
+      "samples",
+      "renders"
+    ],
+    "required_fields": [
+      "run_id",
+      "catalog_id",
+      "vendor",
+      "name",
+      "execution_status",
+      "operator_approval_reference",
+      "source_url",
+      "official_surface",
+      "entitlement_reference_redacted",
+      "purchase_or_license_change_reference",
+      "inventory_before_sha256",
+      "inventory_after_sha256",
+      "observed_local_signal",
+      "created_artifacts",
+      "redactions",
+      "post_action_validation"
+    ],
+    "required_post_action_validation": [
+      "refreshed inventory snapshot",
+      "redacted official-surface receipt",
+      "repository validation passed"
+    ]
+  },
+  "recommended_item_count": 12,
+  "recommended_local_item_count": 4,
+  "schema_version": 1,
+  "source_file_sha256": {
+    "automation/openai-production-orchestration.json": "d951542e3acf034bcd848674e586015483d5bb0d5aa411a1d135fbcb9f77e605",
+    "catalogs/library-installation-plan.json": "a187737a31ea1feb5a5fda512bb5b1a7ce75d5d8fc5c26f6eb23e61f5093ea71",
+    "catalogs/recommended-packs.json": "23a6158a3339abf5c235b5f89fc7a1bb5ca2b5c5354bedb0eecd146578bba4c5",
+    "inventory/live12-local-inventory.json": "2ea81c2ccdcb76fdb0c12fcfec4a8fb792499c90a05d3bfa6ddc1dd2f648b094"
+  },
+  "source_files": [
+    "catalogs/library-installation-plan.json",
+    "catalogs/recommended-packs.json",
+    "inventory/live12-local-inventory.json",
+    "automation/openai-production-orchestration.json"
+  ],
+  "summary": {
+    "by_action_class": {
+      "account_entitlement_review_required": 2,
+      "available_in_live_database_pending_operator_action": 9,
+      "entitlement_or_purchase_review_required": 9
+    },
+    "by_priority": {
+      "high": 11,
+      "medium": 9
+    },
+    "by_status": {
+      "account_login_required": 2,
+      "account_or_purchase_required": 9,
+      "live_database_available_not_installed": 9
+    },
+    "by_vendor": {
+      "Ableton": 11,
+      "Arturia": 9
+    },
+    "purchase_or_license_change_required_count": 9
+  }
+}

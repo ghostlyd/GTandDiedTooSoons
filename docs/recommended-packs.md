@@ -24,7 +24,13 @@ The local Live database also indexes 43 Pack candidates. Of those, 34 are not in
 python3 scripts/inventory_live_suite.py
 ```
 
-The install backlog is versioned in `catalogs/library-installation-plan.json`.
+The install backlog is versioned in `catalogs/library-installation-plan.json`. Generate the operator queue with:
+
+```bash
+python3 scripts/render_library_installation_queue.py --stable
+```
+
+Use `docs/library-installation-queue.md` for account-gated Ableton/Arturia actions; it performs no vendor login, purchase, install, DAW launch, or OpenAI API call.
 
 ## Priority Additions
 
