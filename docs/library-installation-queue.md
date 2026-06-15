@@ -6,7 +6,9 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - No vendor login, purchase, install, DAW launch, or OpenAI API call is performed by this renderer or CI check.
 - Do not commit vendor credentials, session cookies, license files, installer packages, commercial pack content, presets, samples, or renders.
 - Local receipt root: `output/library-installation` (`ignored_local_only`).
+- Prepare local queue: `python3 scripts/prepare_library_installation_queue.py --stable`
 - Inventory refresh: `python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json`
+- Receipt recorder: `python3 scripts/record_library_installation_receipt.py --request output/library-installation/<catalog-id>/installation-request.json --evidence output/library-installation/<catalog-id>/operator-evidence.json`
 
 ## Inventory Summary
 
@@ -48,7 +50,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Present in Live database pack index; absent from installed Factory Packs places.
 - Project use: Dry room acoustic drums for punk kit attack and reinforcement under electronic drums.
 - Operator next step: Check the Live Browser database entry, then act through the official Ableton surface after approval.
-- Receipt template: `output/library-installation/ableton-drum-booth/receipt.json`
+- Receipt template: `output/library-installation/ableton-drum-booth/receipt-template.json`
 
 ### 2. Drum Essentials
 
@@ -62,7 +64,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Present in Live database pack index; absent from installed Factory Packs places.
 - Project use: Core drum racks, MIDI clips, and one-shots for fast beat sketching and kit layering.
 - Operator next step: Check the Live Browser database entry, then act through the official Ableton surface after approval.
-- Receipt template: `output/library-installation/ableton-drum-essentials/receipt.json`
+- Receipt template: `output/library-installation/ableton-drum-essentials/receipt-template.json`
 
 ### 3. String Quartet by Spitfire Audio
 
@@ -76,7 +78,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Present in Live database pack index; absent from installed Factory Packs places.
 - Project use: Bowed, pizzicato, and tremolo string gestures for fiddle-family arrangements.
 - Operator next step: Check the Live Browser database entry, then act through the official Ableton surface after approval.
-- Receipt template: `output/library-installation/ableton-string-quartet/receipt.json`
+- Receipt template: `output/library-installation/ableton-string-quartet/receipt-template.json`
 
 ### 4. Sequencers
 
@@ -90,7 +92,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Present in Live database pack index; absent from installed Factory Packs places.
 - Project use: Generative MIDI sequencing for banjo rolls, house stabs, and worker-agent arrangement sketches.
 - Operator next step: Check the Live Browser database entry, then act through the official Ableton surface after approval.
-- Receipt template: `output/library-installation/ableton-sequencers/receipt.json`
+- Receipt template: `output/library-installation/ableton-sequencers/receipt-template.json`
 
 ### 5. Chop and Swing
 
@@ -104,7 +106,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Present in Live database pack index; absent from installed Factory Packs places.
 - Project use: Sampling-first grooves and chops for transforming public-domain fiddle/banjo fragments.
 - Operator next step: Check the Live Browser database entry, then act through the official Ableton surface after approval.
-- Receipt template: `output/library-installation/ableton-chop-and-swing/receipt.json`
+- Receipt template: `output/library-installation/ableton-chop-and-swing/receipt-template.json`
 
 ### 6. Drive and Glow
 
@@ -118,7 +120,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Present in Live database pack index; absent from installed Factory Packs places.
 - Project use: Saturated indie guitars, basses, drums, and synth textures for punk/electronic crossover.
 - Operator next step: Check the Live Browser database entry, then act through the official Ableton surface after approval.
-- Receipt template: `output/library-installation/ableton-drive-and-glow/receipt.json`
+- Receipt template: `output/library-installation/ableton-drive-and-glow/receipt-template.json`
 
 ### 7. Electric Keyboards
 
@@ -132,7 +134,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Present in Live database pack index; absent from installed Factory Packs places.
 - Project use: Organic EP/organ layers for deep-house harmonic anchors.
 - Operator next step: Check the Live Browser database entry, then act through the official Ableton surface after approval.
-- Receipt template: `output/library-installation/ableton-electric-keyboards/receipt.json`
+- Receipt template: `output/library-installation/ableton-electric-keyboards/receipt-template.json`
 
 ### 8. Generators by Iftah
 
@@ -146,7 +148,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Present in Live database pack index; absent from installed Factory Packs places.
 - Project use: Pattern and phrase generation for controlled swarm-composition experiments.
 - Operator next step: Check the Live Browser database entry, then act through the official Ableton surface after approval.
-- Receipt template: `output/library-installation/ableton-generators-by-iftah/receipt.json`
+- Receipt template: `output/library-installation/ableton-generators-by-iftah/receipt-template.json`
 
 ### 9. Performance Pack by Iftah
 
@@ -160,7 +162,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Present in Live database pack index; absent from installed Factory Packs places.
 - Project use: Live set control, macros, and performance operations for DJ/lead-controller execution.
 - Operator next step: Check the Live Browser database entry, then act through the official Ableton surface after approval.
-- Receipt template: `output/library-installation/ableton-performance-pack-by-iftah/receipt.json`
+- Receipt template: `output/library-installation/ableton-performance-pack-by-iftah/receipt-template.json`
 
 ### 10. DM-307A Free Pack
 
@@ -174,7 +176,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Not present in Live database pack index; official page marks it discontinued but downloadable.
 - Project use: Industrial, house, techno, and organic percussion for alien drum layers.
 - Operator next step: Confirm account entitlement through the official vendor surface after approval.
-- Receipt template: `output/library-installation/ableton-dm-307a-free-pack/receipt.json`
+- Receipt template: `output/library-installation/ableton-dm-307a-free-pack/receipt-template.json`
 
 ### 11. Spectral Textures
 
@@ -188,7 +190,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Not present in installed Factory Packs places or current Live database pack candidates.
 - Project use: Field-recording and additive-synthesis atmospheres for alien transitions.
 - Operator next step: Confirm account entitlement through the official vendor surface after approval.
-- Receipt template: `output/library-installation/ableton-spectral-textures/receipt.json`
+- Receipt template: `output/library-installation/ableton-spectral-textures/receipt-template.json`
 
 ### 12. Electronica Selection
 
@@ -202,7 +204,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.
 - Project use: Organic motion, granular detail, cinematic layers, and abstract analog tones.
 - Operator next step: Confirm entitlement first; any purchase or license change needs separate approval evidence.
-- Receipt template: `output/library-installation/arturia-electronica-selection/receipt.json`
+- Receipt template: `output/library-installation/arturia-electronica-selection/receipt-template.json`
 
 ### 13. Dancefloor Selection
 
@@ -216,7 +218,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.
 - Project use: House grooves, euphoric builds, and UKG-adjacent club motion for the deep-house layer.
 - Operator next step: Confirm entitlement first; any purchase or license change needs separate approval evidence.
-- Receipt template: `output/library-installation/arturia-dancefloor-selection/receipt.json`
+- Receipt template: `output/library-installation/arturia-dancefloor-selection/receipt-template.json`
 
 ### 14. House Explorations
 
@@ -230,7 +232,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.
 - Project use: Deep-house sub bass, chord stabs, EP keys, pads, and leads.
 - Operator next step: Confirm entitlement first; any purchase or license change needs separate approval evidence.
-- Receipt template: `output/library-installation/arturia-house-explorations/receipt.json`
+- Receipt template: `output/library-installation/arturia-house-explorations/receipt-template.json`
 
 ### 15. Guitar Deconstructed
 
@@ -244,7 +246,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.
 - Project use: Granular guitar-source presets that bridge punk strum energy and abstract ambience.
 - Operator next step: Confirm entitlement first; any purchase or license change needs separate approval evidence.
-- Receipt template: `output/library-installation/arturia-guitar-deconstructed/receipt.json`
+- Receipt template: `output/library-installation/arturia-guitar-deconstructed/receipt-template.json`
 
 ### 16. Post-Rock Guitars
 
@@ -258,7 +260,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.
 - Project use: Guitar drones, swells, and cinematic expression for punk/ambient crossover.
 - Operator next step: Confirm entitlement first; any purchase or license change needs separate approval evidence.
-- Receipt template: `output/library-installation/arturia-post-rock-guitars/receipt.json`
+- Receipt template: `output/library-installation/arturia-post-rock-guitars/receipt-template.json`
 
 ### 17. Folkloric Strings
 
@@ -272,7 +274,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.
 - Project use: Old-world drones, bowed color, and roots-adjacent string atmosphere.
 - Operator next step: Confirm entitlement first; any purchase or license change needs separate approval evidence.
-- Receipt template: `output/library-installation/arturia-folkloric-strings/receipt.json`
+- Receipt template: `output/library-installation/arturia-folkloric-strings/receipt-template.json`
 
 ### 18. Cities In Dust
 
@@ -286,7 +288,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.
 - Project use: Ambient, IDM, crystalline, and granular alien-electronica palette.
 - Operator next step: Confirm entitlement first; any purchase or license change needs separate approval evidence.
-- Receipt template: `output/library-installation/arturia-cities-in-dust/receipt.json`
+- Receipt template: `output/library-installation/arturia-cities-in-dust/receipt-template.json`
 
 ### 19. Industrial Force
 
@@ -300,7 +302,7 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.
 - Project use: Aggressive underground synth and percussion energy for punk-electronica impact.
 - Operator next step: Confirm entitlement first; any purchase or license change needs separate approval evidence.
-- Receipt template: `output/library-installation/arturia-industrial-force/receipt.json`
+- Receipt template: `output/library-installation/arturia-industrial-force/receipt-template.json`
 
 ### 20. IDM Grooves
 
@@ -314,11 +316,12 @@ Generated operator handoff for approval-gated Ableton and Arturia library/accoun
 - Local signal: Arturia Software Center and Analog Lab V are installed; this specific bank is not verified as owned.
 - Project use: Cerebral drum mechanics and fractured movement for alien-electronica transitions.
 - Operator next step: Confirm entitlement first; any purchase or license change needs separate approval evidence.
-- Receipt template: `output/library-installation/arturia-idm-grooves/receipt.json`
+- Receipt template: `output/library-installation/arturia-idm-grooves/receipt-template.json`
 
 ## Post-Action Checks
 
 1. `python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json`
 2. `python3 scripts/validate_repo.py`
 3. `python3 scripts/test_library_installation_queue.py`
+4. `python3 scripts/test_library_installation_preflight.py`
 

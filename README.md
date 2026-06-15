@@ -28,12 +28,14 @@ python3 scripts/render_live12_daw_mutation_queue_runbook.py --stable
 python3 scripts/validate_repo.py
 python3 scripts/test_production_appeal_scorecards.py
 python3 scripts/test_library_installation_queue.py
+python3 scripts/test_library_installation_preflight.py
 python3 scripts/test_openai_production_swarm_queue.py
 python3 scripts/test_max_for_live_device_contracts.py
 python3 scripts/test_live12_daw_mutation_preflight.py
 python3 scripts/test_live12_daw_mutation_runbook.py
 python3 scripts/test_live12_daw_mutation_queue_runbook.py
 python3 scripts/test_public_domain_source_deck.py
+python3 scripts/prepare_library_installation_queue.py --stable
 python3 scripts/inventory_live_suite.py
 ```
 
@@ -61,6 +63,8 @@ Generated local inventory lands in `inventory/live12-local-inventory.json` and `
 - `automation/generated/openai-production-swarm-queue.json` - generated metadata-only per-track swarm queue linking worker roles to DAW mutation and source-deck handoffs.
 - `automation/generated/production-appeal-scorecards.json` - generated per-track affect/listening hypotheses, Max for Live levers, and evidence gates before stronger claims.
 - `automation/generated/library-installation-queue.json` - generated metadata-only queue for supervised official Ableton/Arturia account and library actions.
+- `scripts/prepare_library_installation_queue.py` - local-only request, launch-plan, evidence, and receipt scaffold generator for the library queue.
+- `scripts/record_library_installation_receipt.py` - local-only receipt recorder for approved vendor/account action evidence.
 - `automation/generated/max-for-live-device-contracts.json` - generated source-only Max for Live contract bundle with `.maxpat` patch hashes.
 - `automation/generated/live12-daw-action-plan.json` - generated approval-gated Ableton Live 12 / Max for Live action queue for local session building.
 - `automation/generated/public-domain-source-deck.json` - generated source deck manifest with approved source metadata, per-track assignments, and muted-by-default policy.

@@ -243,6 +243,8 @@ def main() -> int:
             "planned_not_executed",
             "No vendor login, purchase, install, DAW launch, or OpenAI API call is performed",
             "Do not commit vendor credentials, session cookies, license files, installer packages, commercial pack content, presets, samples, or renders.",
+            "python3 scripts/prepare_library_installation_queue.py --stable",
+            "python3 scripts/record_library_installation_receipt.py --request output/library-installation/<catalog-id>/installation-request.json --evidence output/library-installation/<catalog-id>/operator-evidence.json",
             "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         ]:
             if required_text not in markdown:

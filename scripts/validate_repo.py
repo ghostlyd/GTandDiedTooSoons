@@ -66,10 +66,13 @@ REQUIRED_FILES = [
     "scripts/prepare_live12_daw_mutation_queue.py",
     "scripts/stage_live12_daw_import_bundle.py",
     "scripts/record_live12_daw_mutation_receipt.py",
+    "scripts/prepare_library_installation_queue.py",
+    "scripts/record_library_installation_receipt.py",
     "scripts/render_openai_worker_briefs.py",
     "scripts/test_openai_production_swarm_queue.py",
     "scripts/test_production_appeal_scorecards.py",
     "scripts/test_library_installation_queue.py",
+    "scripts/test_library_installation_preflight.py",
     "scripts/test_max_for_live_device_contracts.py",
     "scripts/test_live12_daw_mutation_preflight.py",
     "scripts/test_live12_daw_mutation_runbook.py",
@@ -1560,6 +1563,7 @@ def validate_library_installation_queue(root: Path, errors: list[str]) -> None:
             "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
             "python3 scripts/validate_repo.py",
             "python3 scripts/test_library_installation_queue.py",
+            "python3 scripts/test_library_installation_preflight.py",
         ]
         if queue_item.get("post_action_validation") != expected_post_action_validation:
             fail(errors, f"Generated library installation queue post-action validation is stale: {catalog_id}")
@@ -1584,6 +1588,8 @@ def validate_library_installation_queue(root: Path, errors: list[str]) -> None:
         "planned_not_executed",
         "No vendor login, purchase, install, DAW launch, or OpenAI API call is performed",
         "Do not commit vendor credentials, session cookies, license files, installer packages, commercial pack content, presets, samples, or renders.",
+        "python3 scripts/prepare_library_installation_queue.py --stable",
+        "python3 scripts/record_library_installation_receipt.py --request output/library-installation/<catalog-id>/installation-request.json --evidence output/library-installation/<catalog-id>/operator-evidence.json",
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
     ]:
         if expected_text not in markdown:

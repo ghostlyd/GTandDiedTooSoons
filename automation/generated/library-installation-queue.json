@@ -100,9 +100,26 @@
     }
   ],
   "operator_commands": {
+    "prepare_local_preflight": [
+      "python3",
+      "scripts/prepare_library_installation_queue.py",
+      "--stable"
+    ],
+    "probe_preflight": [
+      "python3",
+      "scripts/test_library_installation_preflight.py"
+    ],
     "probe_queue": [
       "python3",
       "scripts/test_library_installation_queue.py"
+    ],
+    "record_receipt": [
+      "python3",
+      "scripts/record_library_installation_receipt.py",
+      "--request",
+      "output/library-installation/<catalog-id>/installation-request.json",
+      "--evidence",
+      "output/library-installation/<catalog-id>/operator-evidence.json"
     ],
     "refresh_inventory_after_action": [
       "python3",
@@ -140,7 +157,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "high",
       "project_use": "Dry room acoustic drums for punk kit attack and reinforcement under electronic drums.",
@@ -165,7 +183,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/ableton-drum-booth/receipt.json"
+        "template_path": "output/library-installation/ableton-drum-booth/receipt-template.json"
       },
       "recommended": true,
       "recommended_catalog_ref": "catalogs/recommended-packs.json#id=ableton-drum-booth",
@@ -198,7 +216,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "high",
       "project_use": "Core drum racks, MIDI clips, and one-shots for fast beat sketching and kit layering.",
@@ -223,7 +242,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/ableton-drum-essentials/receipt.json"
+        "template_path": "output/library-installation/ableton-drum-essentials/receipt-template.json"
       },
       "recommended": false,
       "recommended_catalog_ref": null,
@@ -256,7 +275,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "high",
       "project_use": "Bowed, pizzicato, and tremolo string gestures for fiddle-family arrangements.",
@@ -281,7 +301,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/ableton-string-quartet/receipt.json"
+        "template_path": "output/library-installation/ableton-string-quartet/receipt-template.json"
       },
       "recommended": true,
       "recommended_catalog_ref": "catalogs/recommended-packs.json#id=ableton-string-quartet",
@@ -314,7 +334,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "high",
       "project_use": "Generative MIDI sequencing for banjo rolls, house stabs, and worker-agent arrangement sketches.",
@@ -339,7 +360,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/ableton-sequencers/receipt.json"
+        "template_path": "output/library-installation/ableton-sequencers/receipt-template.json"
       },
       "recommended": true,
       "recommended_catalog_ref": "catalogs/recommended-packs.json#id=ableton-sequencers",
@@ -372,7 +393,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "high",
       "project_use": "Sampling-first grooves and chops for transforming public-domain fiddle/banjo fragments.",
@@ -397,7 +419,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/ableton-chop-and-swing/receipt.json"
+        "template_path": "output/library-installation/ableton-chop-and-swing/receipt-template.json"
       },
       "recommended": false,
       "recommended_catalog_ref": null,
@@ -430,7 +452,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "high",
       "project_use": "Saturated indie guitars, basses, drums, and synth textures for punk/electronic crossover.",
@@ -455,7 +478,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/ableton-drive-and-glow/receipt.json"
+        "template_path": "output/library-installation/ableton-drive-and-glow/receipt-template.json"
       },
       "recommended": false,
       "recommended_catalog_ref": null,
@@ -488,7 +511,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "medium",
       "project_use": "Organic EP/organ layers for deep-house harmonic anchors.",
@@ -513,7 +537,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/ableton-electric-keyboards/receipt.json"
+        "template_path": "output/library-installation/ableton-electric-keyboards/receipt-template.json"
       },
       "recommended": false,
       "recommended_catalog_ref": null,
@@ -546,7 +570,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "medium",
       "project_use": "Pattern and phrase generation for controlled swarm-composition experiments.",
@@ -571,7 +596,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/ableton-generators-by-iftah/receipt.json"
+        "template_path": "output/library-installation/ableton-generators-by-iftah/receipt-template.json"
       },
       "recommended": false,
       "recommended_catalog_ref": null,
@@ -604,7 +629,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "medium",
       "project_use": "Live set control, macros, and performance operations for DJ/lead-controller execution.",
@@ -629,7 +655,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/ableton-performance-pack-by-iftah/receipt.json"
+        "template_path": "output/library-installation/ableton-performance-pack-by-iftah/receipt-template.json"
       },
       "recommended": false,
       "recommended_catalog_ref": null,
@@ -662,7 +688,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "medium",
       "project_use": "Industrial, house, techno, and organic percussion for alien drum layers.",
@@ -687,7 +714,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/ableton-dm-307a-free-pack/receipt.json"
+        "template_path": "output/library-installation/ableton-dm-307a-free-pack/receipt-template.json"
       },
       "recommended": false,
       "recommended_catalog_ref": null,
@@ -720,7 +747,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "high",
       "project_use": "Field-recording and additive-synthesis atmospheres for alien transitions.",
@@ -745,7 +773,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/ableton-spectral-textures/receipt.json"
+        "template_path": "output/library-installation/ableton-spectral-textures/receipt-template.json"
       },
       "recommended": true,
       "recommended_catalog_ref": "catalogs/recommended-packs.json#id=ableton-spectral-textures",
@@ -779,7 +807,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "high",
       "project_use": "Organic motion, granular detail, cinematic layers, and abstract analog tones.",
@@ -804,7 +833,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/arturia-electronica-selection/receipt.json"
+        "template_path": "output/library-installation/arturia-electronica-selection/receipt-template.json"
       },
       "recommended": false,
       "recommended_catalog_ref": null,
@@ -838,7 +867,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "high",
       "project_use": "House grooves, euphoric builds, and UKG-adjacent club motion for the deep-house layer.",
@@ -863,7 +893,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/arturia-dancefloor-selection/receipt.json"
+        "template_path": "output/library-installation/arturia-dancefloor-selection/receipt-template.json"
       },
       "recommended": false,
       "recommended_catalog_ref": null,
@@ -897,7 +927,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "high",
       "project_use": "Deep-house sub bass, chord stabs, EP keys, pads, and leads.",
@@ -922,7 +953,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/arturia-house-explorations/receipt.json"
+        "template_path": "output/library-installation/arturia-house-explorations/receipt-template.json"
       },
       "recommended": true,
       "recommended_catalog_ref": "catalogs/recommended-packs.json#id=arturia-house-explorations",
@@ -956,7 +987,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "high",
       "project_use": "Granular guitar-source presets that bridge punk strum energy and abstract ambience.",
@@ -981,7 +1013,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/arturia-guitar-deconstructed/receipt.json"
+        "template_path": "output/library-installation/arturia-guitar-deconstructed/receipt-template.json"
       },
       "recommended": true,
       "recommended_catalog_ref": "catalogs/recommended-packs.json#id=arturia-guitar-deconstructed",
@@ -1015,7 +1047,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "medium",
       "project_use": "Guitar drones, swells, and cinematic expression for punk/ambient crossover.",
@@ -1040,7 +1073,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/arturia-post-rock-guitars/receipt.json"
+        "template_path": "output/library-installation/arturia-post-rock-guitars/receipt-template.json"
       },
       "recommended": false,
       "recommended_catalog_ref": null,
@@ -1074,7 +1107,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "medium",
       "project_use": "Old-world drones, bowed color, and roots-adjacent string atmosphere.",
@@ -1099,7 +1133,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/arturia-folkloric-strings/receipt.json"
+        "template_path": "output/library-installation/arturia-folkloric-strings/receipt-template.json"
       },
       "recommended": true,
       "recommended_catalog_ref": "catalogs/recommended-packs.json#id=arturia-folkloric-strings",
@@ -1133,7 +1167,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "medium",
       "project_use": "Ambient, IDM, crystalline, and granular alien-electronica palette.",
@@ -1158,7 +1193,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/arturia-cities-in-dust/receipt.json"
+        "template_path": "output/library-installation/arturia-cities-in-dust/receipt-template.json"
       },
       "recommended": true,
       "recommended_catalog_ref": "catalogs/recommended-packs.json#id=arturia-cities-in-dust",
@@ -1192,7 +1227,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "medium",
       "project_use": "Aggressive underground synth and percussion energy for punk-electronica impact.",
@@ -1217,7 +1253,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/arturia-industrial-force/receipt.json"
+        "template_path": "output/library-installation/arturia-industrial-force/receipt-template.json"
       },
       "recommended": false,
       "recommended_catalog_ref": null,
@@ -1251,7 +1287,8 @@
       "post_action_validation": [
         "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
         "python3 scripts/validate_repo.py",
-        "python3 scripts/test_library_installation_queue.py"
+        "python3 scripts/test_library_installation_queue.py",
+        "python3 scripts/test_library_installation_preflight.py"
       ],
       "priority": "medium",
       "project_use": "Cerebral drum mechanics and fractured movement for alien-electronica transitions.",
@@ -1276,7 +1313,7 @@
           "redactions",
           "post_action_validation"
         ],
-        "template_path": "output/library-installation/arturia-idm-grooves/receipt.json"
+        "template_path": "output/library-installation/arturia-idm-grooves/receipt-template.json"
       },
       "recommended": false,
       "recommended_catalog_ref": null,

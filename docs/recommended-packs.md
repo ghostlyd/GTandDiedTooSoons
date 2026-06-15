@@ -31,6 +31,11 @@ python3 scripts/render_library_installation_queue.py --stable
 ```
 
 Use `docs/library-installation-queue.md` for account-gated Ableton/Arturia actions; it performs no vendor login, purchase, install, DAW launch, or OpenAI API call.
+Prepare local ignored request/evidence/receipt scaffolds with:
+
+```bash
+python3 scripts/prepare_library_installation_queue.py --stable
+```
 
 ## Priority Additions
 
