@@ -475,7 +475,7 @@
   "source_file_sha256": {
     "automation/live12-session-template.json": "f17640bd3d24a4f6953836393c3286a45c7ba9c9064399590611dac566c76c51",
     "automation/max-for-live-device-contracts.json": "e057cd7e9931b678b0785ab1857aeeff2e2e100d38bc0aa4657c3042c5d467c3",
-    "compositions/generated/live12-track-build-plans.json": "0893e3a502e4b451f5d2b5b4da5848e732fd1c14bdd4f39512c745e5f7921bce"
+    "compositions/generated/live12-track-build-plans.json": "042b225ca844fe9ab57dca092fc77735244d526ed6dac0f35c72a4807ca58afa"
   },
   "source_files": [
     "automation/max-for-live-device-contracts.json",

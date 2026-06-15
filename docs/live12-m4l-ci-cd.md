@@ -10,6 +10,7 @@ GitHub-hosted runners do not include Ableton Live, Max for Live, Arturia Softwar
 - Exercise local inventory code in dry-run mode.
 - Ensure public-domain source entries include rights metadata.
 - Regenerate OpenAI worker briefs and composition MIDI sketches in stable mode, then diff them against committed generated artifacts.
+- Run composition mutation blueprint probes to require full bluegrass instrumentation, alien-electronic role jobs, punk constraints, source-deck mute gates, and Max for Live focus coverage per track.
 - Regenerate production appeal scorecards in stable mode, then diff JSON and Markdown outputs against committed artifacts.
 - Regenerate the library installation queue in stable mode, then diff JSON and Markdown outputs against committed artifacts.
 - Regenerate the OpenAI production swarm queue in stable mode, then diff JSON and Markdown outputs against committed artifacts.
@@ -47,6 +48,7 @@ python3 scripts/test_library_installation_queue.py
 python3 scripts/test_library_installation_preflight.py
 python3 scripts/test_openai_production_swarm_queue.py
 python3 scripts/test_max_for_live_device_contracts.py
+python3 scripts/test_composition_mutation_blueprints.py
 python3 scripts/test_live12_daw_mutation_preflight.py
 python3 scripts/test_live12_daw_mutation_runbook.py
 python3 scripts/test_live12_daw_mutation_queue_runbook.py
@@ -77,6 +79,7 @@ For future Max device work:
 | `docs/openai-production-swarm-queue.md` | Generated human-readable swarm queue with track-by-track role handoffs, approval gates, and DAW/source references. |
 | `automation/generated/max-for-live-device-contracts.json` | Source-only Max for Live contract bundle and `.maxpat` patch hashes for every session device contract. |
 | `max-for-live/patches/*.maxpat` | Reviewable Max patch source blueprints; compile locally only after approval and rollback evidence. |
+| `compositions/composition-mutation-blueprints.json` | Metadata-only track DNA contract for full traditional-role coverage, alien-electronic roles, punk constraints, source-deck review state, and Max for Live mutation lanes. |
 | `automation/generated/live12-daw-action-plan.json` | Approval-gated action queue for building generated tracks locally in Live 12 without committing `.als`, `.amxd`, samples, renders, credentials, or account artifacts. |
 | `automation/generated/public-domain-source-deck.json` | Metadata-only approved source-deck handoff with rights evidence and muted-by-default per-track source assignments. |
 | `docs/public-domain-source-deck.md` | Generated operator-facing source-deck summary that omits raw local paths and direct download URLs. |
@@ -85,7 +88,7 @@ For future Max device work:
 | `docs/live12-daw-mutation-runbook.md` | Generated human-readable checklist for applying local Ableton/Max mutations with rollback and receipt evidence. |
 | `automation/generated/live12-daw-mutation-queue-runbook.json` | Generated full-set queue command manifest for staging ignored local DAW mutation artifacts without launching Ableton automatically. |
 | `docs/live12-daw-mutation-queue-runbook.md` | Generated full-set queue handoff for queue preparation, gated per-track launch commands, and receipt capture. |
-| `compositions/generated/live12-track-build-plans.json` | Human-readable import map, device targets, MIDI hashes, and safety constraints for each standalone track. |
+| `compositions/generated/live12-track-build-plans.json` | Human-readable import map, device targets, MIDI hashes, mirrored composition mutation blueprints, and safety constraints for each standalone track. |
 | `compositions/generated/midi/*.mid` | Deterministic placeholder MIDI sketches for Live import and replacement with verified Ableton/Arturia instruments. |
 | `inventory/live12-local-inventory.*` | Non-sensitive local host state for pack and plugin availability. |
 | `catalogs/recommended-packs.json` | License-aware planning for Ableton and Arturia content. |

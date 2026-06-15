@@ -10,7 +10,7 @@ Do not claim scientifically proven psychological effects from these tracks unles
 
 - Track slug: `good-vibrations-in-a-burned-barn`
 - Claim status: `hypothesis_not_validated`
-- Overall hypothesis score: `4.75`
+- Overall hypothesis score: `4.88`
 - Study gate: `requires_listener_protocol=true`
 
 | Dimension | Score | Measurement prompt |
@@ -19,7 +19,7 @@ Do not claim scientifically proven psychological effects from these tracks unles
 | `hook_repetition` | 5 | Mark the first timestamp where the core motif is recognized, then note whether it returns with meaningful variation. |
 | `call_response` | 5 | During a rough playback, log whether response phrases feel conversational rather than stacked or ornamental. |
 | `spectral_contrast` | 5 | Compare acoustic-core audibility against alien texture density; note any section where identity collapses into generic wash. |
-| `spatial_motion` | 4 | On headphones and speakers, rate whether spatial movement supports form without pulling the lead instrument out of focus. |
+| `spatial_motion` | 5 | On headphones and speakers, rate whether spatial movement supports form without pulling the lead instrument out of focus. |
 | `dynamic_surprise` | 4 | Log whether a break, stop, or fill changes attention without feeling like a random edit. |
 | `tactile_performance_risk` | 5 | During controller rehearsal, note whether imperfections read as human urgency rather than technical failure. |
 | `provenance_resonance` | 5 | Before any unmute, verify whether source use has audible purpose, credit clarity, and rights evidence. |

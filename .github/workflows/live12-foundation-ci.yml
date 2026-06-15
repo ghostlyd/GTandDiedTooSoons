@@ -43,6 +43,9 @@ jobs:
           python3 scripts/render_composition_sketches.py --stable --output-dir /tmp/composition-sketches
           diff -ru compositions/generated /tmp/composition-sketches
 
+      - name: Run composition mutation blueprint probes
+        run: python3 scripts/test_composition_mutation_blueprints.py
+
       - name: Verify generated production appeal scorecards are in sync
         run: |
           python3 scripts/render_production_appeal_scorecards.py --stable --output /tmp/production-appeal-scorecards.json --markdown-output /tmp/production-appeal-scorecards.md
@@ -151,6 +154,9 @@ jobs:
           rm -rf /tmp/composition-sketches
           python3 scripts/render_composition_sketches.py --stable --output-dir /tmp/composition-sketches
           diff -ru compositions/generated /tmp/composition-sketches
+
+      - name: Run composition mutation blueprint probes
+        run: python3 scripts/test_composition_mutation_blueprints.py
 
       - name: Verify generated production appeal scorecards are in sync
         run: |

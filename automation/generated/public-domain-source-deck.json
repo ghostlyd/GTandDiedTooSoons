@@ -258,7 +258,7 @@
   "purpose": "Metadata-only public-domain source deck handoff for Ableton Live 12 / Max for Live sampling and reference work.",
   "schema_version": 1,
   "source_file_sha256": {
-    "automation/generated/live12-daw-action-plan.json": "6be1bc42158e02223caffacedfad72887a4f8341f6af2a187a6a5e876468547a",
+    "automation/generated/live12-daw-action-plan.json": "8002bf727a4d8d427fbf062c14f1951f1034c8437c037d51aa9102ea1368b4b8",
     "catalogs/public-domain-bluegrass-sources.json": "d51fd5b0d1fbb24df3bfb3f320274d930b3b1d078f654a1e190d8fc56f9d22e7",
     "sources/public-domain/download-ledger.json": "1afc7bc369de79189aa13d1396b53604613fb21b52c6283281c1a530fcba61c5"
   },

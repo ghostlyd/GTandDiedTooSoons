@@ -124,7 +124,7 @@
             "Spatial harmonic field or spatial send targets are present.",
             "Brief references width, dub, fade, bloom, or spatial movement."
           ],
-          "score": 4
+          "score": 5
         },
         {
           "daw_levers": [
@@ -200,7 +200,7 @@
           ]
         }
       ],
-      "overall_hypothesis_score": 4.75,
+      "overall_hypothesis_score": 4.88,
       "study_gate": {
         "minimum_evidence_before_strong_claim": [
           "approved study protocol",
@@ -1204,11 +1204,11 @@
     }
   ],
   "source_file_sha256": {
-    "automation/generated/live12-daw-action-plan.json": "6be1bc42158e02223caffacedfad72887a4f8341f6af2a187a6a5e876468547a",
-    "automation/generated/max-for-live-device-contracts.json": "25613153f7ed60871411911a4572f10448a6f0298a62ba63bc2aa285e10b51d0",
-    "automation/generated/public-domain-source-deck.json": "8f1e492e9feeff70b2bcec6fdc65a40b1cbc56fca3580bf25f067776846791a4",
+    "automation/generated/live12-daw-action-plan.json": "8002bf727a4d8d427fbf062c14f1951f1034c8437c037d51aa9102ea1368b4b8",
+    "automation/generated/max-for-live-device-contracts.json": "c2568c4dec787f50bad5d2d743fa406080403086ebb3cc385f8f4b3b892c497d",
+    "automation/generated/public-domain-source-deck.json": "a4bea225bea9fad4a45c3705dc18a2fc76bbb669c25d37e50cc2fa91679e04be",
     "compositions/down-tempo-punk-bluegrass-set.json": "d7ace3ba0abc6d17758caa587c052818002f76825a024dab5f5ced531bdff488",
-    "compositions/generated/live12-track-build-plans.json": "0893e3a502e4b451f5d2b5b4da5848e732fd1c14bdd4f39512c745e5f7921bce"
+    "compositions/generated/live12-track-build-plans.json": "042b225ca844fe9ab57dca092fc77735244d526ed6dac0f35c72a4807ca58afa"
   },
   "source_files": [
     "compositions/down-tempo-punk-bluegrass-set.json",

@@ -73,7 +73,7 @@
         "verification_action_id": "good-vibrations-in-a-burned-barn.preflight.verify-midi-hash"
       },
       "mutation_action_count": 19,
-      "plan_track_sha256": "42e1dd9eebf164e9da350db9d07473c393be29c25c2330315834d5109bf592b3",
+      "plan_track_sha256": "3838501fc900b347e81e0d86d29068a96a3f61c09ab40957787a5992c85f21bc",
       "preflight_action_ids": [
         "good-vibrations-in-a-burned-barn.preflight.verify-midi-hash",
         "good-vibrations-in-a-burned-barn.preflight.create-local-rollback-copy",
@@ -162,7 +162,7 @@
         "verification_action_id": "a-p-carter-in-the-warehouse.preflight.verify-midi-hash"
       },
       "mutation_action_count": 18,
-      "plan_track_sha256": "7873b6961d1ad83f9a96808012102d878f00c48477739acf7bd4a699258d14c3",
+      "plan_track_sha256": "8f937ac8841a9c077c1d46c907cb09dcf3827c6f7eab11b71b35b87fe39e6c7e",
       "preflight_action_ids": [
         "a-p-carter-in-the-warehouse.preflight.verify-midi-hash",
         "a-p-carter-in-the-warehouse.preflight.create-local-rollback-copy",
@@ -251,7 +251,7 @@
         "verification_action_id": "no-gods-no-masters-no-quantize.preflight.verify-midi-hash"
       },
       "mutation_action_count": 18,
-      "plan_track_sha256": "c228333f5103009137c8ef9ef8f8960712ec374fabacbd80c42a195ea75151a3",
+      "plan_track_sha256": "149370924a02a9666756f3595ec26273dc4fe78debb415603988ebcd2aa0f32d",
       "preflight_action_ids": [
         "no-gods-no-masters-no-quantize.preflight.verify-midi-hash",
         "no-gods-no-masters-no-quantize.preflight.create-local-rollback-copy",
@@ -340,7 +340,7 @@
         "verification_action_id": "possum-kingdom-afterhours.preflight.verify-midi-hash"
       },
       "mutation_action_count": 18,
-      "plan_track_sha256": "88a1b8492bfe31656ffcea6b1d5fbc521a385c3b5f9e960f741fcafa6ed73c71",
+      "plan_track_sha256": "8eca326c2db3c3369d3ee55b961613424dd8a60d5ba276ce0bdd1d0019817226",
       "preflight_action_ids": [
         "possum-kingdom-afterhours.preflight.verify-midi-hash",
         "possum-kingdom-afterhours.preflight.create-local-rollback-copy",
@@ -429,7 +429,7 @@
         "verification_action_id": "the-ballad-of-the-broken-controller.preflight.verify-midi-hash"
       },
       "mutation_action_count": 18,
-      "plan_track_sha256": "3f012cc5d1babfd8193bed8b45ba2c23421e22468586d2109b358f2cd6241f62",
+      "plan_track_sha256": "95357eed1a5c5b6d2cb1ace2054a367ee36cad2c0764671d7b2f1253a15ad958",
       "preflight_action_ids": [
         "the-ballad-of-the-broken-controller.preflight.verify-midi-hash",
         "the-ballad-of-the-broken-controller.preflight.create-local-rollback-copy",
@@ -521,7 +521,7 @@
         "verification_action_id": "rail-yard-ghost-in-the-control-room.preflight.verify-midi-hash"
       },
       "mutation_action_count": 21,
-      "plan_track_sha256": "887fa3c0abd320aab9619938b653c722e6e5ba021deb6d7d5e10086a7145d0a5",
+      "plan_track_sha256": "7018b710618fd37bd2fc6473bb4dae03f7af546e90706c774dc2eb5616d133c9",
       "preflight_action_ids": [
         "rail-yard-ghost-in-the-control-room.preflight.verify-midi-hash",
         "rail-yard-ghost-in-the-control-room.preflight.create-local-rollback-copy",
@@ -618,9 +618,9 @@
   },
   "schema_version": 1,
   "source_file_sha256": {
-    "automation/generated/live12-daw-action-plan.json": "6be1bc42158e02223caffacedfad72887a4f8341f6af2a187a6a5e876468547a",
+    "automation/generated/live12-daw-action-plan.json": "8002bf727a4d8d427fbf062c14f1951f1034c8437c037d51aa9102ea1368b4b8",
     "automation/live12-session-template.json": "f17640bd3d24a4f6953836393c3286a45c7ba9c9064399590611dac566c76c51",
-    "compositions/generated/live12-track-build-plans.json": "0893e3a502e4b451f5d2b5b4da5848e732fd1c14bdd4f39512c745e5f7921bce"
+    "compositions/generated/live12-track-build-plans.json": "042b225ca844fe9ab57dca092fc77735244d526ed6dac0f35c72a4807ca58afa"
   },
   "source_files": [
     "automation/generated/live12-daw-action-plan.json",
@@ -631,7 +631,7 @@
     "build_plan_track_count": 6,
     "path": "automation/generated/live12-daw-action-plan.json",
     "session_track_count": 10,
-    "sha256": "6be1bc42158e02223caffacedfad72887a4f8341f6af2a187a6a5e876468547a",
+    "sha256": "8002bf727a4d8d427fbf062c14f1951f1034c8437c037d51aa9102ea1368b4b8",
     "track_count": 6
   }
 }

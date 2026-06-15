@@ -63,13 +63,13 @@
   ],
   "schema_version": 1,
   "source_file_sha256": {
-    "automation/generated/live12-daw-mutation-package.json": "8160ecc73e5e7de6f36957daf51ee363ebb6bcf6cfa7bd845017b0cc411c605b",
-    "automation/generated/live12-daw-mutation-queue-runbook.json": "c1110fa918099b70f7fa6975f3db26cc711fe06b7c68bb1d917e94b8751eea9e",
+    "automation/generated/live12-daw-mutation-package.json": "c1e5af272442795b31ef9c8e7532663ac00d74dbd61dd8e10c581b2c2e1c7dc4",
+    "automation/generated/live12-daw-mutation-queue-runbook.json": "8f25ac3d50cca9f40e02fc60d79d9064b2693a34197b16e38b0e2f61487532c3",
     "automation/generated/openai-worker-briefs.json": "868ec7a15d0f0aaa3774a1ba82bc9766f62bb4d7c147f61ab13a169e4f7d3e70",
-    "automation/generated/public-domain-source-deck.json": "8f1e492e9feeff70b2bcec6fdc65a40b1cbc56fca3580bf25f067776846791a4",
+    "automation/generated/public-domain-source-deck.json": "a4bea225bea9fad4a45c3705dc18a2fc76bbb669c25d37e50cc2fa91679e04be",
     "automation/openai-production-orchestration.json": "d951542e3acf034bcd848674e586015483d5bb0d5aa411a1d135fbcb9f77e605",
     "automation/worker-chain.json": "ca970b4096d7ef183aa589bffe358ff50bf0917e96d20976cd6b0f2a48120d83",
-    "compositions/generated/live12-track-build-plans.json": "0893e3a502e4b451f5d2b5b4da5848e732fd1c14bdd4f39512c745e5f7921bce"
+    "compositions/generated/live12-track-build-plans.json": "042b225ca844fe9ab57dca092fc77735244d526ed6dac0f35c72a4807ca58afa"
   },
   "source_files": [
     "automation/openai-production-orchestration.json",

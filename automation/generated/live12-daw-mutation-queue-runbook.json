@@ -73,8 +73,8 @@
   },
   "schema_version": 1,
   "source_file_sha256": {
-    "automation/generated/live12-daw-mutation-package.json": "8160ecc73e5e7de6f36957daf51ee363ebb6bcf6cfa7bd845017b0cc411c605b",
-    "automation/generated/max-for-live-device-contracts.json": "25613153f7ed60871411911a4572f10448a6f0298a62ba63bc2aa285e10b51d0",
+    "automation/generated/live12-daw-mutation-package.json": "c1e5af272442795b31ef9c8e7532663ac00d74dbd61dd8e10c581b2c2e1c7dc4",
+    "automation/generated/max-for-live-device-contracts.json": "c2568c4dec787f50bad5d2d743fa406080403086ebb3cc385f8f4b3b892c497d",
     "scripts/prepare_live12_daw_mutation_queue.py": "9afdf8bdee1d476d1fd5ffc4c019245e64aae5477e5b80d032ea874753786b3a",
     "scripts/record_live12_daw_mutation_receipt.py": "e056ae3bbf38d128c0054b1c4bab4b7af9ce28db0b11ac017819ffef351e3ed9",
     "scripts/stage_live12_daw_import_bundle.py": "5d776200f8836f9a6724da40d11b11b8bc2eb331857e3a08a3be6f48c15a6fc2"
