@@ -22,6 +22,7 @@ PPQ = 480
 BAR_TICKS = PPQ * 4
 SOURCE_FILES = [
     "compositions/down-tempo-punk-bluegrass-set.json",
+    "compositions/composition-mutation-blueprints.json",
     "automation/live12-session-template.json",
 ]
 
@@ -461,12 +462,20 @@ def render_midi(track: dict[str, Any], scenes: list[dict[str, Any]], output_path
     output_path.write_bytes(header + b"".join(midi_tracks))
 
 
-def build_plan_entry(track: dict[str, Any], session_template: dict[str, Any], output_dir: Path) -> dict[str, Any]:
+def build_plan_entry(
+    track: dict[str, Any],
+    session_template: dict[str, Any],
+    output_dir: Path,
+    blueprint_by_slug: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
     slug = slugify(track["title"])
     scenes = build_scenes(track)
     midi_rel = Path("midi") / f"{slug}.mid"
     midi_path = output_dir / midi_rel
     render_midi(track, scenes, midi_path)
+    blueprint = blueprint_by_slug.get(slug)
+    if not blueprint:
+        raise ValueError(f"Missing composition mutation blueprint for {slug}")
 
     session_tracks = {item["name"]: item for item in session_template.get("tracks", [])}
     layers = []
@@ -503,6 +512,7 @@ def build_plan_entry(track: dict[str, Any], session_template: dict[str, Any], ou
         "bluegrass_core": track.get("bluegrass_core", []),
         "electronic_dna": track.get("electronic_dna", []),
         "punk_spirit": track.get("punk_spirit", []),
+        "composition_mutation_blueprint": blueprint,
         "production_constraints": [
             "Import MIDI into Ableton Live 12, then map each MIDI track to the matching session-template track.",
             "Keep Public Domain Source Deck muted until the source ledger approves the selected audio.",
@@ -514,11 +524,19 @@ def build_plan_entry(track: dict[str, Any], session_template: dict[str, Any], ou
 
 def render(output_dir: Path = DEFAULT_OUTPUT_DIR, stable: bool = False) -> dict[str, Any]:
     composition = read_json("compositions/down-tempo-punk-bluegrass-set.json")
+    blueprint_manifest = read_json("compositions/composition-mutation-blueprints.json")
     session_template = read_json("automation/live12-session-template.json")
     output_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "midi").mkdir(parents=True, exist_ok=True)
 
-    plans = [build_plan_entry(track, session_template, output_dir) for track in composition.get("tracks", [])]
+    blueprint_by_slug = {
+        blueprint["slug"]: blueprint
+        for blueprint in blueprint_manifest.get("tracks", [])
+    }
+    plans = [
+        build_plan_entry(track, session_template, output_dir, blueprint_by_slug)
+        for track in composition.get("tracks", [])
+    ]
     return {
         "schema_version": 1,
         "generated_at": STABLE_GENERATED_AT if stable else utc_now(),
@@ -530,6 +548,7 @@ def render(output_dir: Path = DEFAULT_OUTPUT_DIR, stable: bool = False) -> dict[
             "Create or open a Live 12 session from automation/live12-session-template.json.",
             "Drag each .mid file into Live and route generated MIDI tracks to matching session tracks.",
             "Replace GM placeholder sounds with the documented Ableton/Arturia instruments only after license verification.",
+            "Use composition_mutation_blueprint for per-track role jobs, mutation lanes, and section-level review targets.",
             "Use Max for Live device contracts in each plan as the automation target list.",
         ],
         "tracks": plans,
@@ -543,9 +562,12 @@ def write_readme(output_dir: Path) -> None:
         "This directory contains deterministic composition artifacts rendered from:",
         "",
         "- `compositions/down-tempo-punk-bluegrass-set.json`",
+        "- `compositions/composition-mutation-blueprints.json`",
         "- `automation/live12-session-template.json`",
         "",
-        "The `.mid` files are generated note/control sketches for Ableton Live import. They do not contain sampled audio, Ableton Live Sets, Max for Live devices, Arturia presets, commercial pack content, private recordings, credentials, cookies, or license files.",
+        "The `.mid` files are generated note/control sketches for Ableton Live import. The JSON build plan also carries per-track composition mutation blueprints: full bluegrass-role jobs, alien-electronic role jobs, punk constraints, source-deck approval state, and Max for Live mutation lanes.",
+        "",
+        "These generated files do not contain sampled audio, Ableton Live Sets, Max for Live devices, Arturia presets, commercial pack content, private recordings, credentials, cookies, or license files.",
         "",
         "The approval-gated Ableton/Max for Live action queue that consumes these sketches lives at `automation/generated/live12-daw-action-plan.json`.",
         "",

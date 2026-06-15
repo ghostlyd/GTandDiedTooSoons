@@ -343,6 +343,7 @@ def build_track_plan(
         "midi_file": track_plan["midi_file"],
         "midi_sha256": track_plan["midi_sha256"],
         "approximate_bars": track_plan["approximate_bars"],
+        "composition_mutation_blueprint": track_plan.get("composition_mutation_blueprint", {}),
         "approval_gates_required": approval_gates_from_actions(
             preflight_actions,
             session_actions,

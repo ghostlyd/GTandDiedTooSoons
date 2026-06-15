@@ -48,6 +48,7 @@ REQUIRED_FILES = [
     "automation/live12-session-template.json",
     "automation/worker-chain.json",
     "compositions/down-tempo-punk-bluegrass-set.json",
+    "compositions/composition-mutation-blueprints.json",
     "compositions/generated/README.md",
     "compositions/generated/live12-track-build-plans.json",
     "scripts/inventory_live_suite.py",
@@ -77,6 +78,7 @@ REQUIRED_FILES = [
     "scripts/test_live12_daw_mutation_preflight.py",
     "scripts/test_live12_daw_mutation_runbook.py",
     "scripts/test_live12_daw_mutation_queue_runbook.py",
+    "scripts/test_composition_mutation_blueprints.py",
     "scripts/test_public_domain_source_deck.py",
     "sources/public-domain/download-ledger.json",
 ]
@@ -174,7 +176,30 @@ EXPECTED_OPENAI_SWARM_QUEUE_SOURCES = {
 }
 EXPECTED_COMPOSITION_SKETCH_SOURCES = {
     "compositions/down-tempo-punk-bluegrass-set.json",
+    "compositions/composition-mutation-blueprints.json",
     "automation/live12-session-template.json",
+}
+EXPECTED_TRADITIONAL_BLUEGRASS_ROLE_IDS = {
+    "aeroband_banjo_lead",
+    "fiddle_hybrid_strings",
+    "mandolin_chop",
+    "dobro_metallic_slide",
+    "acoustic_guitar_boom_chuck",
+    "upright_bass_sub",
+}
+EXPECTED_ALIEN_ROLE_IDS = {
+    "deep_house_machines",
+    "alien_sky",
+    "public_domain_source_deck",
+}
+EXPECTED_PUNK_ROLE_IDS = {
+    "punk_kit",
+    "performance_rule",
+    "anti_polish_rule",
+}
+ALLOWED_SOURCE_DECK_STATES = {
+    "muted",
+    "candidate_slices_after_review",
 }
 EXPECTED_PRODUCTION_APPEAL_SCORECARD_SOURCES = {
     "compositions/down-tempo-punk-bluegrass-set.json",
@@ -809,6 +834,7 @@ def validate_json_contracts(root: Path, errors: list[str]) -> None:
         "automation/live12-session-template.json",
         "automation/worker-chain.json",
         "compositions/down-tempo-punk-bluegrass-set.json",
+        "compositions/composition-mutation-blueprints.json",
     ]:
         data = load_json(root / rel, errors)
         if data and data.get("schema_version") != 1:
@@ -1723,6 +1749,8 @@ def validate_generated_daw_action_plan(root: Path, errors: list[str]) -> None:
         for field in ["tempo_bpm", "key_center", "duration_target", "midi_file", "midi_sha256", "approximate_bars"]:
             if track.get(field) != build_plan.get(field):
                 fail(errors, f"Generated DAW action plan track {field} is stale: {title}")
+        if track.get("composition_mutation_blueprint") != build_plan.get("composition_mutation_blueprint"):
+            fail(errors, f"Generated DAW action plan must mirror composition mutation blueprint: {title}")
         if not tempo_range[0] <= track.get("tempo_bpm", 0) <= tempo_range[1]:
             fail(errors, f"Generated DAW action plan tempo is outside session range: {title}")
         actual_approval_gates = set()
@@ -2641,11 +2669,122 @@ def validate_midi_file(path: Path, errors: list[str], expected_track_names: list
         fail(errors, f"MIDI file track names do not match manifest layers: {rel}")
 
 
-def validate_generated_composition_sketches(root: Path, errors: list[str]) -> None:
-    data = load_json(root / "compositions/generated/live12-track-build-plans.json", errors)
+def slugify_title(value: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+    return slug or "untitled"
+
+
+def validate_composition_mutation_blueprints(root: Path, errors: list[str]) -> None:
+    data = load_json(root / "compositions/composition-mutation-blueprints.json", errors)
     compositions = load_json(root / "compositions/down-tempo-punk-bluegrass-set.json", errors)
     session_template = load_json(root / "automation/live12-session-template.json", errors)
     if not data or not compositions or not session_template:
+        return
+
+    if data.get("schema_version") != 1:
+        fail(errors, "Composition mutation blueprints must use schema_version 1")
+    claims_policy = require_dict(data.get("claims_policy"), "composition blueprint claims_policy", errors)
+    if claims_policy.get("appeal_claim_status") != "hypothesis_not_proof":
+        fail(errors, "Composition mutation blueprints must keep appeal claims in hypothesis_not_proof status")
+    if "scientifically proven" not in str(claims_policy.get("must_not_claim", "")):
+        fail(errors, "Composition mutation blueprints must block scientifically proven claims without study evidence")
+
+    role_contract = require_dict(data.get("role_contract"), "composition blueprint role_contract", errors)
+    if set(role_contract.get("required_traditional_role_ids", [])) != EXPECTED_TRADITIONAL_BLUEGRASS_ROLE_IDS:
+        fail(errors, "Composition mutation blueprint traditional role contract is stale")
+    if set(role_contract.get("required_alien_role_ids", [])) != EXPECTED_ALIEN_ROLE_IDS:
+        fail(errors, "Composition mutation blueprint alien role contract is stale")
+    if set(role_contract.get("required_punk_role_ids", [])) != EXPECTED_PUNK_ROLE_IDS:
+        fail(errors, "Composition mutation blueprint punk role contract is stale")
+    if not {"live_set_mutation", "export_or_release"}.issubset(set(role_contract.get("required_approval_gates", []))):
+        fail(errors, "Composition mutation blueprint role contract must require Live mutation and export gates")
+
+    session_device_contracts = {
+        contract
+        for track in session_template.get("tracks", [])
+        for contract in track.get("device_contracts", [])
+    }
+    allowed_target_roles = EXPECTED_TRADITIONAL_BLUEGRASS_ROLE_IDS | EXPECTED_ALIEN_ROLE_IDS | {"punk_kit"}
+    source_tracks = require_list(compositions.get("tracks"), "composition tracks", errors)
+    blueprints = require_list(data.get("tracks"), "composition mutation blueprint tracks", errors)
+    source_slugs = [slugify_title(str(track.get("title", ""))) for track in source_tracks]
+    blueprint_slugs = [blueprint.get("slug") for blueprint in blueprints]
+    if blueprint_slugs != source_slugs:
+        fail(errors, "Composition mutation blueprint track order must match composition source tracks")
+
+    for composition_track, blueprint in zip(source_tracks, blueprints, strict=False):
+        slug = blueprint.get("slug")
+        label = f"composition mutation blueprint {slug}"
+        if blueprint.get("title") != composition_track.get("title"):
+            fail(errors, f"{label} title must mirror composition source track")
+        for field in ["hook_thesis", "testable_appeal_hypothesis"]:
+            require_non_empty_string(blueprint.get(field), f"{label}.{field}", errors)
+        if "hypothesis" not in str(blueprint.get("testable_appeal_hypothesis", "")).lower():
+            fail(errors, f"{label} must label appeal claims as hypotheses")
+
+        traditional_jobs = require_dict(blueprint.get("traditional_role_jobs"), f"{label}.traditional_role_jobs", errors)
+        alien_jobs = require_dict(blueprint.get("alien_role_jobs"), f"{label}.alien_role_jobs", errors)
+        punk_jobs = require_dict(blueprint.get("punk_role_jobs"), f"{label}.punk_role_jobs", errors)
+        if set(traditional_jobs) != EXPECTED_TRADITIONAL_BLUEGRASS_ROLE_IDS:
+            fail(errors, f"{label} must define every traditional bluegrass role")
+        if set(alien_jobs) != EXPECTED_ALIEN_ROLE_IDS:
+            fail(errors, f"{label} must define every alien/electronic role")
+        if set(punk_jobs) != EXPECTED_PUNK_ROLE_IDS:
+            fail(errors, f"{label} must define every punk role")
+        for role_id, job in {**traditional_jobs, **alien_jobs, **punk_jobs}.items():
+            require_non_empty_string(job, f"{label}.{role_id}", errors)
+
+        source_deck_plan = require_dict(blueprint.get("source_deck_plan"), f"{label}.source_deck_plan", errors)
+        if source_deck_plan.get("deck_state") != "muted_until_human_provenance_review":
+            fail(errors, f"{label} source deck must default to muted provenance review")
+        if source_deck_plan.get("approval_gate") != "live_set_mutation":
+            fail(errors, f"{label} source deck must be gated by live_set_mutation")
+
+        mutation_lanes = require_list(blueprint.get("mutation_lanes"), f"{label}.mutation_lanes", errors)
+        lane_devices = {lane.get("device_id") for lane in mutation_lanes if isinstance(lane, dict)}
+        expected_focus_devices = {f"m4l.{focus}" for focus in composition_track.get("max_for_live_focus", [])}
+        if not expected_focus_devices.issubset(lane_devices):
+            fail(errors, f"{label} mutation lanes must cover composition max_for_live_focus devices")
+        for lane in mutation_lanes:
+            lane = require_dict(lane, f"{label}.mutation_lane", errors)
+            device_id = lane.get("device_id")
+            if device_id not in session_device_contracts:
+                fail(errors, f"{label} mutation lane references unknown device: {device_id}")
+            if lane.get("target_role_id") not in allowed_target_roles:
+                fail(errors, f"{label} mutation lane references unknown target role: {lane.get('target_role_id')}")
+            if lane.get("approval_gate") != "live_set_mutation":
+                fail(errors, f"{label} mutation lane must be gated by live_set_mutation: {device_id}")
+            for field in ["musical_purpose", "automation_shape"]:
+                require_non_empty_string(lane.get(field), f"{label}.{device_id}.{field}", errors)
+
+        arrangement = composition_track.get("arrangement", [])
+        section_blueprints = require_list(blueprint.get("section_blueprints"), f"{label}.section_blueprints", errors)
+        if len(section_blueprints) != len(arrangement):
+            fail(errors, f"{label} section blueprint count must match arrangement count")
+        for index, section in enumerate(section_blueprints, start=1):
+            section = require_dict(section, f"{label}.section_blueprint", errors)
+            if section.get("arrangement_index") != index:
+                fail(errors, f"{label} section blueprint indices must be sequential")
+            if section.get("source_deck_state") not in ALLOWED_SOURCE_DECK_STATES:
+                fail(errors, f"{label} section has invalid source deck state: {section.get('source_deck_state')}")
+            for field in ["section_function", "mutation_focus", "energy_shape"]:
+                require_non_empty_string(section.get(field), f"{label}.section_{index}.{field}", errors)
+
+    for string_value in iter_string_values(data):
+        if "/Users/" in string_value:
+            fail(errors, "Composition mutation blueprints must not contain absolute user paths")
+        if "sources/public-domain/raw/" in string_value or AUDIO_PATH_PATTERN.search(string_value):
+            fail(errors, f"Composition mutation blueprints must not contain raw audio paths: {string_value}")
+        if SECRET_VALUE_PATTERN.search(string_value):
+            fail(errors, "Composition mutation blueprints must not contain API tokens or bearer credentials")
+
+
+def validate_generated_composition_sketches(root: Path, errors: list[str]) -> None:
+    data = load_json(root / "compositions/generated/live12-track-build-plans.json", errors)
+    compositions = load_json(root / "compositions/down-tempo-punk-bluegrass-set.json", errors)
+    blueprints = load_json(root / "compositions/composition-mutation-blueprints.json", errors)
+    session_template = load_json(root / "automation/live12-session-template.json", errors)
+    if not data or not compositions or not blueprints or not session_template:
         return
 
     if data.get("schema_version") != 1:
@@ -2673,6 +2812,11 @@ def validate_generated_composition_sketches(root: Path, errors: list[str]) -> No
     generated_track_titles = [track.get("title") for track in data.get("tracks", [])]
     if generated_track_titles != source_track_titles:
         fail(errors, "Generated composition sketch track order must match compositions/down-tempo-punk-bluegrass-set.json")
+    blueprints_by_slug = {
+        blueprint.get("slug"): blueprint
+        for blueprint in blueprints.get("tracks", [])
+        if isinstance(blueprint, dict)
+    }
 
     tempo_range = session_template.get("tempo_range_bpm", [0, 999])
     session_tracks = {track.get("name") for track in session_template.get("tracks", [])}
@@ -2689,6 +2833,9 @@ def validate_generated_composition_sketches(root: Path, errors: list[str]) -> No
             fail(errors, f"Generated composition sketch has invalid bar count: {title}")
         if not tempo_range[0] <= track.get("tempo_bpm", 0) <= tempo_range[1]:
             fail(errors, f"Generated composition sketch tempo is outside session range: {title}")
+        expected_blueprint = blueprints_by_slug.get(track.get("slug"))
+        if track.get("composition_mutation_blueprint") != expected_blueprint:
+            fail(errors, f"Generated composition sketch must mirror source mutation blueprint: {title}")
         for focus in track.get("max_for_live_focus", []):
             if focus not in device_contracts:
                 fail(errors, f"Generated composition sketch references unknown Max for Live focus: {title}: {focus}")
@@ -2774,6 +2921,7 @@ def main() -> int:
     validate_generated_daw_mutation_package(root, errors)
     validate_generated_daw_mutation_runbook(root, errors)
     validate_generated_daw_mutation_queue_runbook(root, errors)
+    validate_composition_mutation_blueprints(root, errors)
     validate_generated_composition_sketches(root, errors)
     validate_binary_hygiene(root, errors)
     validate_tracked_raw_source_files(root, errors)

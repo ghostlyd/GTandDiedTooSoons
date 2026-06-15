@@ -1,0 +1,361 @@
+{
+  "schema_version": 1,
+  "purpose": "Machine-checkable composition DNA for standalone downtempo punk-bluegrass tracks before any Ableton Live mutation.",
+  "claims_policy": {
+    "appeal_claim_status": "hypothesis_not_proof",
+    "must_not_claim": "scientifically proven psychological effect without a reviewed listener-study protocol",
+    "use_in_production": "Treat each testable appeal hypothesis as an arrangement prompt and measurement target, not as a validated claim."
+  },
+  "role_contract": {
+    "required_traditional_role_ids": [
+      "aeroband_banjo_lead",
+      "fiddle_hybrid_strings",
+      "mandolin_chop",
+      "dobro_metallic_slide",
+      "acoustic_guitar_boom_chuck",
+      "upright_bass_sub"
+    ],
+    "required_alien_role_ids": [
+      "deep_house_machines",
+      "alien_sky",
+      "public_domain_source_deck"
+    ],
+    "required_punk_role_ids": [
+      "punk_kit",
+      "performance_rule",
+      "anti_polish_rule"
+    ],
+    "required_approval_gates": [
+      "live_set_mutation",
+      "export_or_release"
+    ],
+    "source_deck_policy": "Public-domain source deck remains muted until candidate source IDs are present in the download ledger and a human provenance review approves unmute."
+  },
+  "tracks": [
+    {
+      "slug": "good-vibrations-in-a-burned-barn",
+      "title": "Good Vibrations in a Burned Barn",
+      "hook_thesis": "A controller-banjo forward roll behaves like a modular pop hook while the room collapses into a barn-fire punk refrain.",
+      "testable_appeal_hypothesis": "Hypothesis: repeated bright banjo cells, delayed fiddle answers, and a late four-on-floor entrance will improve recall without making the track feel polished.",
+      "traditional_role_jobs": {
+        "aeroband_banjo_lead": "Play the lead hook as Brian Wilson-style cell repetition, with velocity changes preserved from the controller.",
+        "fiddle_hybrid_strings": "Answer the hook with long mixolydian drones and bowed lift into the chorus.",
+        "mandolin_chop": "Provide offbeat lift on beats two and four, then thin out during the half-time break.",
+        "dobro_metallic_slide": "Enter as a bent harmony shadow after the first house-kick arrival.",
+        "acoustic_guitar_boom_chuck": "Hold the dry barn-floor rhythm bed under the banjo without masking the roll.",
+        "upright_bass_sub": "Double root and fifth movement with low-end restraint and sidechain headroom."
+      },
+      "alien_role_jobs": {
+        "deep_house_machines": "Delay the kick entrance so the house grid feels earned, then lock the mandolin chop to it.",
+        "alien_sky": "Granularly smear fiddle answers into a wide freeze bloom after the fourth section.",
+        "public_domain_source_deck": "Prefer old-time reel and hornpipe candidates for micro-slices only after provenance approval."
+      },
+      "punk_role_jobs": {
+        "punk_kit": "Use dry snare hits and a half-time break rather than cinematic drum programming.",
+        "performance_rule": "Keep one lead-controller take with audible risk before comping.",
+        "anti_polish_rule": "Leave a controlled edge on pick noise, snare room, and final chorus crowd response."
+      },
+      "source_deck_plan": {
+        "candidate_strategy": "Use generated source candidates for rhythmic DNA and do not expose raw local sample paths.",
+        "deck_state": "muted_until_human_provenance_review",
+        "approval_gate": "live_set_mutation",
+        "credit_policy": "Carry Citizen DJ / Library of Congress credit into release notes if any source deck slice is unmuted."
+      },
+      "mutation_lanes": [
+        {
+          "device_id": "m4l.aeroband_banjo_mapper",
+          "target_role_id": "aeroband_banjo_lead",
+          "musical_purpose": "Map controller gestures into banjo-like pluck articulation.",
+          "automation_shape": "velocity_curve rises from intimate verse to shouted chorus.",
+          "approval_gate": "live_set_mutation"
+        },
+        {
+          "device_id": "m4l.roll_probability_engine",
+          "target_role_id": "aeroband_banjo_lead",
+          "musical_purpose": "Keep the roll varied without erasing the hook.",
+          "automation_shape": "roll_density increases at each chorus return.",
+          "approval_gate": "live_set_mutation"
+        },
+        {
+          "device_id": "m4l.spatial_harmonic_field",
+          "target_role_id": "alien_sky",
+          "musical_purpose": "Open the final chorus into an alien stereo field.",
+          "automation_shape": "width and freeze rise only after the half-time break.",
+          "approval_gate": "live_set_mutation"
+        }
+      ],
+      "section_blueprints": [
+        {"arrangement_index": 1, "section_function": "prove the texture before rhythm", "mutation_focus": "source deck stays muted while alien sky establishes dust", "energy_shape": "low static", "source_deck_state": "muted"},
+        {"arrangement_index": 2, "section_function": "teach the banjo hook", "mutation_focus": "controller articulation and roll probability", "energy_shape": "human lift", "source_deck_state": "muted"},
+        {"arrangement_index": 3, "section_function": "attach the dance grid", "mutation_focus": "house kick enters under mandolin chop", "energy_shape": "steady ramp", "source_deck_state": "muted"},
+        {"arrangement_index": 4, "section_function": "make the fiddle answer uncanny", "mutation_focus": "spatial harmonic field and granular tails", "energy_shape": "wide bloom", "source_deck_state": "muted"},
+        {"arrangement_index": 5, "section_function": "break the polish", "mutation_focus": "punk kit and half-time dry room", "energy_shape": "abrupt drop", "source_deck_state": "muted"},
+        {"arrangement_index": 6, "section_function": "return with provenance-safe slices", "mutation_focus": "source deck slices only after review", "energy_shape": "high chorus", "source_deck_state": "candidate_slices_after_review"}
+      ]
+    },
+    {
+      "slug": "a-p-carter-in-the-warehouse",
+      "title": "A.P. Carter in the Warehouse",
+      "hook_thesis": "A plainspoken dobro hook moves like a Carter Family melody inside a slow warehouse kick and dub-return system.",
+      "testable_appeal_hypothesis": "Hypothesis: sparse narrative phrasing plus call-response stabs will feel intimate while the low-passed house pulse keeps bodies moving.",
+      "traditional_role_jobs": {
+        "aeroband_banjo_lead": "Answer the dobro hook with restrained banjo imitation rather than constant roll density.",
+        "fiddle_hybrid_strings": "Provide tremolo tension behind the bridge and soften the final return.",
+        "mandolin_chop": "Mark the warehouse backbeat with dry offbeat punctuation.",
+        "dobro_metallic_slide": "Carry the lead thesis through bends, slides, and chorus pickups.",
+        "acoustic_guitar_boom_chuck": "Keep boom-chuck phrasing plain and narrative, close to the vocal pocket.",
+        "upright_bass_sub": "Bridge acoustic root movement into deep-house sub without busy passing tones."
+      },
+      "alien_role_jobs": {
+        "deep_house_machines": "Use low-passed stabs as the answering voice to banjo and dobro.",
+        "alien_sky": "Reserve reverse granular tails for the stripped bridge.",
+        "public_domain_source_deck": "Prefer ballad-contour candidates only after provenance review."
+      },
+      "punk_role_jobs": {
+        "punk_kit": "Crush the room in the bridge but avoid festival-rock polish.",
+        "performance_rule": "Keep the topline phrasing plain, close, and under-edited.",
+        "anti_polish_rule": "Let warehouse noise and imperfect slide attacks remain audible."
+      },
+      "source_deck_plan": {
+        "candidate_strategy": "Use source candidates for contour reference, not as full-song substitution.",
+        "deck_state": "muted_until_human_provenance_review",
+        "approval_gate": "live_set_mutation",
+        "credit_policy": "Credit Citizen DJ / Library of Congress if source deck audio is used."
+      },
+      "mutation_lanes": [
+        {
+          "device_id": "m4l.call_response_router",
+          "target_role_id": "fiddle_hybrid_strings",
+          "musical_purpose": "Route banjo, fiddle, and stab answers around the dobro thesis.",
+          "automation_shape": "answer density drops in the bridge then doubles at the return.",
+          "approval_gate": "live_set_mutation"
+        },
+        {
+          "device_id": "m4l.house_grid_conductor",
+          "target_role_id": "deep_house_machines",
+          "musical_purpose": "Keep the warehouse pulse slow but locked.",
+          "automation_shape": "swing and accent rise through the second half.",
+          "approval_gate": "live_set_mutation"
+        }
+      ],
+      "section_blueprints": [
+        {"arrangement_index": 1, "section_function": "state the dobro thesis", "mutation_focus": "slide phrase contour", "energy_shape": "solo reveal", "source_deck_state": "muted"},
+        {"arrangement_index": 2, "section_function": "open the warehouse pulse", "mutation_focus": "kick and sub discipline", "energy_shape": "low ramp", "source_deck_state": "muted"},
+        {"arrangement_index": 3, "section_function": "build call-response identity", "mutation_focus": "banjo and stab routing", "energy_shape": "locked groove", "source_deck_state": "muted"},
+        {"arrangement_index": 4, "section_function": "strip to story and stomp", "mutation_focus": "room crush and bowed harmonic", "energy_shape": "negative space", "source_deck_state": "muted"},
+        {"arrangement_index": 5, "section_function": "return with doubled riff", "mutation_focus": "dobro and banjo unison risk", "energy_shape": "controlled lift", "source_deck_state": "candidate_slices_after_review"}
+      ]
+    },
+    {
+      "slug": "no-gods-no-masters-no-quantize",
+      "title": "No Gods, No Masters, No Quantize",
+      "hook_thesis": "Fast banjo, abrupt punk stops, and a shadow acid line argue with the grid instead of obeying it.",
+      "testable_appeal_hypothesis": "Hypothesis: slight timing friction between human roll and locked kick will create attention without collapsing danceability.",
+      "traditional_role_jobs": {
+        "aeroband_banjo_lead": "Lead with fast roll language and preserve unquantized attack variance.",
+        "fiddle_hybrid_strings": "Use double-stops as stop-time exclamation points.",
+        "mandolin_chop": "Cut through with clipped offbeats and ghost-note pressure.",
+        "dobro_metallic_slide": "Add short metallic answers after abrupt stops.",
+        "acoustic_guitar_boom_chuck": "Reinforce the anti-polish pulse with aggressive downstrokes.",
+        "upright_bass_sub": "Mirror roots while the acid shadow threatens chromatic motion."
+      },
+      "alien_role_jobs": {
+        "deep_house_machines": "Lock kick and acid-shadow stabs after the banjo establishes human drift.",
+        "alien_sky": "Use spectral freeze only as a stop-time punctuation device.",
+        "public_domain_source_deck": "Prefer reel and hornpipe candidates for transient chop studies after approval."
+      },
+      "punk_role_jobs": {
+        "punk_kit": "Favor raw kit stops and short fills over smooth transitions.",
+        "performance_rule": "Do not quantize the opening banjo count-off.",
+        "anti_polish_rule": "Keep abrupt gaps and rough cadence as structural features."
+      },
+      "source_deck_plan": {
+        "candidate_strategy": "Use source candidates as transient vocabulary after ledger and credit checks.",
+        "deck_state": "muted_until_human_provenance_review",
+        "approval_gate": "live_set_mutation",
+        "credit_policy": "Credit Citizen DJ / Library of Congress in any released source-use notes."
+      },
+      "mutation_lanes": [
+        {
+          "device_id": "m4l.chop_clock_guard",
+          "target_role_id": "mandolin_chop",
+          "musical_purpose": "Prevent chop drift from hiding the intentionally unquantized banjo.",
+          "automation_shape": "tighten only when kick and mandolin need to lock.",
+          "approval_gate": "live_set_mutation"
+        },
+        {
+          "device_id": "m4l.root_motion_limiter",
+          "target_role_id": "upright_bass_sub",
+          "musical_purpose": "Limit low-end chaos while the acid shadow pushes flat-seven pressure.",
+          "automation_shape": "root constraint stays strong during stop-time choruses.",
+          "approval_gate": "live_set_mutation"
+        }
+      ],
+      "section_blueprints": [
+        {"arrangement_index": 1, "section_function": "declare human timing", "mutation_focus": "unquantized banjo count-off", "energy_shape": "nervous start", "source_deck_state": "muted"},
+        {"arrangement_index": 2, "section_function": "prove the grid can join", "mutation_focus": "kick enters after four bars", "energy_shape": "snap to floor", "source_deck_state": "muted"},
+        {"arrangement_index": 3, "section_function": "introduce acid contradiction", "mutation_focus": "root limiter and bass mirror", "energy_shape": "pressurized", "source_deck_state": "muted"},
+        {"arrangement_index": 4, "section_function": "weaponize silence", "mutation_focus": "stop-time chorus and kit cuts", "energy_shape": "hard cut", "source_deck_state": "muted"},
+        {"arrangement_index": 5, "section_function": "freeze the argument", "mutation_focus": "fiddle and spectral freeze outro", "energy_shape": "ragged dissolve", "source_deck_state": "candidate_slices_after_review"}
+      ]
+    },
+    {
+      "slug": "possum-kingdom-afterhours",
+      "title": "Possum Kingdom Afterhours",
+      "hook_thesis": "A slow modal fiddle place-study becomes dub-techno bluegrass afterhours without losing one-take lead risk.",
+      "testable_appeal_hypothesis": "Hypothesis: low tempo, modal repetition, and long spatial fade will create sustained immersion while feedback edges keep the track from becoming ambient wallpaper.",
+      "traditional_role_jobs": {
+        "aeroband_banjo_lead": "Use harmonics and sparse roll fragments rather than lead runs.",
+        "fiddle_hybrid_strings": "Own the modal identity with bowed place-setting drones.",
+        "mandolin_chop": "Enter rarely as a dry pulse marker against dub chords.",
+        "dobro_metallic_slide": "Swell into chorus spaces and answer the fiddle without stealing focus.",
+        "acoustic_guitar_boom_chuck": "Keep a low, brushed rhythm bed under the dub-techno chord movement.",
+        "upright_bass_sub": "Hold root gravity and sub drone with strict mono discipline."
+      },
+      "alien_role_jobs": {
+        "deep_house_machines": "Use slow dub-techno chords, restrained hats, and deep sidechain rather than peak-time programming.",
+        "alien_sky": "Turn banjo harmonics into granular particles and long spatial fade.",
+        "public_domain_source_deck": "Prefer hornpipe contour candidates for distant counter-lines after approval."
+      },
+      "punk_role_jobs": {
+        "punk_kit": "Use brush kit and feedback edges instead of glossy breakdowns.",
+        "performance_rule": "Keep a one-take lead rule for the primary controller pass.",
+        "anti_polish_rule": "No cinematic riser before the chorus; let the swell stay handmade."
+      },
+      "source_deck_plan": {
+        "candidate_strategy": "Use source candidates as quiet contour ghosts only after provenance review.",
+        "deck_state": "muted_until_human_provenance_review",
+        "approval_gate": "live_set_mutation",
+        "credit_policy": "Carry Citizen DJ / Library of Congress credit if any approved source appears."
+      },
+      "mutation_lanes": [
+        {
+          "device_id": "m4l.spatial_harmonic_field",
+          "target_role_id": "alien_sky",
+          "musical_purpose": "Move drones and harmonics through a spatial field without masking low end.",
+          "automation_shape": "azimuth and width drift slowly across the full arrangement.",
+          "approval_gate": "live_set_mutation"
+        },
+        {
+          "device_id": "m4l.provenance_sampler",
+          "target_role_id": "public_domain_source_deck",
+          "musical_purpose": "Gate any historical fragments behind ledger-backed approval.",
+          "automation_shape": "slice_index remains inactive until human review unmute.",
+          "approval_gate": "live_set_mutation"
+        }
+      ],
+      "section_blueprints": [
+        {"arrangement_index": 1, "section_function": "establish place", "mutation_focus": "fiddle drone and sub restraint", "energy_shape": "low hover", "source_deck_state": "muted"},
+        {"arrangement_index": 2, "section_function": "start afterhours pulse", "mutation_focus": "brush kit and dub chords", "energy_shape": "slow pulse", "source_deck_state": "muted"},
+        {"arrangement_index": 3, "section_function": "make banjo harmonic alien", "mutation_focus": "granular particle lane", "energy_shape": "textural lift", "source_deck_state": "muted"},
+        {"arrangement_index": 4, "section_function": "swell the chorus by hand", "mutation_focus": "dobro feedback and room send", "energy_shape": "wide swell", "source_deck_state": "muted"},
+        {"arrangement_index": 5, "section_function": "fade with discipline", "mutation_focus": "spatial field and low-end mono check", "energy_shape": "long fade", "source_deck_state": "candidate_slices_after_review"}
+      ]
+    },
+    {
+      "slug": "the-ballad-of-the-broken-controller",
+      "title": "The Ballad of the Broken Controller",
+      "hook_thesis": "Controller failure becomes the hook when bluegrass instruments, glitch percussion, and a synthetic choir refuse to hide the mistake.",
+      "testable_appeal_hypothesis": "Hypothesis: audible failure framed as rhythm will increase memorability while the full acoustic stack keeps the song grounded.",
+      "traditional_role_jobs": {
+        "aeroband_banjo_lead": "Let calibration noise and controller slips shape the lead riff.",
+        "fiddle_hybrid_strings": "Saw into the refrain with raw support rather than clean string pads.",
+        "mandolin_chop": "Use tremolo lift to make the refrain feel communal.",
+        "dobro_metallic_slide": "Bend around failed notes and make recovery audible.",
+        "acoustic_guitar_boom_chuck": "Anchor the refrain with short, loud strums.",
+        "upright_bass_sub": "Use slap-like attacks against the glitch rhythm without overloading the sub."
+      },
+      "alien_role_jobs": {
+        "deep_house_machines": "Convert controller errors into glitch percussion while preserving the banjo riff.",
+        "alien_sky": "Stack a wide synthetic choir behind the last refrain.",
+        "public_domain_source_deck": "Use approved source candidates only as texture behind the failure motif."
+      },
+      "punk_role_jobs": {
+        "punk_kit": "Make the refrain short, loud, and physically clipped.",
+        "performance_rule": "Retain at least one failed controller event as a documented hook element.",
+        "anti_polish_rule": "Do not smooth every pitch bend or MIDI mistrigger."
+      },
+      "source_deck_plan": {
+        "candidate_strategy": "Keep public-domain fragments secondary to the controller-failure hook.",
+        "deck_state": "muted_until_human_provenance_review",
+        "approval_gate": "live_set_mutation",
+        "credit_policy": "Credit Citizen DJ / Library of Congress if any source deck layer is active."
+      },
+      "mutation_lanes": [
+        {
+          "device_id": "m4l.aeroband_banjo_mapper",
+          "target_role_id": "aeroband_banjo_lead",
+          "musical_purpose": "Translate controller instability into playable banjo articulation.",
+          "automation_shape": "humanize_ms increases during failure-reveal sections.",
+          "approval_gate": "live_set_mutation"
+        },
+        {
+          "device_id": "m4l.fill_trigger",
+          "target_role_id": "punk_kit",
+          "musical_purpose": "Answer controller mistakes with bounded punk fills.",
+          "automation_shape": "fill_probability spikes at breakdown and final refrain.",
+          "approval_gate": "live_set_mutation"
+        }
+      ],
+      "section_blueprints": [
+        {"arrangement_index": 1, "section_function": "turn calibration into rhythm", "mutation_focus": "controller noise capture as MIDI intent", "energy_shape": "quirky start", "source_deck_state": "muted"},
+        {"arrangement_index": 2, "section_function": "lock riff to glitch", "mutation_focus": "banjo mapper and glitch percussion", "energy_shape": "tight loop", "source_deck_state": "muted"},
+        {"arrangement_index": 3, "section_function": "lift refrain communally", "mutation_focus": "mandolin tremolo and gang cadence", "energy_shape": "upward push", "source_deck_state": "muted"},
+        {"arrangement_index": 4, "section_function": "expose failure", "mutation_focus": "failed notes remain audible", "energy_shape": "raw reveal", "source_deck_state": "muted"},
+        {"arrangement_index": 5, "section_function": "stack the whole machine", "mutation_focus": "full traditional stack over alien choir", "energy_shape": "maximal refrain", "source_deck_state": "candidate_slices_after_review"}
+      ]
+    },
+    {
+      "slug": "rail-yard-ghost-in-the-control-room",
+      "title": "Rail Yard Ghost in the Control Room",
+      "hook_thesis": "The full system test: AeroBand banjo, every bluegrass support voice, public-domain stutters, and all Max for Live devices move through a controlled rail-yard ghost story.",
+      "testable_appeal_hypothesis": "Hypothesis: complete-stack orchestration with bounded device mutation will create the strongest tactile performance identity while preserving provenance safety.",
+      "traditional_role_jobs": {
+        "aeroband_banjo_lead": "Lead the whole arrangement with controller-banjo calibration, forward-roll hook, and one-take risk.",
+        "fiddle_hybrid_strings": "Answer the hook in orbiting phrases and widen into spectral bloom.",
+        "mandolin_chop": "Lock the chop to house hats while keeping the bluegrass pulse readable.",
+        "dobro_metallic_slide": "Swell around the hook as a haunted steel counter-line.",
+        "acoustic_guitar_boom_chuck": "Bind the rail-yard rhythm bed with dry strums and call-response support.",
+        "upright_bass_sub": "Keep bass and sub under strict root-motion and headroom limits."
+      },
+      "alien_role_jobs": {
+        "deep_house_machines": "Run the four-on-floor grid, hats, and stabs as the control-room clock.",
+        "alien_sky": "Bloom the final sections with spatial freeze and spectral harmonic motion.",
+        "public_domain_source_deck": "Use approved source stutters as historical ghosts only after ledger-backed review."
+      },
+      "punk_role_jobs": {
+        "punk_kit": "Use bounded fills and a short loud refrain without smoothing the outro.",
+        "performance_rule": "Keep the lead controller risk audible across the final pass.",
+        "anti_polish_rule": "No glossy outro; stop with a rollback-safe one-take edge."
+      },
+      "source_deck_plan": {
+        "candidate_strategy": "Use generated candidates as stutters and call-response ghosts only after source IDs are verified in the ledger.",
+        "deck_state": "muted_until_human_provenance_review",
+        "approval_gate": "live_set_mutation",
+        "credit_policy": "Carry Citizen DJ / Library of Congress credit lines into any release notes."
+      },
+      "mutation_lanes": [
+        {"device_id": "m4l.aeroband_banjo_mapper", "target_role_id": "aeroband_banjo_lead", "musical_purpose": "Translate AeroBand controller data into banjo articulation.", "automation_shape": "velocity_curve and humanize_ms follow the performer risk arc.", "approval_gate": "live_set_mutation"},
+        {"device_id": "m4l.roll_probability_engine", "target_role_id": "aeroband_banjo_lead", "musical_purpose": "Vary forward-roll density without losing the hook.", "automation_shape": "roll_density rises through each return.", "approval_gate": "live_set_mutation"},
+        {"device_id": "m4l.call_response_router", "target_role_id": "fiddle_hybrid_strings", "musical_purpose": "Route fiddle, guitar, and dobro answers around the banjo hook.", "automation_shape": "answer density follows scene energy.", "approval_gate": "live_set_mutation"},
+        {"device_id": "m4l.chop_clock_guard", "target_role_id": "mandolin_chop", "musical_purpose": "Keep chop timing locked to the house grid.", "automation_shape": "chop_gate tightens at grid entrances.", "approval_gate": "live_set_mutation"},
+        {"device_id": "m4l.slide_phrase_sampler", "target_role_id": "dobro_metallic_slide", "musical_purpose": "Shape metallic slide phrases into haunted counter-lines.", "automation_shape": "glide_time and feedback rise in chorus swells.", "approval_gate": "live_set_mutation"},
+        {"device_id": "m4l.root_motion_limiter", "target_role_id": "upright_bass_sub", "musical_purpose": "Protect low-end mono and root movement.", "automation_shape": "sidechain_depth stays strongest under kick-heavy scenes.", "approval_gate": "live_set_mutation"},
+        {"device_id": "m4l.fill_trigger", "target_role_id": "punk_kit", "musical_purpose": "Generate bounded fills without derailing the arrangement.", "automation_shape": "fill_probability spikes before short loud refrains.", "approval_gate": "live_set_mutation"},
+        {"device_id": "m4l.house_grid_conductor", "target_role_id": "deep_house_machines", "musical_purpose": "Conduct kick, hats, stabs, and swing as the control-room clock.", "automation_shape": "swing_amount and accent rise once the hook is established.", "approval_gate": "live_set_mutation"},
+        {"device_id": "m4l.provenance_sampler", "target_role_id": "public_domain_source_deck", "musical_purpose": "Keep public-domain stutters gated by provenance checks.", "automation_shape": "slice_index remains inactive until review, then uses short stutters.", "approval_gate": "live_set_mutation"},
+        {"device_id": "m4l.spatial_harmonic_field", "target_role_id": "alien_sky", "musical_purpose": "Bloom the final rail-yard ghost field.", "automation_shape": "width, azimuth, grain_density, and freeze expand through the outro.", "approval_gate": "live_set_mutation"}
+      ],
+      "section_blueprints": [
+        {"arrangement_index": 1, "section_function": "run operator preflight as music", "mutation_focus": "source deck muted, drone active", "energy_shape": "procedural hush", "source_deck_state": "muted"},
+        {"arrangement_index": 2, "section_function": "calibrate banjo hook", "mutation_focus": "AeroBand mapper and roll engine", "energy_shape": "human machine start", "source_deck_state": "muted"},
+        {"arrangement_index": 3, "section_function": "lock the house clock", "mutation_focus": "house grid conductor and chop clock", "energy_shape": "floor lock", "source_deck_state": "muted"},
+        {"arrangement_index": 4, "section_function": "orbit the hook", "mutation_focus": "call-response router across fiddle, guitar, dobro", "energy_shape": "braided lift", "source_deck_state": "muted"},
+        {"arrangement_index": 5, "section_function": "protect low-end impact", "mutation_focus": "root limiter, punk kit, and sub headroom", "energy_shape": "heavy push", "source_deck_state": "muted"},
+        {"arrangement_index": 6, "section_function": "open provenance gate", "mutation_focus": "provenance sampler only after approval", "energy_shape": "historical flicker", "source_deck_state": "candidate_slices_after_review"},
+        {"arrangement_index": 7, "section_function": "bloom alien sky", "mutation_focus": "spatial harmonic field and freeze", "energy_shape": "wide spectral bloom", "source_deck_state": "candidate_slices_after_review"},
+        {"arrangement_index": 8, "section_function": "end with one-take risk", "mutation_focus": "bounded fills and rollback-safe stop", "energy_shape": "ragged stop", "source_deck_state": "candidate_slices_after_review"}
+      ]
+    }
+  ]
+}

@@ -31,6 +31,7 @@ python3 scripts/test_library_installation_queue.py
 python3 scripts/test_library_installation_preflight.py
 python3 scripts/test_openai_production_swarm_queue.py
 python3 scripts/test_max_for_live_device_contracts.py
+python3 scripts/test_composition_mutation_blueprints.py
 python3 scripts/test_live12_daw_mutation_preflight.py
 python3 scripts/test_live12_daw_mutation_runbook.py
 python3 scripts/test_live12_daw_mutation_queue_runbook.py
@@ -73,7 +74,8 @@ Generated local inventory lands in `inventory/live12-local-inventory.json` and `
 - `automation/generated/live12-daw-mutation-queue-runbook.json` - generated full-set queue command manifest for staging ignored local DAW mutation artifacts without launching Ableton automatically.
 - `max-for-live/patches/*.maxpat` - reviewable Max patch source blueprints, not compiled `.amxd` devices.
 - `compositions/down-tempo-punk-bluegrass-set.json` - initial standalone track briefs.
-- `compositions/generated/live12-track-build-plans.json` - generated Live-import plan with MIDI hashes and device targets.
+- `compositions/composition-mutation-blueprints.json` - machine-checkable per-track composition DNA: full bluegrass role jobs, alien-electronic role jobs, punk constraints, source-deck approval state, and Max for Live mutation lanes.
+- `compositions/generated/live12-track-build-plans.json` - generated Live-import plan with MIDI hashes, device targets, and mirrored composition mutation blueprints.
 - `compositions/generated/midi/*.mid` - deterministic MIDI sketches for importing each standalone track into Live.
 - `catalogs/public-domain-bluegrass-sources.json` - rights-aware source catalog.
 - `catalogs/recommended-packs.json` - license-aware library and pack catalog.
