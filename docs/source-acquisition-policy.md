@@ -6,7 +6,7 @@ The project needs deep old-time, bluegrass-adjacent source literacy without crea
 
 1. Use trusted sources first: Library of Congress, Citizen DJ, Internet Archive items with clear metadata, university archives, and rights-cleared artist-provided material.
 2. Treat modern bluegrass recordings as copyrighted by default.
-3. For a U.S. workflow on June 14, 2026, treat sound recordings first published before 1926 as the safest public-domain recording pool under the Music Modernization Act schedule, while still checking composition/lyrics rights separately.
+3. For a U.S. workflow on June 15, 2026, treat sound recordings first published before 1926 as the safest public-domain recording pool under the Music Modernization Act schedule, while still checking composition/lyrics rights separately.
 4. Treat "no known restrictions" as a research signal, not automatic commercial clearance.
 5. Download only entries with explicit source URL, rights status, credit line, and `approved_for_download: true`.
 6. Keep downloaded audio outside Git under `sources/public-domain/raw/`.
@@ -32,7 +32,7 @@ Bluegrass as a named commercial genre mostly emerges after the earliest public-d
 
 Key starting points are versioned in `catalogs/public-domain-bluegrass-sources.json`, including Library of Congress Citizen DJ Folk Music, UCSB Cylinder Audio Archive, Internet Archive Great 78, the Henry Reed Collection, and Library of Congress bluegrass/folklife guides.
 
-The approved source downloads are excerpts from Library of Congress Citizen DJ's National Jukebox Folk Music collection. The catalog records concise rights evidence from the Citizen DJ collection page so review does not depend on ignored screenshots, and the download ledger records local SHA-256 and byte-size evidence for each fetched WAV. UCSB Cylinder Archive material remains research-only for this project until item-level terms are compatible with production reuse, because the site-level MP3 metadata includes non-commercial Creative Commons language.
+The approved source downloads are excerpts from Library of Congress Citizen DJ's National Jukebox Folk Music collection. The catalog records concise rights evidence from the Citizen DJ collection page so review does not depend on ignored screenshots, and the download ledger records local SHA-256 and byte-size evidence for each fetched WAV. On June 15, 2026, Playwright-backed review added old-time reel and hornpipe excerpts from the same collection: Medley of old-time reels, Medley of favorite reels, Hornpipe, and Lamplighter's hornpipe. UCSB Cylinder Archive material remains research-only for this project until item-level terms are compatible with production reuse, because the site-level MP3 metadata includes non-commercial Creative Commons language.
 
 The generated public-domain source deck is the operator-facing bridge into Ableton Live. It mirrors approved ledger entries and per-track source candidates without exposing raw local audio paths or direct download URLs. Keep the Live `Public Domain Source Deck` muted until the generated unmute checks are satisfied and a Live-set mutation approval exists.
 

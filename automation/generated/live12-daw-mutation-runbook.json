@@ -85,8 +85,8 @@
   ],
   "schema_version": 1,
   "source_file_sha256": {
-    "automation/generated/live12-daw-action-plan.json": "dbe1b210945519be06e0fed556563be219b213f5f0017df043bd67c47fa0b4fc",
-    "automation/generated/live12-daw-mutation-package.json": "1a2e88db2cb7868a60bca8fbe0ca62c130c741a99b6e7f9bd71827834c14266a",
+    "automation/generated/live12-daw-action-plan.json": "6be1bc42158e02223caffacedfad72887a4f8341f6af2a187a6a5e876468547a",
+    "automation/generated/live12-daw-mutation-package.json": "8160ecc73e5e7de6f36957daf51ee363ebb6bcf6cfa7bd845017b0cc411c605b",
     "automation/generated/max-for-live-device-contracts.json": "25613153f7ed60871411911a4572f10448a6f0298a62ba63bc2aa285e10b51d0"
   },
   "source_files": [
