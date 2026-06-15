@@ -15,7 +15,7 @@ GTandDiedTooSoons is a repeatable production framework for composing spatially a
 
 1. **Source layer**: public-domain or rights-cleared audio references documented in `catalogs/public-domain-bluegrass-sources.json`, download evidence in `sources/public-domain/download-ledger.json`, and generated source-deck handoff artifacts in `automation/generated/public-domain-source-deck.json` plus `docs/public-domain-source-deck.md`.
 2. **Library layer**: Ableton/Arturia packs and instruments documented in `catalogs/recommended-packs.json` and local inventory snapshots.
-   Installation readiness and account-gated pack backlog live in `catalogs/library-installation-plan.json`.
+   Installation readiness and account-gated pack backlog live in `catalogs/library-installation-plan.json`; the generated supervised operator queue lives in `automation/generated/library-installation-queue.json` and `docs/library-installation-queue.md`.
 3. **Session layer**: track/routing/device contracts in `automation/live12-session-template.json`.
 4. **Max for Live source layer**: device definitions in `automation/max-for-live-device-contracts.json`, generated source bundle in `automation/generated/max-for-live-device-contracts.json`, and reviewable `.maxpat` blueprints in `max-for-live/patches/`.
 5. **Agent layer**: production worker roles in `automation/worker-chain.json`, role briefs in `automation/generated/openai-worker-briefs.json`, and per-track swarm queue handoffs in `automation/generated/openai-production-swarm-queue.json` plus `docs/openai-production-swarm-queue.md`.
@@ -36,6 +36,7 @@ GTandDiedTooSoons is a repeatable production framework for composing spatially a
 - Generated DAW mutation packages are execution preflight text. They may prepare local ignored mutation requests and receipt templates, but they must not claim a Live-set mutation was applied before Ableton/Max confirms the change and a rollback reference exists.
 - Generated DAW mutation runbooks and queue runbooks are operator checklists. They may include local command paths under ignored `output/` roots, but they must keep Ableton launches approval-gated and must not contain absolute user paths, raw source audio paths, secrets, or committed DAW binary references.
 - Generated production appeal scorecards are hypotheses and listening-test gates. They may guide arrangement, Max for Live macro choices, and mix review, but they must not claim scientifically proven psychological effects without approved protocol and results.
+- Generated library installation queues are metadata-only operator handoffs. They may point to official Ableton/Arturia pages and local receipt roots, but they must not perform vendor login, purchase, install, DAW launch, OpenAI API calls, or commit account-bound assets.
 - Inventory scripts record names, versions, and home-relative paths only.
 - Audio acquisition requires explicit rights metadata and `approved_for_download: true`.
 - Generated public-domain source decks are metadata-only handoffs. They may include source IDs, rights evidence, credit summaries, SHA-256 values, and per-track source candidates, but they must not expose raw local audio paths or download URLs in tracked generated artifacts.

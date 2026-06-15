@@ -23,6 +23,7 @@ REQUIRED_FILES = [
     "docs/openai-orchestration.md",
     "docs/openai-production-swarm-queue.md",
     "docs/production-appeal-scorecards.md",
+    "docs/library-installation-queue.md",
     "docs/source-acquisition-policy.md",
     "docs/playwright-source-capture.md",
     "docs/recommended-packs.md",
@@ -37,6 +38,7 @@ REQUIRED_FILES = [
     "automation/generated/openai-worker-briefs.json",
     "automation/generated/openai-production-swarm-queue.json",
     "automation/generated/production-appeal-scorecards.json",
+    "automation/generated/library-installation-queue.json",
     "automation/generated/live12-daw-action-plan.json",
     "automation/generated/live12-daw-mutation-package.json",
     "automation/generated/live12-daw-mutation-runbook.json",
@@ -53,6 +55,7 @@ REQUIRED_FILES = [
     "scripts/render_composition_sketches.py",
     "scripts/render_openai_production_swarm_queue.py",
     "scripts/render_production_appeal_scorecards.py",
+    "scripts/render_library_installation_queue.py",
     "scripts/render_live12_daw_action_plan.py",
     "scripts/render_live12_daw_mutation_package.py",
     "scripts/render_live12_daw_mutation_runbook.py",
@@ -66,6 +69,7 @@ REQUIRED_FILES = [
     "scripts/render_openai_worker_briefs.py",
     "scripts/test_openai_production_swarm_queue.py",
     "scripts/test_production_appeal_scorecards.py",
+    "scripts/test_library_installation_queue.py",
     "scripts/test_max_for_live_device_contracts.py",
     "scripts/test_live12_daw_mutation_preflight.py",
     "scripts/test_live12_daw_mutation_runbook.py",
@@ -175,6 +179,12 @@ EXPECTED_PRODUCTION_APPEAL_SCORECARD_SOURCES = {
     "automation/generated/max-for-live-device-contracts.json",
     "automation/generated/live12-daw-action-plan.json",
     "automation/generated/public-domain-source-deck.json",
+}
+EXPECTED_LIBRARY_INSTALLATION_QUEUE_SOURCES = {
+    "catalogs/library-installation-plan.json",
+    "catalogs/recommended-packs.json",
+    "inventory/live12-local-inventory.json",
+    "automation/openai-production-orchestration.json",
 }
 EXPECTED_PRODUCTION_APPEAL_DIMENSIONS = [
     "entrainment",
@@ -378,6 +388,34 @@ EXPECTED_DAW_MUTATION_RUNBOOK_TRACK_KEYS = {
     "track_slug",
     "track_title",
 }
+EXPECTED_LIBRARY_INSTALLATION_MUST_NOT_COMMIT = [
+    "vendor credentials",
+    "session cookies",
+    "license files",
+    "installer packages",
+    "commercial pack content",
+    "presets",
+    "samples",
+    "renders",
+]
+EXPECTED_LIBRARY_INSTALLATION_RECEIPT_FIELDS = [
+    "run_id",
+    "catalog_id",
+    "vendor",
+    "name",
+    "execution_status",
+    "operator_approval_reference",
+    "source_url",
+    "official_surface",
+    "entitlement_reference_redacted",
+    "purchase_or_license_change_reference",
+    "inventory_before_sha256",
+    "inventory_after_sha256",
+    "observed_local_signal",
+    "created_artifacts",
+    "redactions",
+    "post_action_validation",
+]
 STABLE_GENERATED_AT = "1970-01-01T00:00:00Z"
 AUDIO_PATH_PATTERN = re.compile(r"(?:^|[/\\\s])[\w .~/-]+\.(?:aif|aiff|flac|m4a|mp3|ogg|wav)\b", re.IGNORECASE)
 SECRET_VALUE_PATTERN = re.compile(r"(?:sk-[A-Za-z0-9_-]{20,}|Bearer\s+[A-Za-z0-9._-]{20,})")
@@ -763,6 +801,7 @@ def validate_json_contracts(root: Path, errors: list[str]) -> None:
         "automation/generated/live12-daw-mutation-queue-runbook.json",
         "automation/generated/openai-production-swarm-queue.json",
         "automation/generated/production-appeal-scorecards.json",
+        "automation/generated/library-installation-queue.json",
         "automation/generated/public-domain-source-deck.json",
         "automation/live12-session-template.json",
         "automation/worker-chain.json",
@@ -1344,6 +1383,221 @@ def validate_production_appeal_scorecards(root: Path, errors: list[str]) -> None
             fail(errors, "Generated production appeal scorecards must not contain API tokens or bearer credentials")
     if "/Users/" in markdown or "sources/public-domain/raw/" in markdown or SECRET_VALUE_PATTERN.search(markdown):
         fail(errors, "Generated production appeal scorecard markdown contains sensitive local data")
+
+
+def expected_library_inventory_summary(inventory: dict) -> dict:
+    ableton = as_dict(inventory.get("ableton"))
+    arturia = as_dict(inventory.get("arturia"))
+    plugins = as_dict(inventory.get("plugins"))
+    live_database = as_dict(ableton.get("live_database"))
+    resources = as_dict(arturia.get("resources"))
+    applications = as_list(arturia.get("applications"))
+    application_names = {
+        item.get("name")
+        for item in applications
+        if isinstance(item, dict)
+    }
+    return {
+        "ableton_live": {
+            "exists": as_dict(ableton.get("app")).get("exists", False),
+            "name": as_dict(ableton.get("app")).get("name"),
+            "version": as_dict(ableton.get("app")).get("version"),
+            "factory_pack_count": len(as_list(ableton.get("factory_packs"))),
+            "indexed_pack_candidate_count": len(as_list(live_database.get("indexed_pack_candidates"))),
+            "available_not_installed_count": len(as_list(live_database.get("available_not_installed"))),
+            "live_database_read_status": live_database.get("read_status", "unknown"),
+        },
+        "arturia": {
+            "application_count": len(applications),
+            "software_center_present": "Arturia Software Center.app" in application_names,
+            "resource_product_count": len(as_list(resources.get("products"))),
+            "preset_product_folder_count": len(as_list(resources.get("preset_products"))),
+            "sample_product_folder_count": len(as_list(resources.get("sample_products"))),
+        },
+        "plugins": {
+            "vst3_root_count": len(as_list(plugins.get("vst3_roots"))),
+            "audio_unit_root_count": len(as_list(plugins.get("audio_unit_roots"))),
+        },
+    }
+
+
+def validate_library_installation_queue(root: Path, errors: list[str]) -> None:
+    data = load_json(root / "automation/generated/library-installation-queue.json", errors)
+    markdown_path = root / "docs/library-installation-queue.md"
+    install_plan = load_json(root / "catalogs/library-installation-plan.json", errors)
+    recommended = load_json(root / "catalogs/recommended-packs.json", errors)
+    inventory = load_json(root / "inventory/live12-local-inventory.json", errors)
+    orchestration = load_json(root / "automation/openai-production-orchestration.json", errors)
+    if not data or not install_plan or not recommended:
+        return
+
+    if data.get("schema_version") != 1:
+        fail(errors, "Generated library installation queue must use schema_version 1")
+    if data.get("generated_at") != STABLE_GENERATED_AT:
+        fail(errors, "Generated library installation queue must be committed with stable generated_at")
+    if data.get("generator") != "scripts/render_library_installation_queue.py":
+        fail(errors, "Generated library installation queue must name scripts/render_library_installation_queue.py as generator")
+
+    source_files = set(data.get("source_files", []))
+    if source_files != EXPECTED_LIBRARY_INSTALLATION_QUEUE_SOURCES:
+        fail(errors, "Generated library installation queue source_files must match expected source manifests")
+    source_hashes = data.get("source_file_sha256") or {}
+    if set(source_hashes) != EXPECTED_LIBRARY_INSTALLATION_QUEUE_SOURCES:
+        fail(errors, "Generated library installation queue source_file_sha256 keys must match expected source manifests")
+    for source_file in source_files:
+        if Path(source_file).is_absolute() or ".." in Path(source_file).parts or not (root / source_file).exists():
+            fail(errors, f"Generated library installation queue source file is invalid: {source_file}")
+            continue
+        expected_hash = source_hashes.get(source_file)
+        if not SHA256_PATTERN.match(str(expected_hash or "")):
+            fail(errors, f"Generated library installation queue source hash is invalid: {source_file}")
+        elif expected_hash != sha256_file(root / source_file):
+            fail(errors, f"Generated library installation queue source hash is stale: {source_file}")
+
+    policy = require_dict(data.get("queue_policy"), "Generated library installation queue queue_policy", errors)
+    if policy.get("execution_status") != "planned_not_executed":
+        fail(errors, "Generated library installation queue must stay planned_not_executed")
+    if policy.get("api_execution_status") != "not_called_ci_safe":
+        fail(errors, "Generated library installation queue must not call APIs in CI")
+    if policy.get("credentials_required_for_generation") is not False:
+        fail(errors, "Generated library installation queue generation must not require credentials")
+    if policy.get("requires_human_confirmation") is not True:
+        fail(errors, "Generated library installation queue must require human confirmation")
+    if policy.get("ci_install_allowed") is not False:
+        fail(errors, "Generated library installation queue must block CI vendor actions")
+    if policy.get("git_policy") != "metadata_only_no_commercial_assets":
+        fail(errors, "Generated library installation queue git policy is stale")
+    if policy.get("local_output_root") != "output/library-installation":
+        fail(errors, "Generated library installation queue local output root is stale")
+    if policy.get("blocked_without_approval") != ["vendor_account_action", "purchase_or_license_change"]:
+        fail(errors, "Generated library installation queue approval gates are stale")
+    if policy.get("must_not_commit") != EXPECTED_LIBRARY_INSTALLATION_MUST_NOT_COMMIT:
+        fail(errors, "Generated library installation queue must_not_commit list is stale")
+
+    if data.get("inventory_summary") != expected_library_inventory_summary(inventory):
+        fail(errors, "Generated library installation queue inventory_summary must match sanitized inventory")
+
+    expected_gate_ids = {"vendor_account_action", "purchase_or_license_change"}
+    orchestration_gate_ids = {gate.get("id") for gate in orchestration.get("approval_gates", [])}
+    if {gate.get("id") for gate in data.get("approval_gates", [])} != expected_gate_ids:
+        fail(errors, "Generated library installation queue approval gate metadata is stale")
+    if not expected_gate_ids.issubset(orchestration_gate_ids):
+        fail(errors, "Generated library installation queue cannot find required gates in orchestration contract")
+
+    for route in data.get("official_vendor_routes", []):
+        vendor = route.get("vendor")
+        allowed_hosts = set(route.get("allowed_hosts", []))
+        if vendor not in PACK_VENDORS:
+            fail(errors, f"Generated library installation queue route references unknown vendor: {vendor}")
+        if allowed_hosts != OFFICIAL_PACK_HOSTS.get(vendor, set()):
+            fail(errors, f"Generated library installation queue route hosts are stale: {vendor}")
+        for field in ["operator_route", "supervised_automation_boundary"]:
+            require_non_empty_string(route.get(field), f"Generated library installation queue route {vendor}.{field}", errors)
+
+    recommended_items = as_list(recommended.get("items"))
+    recommended_by_id = {
+        item.get("id"): item
+        for item in recommended_items
+        if isinstance(item, dict) and item.get("id")
+    }
+    local_recommended_items = [
+        item
+        for item in recommended_items
+        if isinstance(item, dict) and item.get("status") in LOCAL_RECOMMENDATION_STATUSES
+    ]
+    plan_items = as_list(install_plan.get("items"))
+    queue_items = as_list(data.get("queue"))
+    if data.get("install_item_count") != len(plan_items) or len(queue_items) != len(plan_items):
+        fail(errors, "Generated library installation queue item count must mirror installation plan")
+    if data.get("recommended_item_count") != len(recommended_items):
+        fail(errors, "Generated library installation queue recommended_item_count must mirror recommendations")
+    if data.get("recommended_local_item_count") != len(local_recommended_items):
+        fail(errors, "Generated library installation queue local recommended count is stale")
+    if [item.get("catalog_id") for item in queue_items if isinstance(item, dict)] != [item.get("id") for item in plan_items if isinstance(item, dict)]:
+        fail(errors, "Generated library installation queue item order must mirror installation plan")
+
+    for index, (queue_item, plan_item) in enumerate(zip(queue_items, plan_items, strict=False), start=1):
+        if not isinstance(queue_item, dict) or not isinstance(plan_item, dict):
+            fail(errors, f"Generated library installation queue item must be object at position {index}")
+            continue
+        catalog_id = plan_item.get("id")
+        if queue_item.get("queue_order") != index or queue_item.get("id") != f"library-install.{catalog_id}":
+            fail(errors, f"Generated library installation queue item id/order is stale: {catalog_id}")
+        for field in ["vendor", "name", "priority", "status", "source_url", "install_route", "local_signal", "project_use"]:
+            if queue_item.get(field) != plan_item.get(field):
+                fail(errors, f"Generated library installation queue item {field} must mirror installation plan: {catalog_id}")
+        vendor = queue_item.get("vendor")
+        source_host = https_host(queue_item.get("source_url", ""))
+        if source_host not in OFFICIAL_PACK_HOSTS.get(vendor, set()):
+            fail(errors, f"Generated library installation queue source_url host is not official: {catalog_id}")
+        expected_gates = ["vendor_account_action"]
+        if plan_item.get("status") == "account_or_purchase_required":
+            expected_gates.append("purchase_or_license_change")
+        if queue_item.get("approval_gates_required") != expected_gates:
+            fail(errors, f"Generated library installation queue approval gates are stale: {catalog_id}")
+        if queue_item.get("requires_human_confirmation") is not True or queue_item.get("ci_install_allowed") is not False:
+            fail(errors, f"Generated library installation queue item must require human confirmation and block CI: {catalog_id}")
+        if queue_item.get("automation_mode") != "supervised_official_surface_after_approval":
+            fail(errors, f"Generated library installation queue automation mode is stale: {catalog_id}")
+        automation_steps = queue_item.get("automation_steps", [])
+        validate_string_items(require_list(automation_steps, f"Generated library installation queue {catalog_id}.automation_steps", errors), f"Generated library installation queue {catalog_id}.automation_steps", errors)
+        if "install" in " ".join(automation_steps).lower():
+            fail(errors, f"Generated library installation queue automation_steps must not be executable install instructions: {catalog_id}")
+        if queue_item.get("recommended") != (catalog_id in recommended_by_id):
+            fail(errors, f"Generated library installation queue recommended flag is stale: {catalog_id}")
+        expected_ref = f"catalogs/recommended-packs.json#id={catalog_id}" if catalog_id in recommended_by_id else None
+        if queue_item.get("recommended_catalog_ref") != expected_ref:
+            fail(errors, f"Generated library installation queue recommended ref is stale: {catalog_id}")
+        receipt = require_dict(queue_item.get("receipt"), f"Generated library installation queue {catalog_id}.receipt", errors)
+        receipt_path = Path(str(receipt.get("template_path", "")))
+        if receipt_path.is_absolute() or ".." in receipt_path.parts or receipt_path.parts[:2] != ("output", "library-installation"):
+            fail(errors, f"Generated library installation queue receipt path must stay under output/library-installation: {catalog_id}")
+        if receipt.get("git_policy") != "ignored_local_only":
+            fail(errors, f"Generated library installation queue receipt must stay ignored local-only: {catalog_id}")
+        if receipt.get("required_fields") != EXPECTED_LIBRARY_INSTALLATION_RECEIPT_FIELDS:
+            fail(errors, f"Generated library installation queue receipt fields are stale: {catalog_id}")
+        expected_post_action_validation = [
+            "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+            "python3 scripts/validate_repo.py",
+            "python3 scripts/test_library_installation_queue.py",
+        ]
+        if queue_item.get("post_action_validation") != expected_post_action_validation:
+            fail(errors, f"Generated library installation queue post-action validation is stale: {catalog_id}")
+
+    local_recommended_ids = [item.get("id") for item in data.get("local_recommended_items", [])]
+    if local_recommended_ids != [item.get("id") for item in local_recommended_items]:
+        fail(errors, "Generated library installation queue local recommended items are stale")
+
+    receipt_contract = require_dict(data.get("receipt_contract"), "Generated library installation queue receipt_contract", errors)
+    if receipt_contract.get("output_root") != "output/library-installation":
+        fail(errors, "Generated library installation queue receipt output root is stale")
+    if receipt_contract.get("git_policy") != "ignored_local_only":
+        fail(errors, "Generated library installation queue receipt git policy is stale")
+    if receipt_contract.get("required_fields") != EXPECTED_LIBRARY_INSTALLATION_RECEIPT_FIELDS:
+        fail(errors, "Generated library installation queue receipt fields must match contract")
+    if receipt_contract.get("prohibited_artifacts") != EXPECTED_LIBRARY_INSTALLATION_MUST_NOT_COMMIT:
+        fail(errors, "Generated library installation queue receipt prohibited artifacts are stale")
+
+    markdown = markdown_path.read_text(encoding="utf-8") if markdown_path.exists() else ""
+    for expected_text in [
+        "# Library Installation Queue",
+        "planned_not_executed",
+        "No vendor login, purchase, install, DAW launch, or OpenAI API call is performed",
+        "Do not commit vendor credentials, session cookies, license files, installer packages, commercial pack content, presets, samples, or renders.",
+        "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
+    ]:
+        if expected_text not in markdown:
+            fail(errors, f"Generated library installation queue markdown is missing required text: {expected_text}")
+
+    for string_value in iter_string_values(data):
+        if "/Users/" in string_value or "/Applications/" in string_value:
+            fail(errors, f"Generated library installation queue must not contain local absolute paths: {string_value}")
+        if "sources/public-domain/raw/" in string_value or AUDIO_PATH_PATTERN.search(string_value):
+            fail(errors, f"Generated library installation queue must not contain raw audio paths: {string_value}")
+        if SECRET_VALUE_PATTERN.search(string_value):
+            fail(errors, "Generated library installation queue must not contain API tokens or bearer credentials")
+    if "/Users/" in markdown or "/Applications/" in markdown or "sources/public-domain/raw/" in markdown or SECRET_VALUE_PATTERN.search(markdown):
+        fail(errors, "Generated library installation queue markdown contains sensitive local data")
 
 
 def validate_generated_daw_action_plan(root: Path, errors: list[str]) -> None:
@@ -2508,6 +2762,7 @@ def main() -> int:
     validate_generated_worker_briefs(root, errors)
     validate_openai_production_swarm_queue(root, errors)
     validate_production_appeal_scorecards(root, errors)
+    validate_library_installation_queue(root, errors)
     validate_generated_daw_action_plan(root, errors)
     validate_public_domain_source_deck(root, errors)
     validate_generated_daw_mutation_package(root, errors)

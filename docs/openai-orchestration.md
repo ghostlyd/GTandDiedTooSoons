@@ -83,7 +83,7 @@ Tools exposed to agents should be narrow and auditable:
 - `propose_session_change`: writes a patch proposal, not a Live set directly.
 - `validate_source_rights`: checks catalog metadata before download.
 - `summarize_take`: processes local transcript text, not raw audio by default.
-- `automate_vendor_install`: uses official Ableton, Arturia, or vendor account surfaces after approval and writes a redacted receipt plus refreshed inventory delta.
+- `automate_vendor_install`: consumes `automation/generated/library-installation-queue.json`, uses official Ableton, Arturia, or vendor account surfaces after approval, and writes a redacted receipt plus refreshed inventory delta.
 - `automate_daw_session`: applies approved local Ableton/Max for Live actions from the DAW mutation package and records a local-only receipt from operator evidence.
 - `render_checklist`: emits required human checks before export.
 
@@ -97,6 +97,7 @@ Allowed:
 
 - navigate official Ableton, Arturia, or vendor pages/apps in an authenticated user session
 - trigger already-entitled installs through official account, Live Browser, or Arturia Software Center flows
+- generate and review `docs/library-installation-queue.md` before any account-gated action
 - refresh local inventory after install
 - apply approved Live/Max for Live changes to a local session after a rollback copy exists
 - record redacted receipts with product/action/result metadata

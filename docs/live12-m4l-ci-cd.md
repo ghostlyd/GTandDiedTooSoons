@@ -11,6 +11,7 @@ GitHub-hosted runners do not include Ableton Live, Max for Live, Arturia Softwar
 - Ensure public-domain source entries include rights metadata.
 - Regenerate OpenAI worker briefs and composition MIDI sketches in stable mode, then diff them against committed generated artifacts.
 - Regenerate production appeal scorecards in stable mode, then diff JSON and Markdown outputs against committed artifacts.
+- Regenerate the library installation queue in stable mode, then diff JSON and Markdown outputs against committed artifacts.
 - Regenerate the OpenAI production swarm queue in stable mode, then diff JSON and Markdown outputs against committed artifacts.
 - Regenerate Max for Live device contracts and `.maxpat` source blueprints in stable mode, then diff them against committed generated artifacts.
 - Regenerate the Live 12 / Max for Live DAW action plan in stable mode, then diff it against the committed generated artifact.
@@ -19,6 +20,7 @@ GitHub-hosted runners do not include Ableton Live, Max for Live, Arturia Softwar
 - Regenerate the Live 12 / Max for Live DAW mutation operator runbook and queue runbook in stable mode, then diff JSON and Markdown outputs against committed artifacts.
 - Run Max for Live source contract probes without compiling `.amxd` devices.
 - Run production appeal scorecard probes to verify hypothesis language, listener-study gates, Max for Live levers, and sensitive-path hygiene.
+- Run library installation queue probes to verify official vendor hosts, approval gates, sanitized inventory summaries, and no CI vendor actions.
 - Run OpenAI production swarm queue probes to verify role/task handoffs, approval gates, and sensitive-path hygiene.
 - Run local DAW mutation preflight probes without opening Ableton or writing `.als`/`.amxd` files.
 - Run DAW mutation runbook and queue runbook probes to verify command contracts, approval gates, Max for Live assignments, and sensitive-path hygiene.
@@ -30,6 +32,7 @@ Run before committing production changes:
 ```bash
 python3 scripts/validate_repo.py
 python3 scripts/render_production_appeal_scorecards.py --stable
+python3 scripts/render_library_installation_queue.py --stable
 python3 scripts/render_openai_worker_briefs.py --stable
 python3 scripts/render_openai_production_swarm_queue.py --stable
 python3 scripts/render_max_for_live_device_contracts.py --stable
@@ -39,6 +42,7 @@ python3 scripts/render_live12_daw_mutation_package.py --stable
 python3 scripts/render_live12_daw_mutation_runbook.py --stable
 python3 scripts/render_live12_daw_mutation_queue_runbook.py --stable
 python3 scripts/test_production_appeal_scorecards.py
+python3 scripts/test_library_installation_queue.py
 python3 scripts/test_openai_production_swarm_queue.py
 python3 scripts/test_max_for_live_device_contracts.py
 python3 scripts/test_live12_daw_mutation_preflight.py
@@ -63,6 +67,8 @@ For future Max device work:
 | `automation/worker-chain.json` | Agent/worker responsibilities for arrangement, sound design, source research, mix review, and release QA. |
 | `automation/generated/production-appeal-scorecards.json` | Non-overclaiming per-track listening hypotheses, Max for Live levers, and evidence gates before stronger psychological claims. |
 | `docs/production-appeal-scorecards.md` | Generated operator-facing scorecard summary for arrangement, spatial, mix, and listening-test decisions. |
+| `automation/generated/library-installation-queue.json` | Metadata-only Ableton/Arturia queue for supervised official-surface account and library actions; never runs vendor actions in CI. |
+| `docs/library-installation-queue.md` | Generated operator-facing library queue with approval gates, receipt root, official routes, and sanitized inventory summary. |
 | `automation/generated/openai-production-swarm-queue.json` | Metadata-only per-track worker task queue for future OpenAI Agents/Responses execution without CI API calls or private audio. |
 | `docs/openai-production-swarm-queue.md` | Generated human-readable swarm queue with track-by-track role handoffs, approval gates, and DAW/source references. |
 | `automation/generated/max-for-live-device-contracts.json` | Source-only Max for Live contract bundle and `.maxpat` patch hashes for every session device contract. |
@@ -78,13 +84,21 @@ For future Max device work:
 | `compositions/generated/live12-track-build-plans.json` | Human-readable import map, device targets, MIDI hashes, and safety constraints for each standalone track. |
 | `compositions/generated/midi/*.mid` | Deterministic placeholder MIDI sketches for Live import and replacement with verified Ableton/Arturia instruments. |
 | `inventory/live12-local-inventory.*` | Non-sensitive local host state for pack and plugin availability. |
-| `catalogs/recommended-packs.json` | License-aware install planning for Ableton and Arturia content. |
+| `catalogs/recommended-packs.json` | License-aware planning for Ableton and Arturia content. |
+| `catalogs/library-installation-plan.json` | Account-gated Ableton/Arturia backlog consumed by the generated installation queue. |
 | `catalogs/public-domain-bluegrass-sources.json` | Rights-aware source pool for sampling and reference study. |
 
 ## Deployment Model
 
 1. Merge text contracts and scripts through PR.
-2. Install packs locally through official vendor account flows.
+2. Render the library installation queue and perform approved pack actions locally through official vendor account flows:
+
+```bash
+python3 scripts/render_library_installation_queue.py --stable
+```
+
+Use `docs/library-installation-queue.md` as the operator handoff. It is generated from tracked catalogs and local inventory, performs no vendor login, purchase, install, DAW launch, or OpenAI API call, and records any local evidence under ignored `output/library-installation/`.
+
 3. Refresh inventory.
 4. Build or update Live set locally.
 5. Prepare and stage the full six-track DAW mutation queue under ignored `output/` folders:
