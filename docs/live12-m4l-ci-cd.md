@@ -21,6 +21,7 @@ GitHub-hosted runners do not include Ableton Live, Max for Live, Arturia Softwar
 - Run Max for Live source contract probes without compiling `.amxd` devices.
 - Run production appeal scorecard probes to verify hypothesis language, listener-study gates, Max for Live levers, and sensitive-path hygiene.
 - Run library installation queue probes to verify official vendor hosts, approval gates, sanitized inventory summaries, and no CI vendor actions.
+- Run library installation preflight probes to verify local-only request, launch-plan, evidence, and receipt scaffolds without vendor sessions.
 - Run OpenAI production swarm queue probes to verify role/task handoffs, approval gates, and sensitive-path hygiene.
 - Run local DAW mutation preflight probes without opening Ableton or writing `.als`/`.amxd` files.
 - Run DAW mutation runbook and queue runbook probes to verify command contracts, approval gates, Max for Live assignments, and sensitive-path hygiene.
@@ -43,6 +44,7 @@ python3 scripts/render_live12_daw_mutation_runbook.py --stable
 python3 scripts/render_live12_daw_mutation_queue_runbook.py --stable
 python3 scripts/test_production_appeal_scorecards.py
 python3 scripts/test_library_installation_queue.py
+python3 scripts/test_library_installation_preflight.py
 python3 scripts/test_openai_production_swarm_queue.py
 python3 scripts/test_max_for_live_device_contracts.py
 python3 scripts/test_live12_daw_mutation_preflight.py
@@ -69,6 +71,8 @@ For future Max device work:
 | `docs/production-appeal-scorecards.md` | Generated operator-facing scorecard summary for arrangement, spatial, mix, and listening-test decisions. |
 | `automation/generated/library-installation-queue.json` | Metadata-only Ableton/Arturia queue for supervised official-surface account and library actions; never runs vendor actions in CI. |
 | `docs/library-installation-queue.md` | Generated operator-facing library queue with approval gates, receipt root, official routes, and sanitized inventory summary. |
+| `scripts/prepare_library_installation_queue.py` | Local-only generator for ignored library action requests, launch plans, operator evidence drafts, and receipt templates. |
+| `scripts/record_library_installation_receipt.py` | Local-only recorder that turns filled operator evidence into redacted receipts after approved vendor/account actions. |
 | `automation/generated/openai-production-swarm-queue.json` | Metadata-only per-track worker task queue for future OpenAI Agents/Responses execution without CI API calls or private audio. |
 | `docs/openai-production-swarm-queue.md` | Generated human-readable swarm queue with track-by-track role handoffs, approval gates, and DAW/source references. |
 | `automation/generated/max-for-live-device-contracts.json` | Source-only Max for Live contract bundle and `.maxpat` patch hashes for every session device contract. |
@@ -98,6 +102,20 @@ python3 scripts/render_library_installation_queue.py --stable
 ```
 
 Use `docs/library-installation-queue.md` as the operator handoff. It is generated from tracked catalogs and local inventory, performs no vendor login, purchase, install, DAW launch, or OpenAI API call, and records any local evidence under ignored `output/library-installation/`.
+
+Prepare the local ignored request/evidence/receipt scaffolds before using any official vendor surface:
+
+```bash
+python3 scripts/prepare_library_installation_queue.py --stable
+```
+
+After an approved vendor/account action, fill `output/library-installation/<catalog-id>/operator-evidence.json`, refresh inventory, then record a redacted local receipt:
+
+```bash
+python3 scripts/record_library_installation_receipt.py \
+  --request output/library-installation/<catalog-id>/installation-request.json \
+  --evidence output/library-installation/<catalog-id>/operator-evidence.json
+```
 
 3. Refresh inventory.
 4. Build or update Live set locally.

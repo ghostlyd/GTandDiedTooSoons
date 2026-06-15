@@ -165,7 +165,7 @@ def build_queue_item(
     catalog_id = item["id"]
     is_recommended = catalog_id in recommended_by_id
     status = item.get("status", "")
-    receipt_path = f"output/library-installation/{catalog_id}/receipt.json"
+    receipt_path = f"output/library-installation/{catalog_id}/receipt-template.json"
     return {
         "id": f"library-install.{catalog_id}",
         "queue_order": index,
@@ -203,6 +203,7 @@ def build_queue_item(
             "python3 scripts/inventory_live_suite.py --output inventory/live12-local-inventory.json",
             "python3 scripts/validate_repo.py",
             "python3 scripts/test_library_installation_queue.py",
+            "python3 scripts/test_library_installation_preflight.py",
         ],
     }
 
@@ -276,6 +277,19 @@ def build_queue(stable: bool) -> dict[str, Any]:
             ),
         },
         "operator_commands": {
+            "prepare_local_preflight": [
+                "python3",
+                "scripts/prepare_library_installation_queue.py",
+                "--stable",
+            ],
+            "record_receipt": [
+                "python3",
+                "scripts/record_library_installation_receipt.py",
+                "--request",
+                "output/library-installation/<catalog-id>/installation-request.json",
+                "--evidence",
+                "output/library-installation/<catalog-id>/operator-evidence.json",
+            ],
             "refresh_inventory_after_action": [
                 "python3",
                 "scripts/inventory_live_suite.py",
@@ -284,6 +298,7 @@ def build_queue(stable: bool) -> dict[str, Any]:
             ],
             "validate_repo": ["python3", "scripts/validate_repo.py"],
             "probe_queue": ["python3", "scripts/test_library_installation_queue.py"],
+            "probe_preflight": ["python3", "scripts/test_library_installation_preflight.py"],
         },
         "receipt_contract": {
             "output_root": "output/library-installation",
@@ -328,7 +343,9 @@ def render_markdown(queue: dict[str, Any]) -> str:
         "- No vendor login, purchase, install, DAW launch, or OpenAI API call is performed by this renderer or CI check.",
         "- Do not commit vendor credentials, session cookies, license files, installer packages, commercial pack content, presets, samples, or renders.",
         f"- Local receipt root: `{policy['local_output_root']}` (`ignored_local_only`).",
+        f"- Prepare local queue: `{command_string(commands['prepare_local_preflight'])}`",
         f"- Inventory refresh: `{command_string(commands['refresh_inventory_after_action'])}`",
+        f"- Receipt recorder: `{command_string(commands['record_receipt'])}`",
         "",
         "## Inventory Summary",
         "",
@@ -390,6 +407,7 @@ def render_markdown(queue: dict[str, Any]) -> str:
             f"1. `{command_string(commands['refresh_inventory_after_action'])}`",
             f"2. `{command_string(commands['validate_repo'])}`",
             f"3. `{command_string(commands['probe_queue'])}`",
+            f"4. `{command_string(commands['probe_preflight'])}`",
             "",
         ]
     )

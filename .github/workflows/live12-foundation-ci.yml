@@ -105,6 +105,9 @@ jobs:
       - name: Run library installation queue probes
         run: python3 scripts/test_library_installation_queue.py
 
+      - name: Run library installation preflight probes
+        run: python3 scripts/test_library_installation_preflight.py
+
       - name: Run Live 12 DAW mutation preflight probes
         run: python3 scripts/test_live12_daw_mutation_preflight.py
 
@@ -210,6 +213,9 @@ jobs:
 
       - name: Run library installation queue probes
         run: python3 scripts/test_library_installation_queue.py
+
+      - name: Run library installation preflight probes
+        run: python3 scripts/test_library_installation_preflight.py
 
       - name: Run Live 12 DAW mutation preflight probes
         run: python3 scripts/test_live12_daw_mutation_preflight.py
