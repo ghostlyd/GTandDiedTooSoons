@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-06-14",
+  "reviewed_on": "2026-06-15",
   "policy": "Download only entries with explicit provenance, compatible rights metadata, and approved_for_download set to true.",
   "sources": [
     {
@@ -166,6 +166,142 @@
       "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
       "project_use": "Ballad-contour and modal phrase source for A.P. Carter-style narrative hooks, fiddle drone reharmonization, and slow-house vocal-chop beds.",
       "notes": "Selected as a public-domain folk sample with useful melodic contour for downtempo arrangement studies."
+    },
+    {
+      "id": "loc-citizen-dj-medley-old-time-reels-248482-001",
+      "name": "Medley of old-time reels - excerpt 001",
+      "type": "sample",
+      "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+      "item_url": "https://www.loc.gov/item/jukebox-248482/",
+      "rights_status": "public_domain",
+      "approved_for_download": true,
+      "download_url": "https://s3.amazonaws.com/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/Medley-of-old-time-reels_jukebox-248482_001_00-00-00.wav",
+      "allowed_download_hosts": [
+        "s3.amazonaws.com"
+      ],
+      "allowed_download_path_prefixes": [
+        "/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/"
+      ],
+      "browser_evidence": {
+        "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "artifact_path": "output/playwright/loc-citizen-dj-folk-20260615.png",
+        "trace_artifact_path": "output/playwright/loc-citizen-dj-folk-20260615-trace.zip",
+        "captured_at": "2026-06-15T01:22:42Z"
+      },
+      "rights_evidence": {
+        "evidence_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "captured_at": "2026-06-15T01:22:42Z",
+        "collection": "The National Jukebox: Folk Music",
+        "rights_summary": "Citizen DJ states the collection works have been identified as public domain and are free to use and reuse without restriction.",
+        "reuse_scope": "Copy, modify, distribute, and perform, including commercial use, without asking permission.",
+        "credit_recommendation": "Attribution is recommended but not required; use the Citizen DJ / Library of Congress / National Jukebox credit line.",
+        "cultural_respect_note": "Treat as historical instrumental dance material and preserve the collection credit when transformed."
+      },
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "project_use": "Old-time reel chain for fiddle-roll extraction, AeroBand banjo phrasing, and deep-house micro-loop chopping.",
+      "notes": "LOC item metadata describes the 1905 source as a violin solo with orchestra; selected from the Citizen DJ public-domain folk sample page."
+    },
+    {
+      "id": "loc-citizen-dj-medley-favorite-reels-422524-001",
+      "name": "Medley of favorite reels - excerpt 001",
+      "type": "sample",
+      "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+      "item_url": "https://www.loc.gov/item/jukebox-422524/",
+      "rights_status": "public_domain",
+      "approved_for_download": true,
+      "download_url": "https://s3.amazonaws.com/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/Medley-of-favorite-reels_jukebox-422524_001_00-01-41.wav",
+      "allowed_download_hosts": [
+        "s3.amazonaws.com"
+      ],
+      "allowed_download_path_prefixes": [
+        "/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/"
+      ],
+      "browser_evidence": {
+        "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "artifact_path": "output/playwright/loc-citizen-dj-folk-20260615.png",
+        "trace_artifact_path": "output/playwright/loc-citizen-dj-folk-20260615-trace.zip",
+        "captured_at": "2026-06-15T01:22:42Z"
+      },
+      "rights_evidence": {
+        "evidence_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "captured_at": "2026-06-15T01:22:42Z",
+        "collection": "The National Jukebox: Folk Music",
+        "rights_summary": "Citizen DJ states the collection works have been identified as public domain and are free to use and reuse without restriction.",
+        "reuse_scope": "Copy, modify, distribute, and perform, including commercial use, without asking permission.",
+        "credit_recommendation": "Attribution is recommended but not required; use the Citizen DJ / Library of Congress / National Jukebox credit line.",
+        "cultural_respect_note": "Treat as historical instrumental dance material and preserve the collection credit when transformed."
+      },
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "project_use": "Violin-and-piano reel contour for melodic hooks, call-response fragments, and spectral freeze transitions.",
+      "notes": "LOC item metadata describes the 1906 source as a violin solo with piano; selected from the Citizen DJ public-domain folk sample page."
+    },
+    {
+      "id": "loc-citizen-dj-hornpipe-13796-001",
+      "name": "Hornpipe - excerpt 001",
+      "type": "sample",
+      "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+      "item_url": "https://www.loc.gov/item/jukebox-13796/",
+      "rights_status": "public_domain",
+      "approved_for_download": true,
+      "download_url": "https://s3.amazonaws.com/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/Hornpipe_jukebox-13796_001_00-00-01.wav",
+      "allowed_download_hosts": [
+        "s3.amazonaws.com"
+      ],
+      "allowed_download_path_prefixes": [
+        "/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/"
+      ],
+      "browser_evidence": {
+        "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "artifact_path": "output/playwright/loc-citizen-dj-folk-20260615.png",
+        "trace_artifact_path": "output/playwright/loc-citizen-dj-folk-20260615-trace.zip",
+        "captured_at": "2026-06-15T01:22:42Z"
+      },
+      "rights_evidence": {
+        "evidence_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "captured_at": "2026-06-15T01:22:42Z",
+        "collection": "The National Jukebox: Folk Music",
+        "rights_summary": "Citizen DJ states the collection works have been identified as public domain and are free to use and reuse without restriction.",
+        "reuse_scope": "Copy, modify, distribute, and perform, including commercial use, without asking permission.",
+        "credit_recommendation": "Attribution is recommended but not required; use the Citizen DJ / Library of Congress / National Jukebox credit line.",
+        "cultural_respect_note": "Treat as historical dance source material and avoid presenting the military-band arrangement as a bluegrass recording."
+      },
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "project_use": "Hornpipe pulse and turnarounds for banjo-roll articulation, off-grid fills, and punk-bluegrass dance breakdowns.",
+      "notes": "LOC item metadata describes the 1915 source as a band recording; selected for dance-form vocabulary rather than bluegrass provenance."
+    },
+    {
+      "id": "loc-citizen-dj-lamplighters-hornpipe-28465-001",
+      "name": "Lamplighter's hornpipe - excerpt 001",
+      "type": "sample",
+      "source_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+      "item_url": "https://www.loc.gov/item/jukebox-28465/",
+      "rights_status": "public_domain",
+      "approved_for_download": true,
+      "download_url": "https://s3.amazonaws.com/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/Lamplighters-hornpipe_jukebox-28465_001_00-00-00.wav",
+      "allowed_download_hosts": [
+        "s3.amazonaws.com"
+      ],
+      "allowed_download_path_prefixes": [
+        "/citizen-dj-assets.labs.loc.gov/audio/samplepacks/loc-jukebox-folk-songs/"
+      ],
+      "browser_evidence": {
+        "captured_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "artifact_path": "output/playwright/loc-citizen-dj-folk-20260615.png",
+        "trace_artifact_path": "output/playwright/loc-citizen-dj-folk-20260615-trace.zip",
+        "captured_at": "2026-06-15T01:22:42Z"
+      },
+      "rights_evidence": {
+        "evidence_url": "https://citizen-dj.labs.loc.gov/loc-jukebox-folk-songs/use/",
+        "captured_at": "2026-06-15T01:22:42Z",
+        "collection": "The National Jukebox: Folk Music",
+        "rights_summary": "Citizen DJ states the collection works have been identified as public domain and are free to use and reuse without restriction.",
+        "reuse_scope": "Copy, modify, distribute, and perform, including commercial use, without asking permission.",
+        "credit_recommendation": "Attribution is recommended but not required; use the Citizen DJ / Library of Congress / National Jukebox credit line.",
+        "cultural_respect_note": "Treat as historical dance source material and avoid presenting the military-band arrangement as a bluegrass recording."
+      },
+      "credit_line": "Citizen DJ Project, Library of Congress, National Jukebox.",
+      "project_use": "Hornpipe contour for loping banjo simulations, return-track dub throws, and spatial fiddle-family counter-lines.",
+      "notes": "LOC item metadata describes the 1918 source as a band recording; selected for hornpipe form and rhythmic vocabulary."
     },
     {
       "id": "loc-citizen-dj-public-domain-2022",

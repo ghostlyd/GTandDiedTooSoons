@@ -1204,9 +1204,9 @@
     }
   ],
   "source_file_sha256": {
-    "automation/generated/live12-daw-action-plan.json": "dbe1b210945519be06e0fed556563be219b213f5f0017df043bd67c47fa0b4fc",
+    "automation/generated/live12-daw-action-plan.json": "6be1bc42158e02223caffacedfad72887a4f8341f6af2a187a6a5e876468547a",
     "automation/generated/max-for-live-device-contracts.json": "25613153f7ed60871411911a4572f10448a6f0298a62ba63bc2aa285e10b51d0",
-    "automation/generated/public-domain-source-deck.json": "775657b7c095a137c10e14ddf8da36b6309049156ba7f4e81e8f8c2e58dd626d",
+    "automation/generated/public-domain-source-deck.json": "8f1e492e9feeff70b2bcec6fdc65a40b1cbc56fca3580bf25f067776846791a4",
     "compositions/down-tempo-punk-bluegrass-set.json": "d7ace3ba0abc6d17758caa587c052818002f76825a024dab5f5ced531bdff488",
     "compositions/generated/live12-track-build-plans.json": "0893e3a502e4b451f5d2b5b4da5848e732fd1c14bdd4f39512c745e5f7921bce"
   },

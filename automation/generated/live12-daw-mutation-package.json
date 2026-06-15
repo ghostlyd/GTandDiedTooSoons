@@ -73,7 +73,7 @@
         "verification_action_id": "good-vibrations-in-a-burned-barn.preflight.verify-midi-hash"
       },
       "mutation_action_count": 19,
-      "plan_track_sha256": "65d1b12598acb4772d939ece31779885d5514f09a2e7d6d8013f450c7dd8518e",
+      "plan_track_sha256": "42e1dd9eebf164e9da350db9d07473c393be29c25c2330315834d5109bf592b3",
       "preflight_action_ids": [
         "good-vibrations-in-a-burned-barn.preflight.verify-midi-hash",
         "good-vibrations-in-a-burned-barn.preflight.create-local-rollback-copy",
@@ -251,7 +251,7 @@
         "verification_action_id": "no-gods-no-masters-no-quantize.preflight.verify-midi-hash"
       },
       "mutation_action_count": 18,
-      "plan_track_sha256": "a813234bfffd78d31b9da3f5b419d43d4160b8ce13eece29603ca72d6bd19c47",
+      "plan_track_sha256": "c228333f5103009137c8ef9ef8f8960712ec374fabacbd80c42a195ea75151a3",
       "preflight_action_ids": [
         "no-gods-no-masters-no-quantize.preflight.verify-midi-hash",
         "no-gods-no-masters-no-quantize.preflight.create-local-rollback-copy",
@@ -340,7 +340,7 @@
         "verification_action_id": "possum-kingdom-afterhours.preflight.verify-midi-hash"
       },
       "mutation_action_count": 18,
-      "plan_track_sha256": "4e23877413461055815f51937d19cc7cce6175113eeac3e3b7c9a2acfc27fc81",
+      "plan_track_sha256": "88a1b8492bfe31656ffcea6b1d5fbc521a385c3b5f9e960f741fcafa6ed73c71",
       "preflight_action_ids": [
         "possum-kingdom-afterhours.preflight.verify-midi-hash",
         "possum-kingdom-afterhours.preflight.create-local-rollback-copy",
@@ -521,7 +521,7 @@
         "verification_action_id": "rail-yard-ghost-in-the-control-room.preflight.verify-midi-hash"
       },
       "mutation_action_count": 21,
-      "plan_track_sha256": "9609d1ebca38eee6a08c9d29c7e7e1b0cac8f1dd8b69594205364a0bbb64904a",
+      "plan_track_sha256": "887fa3c0abd320aab9619938b653c722e6e5ba021deb6d7d5e10086a7145d0a5",
       "preflight_action_ids": [
         "rail-yard-ghost-in-the-control-room.preflight.verify-midi-hash",
         "rail-yard-ghost-in-the-control-room.preflight.create-local-rollback-copy",
@@ -618,7 +618,7 @@
   },
   "schema_version": 1,
   "source_file_sha256": {
-    "automation/generated/live12-daw-action-plan.json": "dbe1b210945519be06e0fed556563be219b213f5f0017df043bd67c47fa0b4fc",
+    "automation/generated/live12-daw-action-plan.json": "6be1bc42158e02223caffacedfad72887a4f8341f6af2a187a6a5e876468547a",
     "automation/live12-session-template.json": "f17640bd3d24a4f6953836393c3286a45c7ba9c9064399590611dac566c76c51",
     "compositions/generated/live12-track-build-plans.json": "0893e3a502e4b451f5d2b5b4da5848e732fd1c14bdd4f39512c745e5f7921bce"
   },
@@ -631,7 +631,7 @@
     "build_plan_track_count": 6,
     "path": "automation/generated/live12-daw-action-plan.json",
     "session_track_count": 10,
-    "sha256": "dbe1b210945519be06e0fed556563be219b213f5f0017df043bd67c47fa0b4fc",
+    "sha256": "6be1bc42158e02223caffacedfad72887a4f8341f6af2a187a6a5e876468547a",
     "track_count": 6
   }
 }

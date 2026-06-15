@@ -63,10 +63,10 @@
   ],
   "schema_version": 1,
   "source_file_sha256": {
-    "automation/generated/live12-daw-mutation-package.json": "1a2e88db2cb7868a60bca8fbe0ca62c130c741a99b6e7f9bd71827834c14266a",
-    "automation/generated/live12-daw-mutation-queue-runbook.json": "178f8350cc83b7135250f51a4c31282ae0b6e4f3af7fee6aa40897c8c48c95f7",
-    "automation/generated/openai-worker-briefs.json": "01f6bf2b7ebce0abc60a391e268304ebb51c5b55cc71e78c77127d44ee0fa32d",
-    "automation/generated/public-domain-source-deck.json": "775657b7c095a137c10e14ddf8da36b6309049156ba7f4e81e8f8c2e58dd626d",
+    "automation/generated/live12-daw-mutation-package.json": "8160ecc73e5e7de6f36957daf51ee363ebb6bcf6cfa7bd845017b0cc411c605b",
+    "automation/generated/live12-daw-mutation-queue-runbook.json": "c1110fa918099b70f7fa6975f3db26cc711fe06b7c68bb1d917e94b8751eea9e",
+    "automation/generated/openai-worker-briefs.json": "868ec7a15d0f0aaa3774a1ba82bc9766f62bb4d7c147f61ab13a169e4f7d3e70",
+    "automation/generated/public-domain-source-deck.json": "8f1e492e9feeff70b2bcec6fdc65a40b1cbc56fca3580bf25f067776846791a4",
     "automation/openai-production-orchestration.json": "d951542e3acf034bcd848674e586015483d5bb0d5aa411a1d135fbcb9f77e605",
     "automation/worker-chain.json": "ca970b4096d7ef183aa589bffe358ff50bf0917e96d20976cd6b0f2a48120d83",
     "compositions/generated/live12-track-build-plans.json": "0893e3a502e4b451f5d2b5b4da5848e732fd1c14bdd4f39512c745e5f7921bce"
@@ -95,9 +95,9 @@
       "mutation_job_id": "daw-mutation.good-vibrations-in-a-burned-barn",
       "planned_daw_action_count": 19,
       "source_candidate_ids": [
+        "loc-citizen-dj-medley-old-time-reels-248482-001",
         "loc-citizen-dj-devils-dream-reel-123798-001",
-        "loc-citizen-dj-carnival-of-venice-260123-001",
-        "loc-citizen-dj-duke-of-marlborough-12147-001"
+        "loc-citizen-dj-hornpipe-13796-001"
       ],
       "source_deck_state": "muted_until_human_provenance_review",
       "tasks": [
@@ -1190,8 +1190,8 @@
       "planned_daw_action_count": 18,
       "source_candidate_ids": [
         "loc-citizen-dj-devils-dream-reel-123798-001",
-        "loc-citizen-dj-duke-of-marlborough-12147-001",
-        "loc-citizen-dj-carnival-of-venice-260123-001"
+        "loc-citizen-dj-medley-old-time-reels-248482-001",
+        "loc-citizen-dj-hornpipe-13796-001"
       ],
       "source_deck_state": "muted_until_human_provenance_review",
       "tasks": [
@@ -1736,9 +1736,9 @@
       "mutation_job_id": "daw-mutation.possum-kingdom-afterhours",
       "planned_daw_action_count": 18,
       "source_candidate_ids": [
+        "loc-citizen-dj-lamplighters-hornpipe-28465-001",
         "loc-citizen-dj-devils-dream-reel-123798-001",
-        "loc-citizen-dj-duke-of-marlborough-12147-001",
-        "loc-citizen-dj-carnival-of-venice-260123-001"
+        "loc-citizen-dj-duke-of-marlborough-12147-001"
       ],
       "source_deck_state": "muted_until_human_provenance_review",
       "tasks": [
@@ -2831,8 +2831,8 @@
       "planned_daw_action_count": 21,
       "source_candidate_ids": [
         "loc-citizen-dj-devils-dream-reel-123798-001",
-        "loc-citizen-dj-duke-of-marlborough-12147-001",
-        "loc-citizen-dj-turkey-in-the-straw-medley-247928-001"
+        "loc-citizen-dj-medley-old-time-reels-248482-001",
+        "loc-citizen-dj-hornpipe-13796-001"
       ],
       "source_deck_state": "muted_until_human_provenance_review",
       "tasks": [

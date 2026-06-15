@@ -38,6 +38,46 @@ raw source audio must remain outside Git in the ignored public-domain raw source
 - Project use: Ballad-contour and modal phrase source for A.P. Carter-style narrative hooks, fiddle drone reharmonization, and slow-house vocal-chop beds.
 - Reuse scope: Copy, modify, distribute, and perform, including commercial use, without asking permission.
 
+### Hornpipe - excerpt 001
+
+- Source ID: `loc-citizen-dj-hornpipe-13796-001`
+- Rights status: `public_domain`
+- SHA-256: `04063e6065556172996ccd5347a572764890059d8709a1fd28cc9781a1bef450`
+- Byte size: `980780`
+- Credit: Citizen DJ Project, Library of Congress, National Jukebox.
+- Project use: Hornpipe pulse and turnarounds for banjo-roll articulation, off-grid fills, and punk-bluegrass dance breakdowns.
+- Reuse scope: Copy, modify, distribute, and perform, including commercial use, without asking permission.
+
+### Lamplighter's hornpipe - excerpt 001
+
+- Source ID: `loc-citizen-dj-lamplighters-hornpipe-28465-001`
+- Rights status: `public_domain`
+- SHA-256: `8584aaf7db4e8c2313c8eb3b70709e737422c60ce0d488aeca6ee48403c81994`
+- Byte size: `5762156`
+- Credit: Citizen DJ Project, Library of Congress, National Jukebox.
+- Project use: Hornpipe contour for loping banjo simulations, return-track dub throws, and spatial fiddle-family counter-lines.
+- Reuse scope: Copy, modify, distribute, and perform, including commercial use, without asking permission.
+
+### Medley of favorite reels - excerpt 001
+
+- Source ID: `loc-citizen-dj-medley-favorite-reels-422524-001`
+- Rights status: `public_domain`
+- SHA-256: `f826306e0c321291377035ea53369f035a305d67980963de757ab770ab9c9d28`
+- Byte size: `2523308`
+- Credit: Citizen DJ Project, Library of Congress, National Jukebox.
+- Project use: Violin-and-piano reel contour for melodic hooks, call-response fragments, and spectral freeze transitions.
+- Reuse scope: Copy, modify, distribute, and perform, including commercial use, without asking permission.
+
+### Medley of old-time reels - excerpt 001
+
+- Source ID: `loc-citizen-dj-medley-old-time-reels-248482-001`
+- Rights status: `public_domain`
+- SHA-256: `f4ed2a768612f0d172f7147941931f46a0e681f7dc9f67a826da5cb2a89bd7be`
+- Byte size: `5762348`
+- Credit: Citizen DJ Project, Library of Congress, National Jukebox.
+- Project use: Old-time reel chain for fiddle-roll extraction, AeroBand banjo phrasing, and deep-house micro-loop chopping.
+- Reuse scope: Copy, modify, distribute, and perform, including commercial use, without asking permission.
+
 ### Turkey in the straw medley - excerpt 001
 
 - Source ID: `loc-citizen-dj-turkey-in-the-straw-medley-247928-001`
@@ -55,7 +95,7 @@ raw source audio must remain outside Git in the ignored public-domain raw source
 - Track slug: `good-vibrations-in-a-burned-barn`
 - Deck state: `muted_until_human_provenance_review`
 - Candidate source count: `3`
-- Candidate source IDs: `loc-citizen-dj-devils-dream-reel-123798-001`, `loc-citizen-dj-carnival-of-venice-260123-001`, `loc-citizen-dj-duke-of-marlborough-12147-001`
+- Candidate source IDs: `loc-citizen-dj-medley-old-time-reels-248482-001`, `loc-citizen-dj-devils-dream-reel-123798-001`, `loc-citizen-dj-hornpipe-13796-001`
 
 ### A.P. Carter in the Warehouse
 
@@ -69,14 +109,14 @@ raw source audio must remain outside Git in the ignored public-domain raw source
 - Track slug: `no-gods-no-masters-no-quantize`
 - Deck state: `muted_until_human_provenance_review`
 - Candidate source count: `3`
-- Candidate source IDs: `loc-citizen-dj-devils-dream-reel-123798-001`, `loc-citizen-dj-duke-of-marlborough-12147-001`, `loc-citizen-dj-carnival-of-venice-260123-001`
+- Candidate source IDs: `loc-citizen-dj-devils-dream-reel-123798-001`, `loc-citizen-dj-medley-old-time-reels-248482-001`, `loc-citizen-dj-hornpipe-13796-001`
 
 ### Possum Kingdom Afterhours
 
 - Track slug: `possum-kingdom-afterhours`
 - Deck state: `muted_until_human_provenance_review`
 - Candidate source count: `3`
-- Candidate source IDs: `loc-citizen-dj-devils-dream-reel-123798-001`, `loc-citizen-dj-duke-of-marlborough-12147-001`, `loc-citizen-dj-carnival-of-venice-260123-001`
+- Candidate source IDs: `loc-citizen-dj-lamplighters-hornpipe-28465-001`, `loc-citizen-dj-devils-dream-reel-123798-001`, `loc-citizen-dj-duke-of-marlborough-12147-001`
 
 ### The Ballad of the Broken Controller
 
@@ -90,4 +130,4 @@ raw source audio must remain outside Git in the ignored public-domain raw source
 - Track slug: `rail-yard-ghost-in-the-control-room`
 - Deck state: `muted_until_human_provenance_review`
 - Candidate source count: `3`
-- Candidate source IDs: `loc-citizen-dj-devils-dream-reel-123798-001`, `loc-citizen-dj-duke-of-marlborough-12147-001`, `loc-citizen-dj-turkey-in-the-straw-medley-247928-001`
+- Candidate source IDs: `loc-citizen-dj-devils-dream-reel-123798-001`, `loc-citizen-dj-medley-old-time-reels-248482-001`, `loc-citizen-dj-hornpipe-13796-001`
